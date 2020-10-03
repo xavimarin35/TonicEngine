@@ -39,6 +39,24 @@
     <ClCompile Include="ModuleGUI.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="imgui-1.78\imgui.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.78\imgui_demo.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.78\imgui_draw.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.78\imgui_widgets.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_opengl3.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_sdl.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -88,6 +106,42 @@
     <ClInclude Include="ModuleGUI.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="imgui-1.78\imconfig.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\imgui.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\imgui_internal.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\imstb_rectpack.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\imstb_textedit.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\imstb_truetype.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_opengl3.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_sdl.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="glew\include\GL\eglew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew\include\GL\glew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew\include\GL\glxew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew\include\GL\wglew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -107,6 +161,9 @@
     </Filter>
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{41e2db18-4375-402f-8947-5391de315458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Glew">
+      <UniqueIdentifier>{6a4a886f-d1ad-44a1-bf65-e88bbc54ada1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

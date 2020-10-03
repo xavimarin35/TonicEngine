@@ -14,6 +14,14 @@ ModuleGUI::~ModuleGUI()
 
 bool ModuleGUI::Init()
 {
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
+	ImGui_ImplOpenGL3_Init();
 
 	return true;
 }

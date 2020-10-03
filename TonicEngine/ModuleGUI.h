@@ -5,6 +5,9 @@
 #include "Globals.h"
 #include "Module.h"
 
+#include "imgui-1.78/imgui.h"
+#include "imgui-1.78/examples/imgui_impl_sdl.h"
+#include "imgui-1.78/examples/imgui_impl_opengl3.h"
 
 class ModuleGUI : public Module
 {

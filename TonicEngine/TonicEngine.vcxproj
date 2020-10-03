@@ -76,8 +76,20 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="glew\include\GL\eglew.h" />
+    <ClInclude Include="glew\include\GL\glew.h" />
+    <ClInclude Include="glew\include\GL\glxew.h" />
+    <ClInclude Include="glew\include\GL\wglew.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_sdl.h" />
+    <ClInclude Include="imgui-1.78\imconfig.h" />
+    <ClInclude Include="imgui-1.78\imgui.h" />
+    <ClInclude Include="imgui-1.78\imgui_internal.h" />
+    <ClInclude Include="imgui-1.78\imstb_rectpack.h" />
+    <ClInclude Include="imgui-1.78\imstb_textedit.h" />
+    <ClInclude Include="imgui-1.78\imstb_truetype.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleGUI.h" />
@@ -96,6 +108,12 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_sdl.cpp" />
+    <ClCompile Include="imgui-1.78\imgui.cpp" />
+    <ClCompile Include="imgui-1.78\imgui_demo.cpp" />
+    <ClCompile Include="imgui-1.78\imgui_draw.cpp" />
+    <ClCompile Include="imgui-1.78\imgui_widgets.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
