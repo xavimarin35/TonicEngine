@@ -12,9 +12,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleCamera3D.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -35,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneIntro.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +58,6 @@
     <ClInclude Include="Light.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -82,6 +79,9 @@
     <ClInclude Include="Timer.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneIntro.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -98,9 +98,6 @@
     </Filter>
     <Filter Include="Sources\Modules">
       <UniqueIdentifier>{a653ba7a-bb04-472f-92a6-219bfb0eef12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Modules\Game">
-      <UniqueIdentifier>{1bd97ec5-41f9-4456-9290-4a4b7f69835e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
