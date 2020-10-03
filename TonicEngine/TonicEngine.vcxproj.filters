@@ -36,6 +36,9 @@
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleGUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -80,6 +83,9 @@
       <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleGUI.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>

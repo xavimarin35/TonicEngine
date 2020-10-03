@@ -8,6 +8,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
+	gui = new ModuleGUI(this);
 
 
 
@@ -20,6 +21,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(physics);
+	AddModule(gui);
 	
 	// Scenes
 	AddModule(scene_intro);
