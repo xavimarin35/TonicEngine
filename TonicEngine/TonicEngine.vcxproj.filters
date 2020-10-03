@@ -105,5 +105,8 @@
     <Filter Include="Sources\Modules">
       <UniqueIdentifier>{a653ba7a-bb04-472f-92a6-219bfb0eef12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ImGui">
+      <UniqueIdentifier>{41e2db18-4375-402f-8947-5391de315458}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
