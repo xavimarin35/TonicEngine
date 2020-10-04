@@ -3,6 +3,8 @@
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 
+#pragma comment (lib, "imgui-1.78/examples/libs/glfw/lib-vc2010-32/glfw3.lib")
+
 
 ModuleGUI::ModuleGUI(Application* app, bool start_enabled) : Module(app, start_enabled)
 {

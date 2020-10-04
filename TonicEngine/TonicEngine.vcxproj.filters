@@ -57,6 +57,9 @@
     <ClCompile Include="imgui-1.78\examples\imgui_impl_sdl.cpp">
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_opengl2.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -130,17 +133,20 @@
     <ClInclude Include="imgui-1.78\examples\imgui_impl_sdl.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_opengl2.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="glew\include\GL\eglew.h">
-      <Filter>Sources\Glew</Filter>
+      <Filter>Sources\glew</Filter>
     </ClInclude>
     <ClInclude Include="glew\include\GL\glew.h">
-      <Filter>Sources\Glew</Filter>
+      <Filter>Sources\glew</Filter>
     </ClInclude>
     <ClInclude Include="glew\include\GL\glxew.h">
-      <Filter>Sources\Glew</Filter>
+      <Filter>Sources\glew</Filter>
     </ClInclude>
     <ClInclude Include="glew\include\GL\wglew.h">
-      <Filter>Sources\Glew</Filter>
+      <Filter>Sources\glew</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,8 +168,8 @@
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{41e2db18-4375-402f-8947-5391de315458}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Glew">
-      <UniqueIdentifier>{6a4a886f-d1ad-44a1-bf65-e88bbc54ada1}</UniqueIdentifier>
+    <Filter Include="Sources\glew">
+      <UniqueIdentifier>{c61c936c-727b-4f66-8e98-f437bbf28b59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

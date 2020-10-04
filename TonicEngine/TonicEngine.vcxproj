@@ -48,11 +48,13 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>D:\GitHub\TonicEngine\TonicEngine\glew\include;D:\GitHub\TonicEngine\TonicEngine\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalLibraryDirectories>D:\GitHub\TonicEngine\TonicEngine\glew\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,6 +66,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>D:\GitHub\TonicEngine\TonicEngine\glew\include;D:\GitHub\TonicEngine\TonicEngine\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,6 +74,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalLibraryDirectories>D:\GitHub\TonicEngine\TonicEngine\glew\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -82,6 +86,7 @@
     <ClInclude Include="glew\include\GL\wglew.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="imgui-1.78\examples\imgui_impl_opengl2.h" />
     <ClInclude Include="imgui-1.78\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-1.78\examples\imgui_impl_sdl.h" />
     <ClInclude Include="imgui-1.78\imconfig.h" />
@@ -108,6 +113,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="imgui-1.78\examples\imgui_impl_opengl2.cpp" />
     <ClCompile Include="imgui-1.78\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-1.78\examples\imgui_impl_sdl.cpp" />
     <ClCompile Include="imgui-1.78\imgui.cpp" />
