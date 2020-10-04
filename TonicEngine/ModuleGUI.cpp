@@ -112,6 +112,37 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::End();
 	}
 
+	// My Main Menu
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			ImGui::MenuItem("New");
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Edit"))
+		{
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Quit"))
+		{
+			if (ImGui::MenuItem("Quit", "ESC"))
+				ret = UPDATE_STOP;
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
+
+	// My Quit button 
+	ImGui::SetNextWindowPos(ImVec2(0, 20));
+	ImGui::SetNextWindowSize(ImVec2(110, 60));
+	ImGui::Begin(" ", &show_close_app_window);   // Pass a pointer to our bool variable
+	if (ImGui::Button("Close Engine"))
+		return UPDATE_STOP;
+	ImGui::End();
+
+
 	ImGuiIO& test_io = *io; 
 
 	// Calling ImGui Render functions
