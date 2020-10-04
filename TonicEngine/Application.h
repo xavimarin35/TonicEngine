@@ -1,6 +1,6 @@
-#pragma once
+#ifndef __Application__
+#define __Application__
 
-#include "p2List.h"
 #include "Globals.h"
 #include "Timer.h"
 #include "Module.h"
@@ -9,8 +9,9 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModulePhysics3D.h"
-#include "ModuleGUI.h"
+#include "ModuleGui.h"
+
+#include <list>
 
 class Application
 {
@@ -20,14 +21,14 @@ public:
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
-	ModulePhysics3D* physics;
 	ModuleGUI* gui;
+
 
 private:
 
 	Timer	ms_timer;
 	float	dt;
-	p2List<Module*> list_modules;
+	std::list<Module*> list_modules;
 
 public:
 
@@ -44,3 +45,5 @@ private:
 	void PrepareUpdate();
 	void FinishUpdate();
 };
+
+#endif __Application__

@@ -20,8 +20,7 @@ int main (int argc, char** argv)
     0,   /* major */
     0,   /* minor */
     0,   /* profile mask */
-    0,   /* flags */
-    0    /* experimental */
+    0    /* flags */
   };
 
 #if defined(GLEW_EGL)
@@ -42,8 +41,7 @@ int main (int argc, char** argv)
 #endif
       "[-version <OpenGL version>] "
       "[-profile core|compatibility] "
-      "[-flag debug|forward] "
-      "[-experimental]"
+      "[-flag debug|forward]"
       "\n");
     return 1;
   }
@@ -54,7 +52,7 @@ int main (int argc, char** argv)
     glewDestroyContext();
     return 1;
   }
-  glewExperimental = params.experimental ? GL_TRUE : GL_FALSE;
+  glewExperimental = GL_TRUE;
   err = glewInit();
   if (GLEW_OK != err)
   {
@@ -129,11 +127,7 @@ GLboolean glewParseArgs (int argc, char** argv, struct createParams *params)
     if (!strcmp(argv[p], "-version"))
     {
       if (++p >= argc) return GL_TRUE;
-#if defined(__STDC_LIB_EXT1__) || (defined(_MSC_VER) && (_MSC_VER >= 1400))
-      if (sscanf_s(argv[p++], "%d.%d", &params->major, &params->minor) != 2) return GL_TRUE;
-#else
       if (sscanf(argv[p++], "%d.%d", &params->major, &params->minor) != 2) return GL_TRUE;
-#endif
     }
     else if (!strcmp(argv[p], "-profile"))
     {
@@ -164,18 +158,13 @@ GLboolean glewParseArgs (int argc, char** argv, struct createParams *params)
     {
       if (++p >= argc) return GL_TRUE;
       params->display = argv[p++];
-    }
+     }
     else if (!strcmp(argv[p], "-visual"))
     {
       if (++p >= argc) return GL_TRUE;
       params->visual = (int)strtol(argv[p++], NULL, 0);
     }
 #endif
-    else if (!strcmp(argv[p], "-experimental"))
-    {
-      params->experimental = 1;
-      ++p;
-    }
     else
       return GL_TRUE;
   }

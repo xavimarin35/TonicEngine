@@ -1,12 +1,9 @@
-#pragma once
+#ifndef __ModuleSceneIntro__
+#define __ModuleSceneIntro__
+
 #include "Module.h"
-#include "p2DynArray.h"
 #include "Globals.h"
-
-#define MAX_SNAKE 2
-
-struct PhysBody3D;
-struct PhysMotor3D;
+#include "Primitive.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -18,6 +15,9 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+	void OnCollision();
 
 };
+
+
+#endif __ModuleSceneIntro__

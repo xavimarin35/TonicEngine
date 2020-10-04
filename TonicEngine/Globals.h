@@ -2,7 +2,7 @@
 
 // Warning disabled ---
 #pragma warning( disable : 4577 ) // Warning that exceptions are disabled
-#pragma warning( disable : 4530 )
+#pragma warning( disable : 4530 ) // Warning that exceptions are disabled
 
 #include <windows.h>
 #include <stdio.h>
@@ -26,6 +26,26 @@ enum update_status
 	UPDATE_STOP,
 	UPDATE_ERROR
 };
+
+// Deletes a buffer
+#define RELEASE( x )\
+    {\
+       if( x != nullptr )\
+       {\
+         delete x;\
+	     x = nullptr;\
+       }\
+    }
+
+// Deletes an array of buffers
+#define RELEASE_ARRAY( x )\
+	{\
+       if( x != nullptr )\
+       {\
+           delete[] x;\
+	       x = nullptr;\
+		 }\
+
 
 // Configuration -----------
 #define SCREEN_WIDTH 1280

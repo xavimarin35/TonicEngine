@@ -19,12 +19,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xmd.h>
-
-#ifndef GLEW_INCLUDE
-#  include <GL/glew.h>
-#else
-#  include GLEW_INCLUDE
-#endif
+#include <GL/glew.h>
 
 #ifdef __cplusplus
 extern "C" {

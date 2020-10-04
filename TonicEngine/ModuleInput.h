@@ -1,4 +1,7 @@
-#pragma once
+#ifndef __ModuleInput__
+#define __ModuleInput__
+
+
 #include "Module.h"
 #include "Globals.h"
 
@@ -68,3 +71,5 @@ private:
 	int mouse_y_motion;
 	//int mouse_z_motion;
 };
+
+#endif __ModuleInput__
