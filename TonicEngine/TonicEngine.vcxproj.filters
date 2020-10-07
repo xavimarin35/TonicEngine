@@ -120,6 +120,7 @@
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -188,5 +189,11 @@
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TonicEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game\Assets\iconEngine.ico" />
   </ItemGroup>
 </Project>
