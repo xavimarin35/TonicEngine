@@ -81,15 +81,6 @@
     <ClInclude Include="MathGeoLib\include\MathGeoLibFwd.h">
       <Filter>Sources\MathGeoLib</Filter>
     </ClInclude>
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_extras.hpp">
-      <Filter>Sources\PCG</Filter>
-    </ClInclude>
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_random.hpp">
-      <Filter>Sources\PCG</Filter>
-    </ClInclude>
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_uint128.hpp">
-      <Filter>Sources\PCG</Filter>
-    </ClInclude>
     <ClInclude Include="imgui-1.78\imconfig.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
@@ -121,6 +112,15 @@
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="pcg-c-0.94\extras\entropy.h">
+      <Filter>Sources\PCG</Filter>
+    </ClInclude>
+    <ClInclude Include="pcg-c-0.94\extras\pcg_spinlock.h">
+      <Filter>Sources\PCG</Filter>
+    </ClInclude>
+    <ClInclude Include="pcg-c-0.94\include\pcg_variants.h">
+      <Filter>Sources\PCG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">

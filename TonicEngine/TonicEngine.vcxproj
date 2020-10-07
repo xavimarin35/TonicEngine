@@ -99,9 +99,9 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_extras.hpp" />
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_random.hpp" />
-    <ClInclude Include="pcg-cpp-0.98\include\pcg_uint128.hpp" />
+    <ClInclude Include="pcg-c-0.94\extras\entropy.h" />
+    <ClInclude Include="pcg-c-0.94\extras\pcg_spinlock.h" />
+    <ClInclude Include="pcg-c-0.94\include\pcg_variants.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Timer.h" />
