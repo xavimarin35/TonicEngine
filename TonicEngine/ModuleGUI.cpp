@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "imgui-1.78/imgui_impl_opengl2.h"
 //#include "imgui-1.78/examples/libs/glfw/include/GLFW/glfw3.h"
 
 #pragma comment (lib, "imgui-1.78/examples/libs/glfw/lib-vc2010-32/glfw3.lib")
@@ -42,12 +43,6 @@ bool ModuleGUI::Start()
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	return true;
-}
-
-void ModuleGUI::Render()
-{
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 update_status ModuleGUI::Update(float dt)
@@ -158,4 +153,17 @@ update_status ModuleGUI::Update(float dt)
 	//SDL_GL_SwapWindow(App->window->window); ---> THIS IS DONE IN THE RENDERER3D MODULE
 
 	return ret;
+}
+
+bool ModuleGUI::CleanUp()
+{
+	ImGui_ImplSDL2_Shutdown();
+	ImGui_ImplOpenGL2_Shutdown();
+	return true;
+}
+
+void ModuleGUI::Render()
+{
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

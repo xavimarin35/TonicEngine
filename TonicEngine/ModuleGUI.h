@@ -23,6 +23,7 @@ public:
 public:
 	bool Init();
 	bool Start();
+	bool CleanUp();
 	void Render();
 	
 	update_status Update(float dt);
