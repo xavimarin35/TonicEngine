@@ -154,8 +154,8 @@ update_status ModuleGUI::Update(float dt)
 
 	// If these lines are not commented, the engine gifts you with an epileptic attack
 	/*glClear(GL_COLOR_BUFFER_BIT);
-	glUseProgram(0); // You may want this if using this code in an OpenGL 3+ context where shaders may be bound
-	SDL_GL_SwapWindow(App->window->window);*/
+	glUseProgram(0); // You may want this if using this code in an OpenGL 3+ context where shaders may be bound*/
+	//SDL_GL_SwapWindow(App->window->window); ---> THIS IS DONE IN THE RENDERER3D MODULE
 
 	return ret;
 }

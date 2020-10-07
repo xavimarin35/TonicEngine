@@ -33,7 +33,7 @@ bool ModuleRenderer3D::Init()
 
 	if(ret == true)
 	{
-		// Without this function the code crashes, IT MUST BE HERE
+		// Without this function glew doesn't initialize so the code crashes, IT MUST BE HERE
 		glewInit();
 
 		//Use Vsync
