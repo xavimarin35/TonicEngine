@@ -33,9 +33,10 @@ public:
 private:
 	ImGuiIO* io = nullptr;
 
-	bool show_demo_window = true;
+	bool show_demo_window = false;
 	bool show_another_window = false;
 	bool show_close_app_window = true;
+	bool show_custom_window = false;
 
 };
 

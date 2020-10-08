@@ -69,20 +69,40 @@ update_status ModuleGUI::Update(float dt)
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
 
+	// My Main Menu
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Demo Window"))
+				show_demo_window = !show_demo_window;
+
+			if (ImGui::MenuItem("Custom Window"))
+				show_custom_window = !show_custom_window;
+
+			if (ImGui::MenuItem("Quit"))
+				ret = UPDATE_STOP;
+			ImGui::EndMenu();
+
+		}
+		ImGui::EndMainMenuBar();
+	}
 
 	// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+	
+	if (show_custom_window) 
 	{
 		static float f = 0.0f;
 		static int counter = 0;
 
-		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Custom Window");                          // Create a window called "Hello, world!" and append into it.
 
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		ImGui::Text("Welcome to 3D TonicEngine");               // Display some text (you can use a format strings too)
+		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("Another Window", &show_another_window);
 
 		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
@@ -93,6 +113,7 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
 
+		// Random Number Generator
 		if (ImGui::Button("Random"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
 			rand = GenerateRandomBetween(100);
 		ImGui::SameLine();
@@ -102,7 +123,6 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		ImGui::End();
 	}
-
 
 	// 3. Show another simple window.
 	if (show_another_window)
@@ -114,39 +134,13 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::End();
 	}
 
-	// My Main Menu
-	if (ImGui::BeginMainMenuBar())
-	{
-		if (ImGui::BeginMenu("File"))
-		{
-			ImGui::MenuItem("New");
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Edit"))
-		{
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Quit"))
-		{
-			if (ImGui::MenuItem("Quit", "ESC"))
-				ret = UPDATE_STOP;
-
-			ImGui::EndMenu();
-		}
-		ImGui::EndMainMenuBar();
-	}
-
-	// Logging a Random Number in Console
-	/*float r = GenerateRandomFloat();
-	LOG("Random: %f", r);*/
-
 	// My Quit button 
-	ImGui::SetNextWindowPos(ImVec2(0, 20));
+	/*ImGui::SetNextWindowPos(ImVec2(0, 20));
 	ImGui::SetNextWindowSize(ImVec2(110, 60));
 	ImGui::Begin(" ", &show_close_app_window);   // Pass a pointer to our bool variable
 	if (ImGui::Button("Close Engine"))
 		return UPDATE_STOP;
-	ImGui::End();
+	ImGui::End();*/
 
 
 	ImGuiIO& test_io = *io; 
