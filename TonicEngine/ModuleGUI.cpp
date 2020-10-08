@@ -93,9 +93,16 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
 
+		if (ImGui::Button("Random"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			rand = GenerateRandomBetween(100);
+		ImGui::SameLine();
+		ImGui::Text("%d", rand);
+
+
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		ImGui::End();
 	}
+
 
 	// 3. Show another simple window.
 	if (show_another_window)
@@ -128,6 +135,10 @@ update_status ModuleGUI::Update(float dt)
 		}
 		ImGui::EndMainMenuBar();
 	}
+
+	// Logging a Random Number in Console
+	/*float r = GenerateRandomFloat();
+	LOG("Random: %f", r);*/
 
 	// My Quit button 
 	ImGui::SetNextWindowPos(ImVec2(0, 20));

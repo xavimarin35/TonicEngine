@@ -27,6 +27,8 @@ public:
 	void Render();
 	
 	update_status Update(float dt);
+	int rand = 0;
+	bool getRand = false;
 
 private:
 	ImGuiIO* io = nullptr;
