@@ -27,7 +27,7 @@ Application::Application()
 
 Application::~Application()
 {
-	std::list<Module*>::iterator item = list_modules.begin();
+	list<Module*>::iterator item = list_modules.begin();
 
 	for (; item != list_modules.end(); item = next(item))
 	{
@@ -45,14 +45,14 @@ bool Application::Init()
 	InitSeed();
 
 	// Call Init() in all modules
-	for (std::list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->Init();
 	}
 
 	// After all Init calls we call Start() in all modules
 	LOG("Application Start --------------");
-	for (std::list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->Start();
 	}
@@ -79,17 +79,17 @@ update_status Application::Update()
 	update_status ret = UPDATE_CONTINUE;
 	PrepareUpdate();
 	
-	for (std::list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item) 
+	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item) 
 	{
 		ret = (*item)->PreUpdate(dt);
 	}
 
-	for (std::list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item)
+	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item)
 	{
 		ret = (*item)->Update(dt);
 	}
 	
-	for (std::list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item)
+	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item)
 	{
 		ret = (*item)->PostUpdate(dt);
 	}
@@ -103,7 +103,7 @@ bool Application::CleanUp()
 {
 	bool ret = true;
 
-	for (std::list<Module*>::reverse_iterator item = list_modules.rbegin(); item != list_modules.rend() && ret; ++item)
+	for (list<Module*>::reverse_iterator item = list_modules.rbegin(); item != list_modules.rend() && ret; ++item)
 	{
 		ret = (*item)->CleanUp();
 	}

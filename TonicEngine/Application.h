@@ -13,22 +13,30 @@
 
 #include <list>
 
+class Module;
+class ModuleWindow;
+class ModuleInput;
+class ModuleSceneIntro;
+class ModuleRenderer3D;
+class ModuleCamera3D;
+class ModuleGUI;
+
 class Application
 {
 public:
-	ModuleWindow* window;
-	ModuleInput* input;
-	ModuleSceneIntro* scene_intro;
-	ModuleRenderer3D* renderer3D;
-	ModuleCamera3D* camera;
-	ModuleGUI* gui;
+	ModuleWindow* window = nullptr;
+	ModuleInput* input = nullptr;
+	ModuleSceneIntro* scene_intro = nullptr;
+	ModuleRenderer3D* renderer3D = nullptr;
+	ModuleCamera3D* camera = nullptr;
+	ModuleGUI* gui = nullptr;
 
 
 private:
 
 	Timer	ms_timer;
 	float	dt;
-	std::list<Module*> list_modules;
+	list<Module*> list_modules;
 
 public:
 
