@@ -33,6 +33,10 @@ bool ModuleGUI::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init();
 
+	// Panels
+	Pconfig = new PanelConfiguration();
+	panels.push_back(Pconfig);
+
 	return true;
 
 }

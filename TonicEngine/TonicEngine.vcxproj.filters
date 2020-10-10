@@ -28,6 +28,12 @@
     <Filter Include="Sources\PCG">
       <UniqueIdentifier>{d8e7dd81-f92c-4421-a840-48a3b2c64d81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\GUI">
+      <UniqueIdentifier>{2804fc15-318c-4bb5-b24b-04ced8a2e9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\GUI\Panels">
+      <UniqueIdentifier>{f5039f51-ab35-4471-afab-8fe10ee08b32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -65,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleGui.h">
-      <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="glew\include\GL\glew.h">
       <Filter>Sources\glew</Filter>
@@ -121,6 +124,15 @@
     <ClInclude Include="pcg-c-0.94\include\pcg_variants.h">
       <Filter>Sources\PCG</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleGui.h">
+      <Filter>Sources\Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelManager.h">
+      <Filter>Sources\Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelConfiguration.h">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -159,9 +171,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleGui.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="glew\src\glew.c">
       <Filter>Sources\glew</Filter>
     </ClCompile>
@@ -191,6 +200,12 @@
     </ClCompile>
     <ClCompile Include="RandomNumGenerator.cpp">
       <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGui.cpp">
+      <Filter>Sources\Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelConfiguration.cpp">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
