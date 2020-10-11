@@ -5,6 +5,7 @@
 
 PanelConfiguration::PanelConfiguration() : PanelManager()
 {
+	
 }
 
 PanelConfiguration::~PanelConfiguration()
@@ -18,7 +19,7 @@ bool PanelConfiguration::Start()
 
 bool PanelConfiguration::Draw()
 {
-	if (App->gui->Pconfig) 
+	if (App->gui->Pconfig)
 	{
 
 	}

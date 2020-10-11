@@ -54,4 +54,6 @@ private:
 	void FinishUpdate();
 };
 
+extern Application* App;
+
 #endif __Application__
