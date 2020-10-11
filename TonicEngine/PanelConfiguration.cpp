@@ -18,6 +18,10 @@ bool PanelConfiguration::Start()
 
 bool PanelConfiguration::Draw()
 {
-	
+	if (App->gui->Pconfig) 
+	{
+
+	}
+
 	return true;
 }

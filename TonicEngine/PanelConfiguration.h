@@ -6,6 +6,8 @@
 #include "Application.h"
 #include "PanelManager.h"
 
+class Application;
+
 class PanelConfiguration : public PanelManager
 {
 public:
@@ -14,6 +16,8 @@ public:
 
 	bool Start();
 	bool Draw();
+
+	Application* App;
 };
 
 #endif
