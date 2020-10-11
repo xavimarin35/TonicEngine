@@ -31,6 +31,7 @@ public:
 	bool Start();
 	bool CleanUp();
 	void Render();
+	bool DrawPanels();
 	
 	update_status Update(float dt);
 	int rand = 0;

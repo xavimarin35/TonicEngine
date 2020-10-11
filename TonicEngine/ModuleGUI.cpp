@@ -43,10 +43,37 @@ bool ModuleGUI::Init()
 
 bool ModuleGUI::Start()
 {
+	bool ret = true;
+
 	bool show_demo_window = true;
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	return true;
+
+	for (list<PanelManager*>::iterator it = panels.begin(); it != panels.end(); ++it)
+	{
+		ret = (*it)->Start();
+	}
+
+	return ret;
+}
+
+bool ModuleGUI::DrawPanels()
+{
+	bool ret = true;
+
+	// Start the Dear ImGui frame
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame(App->window->window);
+	ImGui::NewFrame();
+
+	for (list<PanelManager*>::iterator it = panels.begin(); it != panels.end(); ++it)
+	{
+		ret = (*it)->Draw();
+	}
+
+	Render();
+
+	return ret;
 }
 
 update_status ModuleGUI::Update(float dt)
@@ -166,9 +193,18 @@ update_status ModuleGUI::Update(float dt)
 
 bool ModuleGUI::CleanUp()
 {
+	bool ret = true;
+
+	for (list<PanelManager*>::iterator it = panels.begin(); it != panels.end(); ++it)
+	{
+		ret = (*it)->CleanUp();
+	}
+
 	ImGui_ImplSDL2_Shutdown();
 	ImGui_ImplOpenGL2_Shutdown();
-	return true;
+	ImGui::DestroyContext();
+
+	return ret;
 }
 
 void ModuleGUI::Render()
@@ -176,3 +212,5 @@ void ModuleGUI::Render()
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+

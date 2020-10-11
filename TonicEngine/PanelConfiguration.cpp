@@ -1,4 +1,7 @@
+#include "Application.h"
 #include "PanelConfiguration.h"
+#include "ModuleGUI.h"
+#include "ModuleWindow.h"
 
 PanelConfiguration::PanelConfiguration() : PanelManager()
 {
@@ -15,5 +18,6 @@ bool PanelConfiguration::Start()
 
 bool PanelConfiguration::Draw()
 {
+	
 	return true;
 }
