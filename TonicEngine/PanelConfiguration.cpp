@@ -32,7 +32,7 @@ bool PanelConfiguration::Draw()
 		App->window->GetWindowSize(w_width, w_height);
 		ImGui::SetNextWindowSize(ImVec2((float)w_width / 5, (float)w_height), ImGuiCond_Once);
 
-		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_AlwaysAutoResize)
+		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_NoBackground)
 		{
 			if (ImGui::CollapsingHeader("Window"))
 			{

@@ -86,10 +86,8 @@ bool ModuleGUI::Draw()
 		{
 			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
 			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
-
-			if (ImGui::MenuItem("Style Editor Window"))
-				show_style_editor = true;
-			
+            ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
+				
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
@@ -99,20 +97,23 @@ bool ModuleGUI::Draw()
 		}
 
 		ImGui::EndMainMenuBar();
+        
 	}
 
 	// Demo Window
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
 
-	// Work in progress
-	if (show_style_editor)
-	{
-		ImGuiStyle& style = ImGui::GetStyle();
-		style = ImGui::GetStyle();
-	}
+	
+    if (show_style_editor)
+    {
+        ImGui::Begin("Style Editor Window", &show_style_editor);
+        ImGui::ShowStyleEditor();
+        ImGui::End();
+    }
+        
 		
-
+    ImGuiIO& test_io = *io;
 	Render();
 
 	return ret;
@@ -182,5 +183,8 @@ void ModuleGUI::Render()
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+
+
 
 

@@ -22,6 +22,8 @@ void log(const char file[], int line, const char* format, ...);
 // Yellow Color to call in ImGui::TextColored
 #define PanelTextColor ImVec4(1.0f, 1.0f, 0.0f, 1.0f)
 
+#define IM_NEWLINE "\r\n"
+
 // PCG (Random Number Generator) functions
 void InitSeed();
 float GenerateRandomFloat();
