@@ -16,6 +16,8 @@ PanelAbout::~PanelAbout()
 
 bool PanelAbout::Start()
 {
+	this->active = false;
+
 	return true;
 }
 

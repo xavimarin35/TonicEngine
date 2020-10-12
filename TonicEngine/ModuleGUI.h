@@ -36,6 +36,7 @@ public:
 	bool Draw();
 	
 	update_status PreUpdate(float dt);
+	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	
 	// Random Number Generator 
@@ -48,6 +49,8 @@ public:
 	
 	PanelConfiguration* Pconfig = nullptr;
 	PanelAbout* Pabout = nullptr;
+
+	bool quitApp = false;
 
 private:
 	ImGuiIO* io = nullptr;

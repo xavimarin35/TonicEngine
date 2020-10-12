@@ -17,6 +17,8 @@ PanelConfiguration::~PanelConfiguration()
 
 bool PanelConfiguration::Start()
 {
+	this->active = true;
+
 	return true;
 }
 

@@ -71,15 +71,31 @@ bool ModuleGUI::Draw()
 
 	if (ImGui::BeginMainMenuBar())
 	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Quit"))
+				quitApp = true;
 
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("View"))
 		{
-			ImGui::MenuItem("Config Panel", NULL, &Pconfig->active);
+			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
+			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Help"))
+		{
 			ImGui::MenuItem("About Panel", NULL, &Pabout->active);
 			ImGui::EndMenu();
 		}
+
 		ImGui::EndMainMenuBar();
 	}
+
+	// Demo Window
+	if (show_demo_window)
+		ImGui::ShowDemoWindow(&show_demo_window);
 
 	Render();
 
@@ -100,6 +116,16 @@ update_status ModuleGUI::PreUpdate(float dt)
 	{
 		ret = (*it)->PreUpdate(dt);
 	}
+
+	return ret;
+}
+
+update_status ModuleGUI::Update(float dt)
+{
+	update_status ret = UPDATE_CONTINUE;
+
+	if (quitApp)
+		ret = UPDATE_STOP;
 
 	return ret;
 }
