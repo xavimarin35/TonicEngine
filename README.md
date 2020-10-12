@@ -1,6 +1,6 @@
 # TonicEngine
 
-TonicEngine is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi Marín, students of [CITM](https://www.citm.upc.edu/) in Barcelona during our [Game Design and Development Bachelor's Degree](https://www.citm.upc.edu/cat/estudis/graus-videojocs/).
+TonicEngine is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi Marín, students of [CITM](https://www.citm.upc.edu/) in Barcelona during our [Game Design and Development Bachelor's Degree](https://www.citm.upc.edu/cat/estudis/grau-videojocs-bcn/).
 
 ## Information
 
@@ -14,7 +14,7 @@ Download the zip file and unzip it. Open the folder, execute the .exe and enjoy!
 
 IMPORTANT: *Do not modify, change or add any folder or file (unless specified) as you might not be able to execute the application.*
 
-## Authors and accomplishments
+## Authors
 
 ### Pol Casaú
 
