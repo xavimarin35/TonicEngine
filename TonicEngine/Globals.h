@@ -28,7 +28,6 @@ float GenerateRandomFloat();
 int GenerateRandomInt();
 int GenerateRandomBetween(int bound);
 
-
 typedef unsigned int uint;
 
 enum update_status

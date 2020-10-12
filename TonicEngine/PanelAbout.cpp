@@ -36,7 +36,7 @@ bool PanelAbout::Draw()
 			ImGui::Text("3D Game Engine developed in C & C++ during our Game Design and Development Bachelor's Degree.");
 			ImGui::Text("By Pol Casau and Xavi Marin\n\n");
 
-			if (ImGui::Button("Github"))
+			if (ImGui::Button("GitHub"))
 				ShellExecuteA(NULL, "open", "https://github.com/xavimarin35/TonicEngine", NULL, NULL, SW_SHOWNORMAL);
 
 			ImGui::Text("\n3rd Party Libraries used:");

@@ -52,6 +52,9 @@ public:
 
 	bool quitApp = false;
 
+	// Frame Rate
+	int max_fps = 0;
+
 private:
 	ImGuiIO* io = nullptr;
 

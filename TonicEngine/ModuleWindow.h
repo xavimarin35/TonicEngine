@@ -19,6 +19,7 @@ public:
 	bool CleanUp();
 
 	void SetTitle(const char* title);
+	const char* GetTitle();
 
 	// Window SDL functions
 	void GetWindowSize(int& width, int& height);

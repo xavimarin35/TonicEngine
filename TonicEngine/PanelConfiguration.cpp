@@ -46,8 +46,6 @@ bool PanelConfiguration::Draw()
 			if (ImGui::Checkbox("Full Screen", &fullscreen))
 				App->window->SetFullScreen(fullscreen);
 
-			//ImGui::SameLine();
-
 			if (ImGui::Checkbox("Resizable", &resizable))
 				App->window->SetResizable(resizable);
 
@@ -57,7 +55,21 @@ bool PanelConfiguration::Draw()
 
 		if (ImGui::CollapsingHeader("Application"))
 		{
+			char name[60];
+			strcpy_s(name, 60, App->window->GetTitle());
 
+			if (ImGui::InputText("Engine Name", name, 60, ImGuiInputTextFlags_EnterReturnsTrue))
+				App->window->SetTitle(name);
+
+			ImGui::Separator();
+
+			App->gui->max_fps = App->GetFrameRateLimit();
+			if (ImGui::SliderInt("Max FPS", &App->gui->max_fps, 0, 200))
+				App->SetFrameRateLimit(App->gui->max_fps);
+
+			ImGui::Text("Limit Framerate:");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());
 		}
 
 		if (ImGui::CollapsingHeader("Hardware"))
