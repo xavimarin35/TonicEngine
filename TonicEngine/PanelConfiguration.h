@@ -21,13 +21,16 @@ public:
 	int		height = SCREEN_HEIGHT;
 	int		w_width = 0;
 	int		w_height = 0;
+	float	brightness = 1.0f;
+
+	//SDL_version currentVersion;
 
 	bool	fullscreen = false;
 	bool	fulldesktop = false;
 	bool	borderless = false;
 	bool	resizable = true;
 
-	float	brightness = 1.0f;
+	
 };
 
 #endif

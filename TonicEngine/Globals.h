@@ -19,6 +19,9 @@ void log(const char file[], int line, const char* format, ...);
 #define RADTODEG 57.295779513082320876f
 #define HAVE_M_PI
 
+// Yellow Color to call in ImGui::TextColored
+#define PanelTextColor ImVec4(1.0f, 1.0f, 0.0f, 1.0f)
+
 // PCG (Random Number Generator) functions
 void InitSeed();
 float GenerateRandomFloat();

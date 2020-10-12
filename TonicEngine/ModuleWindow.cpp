@@ -108,6 +108,14 @@ void ModuleWindow::SetFullScreen(bool active)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_MINIMIZED);
 }
 
+void ModuleWindow::SetResizable(bool active)
+{
+	if (active)
+		SDL_SetWindowResizable(window, SDL_TRUE);
+	else
+		SDL_SetWindowResizable(window, SDL_FALSE);
+}
+
 void ModuleWindow::SetBorderless(bool active)
 {
 	if (active)
@@ -116,10 +124,3 @@ void ModuleWindow::SetBorderless(bool active)
 		SDL_SetWindowBordered(window, SDL_TRUE);
 }
 
-void ModuleWindow::SetResizable(bool active)
-{
-	if (active)
-		SDL_SetWindowResizable(window, SDL_TRUE);
-	else
-		SDL_SetWindowResizable(window, SDL_FALSE);
-}

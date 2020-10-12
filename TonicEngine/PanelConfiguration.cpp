@@ -29,29 +29,72 @@ bool PanelConfiguration::Draw()
 
 	if (App->gui->Pconfig->active)
 	{
-		static float f = 0.0f;
-		static int counter = 0;
+		App->window->GetWindowSize(w_width, w_height);
+		ImGui::SetNextWindowSize(ImVec2((float)w_width / 4, (float)w_height), ImGuiCond_Once);
 
-		ImGui::Begin("Custom Window");                          // Create a window called "Hello, world!" and append into it.
+		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_AlwaysAutoResize)
+		{
+			ImGui::SliderInt("Width", &width, 1, 1920);
+			ImGui::SliderInt("Height", &height, 1, 1080);
+			ImGui::SliderFloat("Brightness", &brightness, 0.0f, 1.0f);
 
-		ImGui::Text("Welcome to 3D TonicEngine");               // Display some text (you can use a format strings too)
-		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+			SDL_SetWindowBrightness(App->window->window, brightness);
+			SDL_SetWindowSize(App->window->window, width, height);
 
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+			ImGui::Separator();
 
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
+			if (ImGui::Checkbox("Full Screen", &fullscreen))
+				App->window->SetFullScreen(fullscreen);
 
-		// Random Number Generator
-		if (ImGui::Button("Random"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			App->gui->rand = GenerateRandomBetween(100);
-		ImGui::SameLine();
-		ImGui::Text("%d", App->gui->rand);
+			//ImGui::SameLine();
+
+			if (ImGui::Checkbox("Resizable", &resizable))
+				App->window->SetResizable(resizable);
+
+			if (ImGui::Checkbox("Borderless", &borderless))
+				App->window->SetBorderless(borderless);
+		}
+
+		if (ImGui::CollapsingHeader("Application"))
+		{
+
+		}
+
+		if (ImGui::CollapsingHeader("Hardware"))
+		{
+			ImGui::Text("SDL Version:");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
+
+			ImGui::Separator();
+
+			ImGui::Text("CPUs: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%d", SDL_GetCPUCount());
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "(Cache: %d kb)", SDL_GetCPUCacheLineSize());
+
+			ImGui::Text("System RAM: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%f Gb", SDL_GetSystemRAM() / 1024.0f);
 
 
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::Separator();
+
+			ImGui::Text("GPU: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_RENDERER));
+
+			ImGui::Text("Brand: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VENDOR));
+
+			ImGui::Text("Version: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VERSION));
+
+		}
+
 		ImGui::End();
 	}
 
