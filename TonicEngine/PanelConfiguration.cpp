@@ -30,80 +30,86 @@ bool PanelConfiguration::Draw()
 	if (App->gui->Pconfig->active)
 	{
 		App->window->GetWindowSize(w_width, w_height);
-		ImGui::SetNextWindowSize(ImVec2((float)w_width / 4, (float)w_height), ImGuiCond_Once);
+		ImGui::SetNextWindowSize(ImVec2((float)w_width / 5, (float)w_height), ImGuiCond_Once);
 
 		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_AlwaysAutoResize)
 		{
-			ImGui::SliderInt("Width", &width, 1, 1920);
-			ImGui::SliderInt("Height", &height, 1, 1080);
-			ImGui::SliderFloat("Brightness", &brightness, 0.0f, 1.0f);
+			if (ImGui::CollapsingHeader("Window"))
+			{
+				ImGui::SliderInt("Width", &width, 1, 1920);
+				ImGui::SliderInt("Height", &height, 1, 1080);
+				ImGui::SliderFloat("Brightness", &brightness, 0.0f, 1.0f);
 
-			SDL_SetWindowBrightness(App->window->window, brightness);
-			SDL_SetWindowSize(App->window->window, width, height);
+				SDL_SetWindowBrightness(App->window->window, brightness);
+				SDL_SetWindowSize(App->window->window, width, height);
 
-			ImGui::Separator();
+				ImGui::Separator();
 
-			if (ImGui::Checkbox("Full Screen", &fullscreen))
-				App->window->SetFullScreen(fullscreen);
+				if (ImGui::Checkbox("Full Screen", &fullscreen))
+					App->window->SetFullScreen(fullscreen);
 
-			if (ImGui::Checkbox("Resizable", &resizable))
-				App->window->SetResizable(resizable);
+				if (ImGui::Checkbox("Resizable", &resizable))
+					App->window->SetResizable(resizable);
 
-			if (ImGui::Checkbox("Borderless", &borderless))
-				App->window->SetBorderless(borderless);
-		}
+				if (ImGui::Checkbox("Borderless", &borderless))
+					App->window->SetBorderless(borderless);
+			}
+			
+		
 
-		if (ImGui::CollapsingHeader("Application"))
-		{
-			char name[60];
-			strcpy_s(name, 60, App->window->GetTitle());
+			if (ImGui::CollapsingHeader("Application"))
+			{
+				char name[60];
+				strcpy_s(name, 60, App->window->GetTitle());
 
-			if (ImGui::InputText("Engine Name", name, 60, ImGuiInputTextFlags_EnterReturnsTrue))
-				App->window->SetTitle(name);
+				if (ImGui::InputText("Engine Name", name, 60, ImGuiInputTextFlags_EnterReturnsTrue))
+					App->window->SetTitle(name);
 
-			ImGui::Separator();
+				ImGui::Separator();
 
-			App->gui->max_fps = App->GetFrameRateLimit();
-			if (ImGui::SliderInt("Max FPS", &App->gui->max_fps, 0, 200))
-				App->SetFrameRateLimit(App->gui->max_fps);
+				App->gui->max_fps = App->GetFrameRateLimit();
+				if (ImGui::SliderInt("Max FPS", &App->gui->max_fps, 0, 200))
+					App->SetFrameRateLimit(App->gui->max_fps);
 
-			ImGui::Text("Limit Framerate:");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());
-		}
+				ImGui::Text("Limit Framerate:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());
+			}
 
-		if (ImGui::CollapsingHeader("Hardware"))
-		{
-			ImGui::Text("SDL Version:");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
+			if (ImGui::CollapsingHeader("Hardware"))
+			{
+				ImGui::Text("SDL Version:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 
-			ImGui::Separator();
+				ImGui::Separator();
 
-			ImGui::Text("CPUs: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%d", SDL_GetCPUCount());
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "(Cache: %d kb)", SDL_GetCPUCacheLineSize());
+				ImGui::Text("CPUs: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%d", SDL_GetCPUCount());
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "(Cache: %d kb)", SDL_GetCPUCacheLineSize());
 
-			ImGui::Text("System RAM: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%f Gb", SDL_GetSystemRAM() / 1024.0f);
+				ImGui::Text("System RAM: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%f Gb", SDL_GetSystemRAM() / 1024.0f);
 
 
-			ImGui::Separator();
+				ImGui::Separator();
 
-			ImGui::Text("GPU: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_RENDERER));
+				ImGui::Text("GPU: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_RENDERER));
 
-			ImGui::Text("Brand: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VENDOR));
+				ImGui::Text("Brand: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VENDOR));
 
-			ImGui::Text("Version: ");
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VERSION));
+				ImGui::Text("Version: ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VERSION));
+
+			}
 
 		}
 

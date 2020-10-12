@@ -14,10 +14,14 @@
 
 #include "PanelConfiguration.h"
 #include "PanelAbout.h"
+#include "PanelConsole.h"
+#include "PanelHierarchy.h"
 
 
 class PanelConfiguration;
 class PanelAbout;
+class PanelConsole;
+class PanelHierarchy;
 
 
 class ModuleGUI : public Module
@@ -42,13 +46,11 @@ public:
 	// Random Number Generator 
 	int rand = 0;
 	bool getRand = false;
-
-	// Visible Panel Bools
-	bool aboutPanel_visible = false;
-	bool configPanel_visible = true;
 	
 	PanelConfiguration* Pconfig = nullptr;
 	PanelAbout* Pabout = nullptr;
+	PanelConsole* Pconsole = nullptr;
+	PanelHierarchy* Phierarchy = nullptr;
 
 	bool quitApp = false;
 
@@ -59,10 +61,8 @@ private:
 	ImGuiIO* io = nullptr;
 
 	bool show_demo_window = false;
-	bool show_another_window = false;
-	bool show_close_app_window = true;
-	bool show_custom_window = false;
-
+	bool show_style_editor = false;
+	
 	list<PanelManager*> panels;
 
 };

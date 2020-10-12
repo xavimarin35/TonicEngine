@@ -21,9 +21,13 @@ bool ModuleGUI::Init()
 	// Panels
 	Pconfig = new PanelConfiguration();
 	Pabout = new PanelAbout();
+	Pconsole = new PanelConsole();
+	Phierarchy = new PanelHierarchy();
 
 	panels.push_back(Pconfig);
 	panels.push_back(Pabout);
+	panels.push_back(Pconsole);
+	panels.push_back(Phierarchy);
 
 	return true;
 }
@@ -82,6 +86,10 @@ bool ModuleGUI::Draw()
 		{
 			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
 			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
+
+			if (ImGui::MenuItem("Style Editor Window"))
+				show_style_editor = true;
+			
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
@@ -96,6 +104,14 @@ bool ModuleGUI::Draw()
 	// Demo Window
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
+
+	// Work in progress
+	if (show_style_editor)
+	{
+		ImGuiStyle& style = ImGui::GetStyle();
+		style = ImGui::GetStyle();
+	}
+		
 
 	Render();
 

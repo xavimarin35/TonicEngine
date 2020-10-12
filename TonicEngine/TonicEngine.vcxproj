@@ -103,6 +103,8 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="PanelAbout.h" />
     <ClInclude Include="PanelConfiguration.h" />
+    <ClInclude Include="PanelConsole.h" />
+    <ClInclude Include="PanelHierarchy.h" />
     <ClInclude Include="PanelManager.h" />
     <ClInclude Include="pcg-c-0.94\extras\entropy.h" />
     <ClInclude Include="pcg-c-0.94\extras\pcg_spinlock.h" />
@@ -134,6 +136,8 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="PanelAbout.cpp" />
     <ClCompile Include="PanelConfiguration.cpp" />
+    <ClCompile Include="PanelConsole.cpp" />
+    <ClCompile Include="PanelHierarchy.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RandomNumGenerator.cpp" />
     <ClCompile Include="Timer.cpp" />
