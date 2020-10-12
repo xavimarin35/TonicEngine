@@ -46,7 +46,7 @@ bool PanelAbout::Draw()
 			ImGui::BulletText("PCG");
 
 			ImGui::Text("\nMIT License");
-			ImGui::Text("Copyright (c) 2020 Xavi Marín Solà and Pol Casaú Civít");
+			ImGui::Text("Copyright (c) 2020 Xavi Marin Sola and Pol Casau Civit");
 			ImGui::Text("Permission is hereby granted, free of charge, to any person obtaining a copy");
 			ImGui::Text("of this software and associated documentation files (the 'Software'), to deal");
 			ImGui::Text("in the Software without restriction, including without limitation the rights");
