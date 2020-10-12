@@ -31,15 +31,19 @@ public:
 	bool Start();
 	bool CleanUp();
 	void Render();
-	bool DrawPanels();
+	bool Draw();
+	update_status MainMenuBar();
 	
-	update_status Update(float dt);
+	update_status PreUpdate(float dt);
+	/*update_status Update(float dt);*/
+	update_status PostUpdate(float dt);
+	/*update_status Update(float dt);*/
 	int rand = 0;
 	bool getRand = false;
 
 	// Visible Panels
 	bool aboutPanel_visible = false;
-	bool configPanel_visible = false;
+	bool configPanel_visible = true;
 	bool hardwarePanel_visible = false;
 
 	PanelConfiguration* Pconfig = nullptr;
