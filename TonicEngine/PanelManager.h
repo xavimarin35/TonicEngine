@@ -13,6 +13,8 @@ public:
 	PanelManager(){}
 	virtual ~PanelManager(){}
 
+	bool active = false;
+
 	virtual bool Start() { return true; }
 	virtual update_status PreUpdate(float dt) { return UPDATE_CONTINUE; }
 	virtual update_status Update(float dt) { return UPDATE_CONTINUE; }

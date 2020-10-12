@@ -13,9 +13,11 @@
 #include "glew/include/GL/glew.h"
 
 #include "PanelConfiguration.h"
+#include "PanelAbout.h"
 
 
 class PanelConfiguration;
+class PanelAbout;
 
 
 class ModuleGUI : public Module
@@ -32,21 +34,20 @@ public:
 	bool CleanUp();
 	void Render();
 	bool Draw();
-	update_status MainMenuBar();
 	
 	update_status PreUpdate(float dt);
-	/*update_status Update(float dt);*/
 	update_status PostUpdate(float dt);
-	/*update_status Update(float dt);*/
+	
+	// Random Number Generator 
 	int rand = 0;
 	bool getRand = false;
 
-	// Visible Panels
+	// Visible Panel Bools
 	bool aboutPanel_visible = false;
 	bool configPanel_visible = true;
-	bool hardwarePanel_visible = false;
-
+	
 	PanelConfiguration* Pconfig = nullptr;
+	PanelAbout* Pabout = nullptr;
 
 private:
 	ImGuiIO* io = nullptr;

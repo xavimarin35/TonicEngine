@@ -101,6 +101,7 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="PanelAbout.h" />
     <ClInclude Include="PanelConfiguration.h" />
     <ClInclude Include="PanelManager.h" />
     <ClInclude Include="pcg-c-0.94\extras\entropy.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="PanelAbout.cpp" />
     <ClCompile Include="PanelConfiguration.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RandomNumGenerator.cpp" />
