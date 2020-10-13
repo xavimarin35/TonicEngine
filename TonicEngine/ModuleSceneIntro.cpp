@@ -24,7 +24,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));	
 
 	// Uncomment here and on PostUpdate to draw the cube in the second mode (Vertex Array)
-	// (DrawVertexArrays(1);
+	(DrawVertexArrays(1));
 
 	// Uncomment here and on PostUpdate to draw the cube in the third mode (Indices) ----NOT WORKING----
 	// DrawIndices(1);
@@ -48,7 +48,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.Render();
 
 	// Uncomment to draw the cube in the first mode (Direct Mode)
-	// DrawDirectMode();
+	 DrawDirectMode();
 
 	return UPDATE_CONTINUE;
 }
@@ -56,7 +56,7 @@ update_status ModuleSceneIntro::Update(float dt)
 update_status ModuleSceneIntro::PostUpdate(float dt)
 {
 	// Uncomment here and on Start to draw the cube in the second mode (Vertex Array)
-	// DrawVertexArrays(2);
+	 DrawVertexArrays(2);
 
 	// Uncomment here and on Start to draw the cube in the third mode (Indices) ----NOT WORKING----
 	// DrawIndices(2); 

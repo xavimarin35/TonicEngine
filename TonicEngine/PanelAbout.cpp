@@ -34,18 +34,26 @@ bool PanelAbout::Draw()
 			ImGui::Separator();
 
 			ImGui::Text("3D Game Engine developed in C & C++ during our Game Design and Development Bachelor's Degree.");
-			ImGui::Text("By Pol Casau and Xavi Marin\n\n");
+			ImGui::Text("By Pol Casau and Xavi Marin\n");
 
 			if (ImGui::Button("GitHub"))
 				ShellExecuteA(NULL, "open", "https://github.com/xavimarin35/TonicEngine", NULL, NULL, SW_SHOWNORMAL);
 
+			//ImGui::Separator();
+
 			ImGui::Text("\n3rd Party Libraries used:");
-			ImGui::BulletText("SDL");
-			ImGui::BulletText("Glew");
-			ImGui::BulletText("ImGui");
-			ImGui::BulletText("MathGeoLib");
-			ImGui::BulletText("OpenGL");
-			ImGui::BulletText("PCG");
+			if (ImGui::Selectable("OpenGL", false, 0, { 50, 13 }))
+				App->RequestBrowser("https://www.opengl.org/"); ImGui::SameLine();
+			if (ImGui::Selectable("Glew", false, 0, { 35, 13 }))
+				App->RequestBrowser("http://glew.sourceforge.net/"); ImGui::SameLine();
+			if (ImGui::Selectable("SDL", false, 0, { 35, 13 }))
+				App->RequestBrowser("https://www.libsdl.org/"); ImGui::SameLine();
+			if (ImGui::Selectable("ImGui", false, 0, { 40, 13 }))
+				App->RequestBrowser("https://github.com/ocornut/imgui"); ImGui::SameLine();
+			if (ImGui::Selectable("PCG", false, 0, { 35, 13 }))
+				App->RequestBrowser("http://www.pcg-random.org/"); ImGui::SameLine();
+			if (ImGui::Selectable("MathGeoLib", false, 0, { 90, 13 }))
+				App->RequestBrowser("https://github.com/juj/MathGeoLib");
 
 			ImGui::Text("\nMIT License");
 			ImGui::Text("Copyright (c) 2020 Xavi Marin Sola and Pol Casau Civit");

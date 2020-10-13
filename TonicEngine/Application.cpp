@@ -132,6 +132,11 @@ bool Application::CleanUp()
 	return ret;
 }
 
+void Application::RequestBrowser(const char* link) const
+{
+	ShellExecuteA(NULL, "open", link, NULL, NULL, SW_SHOWNORMAL);
+}
+
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);

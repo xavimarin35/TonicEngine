@@ -49,6 +49,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void RequestBrowser(const char* link) const;
+
 	// Frame Rate
 	uint GetFrameRateLimit();
 	void SetFrameRateLimit(uint max_framerate);
