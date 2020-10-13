@@ -72,6 +72,8 @@ public:
 	uint GetFrameRateLimit();
 	void SetFrameRateLimit(uint max_framerate);
 
+	float GetDT() const;
+
 private:
 
 	void AddModule(Module* mod);

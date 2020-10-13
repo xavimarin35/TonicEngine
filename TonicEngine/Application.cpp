@@ -116,6 +116,13 @@ void Application::AddModule(Module* mod)
 	list_modules.push_back(mod);
 }
 
+float Application::GetDT() const
+{
+	return dt;
+}
+
+
+
 uint Application::GetFrameRateLimit()
 {
 	if (fps_info.framerate_cap > 0)
@@ -131,3 +138,4 @@ void Application::SetFrameRateLimit(uint max_framerate)
 	else
 		fps_info.framerate_cap = 0;
 }
+

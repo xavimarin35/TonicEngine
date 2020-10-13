@@ -29,8 +29,9 @@ bool PanelConfiguration::Draw()
 
 	if (App->gui->Pconfig->active)
 	{
-		App->window->GetWindowSize(screen.w_width, screen.w_height);
-		ImGui::SetNextWindowSize(ImVec2((float)screen.w_width / 5, (float)screen.w_height), ImGuiCond_Once);
+		App->window->GetWindowSize(w_width, w_height);
+		ImGui::SetNextWindowPos(PANELCONFIG_POS, ImGuiCond_Once);
+		ImGui::SetNextWindowSize((PANELCONFIG_SIZE), ImGuiCond_Once);
 
 		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_NoBackground)
 		{
@@ -54,8 +55,6 @@ bool PanelConfiguration::Draw()
 				if (ImGui::Checkbox("Borderless", &win.borderless))
 					App->window->SetBorderless(win.borderless);
 			}
-			
-		
 
 			if (ImGui::CollapsingHeader("Application"))
 			{
