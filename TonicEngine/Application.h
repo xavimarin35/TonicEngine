@@ -12,6 +12,7 @@
 #include "ModuleGui.h"
 
 #include <list>
+#include <string>
 
 class Module;
 class ModuleWindow;
@@ -51,6 +52,12 @@ public:
 
 	void RequestBrowser(const char* link) const;
 
+	const char* GetAppName() const;
+	const char* GetOrgName() const;
+	void ApplyAppName(const char* name);
+	void ApplyOrgName(const char* name);
+	string appName;
+	string orgName;
 	// Frame Rate
 	uint GetFrameRateLimit();
 	void SetFrameRateLimit(uint max_framerate);

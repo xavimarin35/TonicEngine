@@ -137,6 +137,27 @@ void Application::RequestBrowser(const char* link) const
 	ShellExecuteA(NULL, "open", link, NULL, NULL, SW_SHOWNORMAL);
 }
 
+const char* Application::GetAppName() const
+{
+	return appName.data();
+}
+
+const char* Application::GetOrgName() const
+{
+	return orgName.data();
+}
+
+void Application::ApplyAppName(const char* name)
+{
+	appName.assign(name);
+	App->window->SetTitle(appName.data());
+}
+
+void Application::ApplyOrgName(const char* name)
+{
+	orgName = name;
+}
+
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);

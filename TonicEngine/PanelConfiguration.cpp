@@ -58,11 +58,19 @@ bool PanelConfiguration::Draw()
 
 			if (ImGui::CollapsingHeader("Application"))
 			{
-				char name[60];
-				strcpy_s(name, 60, App->window->GetTitle());
+				// App Name
+				static char appName[60];
+				if (App->GetAppName() != nullptr)
+					strcpy_s(appName, 60, App->GetAppName());
+				if (ImGui::InputText("App Name", appName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
+					App->ApplyAppName(appName);
 
-				if (ImGui::InputText("Engine Name", name, 60, ImGuiInputTextFlags_EnterReturnsTrue))
-					App->window->SetTitle(name);
+				// Organization Name
+				static char orgName[60];
+				if (App->GetOrgName() != nullptr)
+					strcpy_s(orgName, 60, App->GetOrgName());
+				if (ImGui::InputText("Organization Name", orgName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
+					App->ApplyOrgName(orgName);
 
 				ImGui::Separator();
 
