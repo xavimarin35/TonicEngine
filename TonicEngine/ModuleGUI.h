@@ -56,6 +56,7 @@ public:
 
 	// Frame Rate
 	int max_fps = 0;
+	void RenderFPS(float fps, float ms);
 
 private:
 	ImGuiIO* io = nullptr;

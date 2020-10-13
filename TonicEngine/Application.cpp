@@ -57,41 +57,26 @@ bool Application::Init()
 		ret = (*item)->Start();
 	}
 	
-	framerate_cap = 1000 / maxFPS;
-
+	ms_timer.Start();
 	return ret;
 }
 
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	frame_count++;
-	last_sec_frame_count++;
+	dt = (float)ms_timer.Read() / 1000.0f;
 
-	dt = frame_time.ReadSec();
-
-	frame_time.Start();
+	ms_timer.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	if (last_sec_frame_time.Read() > 1000)
-	{
-		last_sec_frame_time.Start();
-		prev_last_sec_frame_count = last_sec_frame_count;
-		last_sec_frame_count = 0;
-	}
-	float avg_fps = float(frame_count) / startup_time.ReadSec();
-	float seconds_since_startup = startup_time.ReadSec();
-	uint last_frame_ms = frame_time.Read();
-	uint frames_on_last_update = prev_last_sec_frame_count;
+	int ms_cap = 1000 / framerateCap;
+	if (ms_timer.Read() < ms_cap)
+		SDL_Delay(ms_cap - ms_timer.Read());
 
-	if (last_frame_ms > 0 && last_frame_ms < framerate_cap)
-		SDL_Delay(framerate_cap - last_frame_ms);
-
-	/*gui->RenderFPS((float)frames_on_last_update);
-	gui->RenderMS((float)last_frame_ms);*/
+	//gui->RenderFPS(1 / dt, dt * 1000);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -113,6 +98,7 @@ update_status Application::Update()
 	for (list<Module*>::iterator item = list_modules.begin(); item != list_modules.end() && ret == UPDATE_CONTINUE; ++item)
 	{
 		ret = (*item)->PostUpdate(dt);
+		
 	}
 	
 
@@ -158,6 +144,16 @@ void Application::ApplyOrgName(const char* name)
 	orgName = name;
 }
 
+int Application::getFrameRateCap()
+{
+	return framerateCap;
+}
+
+void Application::setFrameRateCap(int cap)
+{
+	framerateCap = cap;
+}
+
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
@@ -168,19 +164,19 @@ float Application::GetDT() const
 	return dt;
 }
 
-uint Application::GetFrameRateLimit()
-{
-	if (framerate_cap > 0)
-		return (uint)((1.0f / (float)framerate_cap) * 1000.0f);
-	else
-		return 0;
-}
-
-void Application::SetFrameRateLimit(uint max_framerate)
-{
-	if (max_framerate > 0)
-		framerate_cap = 1000 / max_framerate;
-	else
-		framerate_cap = 0;
-}
+//uint Application::GetFrameRateLimit()
+//{
+//	if (framerate_cap > 0)
+//		return (uint)((1.0f / (float)framerate_cap) * 1000.0f);
+//	else
+//		return 0;
+//}
+//
+//void Application::SetFrameRateLimit(uint max_framerate)
+//{
+//	if (max_framerate > 0)
+//		framerate_cap = 1000 / max_framerate;
+//	else
+//		framerate_cap = 0;
+//}
 

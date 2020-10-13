@@ -11,6 +11,8 @@
 #include "ModuleCamera3D.h"
 #include "ModuleGui.h"
 
+
+#include <vector>
 #include <list>
 #include <string>
 
@@ -31,11 +33,6 @@ public:
 	ModuleRenderer3D* renderer3D = nullptr;
 	ModuleCamera3D* camera = nullptr;
 	ModuleGUI* gui = nullptr;
-
-
-private:
-
-	Timer	ms_timer;
 
 public: 
 
@@ -58,22 +55,25 @@ public:
 	void ApplyOrgName(const char* name);
 	string appName;
 	string orgName;
-	// Frame Rate
-	uint GetFrameRateLimit();
-	void SetFrameRateLimit(uint max_framerate);
 
-	uint					frame_count = 0;
+	// Frame Rate
+	int getFrameRateCap();
+	void setFrameRateCap(int cap);
+
+	/*uint					frame_count = 0;
 	Timer					startup_time;
 	Timer					frame_time;
 	Timer					last_sec_frame_time;
 	uint					last_sec_frame_count = 0;
 	uint					prev_last_sec_frame_count = 0;
 	uint					framerate_cap = 0;
-	uint					maxFPS = 60;
+	uint					maxFPS = 60;*/
+
+	int framerateCap = 60;
+	Timer	ms_timer;
+	float	dt;
 
 	float GetDT() const;
-
-	float	dt;
 
 private:
 

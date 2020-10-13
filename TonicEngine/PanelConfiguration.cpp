@@ -74,13 +74,19 @@ bool PanelConfiguration::Draw()
 
 				ImGui::Separator();
 
-				App->gui->max_fps = App->GetFrameRateLimit();
-				if (ImGui::SliderInt("Max FPS", &App->gui->max_fps, 0, 200))
-					App->SetFrameRateLimit(App->gui->max_fps);
+				static int framerateCap = App->getFrameRateCap();
+				if (ImGui::SliderInt("MaxFPS", &framerateCap, 1, 120))
+					App->setFrameRateCap(framerateCap);
 
-				ImGui::Text("Limit Framerate:");
+				char title[25];
+				sprintf_s(title, 25, "Framerate %.1f", fpsVec[fpsVec.size() - 1]);
+				ImGui::PlotHistogram("##framerate", &fpsVec[0], fpsVec.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+				sprintf_s(title, 25, "Milliseconds %0.1f", msVec[msVec.size() - 1]);
+				ImGui::PlotHistogram("##milliseconds", &msVec[0], msVec.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
+
+				/*ImGui::Text("Limit Framerate:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());
+				ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());*/
 			}
 
 			if (ImGui::CollapsingHeader("Hardware"))
@@ -138,4 +144,16 @@ bool PanelConfiguration::Draw()
 	}
 
 	return true;
+}
+
+void PanelConfiguration::UpdateFPS(float fps, float ms)
+{
+	for (uint i = 0; i < HISTOGRAM_BARS - 1; ++i)
+	{
+		fpsVec[i] = fpsVec[i + 1];
+		msVec[i] = msVec[i + 1];
+	}
+
+	fpsVec[HISTOGRAM_BARS - 1] = fps;
+	msVec[HISTOGRAM_BARS - 1] = ms;
 }

@@ -160,6 +160,12 @@ update_status ModuleGUI::PostUpdate(float dt)
 	return ret;
 }
 
+void ModuleGUI::RenderFPS(float fps, float ms)
+{
+	if (Pconfig != nullptr)
+		Pconfig->UpdateFPS(fps, ms);
+}
+
 bool ModuleGUI::CleanUp()
 {
 	bool ret = true;

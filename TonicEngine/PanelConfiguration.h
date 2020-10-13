@@ -6,10 +6,14 @@
 #include "Application.h"
 #include "PanelManager.h"
 
+#include <vector>
 #include <list>
 
 #define PANELCONFIG_POS ImVec2(1152.0f, 18.0f)
 #define PANELCONFIG_SIZE ImVec2((float)w_width / 5, (float)w_height - 18)
+#define HISTOGRAM_BARS 100
+
+class Application;
 
 class PanelConfiguration : public PanelManager
 {
@@ -19,6 +23,10 @@ public:
 
 	bool Start();
 	bool Draw();
+
+	void UpdateFPS(float fps, float ms);
+	vector<float> fpsVec;
+	vector<float> msVec;
 
 public:
 	int		w_width = 0;
