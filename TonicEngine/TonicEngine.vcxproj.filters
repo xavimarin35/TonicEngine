@@ -207,9 +207,6 @@
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="RandomNumGenerator.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleGui.cpp">
       <Filter>Sources\Modules\GUI</Filter>
     </ClCompile>
@@ -224,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="PanelConsole.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomNumGenerator.cpp">
+      <Filter>Sources\PCG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

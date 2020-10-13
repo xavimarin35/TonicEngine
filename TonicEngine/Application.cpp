@@ -72,11 +72,8 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	int ms_cap = 1000 / framerateCap;
-	if (ms_timer.Read() < ms_cap)
-		SDL_Delay(ms_cap - ms_timer.Read());
-
-	//gui->RenderFPS(1 / dt, dt * 1000);
+	last_fps = 1.0f / dt;
+	last_ms = (float)ms_timer.Read();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -101,7 +98,6 @@ update_status Application::Update()
 		
 	}
 	
-
 	FinishUpdate();
 	return ret;
 }
@@ -144,6 +140,16 @@ void Application::ApplyOrgName(const char* name)
 	orgName = name;
 }
 
+float Application::GetMS()
+{
+	return last_ms;
+}
+
+float Application::GetFPS()
+{
+	return last_fps;
+}
+
 int Application::getFrameRateCap()
 {
 	return framerateCap;
@@ -164,19 +170,4 @@ float Application::GetDT() const
 	return dt;
 }
 
-//uint Application::GetFrameRateLimit()
-//{
-//	if (framerate_cap > 0)
-//		return (uint)((1.0f / (float)framerate_cap) * 1000.0f);
-//	else
-//		return 0;
-//}
-//
-//void Application::SetFrameRateLimit(uint max_framerate)
-//{
-//	if (max_framerate > 0)
-//		framerate_cap = 1000 / max_framerate;
-//	else
-//		framerate_cap = 0;
-//}
 

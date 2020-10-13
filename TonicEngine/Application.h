@@ -34,9 +34,14 @@ public:
 	ModuleCamera3D* camera = nullptr;
 	ModuleGUI* gui = nullptr;
 
-public: 
+private: 
 
 	list<Module*> list_modules;
+	Timer	ms_timer;
+	float	dt;
+	float last_fps = 0.0f;
+	float last_ms = 0.0f;
+
 
 public:
 
@@ -57,6 +62,9 @@ public:
 	string orgName;
 
 	// Frame Rate
+	float GetMS();
+	float GetFPS();
+
 	int getFrameRateCap();
 	void setFrameRateCap(int cap);
 
@@ -69,9 +77,9 @@ public:
 	uint					framerate_cap = 0;
 	uint					maxFPS = 60;*/
 
+
 	int framerateCap = 60;
-	Timer	ms_timer;
-	float	dt;
+	
 
 	float GetDT() const;
 

@@ -74,19 +74,31 @@ bool PanelConfiguration::Draw()
 
 				ImGui::Separator();
 
-				static int framerateCap = App->getFrameRateCap();
+				/*static int framerateCap = App->getFrameRateCap();
 				if (ImGui::SliderInt("MaxFPS", &framerateCap, 1, 120))
-					App->setFrameRateCap(framerateCap);
+					App->setFrameRateCap(framerateCap);*/
 
-				char title[25];
-				sprintf_s(title, 25, "Framerate %.1f", fpsVec[fpsVec.size() - 1]);
-				ImGui::PlotHistogram("##framerate", &fpsVec[0], fpsVec.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-				sprintf_s(title, 25, "Milliseconds %0.1f", msVec[msVec.size() - 1]);
-				ImGui::PlotHistogram("##milliseconds", &msVec[0], msVec.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 
-				/*ImGui::Text("Limit Framerate:");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(PanelTextColor), "%d", App->GetFrameRateLimit());*/
+				if (vector_fps.size() != 100)
+				{
+					vector_fps.push_back(App->GetFPS());
+					vector_ms.push_back(App->GetMS());
+				}
+				else
+				{
+					vector_fps.erase(vector_fps.begin());
+					vector_fps.push_back(App->GetFPS());
+
+					vector_ms.erase(vector_ms.begin());
+					vector_ms.push_back(App->GetMS());
+				}
+
+
+				ImGui::Text("Framerate %.1f", vector_fps[vector_fps.size() - 1]);
+				ImGui::PlotHistogram("##framerate", &vector_fps[0], vector_fps.size(), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
+				ImGui::Text("Milliseconds %.1f", vector_ms[vector_ms.size() - 1]);
+				ImGui::PlotHistogram("##milliseconds", &vector_ms[0], vector_ms.size(), 0, NULL, 0.0f, 40.0f, ImVec2(310, 100));
+
 			}
 
 			if (ImGui::CollapsingHeader("Hardware"))

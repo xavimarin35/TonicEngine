@@ -24,6 +24,9 @@ public:
 	bool Start();
 	bool Draw();
 
+	std::vector<float> vector_ms;
+	std::vector<float> vector_fps;
+
 	void UpdateFPS(float fps, float ms);
 	vector<float> fpsVec;
 	vector<float> msVec;
