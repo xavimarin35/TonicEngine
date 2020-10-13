@@ -29,6 +29,12 @@ bool PanelHierarchy::Draw()
 	if (App->gui->Phierarchy->active)
 	{
 
+		if (ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_AlwaysAutoResize)) 
+		{
+			ImGui::Text("los game objects");
+		}
+
+		ImGui::End();
 	}
 	return true;
 }

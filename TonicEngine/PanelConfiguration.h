@@ -6,6 +6,7 @@
 #include "Application.h"
 #include "PanelManager.h"
 
+#include <list>
 
 class PanelConfiguration : public PanelManager
 {
@@ -17,27 +18,7 @@ public:
 	bool Draw();
 
 public:
-	struct ScreenInfo {
-		int		width = SCREEN_WIDTH;
-		int		height = SCREEN_HEIGHT;
-		int		w_width = 0;
-		int		w_height = 0;
-		float	brightness = 1.0f;
-	}screen;
 	
-
-	struct WindowInfo {
-		bool	fullscreen = false;
-		bool	fulldesktop = false;
-		bool	borderless = false;
-		bool	resizable = true;
-	}win;
-
-	struct HardwareInfo {
-		GLint VRAM_budget = 0;
-		GLint VRAM_available = 0;
-		GLint VRAM_usage = 0;
-	}hardware;
 	
 };
 

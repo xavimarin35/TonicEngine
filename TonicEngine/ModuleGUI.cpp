@@ -87,6 +87,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
 			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
             ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
+			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
 				
 			ImGui::EndMenu();
 		}

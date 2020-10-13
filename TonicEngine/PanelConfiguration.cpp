@@ -94,7 +94,6 @@ bool PanelConfiguration::Draw()
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(PanelTextColor), "%f Gb", SDL_GetSystemRAM() / 1024.0f);
 
-
 				ImGui::Separator();
 
 				ImGui::Text("GPU: ");
@@ -112,17 +111,17 @@ bool PanelConfiguration::Draw()
 				glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &hardware.VRAM_budget);
 				ImGui::Text("VRAM Budget:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_budget) / (1024.0f));
+				ImGui::TextColored(ImVec4(PanelTextColor), "%f", float(hardware.VRAM_budget) / (1024.0f));
 
 				glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &hardware.VRAM_available);
 				ImGui::Text("VRAM Available:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_usage) / (1024.f));
+				ImGui::TextColored(ImVec4(PanelTextColor), "%f", float(hardware.VRAM_usage) / (1024.f));
 
 				hardware.VRAM_usage = hardware.VRAM_budget - hardware.VRAM_available;
 				ImGui::Text("VRAM Usage:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_available) / (1024.f));
+				ImGui::TextColored(ImVec4(PanelTextColor), "%f", float(hardware.VRAM_available) / (1024.f));
 
 			}
 
