@@ -119,6 +119,24 @@ bool PanelConfiguration::Draw()
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(PanelTextColor), "%f Gb", SDL_GetSystemRAM() / 1024.0f);
 
+				ImGui::Text("Caps: "); ImGui::SameLine();
+				if (SDL_HasRDTSC)
+					ImGui::TextColored(ImVec4(PanelTextColor), "RDTSC"); ImGui::SameLine();
+				if (SDL_HasMMX)
+					ImGui::TextColored(ImVec4(PanelTextColor), "MMX"); ImGui::SameLine();
+				if (SDL_HasSSE)
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE"); ImGui::SameLine();
+				if (SDL_HasSSE2)
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE2"); ImGui::SameLine();
+				if (SDL_HasSSE3)
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE3"); /*ImGui::SameLine();*/
+				if (SDL_HasSSE41)
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE41"); ImGui::SameLine();
+				if (SDL_HasSSE42)
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE42"); ImGui::SameLine();
+				if (SDL_HasAVX)
+					ImGui::TextColored(ImVec4(PanelTextColor), "AVX");
+
 				ImGui::Separator();
 
 				ImGui::Text("GPU: ");
