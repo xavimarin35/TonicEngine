@@ -57,20 +57,41 @@ bool Application::Init()
 		ret = (*item)->Start();
 	}
 	
-	ms_timer.Start();
+	framerate_cap = 1000 / maxFPS;
+
 	return ret;
 }
 
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	dt = (float)ms_timer.Read() / 1000.0f;
-	ms_timer.Start();
+	frame_count++;
+	last_sec_frame_count++;
+
+	dt = frame_time.ReadSec();
+
+	frame_time.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+	float avg_fps = float(frame_count) / startup_time.ReadSec();
+	float seconds_since_startup = startup_time.ReadSec();
+	uint last_frame_ms = frame_time.Read();
+	uint frames_on_last_update = prev_last_sec_frame_count;
+
+	if (last_frame_ms > 0 && last_frame_ms < framerate_cap)
+		SDL_Delay(framerate_cap - last_frame_ms);
+
+	/*gui->RenderFPS((float)frames_on_last_update);
+	gui->RenderMS((float)last_frame_ms);*/
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -121,12 +142,10 @@ float Application::GetDT() const
 	return dt;
 }
 
-
-
 uint Application::GetFrameRateLimit()
 {
-	if (fps_info.framerate_cap > 0)
-		return (uint)((1.0f / (float)fps_info.framerate_cap) * 1000.0f);
+	if (framerate_cap > 0)
+		return (uint)((1.0f / (float)framerate_cap) * 1000.0f);
 	else
 		return 0;
 }
@@ -134,8 +153,8 @@ uint Application::GetFrameRateLimit()
 void Application::SetFrameRateLimit(uint max_framerate)
 {
 	if (max_framerate > 0)
-		fps_info.framerate_cap = 1000 / max_framerate;
+		framerate_cap = 1000 / max_framerate;
 	else
-		fps_info.framerate_cap = 0;
+		framerate_cap = 0;
 }
 
