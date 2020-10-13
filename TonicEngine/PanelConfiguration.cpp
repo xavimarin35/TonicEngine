@@ -29,30 +29,30 @@ bool PanelConfiguration::Draw()
 
 	if (App->gui->Pconfig->active)
 	{
-		App->window->GetWindowSize(w_width, w_height);
-		ImGui::SetNextWindowSize(ImVec2((float)w_width / 5, (float)w_height), ImGuiCond_Once);
+		App->window->GetWindowSize(screen.w_width, screen.w_height);
+		ImGui::SetNextWindowSize(ImVec2((float)screen.w_width / 5, (float)screen.w_height), ImGuiCond_Once);
 
 		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_NoBackground)
 		{
 			if (ImGui::CollapsingHeader("Window"))
 			{
-				ImGui::SliderInt("Width", &width, 1, 1920);
-				ImGui::SliderInt("Height", &height, 1, 1080);
-				ImGui::SliderFloat("Brightness", &brightness, 0.0f, 1.0f);
+				ImGui::SliderInt("Width", &screen.width, 1, 1920);
+				ImGui::SliderInt("Height", &screen.height, 1, 1080);
+				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);
 
-				SDL_SetWindowBrightness(App->window->window, brightness);
-				SDL_SetWindowSize(App->window->window, width, height);
+				SDL_SetWindowBrightness(App->window->window, screen.brightness);
+				SDL_SetWindowSize(App->window->window, screen.width, screen.height);
 
 				ImGui::Separator();
 
-				if (ImGui::Checkbox("Full Screen", &fullscreen))
-					App->window->SetFullScreen(fullscreen);
+				if (ImGui::Checkbox("Full Screen", &win.fullscreen))
+					App->window->SetFullScreen(win.fullscreen);
 
-				if (ImGui::Checkbox("Resizable", &resizable))
-					App->window->SetResizable(resizable);
+				if (ImGui::Checkbox("Resizable", &win.resizable))
+					App->window->SetResizable(win.resizable);
 
-				if (ImGui::Checkbox("Borderless", &borderless))
-					App->window->SetBorderless(borderless);
+				if (ImGui::Checkbox("Borderless", &win.borderless))
+					App->window->SetBorderless(win.borderless);
 			}
 			
 		
@@ -108,6 +108,21 @@ bool PanelConfiguration::Draw()
 				ImGui::Text("Version: ");
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(PanelTextColor), "%s", glGetString(GL_VERSION));
+
+				glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &hardware.VRAM_budget);
+				ImGui::Text("VRAM Budget:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_budget) / (1024.0f));
+
+				glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &hardware.VRAM_available);
+				ImGui::Text("VRAM Available:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_usage) / (1024.f));
+
+				hardware.VRAM_usage = hardware.VRAM_budget - hardware.VRAM_available;
+				ImGui::Text("VRAM Usage:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(255, 255, 0, 255), "%f", float(hardware.VRAM_available) / (1024.f));
 
 			}
 
