@@ -118,8 +118,8 @@ void Application::AddModule(Module* mod)
 
 uint Application::GetFrameRateLimit()
 {
-	if (framerate_cap > 0)
-		return (uint)((1.0f / (float)framerate_cap) * 1000.0f);
+	if (fps_info.framerate_cap > 0)
+		return (uint)((1.0f / (float)fps_info.framerate_cap) * 1000.0f);
 	else
 		return 0;
 }
@@ -127,7 +127,7 @@ uint Application::GetFrameRateLimit()
 void Application::SetFrameRateLimit(uint max_framerate)
 {
 	if (max_framerate > 0)
-		framerate_cap = 1000 / max_framerate;
+		fps_info.framerate_cap = 1000 / max_framerate;
 	else
-		framerate_cap = 0;
+		fps_info.framerate_cap = 0;
 }

@@ -36,5 +36,6 @@ bool PanelHierarchy::Draw()
 
 		ImGui::End();
 	}
+
 	return true;
 }

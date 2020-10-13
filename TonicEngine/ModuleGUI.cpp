@@ -114,7 +114,7 @@ bool ModuleGUI::Draw()
     }
         
 		
-    ImGuiIO& test_io = *io;
+    //ImGuiIO& test_io = *io;
 	Render();
 
 	return ret;
