@@ -37,11 +37,6 @@ public:
 private: 
 
 	list<Module*> list_modules;
-	Timer	ms_timer;
-	float	dt;
-	float last_fps = 0.0f;
-	float last_ms = 0.0f;
-
 
 public:
 
@@ -61,27 +56,22 @@ public:
 	string appName;
 	string orgName;
 
-	// Frame Rate
-	float GetMS();
-	float GetFPS();
-
-	int getFrameRateCap();
-	void setFrameRateCap(int cap);
-
-	/*uint					frame_count = 0;
+	//Frame rate
+	uint					frame_count = 0;
 	Timer					startup_time;
 	Timer					frame_time;
 	Timer					last_sec_frame_time;
 	uint					last_sec_frame_count = 0;
 	uint					prev_last_sec_frame_count = 0;
 	uint					framerate_cap = 0;
-	uint					maxFPS = 60;*/
-
-
-	int framerateCap = 60;
-	
+	int						capped_ms = -1;
+	int						framerateCap = 60; // Max amount of FPS
+	int						totalBars = 100; // Number of bars that appear in the histogram
+	std::vector<float> fpsVec;
+	std::vector<float> msVec;
 
 	float GetDT() const;
+	float	dt;
 
 private:
 

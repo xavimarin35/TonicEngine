@@ -114,7 +114,7 @@ bool ModuleGUI::Draw()
     }
         
 		
-    //ImGuiIO& test_io = *io;
+    ImGuiIO& test_io = *io; // I think is used for docking
 	Render();
 
 	return ret;
@@ -158,12 +158,6 @@ update_status ModuleGUI::PostUpdate(float dt)
 	}
 
 	return ret;
-}
-
-void ModuleGUI::RenderFPS(float fps, float ms)
-{
-	if (Pconfig != nullptr)
-		Pconfig->UpdateFPS(fps, ms);
 }
 
 bool ModuleGUI::CleanUp()

@@ -74,30 +74,17 @@ bool PanelConfiguration::Draw()
 
 				ImGui::Separator();
 
-				/*static int framerateCap = App->getFrameRateCap();
-				if (ImGui::SliderInt("MaxFPS", &framerateCap, 1, 120))
-					App->setFrameRateCap(framerateCap);*/
+				ImGui::SliderInt("Max FPS", &App->framerateCap, 1, 200);
 
+				ImGui::Text("Limit Framerate:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%d", App->framerateCap);
 
-				if (vector_fps.size() != 100)
-				{
-					vector_fps.push_back(App->GetFPS());
-					vector_ms.push_back(App->GetMS());
-				}
-				else
-				{
-					vector_fps.erase(vector_fps.begin());
-					vector_fps.push_back(App->GetFPS());
-
-					vector_ms.erase(vector_ms.begin());
-					vector_ms.push_back(App->GetMS());
-				}
-
-
-				ImGui::Text("Framerate %.1f", vector_fps[vector_fps.size() - 1]);
-				ImGui::PlotHistogram("##framerate", &vector_fps[0], vector_fps.size(), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
-				ImGui::Text("Milliseconds %.1f", vector_ms[vector_ms.size() - 1]);
-				ImGui::PlotHistogram("##milliseconds", &vector_ms[0], vector_ms.size(), 0, NULL, 0.0f, 40.0f, ImVec2(310, 100));
+				char title[25];
+				sprintf_s(title, 25, "Framerate %.1f", App->fpsVec[App->fpsVec.size() - 1]);
+				ImGui::PlotHistogram("##framerate", &App->fpsVec[0], App->fpsVec.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+				sprintf_s(title, 25, "Milliseconds %0.1f", App->msVec[App->msVec.size() - 1]);
+				ImGui::PlotHistogram("##milliseconds", &App->msVec[0], App->msVec.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 
 			}
 
@@ -176,14 +163,4 @@ bool PanelConfiguration::Draw()
 	return true;
 }
 
-void PanelConfiguration::UpdateFPS(float fps, float ms)
-{
-	for (uint i = 0; i < HISTOGRAM_BARS - 1; ++i)
-	{
-		fpsVec[i] = fpsVec[i + 1];
-		msVec[i] = msVec[i + 1];
-	}
 
-	fpsVec[HISTOGRAM_BARS - 1] = fps;
-	msVec[HISTOGRAM_BARS - 1] = ms;
-}

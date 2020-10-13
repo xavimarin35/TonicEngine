@@ -57,23 +57,48 @@ bool Application::Init()
 		ret = (*item)->Start();
 	}
 	
-	ms_timer.Start();
+	frame_time.Start();
 	return ret;
 }
 
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	dt = (float)ms_timer.Read() / 1000.0f;
+	frame_count++;
+	last_sec_frame_count++;
 
-	ms_timer.Start();
+	dt = (float)frame_time.ReadSec();
+	frame_time.Start();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	last_fps = 1.0f / dt;
-	last_ms = (float)ms_timer.Read();
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+
+	uint last_frame_ms = frame_time.Read();
+	uint frames_on_last_update = prev_last_sec_frame_count;
+
+	fpsVec.push_back(frames_on_last_update);
+	if (fpsVec.size() > totalBars)
+		fpsVec.erase(fpsVec.begin());
+
+	msVec.push_back(last_frame_ms);
+	if (msVec.size() > totalBars)
+		msVec.erase(msVec.begin());
+
+	if (framerateCap > 0)
+		capped_ms = 1000 / framerateCap;
+	else
+		capped_ms = 0;
+
+	if (capped_ms > 0 && last_frame_ms < capped_ms)
+		SDL_Delay(capped_ms - last_frame_ms);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -138,26 +163,6 @@ void Application::ApplyAppName(const char* name)
 void Application::ApplyOrgName(const char* name)
 {
 	orgName = name;
-}
-
-float Application::GetMS()
-{
-	return last_ms;
-}
-
-float Application::GetFPS()
-{
-	return last_fps;
-}
-
-int Application::getFrameRateCap()
-{
-	return framerateCap;
-}
-
-void Application::setFrameRateCap(int cap)
-{
-	framerateCap = cap;
 }
 
 void Application::AddModule(Module* mod)
