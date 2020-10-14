@@ -8,8 +8,8 @@
 #include "imgui-1.78/imgui.h"
 #include "SDL/include/SDL_events.h"
 
-#include "imgui-1.78/examples/imgui_impl_sdl.h"
-#include "imgui-1.78/examples/imgui_impl_opengl3.h"
+#include "imgui-1.78/imgui_impl_sdl.h"
+#include "imgui-1.78/imgui_impl_opengl3.h"
 
 #include "glew/include/GL/glew.h"
 
