@@ -161,6 +161,11 @@ update_status ModuleGUI::PostUpdate(float dt)
 	return ret;
 }
 
+void ModuleGUI::EnableInput(SDL_Event* event)
+{
+	ImGui_ImplSDL2_ProcessEvent(event);
+}
+
 bool ModuleGUI::CleanUp()
 {
 	bool ret = true;

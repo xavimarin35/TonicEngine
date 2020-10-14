@@ -6,6 +6,7 @@
 #include "PanelManager.h"
 
 #include "imgui-1.78/imgui.h"
+#include "SDL/include/SDL_events.h"
 
 #include "imgui-1.78/examples/imgui_impl_sdl.h"
 #include "imgui-1.78/examples/imgui_impl_opengl3.h"
@@ -42,6 +43,8 @@ public:
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
+
+	void EnableInput(SDL_Event* event);
 	
 	// Random Number Generator 
 	int rand = 0;
