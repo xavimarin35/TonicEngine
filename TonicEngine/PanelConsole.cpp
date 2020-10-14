@@ -40,7 +40,7 @@ bool PanelConsole::Draw()
 		if (ImGui::Button("Clear"))
 			EraseLogs();
 			
-		ImGui::Separator();
+			ImGui::Separator();
 
 			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
