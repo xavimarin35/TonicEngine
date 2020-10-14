@@ -16,7 +16,10 @@ PanelConsole::~PanelConsole()
 
 bool PanelConsole::Start()
 {
-	this->active = false;
+	this->active = true;
+	
+	if (consoleEmpty)
+		EraseLogs();
 
 	return true;
 }
@@ -28,7 +31,34 @@ bool PanelConsole::Draw()
 
 	if (App->gui->Pconsole->active)
 	{
-		
+		PrintLogs();
+
+		ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		ImGui::End();
 	}
 	return true;
 }
+
+void PanelConsole::CreateLog(string info)
+{
+	consoleLogs.push_back(info);
+
+	if (consoleLogs.size() > maxLogs)
+		consoleLogs.pop_front();
+}
+
+void PanelConsole::PrintLogs()
+{
+	for (list<string>::const_iterator it = App->appLogs.begin(); it != App->appLogs.end(); ++it)
+		CreateLog((*it));
+
+	App->appLogs.clear();
+}
+
+void PanelConsole::EraseLogs()
+{
+	consoleLogs.clear();
+}
+
+

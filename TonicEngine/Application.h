@@ -56,6 +56,8 @@ public:
 	string appName;
 	string orgName;
 
+	list<string> appLogs;
+
 	//Frame rate
 	uint					frame_count = 0;
 	Timer					startup_time;

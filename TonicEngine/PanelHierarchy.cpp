@@ -16,7 +16,7 @@ PanelHierarchy::~PanelHierarchy()
 
 bool PanelHierarchy::Start()
 {
-	this->active = false;
+	this->active = true;
 
 	return true;
 }

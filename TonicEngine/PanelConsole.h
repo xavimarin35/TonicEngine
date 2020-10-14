@@ -6,6 +6,7 @@
 #include "Application.h"
 #include "PanelManager.h"
 
+#include <list>
 
 class PanelConsole : public PanelManager
 {
@@ -15,6 +16,16 @@ public:
 
 	bool Start();
 	bool Draw();
+
+private:
+	void CreateLog(string info);
+	void PrintLogs();
+	void EraseLogs();
+
+	bool consoleEmpty = true;
+	int maxLogs = 100;
+	
+	list<string> consoleLogs;
 };
 
 #endif
