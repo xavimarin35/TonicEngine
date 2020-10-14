@@ -20,7 +20,7 @@ ModuleCamera3D::~ModuleCamera3D()
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Start()
 {
-	App->appLogs.push_back("Se ensiende la camarita");
+	App->appLogs.push_back("Loading Camera 3D");
 	LOG("Setting up the camera");
 	bool ret = true;
 

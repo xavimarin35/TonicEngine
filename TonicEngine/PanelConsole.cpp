@@ -31,16 +31,36 @@ bool PanelConsole::Draw()
 
 	if (App->gui->Pconsole->active)
 	{
+		ImVec4 color = INIT_MODULE_COLOR;
+
 		PrintLogs();
 
 		ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		if (ImGui::Button("Clear"))
+			EraseLogs();
+
+			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
+			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
+
+			for (list<char*>::iterator item = consoleLogs.begin(); item != consoleLogs.end(); ++item)
+			{
+				
+				ImGui::PushStyleColor(ImGuiCol_Text, color);
+				ImGui::TextColored(color, (*item));
+				ImGui::PopStyleColor();
+			}
+
+			ImGui::PopStyleVar();
+			ImGui::EndChild();
+
 
 		ImGui::End();
 	}
 	return true;
 }
 
-void PanelConsole::CreateLog(string info)
+void PanelConsole::CreateLog(char* info)
 {
 	consoleLogs.push_back(info);
 
@@ -50,7 +70,7 @@ void PanelConsole::CreateLog(string info)
 
 void PanelConsole::PrintLogs()
 {
-	for (list<string>::const_iterator it = App->appLogs.begin(); it != App->appLogs.end(); ++it)
+	for (list<char*>::const_iterator it = App->appLogs.begin(); it != App->appLogs.end(); ++it)
 		CreateLog((*it));
 
 	App->appLogs.clear();

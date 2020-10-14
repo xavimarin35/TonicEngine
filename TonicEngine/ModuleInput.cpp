@@ -20,7 +20,7 @@ ModuleInput::~ModuleInput()
 // Called before render is available
 bool ModuleInput::Init()
 {
-	App->appLogs.push_back("Se ensiende el input");
+	App->appLogs.push_back("Loading Input");
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);

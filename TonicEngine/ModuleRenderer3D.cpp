@@ -19,7 +19,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
-	App->appLogs.push_back("Se ensiende el renderer");
+	App->appLogs.push_back("Loading 3D Renderer Context");
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	

@@ -8,6 +8,9 @@
 
 #include <list>
 
+// Colors for console text
+#define INIT_MODULE_COLOR ImColor(255,255,255)
+
 class PanelConsole : public PanelManager
 {
 public:
@@ -18,14 +21,14 @@ public:
 	bool Draw();
 
 private:
-	void CreateLog(string info);
+	void CreateLog(char* info);
 	void PrintLogs();
 	void EraseLogs();
 
 	bool consoleEmpty = true;
 	int maxLogs = 100;
 	
-	list<string> consoleLogs;
+	list<char*> consoleLogs;
 };
 
 #endif

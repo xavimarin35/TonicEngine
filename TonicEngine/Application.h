@@ -56,7 +56,7 @@ public:
 	string appName;
 	string orgName;
 
-	list<string> appLogs;
+	list<char*> appLogs;
 
 	//Frame rate
 	uint					frame_count = 0;

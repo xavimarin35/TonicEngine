@@ -19,6 +19,7 @@ ModuleWindow::~ModuleWindow()
 bool ModuleWindow::Init()
 {
 	LOG("Init SDL window & surface");
+	App->appLogs.push_back("Loading Window");
 	bool ret = true;
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
