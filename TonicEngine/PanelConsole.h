@@ -9,7 +9,8 @@
 #include <list>
 
 // Colors for console text
-#define INIT_MODULE_COLOR ImColor(255,255,255)
+#define TEXT_CONSOLE_COLOR ImColor(192,192,192)
+#define ERROR_CONSOLE_COLOR ImColor(220,20,60)
 
 class PanelConsole : public PanelManager
 {

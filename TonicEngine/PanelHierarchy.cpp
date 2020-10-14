@@ -34,7 +34,7 @@ bool PanelHierarchy::Draw()
 
 		if (ImGui::Begin("Hierarchy", &active))
 		{
-			ImGui::Text("los game objects");
+			
 		}
 
 		ImGui::End();
