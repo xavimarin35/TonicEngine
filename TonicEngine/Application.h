@@ -10,6 +10,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleGui.h"
+#include "ModuleImporter.h"
 
 
 #include <vector>
@@ -23,6 +24,7 @@ class ModuleSceneIntro;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleGUI;
+class ModuleImporter;
 
 class Application
 {
@@ -33,6 +35,7 @@ public:
 	ModuleRenderer3D* renderer3D = nullptr;
 	ModuleCamera3D* camera = nullptr;
 	ModuleGUI* gui = nullptr;
+	ModuleImporter* importer = nullptr;
 
 private: 
 

@@ -18,15 +18,6 @@ public:
 
 	void OnCollision();
 
-	void DrawDirectMode();
-	void DrawVertexArrays(int stage);
-	void DrawIndices(int stage);
-
-private:
-
-	uint my_id = 0;
-	uint my_indices = 0;
-
 };
 
 
