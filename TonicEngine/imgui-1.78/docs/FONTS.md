@@ -1,6 +1,6 @@
-## Dear ImGui: Using Fonts
+_(You may browse this at https://github.com/ocornut/imgui/blob/master/docs/FONTS.md or view this file with any Markdown viewer)_
 
-(You may browse this document at https://github.com/ocornut/imgui/blob/master/docs/FONTS.md or view this file with any Markdown viewer.)
+## Dear ImGui: Using Fonts
 
 The code in imgui.cpp embeds a copy of 'ProggyClean.ttf' (by Tristan Grimmer),
 a 13 pixels high, pixel-perfect font used by default. We embed it in the source code so you can use Dear ImGui without any file system access. ProggyClean does not scale smoothly, therefore it is recommended that you load your own file when using Dear ImGui in an application aiming to look nice and wanting to support multiple resolutions.
@@ -142,13 +142,6 @@ ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 ![sample code output](https://raw.githubusercontent.com/wiki/ocornut/imgui/web/v160/code_sample_02_jp.png)
 <br>_(settings: Dark style (left), Light style (right) / Font: NotoSansCJKjp-Medium, 20px / Rounding: 5)_
 
-
-**Offset font vertically by altering the `io.Font->DisplayOffset` value:**
-```cpp
-ImFont* font = io.Fonts->AddFontFromFileTTF("font.ttf", size_pixels);
-font->DisplayOffset.y = 1;   // Render 1 pixel down
-```
-
 **Font Atlas too large?**
 
 - If you have very large number of glyphs or multiple fonts, the texture may become too big for your graphics API. The typical result of failing to upload a texture is if every glyphs appears as white rectangles.
@@ -233,7 +226,7 @@ io.Fonts->Build();                                     // Build the atlas while 
 
 ## Using Custom Colorful Icons
 
-**(This is a BETA api, use if you are familiar with dear imgui and with your rendering back-end)**
+**(This is a BETA api, use if you are familiar with dear imgui and with your rendering backend)**
 
 - You can use the `ImFontAtlas::AddCustomRect()` and `ImFontAtlas::AddCustomRectFontGlyph()` api to register rectangles that will be packed into the font atlas texture. Register them before building the atlas, then call Build()`.
 - You can then use `ImFontAtlas::GetCustomRectByIndex(int)` to query the position/size of your rectangle within the texture, and blit/copy any graphics data of your choice into those rectangles.
@@ -337,13 +330,13 @@ DroidSans.ttf
 ProggyClean.ttf
   Copyright (c) 2004, 2005 Tristan Grimmer
   MIT License
-  recommended loading setting: Size = 13.0, DisplayOffset.Y = +1
+  recommended loading setting: Size = 13.0, GlyphOffset.y = +1
   http://www.proggyfonts.net/
 
 ProggyTiny.ttf
   Copyright (c) 2004, 2005 Tristan Grimmer
   MIT License
-  recommended loading setting: Size = 10.0, DisplayOffset.Y = +1
+  recommended loading setting: Size = 10.0, GlyphOffset.y = +1
   http://www.proggyfonts.net/
 
 Karla-Regular.ttf

@@ -1,10 +1,11 @@
-// dear imgui: standalone example application for Emscripten, using SDL2 + OpenGL3
+// Dear ImGui: standalone example application for Emscripten, using SDL2 + OpenGL3
+// (Emscripten is a C++-to-javascript compiler, used to publish executables for the web. See https://emscripten.org/)
+// If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
+// Read online: https://github.com/ocornut/imgui/tree/master/docs
+
 // This is mostly the same code as the SDL2 + OpenGL3 example, simply with the modifications needed to run on Emscripten.
 // It is possible to combine both code into a single source file that will compile properly on Desktop and using Emscripten.
 // See https://github.com/ocornut/imgui/pull/2492 as an example on how to do just that.
-//
-// If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
-// (Emscripten is a C++-to-javascript compiler, used to publish executables for the web. See https://emscripten.org/)
 
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
@@ -61,8 +62,9 @@ int main(int, char**)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
 
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
     // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
@@ -72,7 +74,7 @@ int main(int, char**)
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
 
-    // Setup Platform/Renderer bindings
+    // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForOpenGL(g_Window, g_GLContext);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
