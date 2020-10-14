@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
-#include "imgui-1.78/imgui_impl_opengl2.h"
+#include "imgui-1.78/imgui_impl_opengl3.h"
 //#include "imgui-1.78/examples/libs/glfw/include/GLFW/glfw3.h"
 
 #pragma comment (lib, "imgui-1.78/examples/libs/glfw/lib-vc2010-32/glfw3.lib")
@@ -45,7 +45,7 @@ bool ModuleGUI::Start()
 
 	// Setup Platform/Renderer bindings
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
-	ImGui_ImplOpenGL3_Init();
+	ImGui_ImplOpenGL3_Init(NULL);
 
 	bool show_demo_window = true;
 	bool show_another_window = false;
@@ -179,7 +179,7 @@ bool ModuleGUI::CleanUp()
 	panels.clear();
 
 	ImGui_ImplSDL2_Shutdown();
-	ImGui_ImplOpenGL2_Shutdown();
+	ImGui_ImplOpenGL3_Shutdown();
 	ImGui::DestroyContext();
 
 	return ret;
