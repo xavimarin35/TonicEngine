@@ -16,10 +16,9 @@
 CC = emcc
 CXX = em++
 EXE = example_emscripten.html
-IMGUI_DIR = ../..
 SOURCES = main.cpp
-SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_widgets.cpp
-SOURCES += $(IMGUI_DIR)/backends/imgui_impl_sdl.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
+SOURCES += ../imgui_impl_sdl.cpp ../imgui_impl_opengl3.cpp
+SOURCES += ../../imgui.cpp ../../imgui_demo.cpp ../../imgui_draw.cpp ../../imgui_widgets.cpp
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 
@@ -52,7 +51,7 @@ endif
 ## FINAL BUILD FLAGS
 ##---------------------------------------------------------------------
 
-CPPFLAGS = -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
+CPPFLAGS += -I../ -I../../
 #CPPFLAGS += -g
 CPPFLAGS += -Wall -Wformat -Os
 CPPFLAGS += $(EMS)
@@ -66,10 +65,10 @@ LDFLAGS += --shell-file shell_minimal.html
 %.o:%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/%.cpp
+%.o:../%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-%.o:$(IMGUI_DIR)/backends/%.cpp
+%.o:../../%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 %.o:../libs/gl3w/GL/%.c
