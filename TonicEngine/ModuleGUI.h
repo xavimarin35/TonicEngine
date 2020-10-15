@@ -59,6 +59,8 @@ public:
 
 private:
 	ImGuiIO* io = nullptr;
+	ImGuiIO* test_io = nullptr;
+	bool p_open = true;
 
 	bool show_demo_window = false;
 	bool show_style_editor = false;

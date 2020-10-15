@@ -39,6 +39,9 @@ bool ModuleGUI::Start()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	io = &ImGui::GetIO(); (void)io;
+	io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io->DisplaySize.x = SCREEN_WIDTH;
+	io->DisplaySize.y = SCREEN_HEIGHT;
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
@@ -67,6 +70,20 @@ bool ModuleGUI::Draw()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
+
+	ImGui::SetNextWindowPos({ 0,20 });
+	ImGui::SetNextWindowSize({ (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT });
+	ImGui::SetNextWindowBgAlpha(0.0f);
+
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
+	window_flags |= ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+	ImGui::Begin("Dockspace", 0, window_flags);
+	ImGui::PopStyleVar(3);
 
 	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
 	{
@@ -113,9 +130,13 @@ bool ModuleGUI::Draw()
         ImGui::ShowStyleEditor();
         ImGui::End();
     }
+
+	ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
+	ImGui::End();
         
 		
-    ImGuiIO& test_io = *io; // I think is used for docking
 	Render();
 
 	return ret;
