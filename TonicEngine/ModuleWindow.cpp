@@ -72,6 +72,8 @@ bool ModuleWindow::Init()
 		}
 	}
 
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+
 	return ret;
 }
 

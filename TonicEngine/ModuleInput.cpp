@@ -113,6 +113,22 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
+				break;
+			}
+
+			case SDL_DROPFILE:
+			{
+				char* dropDirection = e.drop.file;
+
+				if (dropDirection != nullptr)
+				{
+					App->appLogs.push_back("New file dropped on window!");
+
+					App->importer->Load(dropDirection);
+
+					SDL_free(dropDirection);
+				}
+				break;
 			}
 		}
 	}

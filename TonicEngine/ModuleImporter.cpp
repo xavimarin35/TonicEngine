@@ -2,6 +2,7 @@
 #include "MeshObj.h"
 #include "Primitive.h"
 #include "Application.h"
+#include "SDL/include/SDL.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -25,12 +26,17 @@ bool ModuleImporter::Start()
 
 	aiAttachLogStream(&stream);
 
-	Load("Assets/warrior.FBX");
+	// Load("Assets/warrior.FBX");
 
 	return true;
 }
 
 update_status ModuleImporter::PreUpdate(float dt)
+{
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleImporter::Update(float dt)
 {
 	return UPDATE_CONTINUE;
 }
@@ -69,7 +75,7 @@ bool ModuleImporter::Load(const char* Filename)
 	}
 
 	else
-		LOG("Error loading scene %s", Filename);
+		App->appLogs.push_back("ERROR: Cannot load scene");
 
 	return ret;
 }

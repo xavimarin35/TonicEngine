@@ -21,7 +21,7 @@ bool MeshObj::Load(aiMesh* mesh2)
 	vertex = new float[num_vertex * 3];
 
 	memcpy(vertex, mesh2->mVertices, sizeof(float) * num_vertex * 3);
-	LOG("This mesh has %d vertices mi pana", num_vertex);
+	App->appLogs.push_back("New mesh");
 
 	glGenBuffers(1, &id_vertex);
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
@@ -39,7 +39,7 @@ bool MeshObj::Load(aiMesh* mesh2)
 			{
 				if (mesh2->mFaces[j].mNumIndices != 3)
 				{
-					LOG("Error in geometry face");
+					App->appLogs.push_back("ERROR: Geometry face");
 
 					ret = false;
 				}
@@ -55,7 +55,7 @@ bool MeshObj::Load(aiMesh* mesh2)
 	// Indices
 	glGenBuffers(1, &id_index);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3* num_index * sizeof(uint), index, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * num_index * sizeof(uint), index, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	return ret;
