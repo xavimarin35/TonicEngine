@@ -32,7 +32,7 @@ bool PanelHierarchy::Draw()
 		ImGui::SetNextWindowPos(PANELHIERARCHY_POS, ImGuiCond_Once);
 		ImGui::SetNextWindowSize(PANELHIERARCHY_SIZE, ImGuiCond_Once);*/
 
-		if (ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_AlwaysAutoResize))
+		if (ImGui::Begin("Hierarchy", &active))
 		{
 			
 		}

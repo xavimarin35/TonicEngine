@@ -33,7 +33,7 @@ bool PanelConfiguration::Draw()
 		/*ImGui::SetNextWindowPos(PANELCONFIG_POS, ImGuiCond_Once);
 		ImGui::SetNextWindowSize((PANELCONFIG_SIZE), ImGuiCond_Once);*/
 
-		if (ImGui::Begin("Configuration", &active, ImGuiWindowFlags_AlwaysAutoResize))
+		if (ImGui::Begin("Configuration", &active))
 		{
 			if (ImGui::CollapsingHeader("Window"))
 			{
