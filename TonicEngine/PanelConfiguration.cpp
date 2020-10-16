@@ -29,14 +29,15 @@ bool PanelConfiguration::Draw()
 
 	if (App->gui->Pconfig->active)
 	{
-		App->window->GetWindowSize(w_width, w_height);
-		ImGui::SetNextWindowPos(PANELCONFIG_POS, ImGuiCond_Once);
-		ImGui::SetNextWindowSize((PANELCONFIG_SIZE), ImGuiCond_Once);
+		
+		/*ImGui::SetNextWindowPos(PANELCONFIG_POS, ImGuiCond_Once);
+		ImGui::SetNextWindowSize((PANELCONFIG_SIZE), ImGuiCond_Once);*/
 
-		if (ImGui::Begin("Configuration"), &active, ImGuiWindowFlags_NoBackground)
+		if (ImGui::Begin("Configuration", &active, ImGuiWindowFlags_AlwaysAutoResize))
 		{
 			if (ImGui::CollapsingHeader("Window"))
 			{
+				App->window->GetWindowSize(w_width, w_height);
 				ImGui::SliderInt("Width", &screen.width, 1, 1920);
 				ImGui::SliderInt("Height", &screen.height, 1, 1080);
 				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);

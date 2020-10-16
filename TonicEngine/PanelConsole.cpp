@@ -31,15 +31,14 @@ bool PanelConsole::Draw()
 
 	if (App->gui->Pconsole->active)
 	{
-		
 
 		PrintLogs();
 
-		ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		if (ImGui::Begin("Console", &active)) {
 
-		if (ImGui::Button("Clear"))
-			EraseLogs();
-			
+			if (ImGui::Button("Clear"))
+				EraseLogs();
+
 			ImGui::Separator();
 
 			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
@@ -54,7 +53,7 @@ bool PanelConsole::Draw()
 					color = ERROR_CONSOLE_COLOR;
 					has_color = true;
 				}
-				if(has_color)
+				if (has_color)
 				{
 					ImGui::PushStyleColor(ImGuiCol_Text, color);
 					ImGui::TextUnformatted(*item);
@@ -66,7 +65,8 @@ bool PanelConsole::Draw()
 			ImGui::EndChild();
 
 
-		ImGui::End();
+			ImGui::End();
+		}
 	}
 	return true;
 }

@@ -28,11 +28,11 @@ bool PanelHierarchy::Draw()
 
 	if (App->gui->Phierarchy->active)
 	{
-		App->window->GetWindowSize(w_width, w_height);
+		/*App->window->GetWindowSize(w_width, w_height);
 		ImGui::SetNextWindowPos(PANELHIERARCHY_POS, ImGuiCond_Once);
-		ImGui::SetNextWindowSize(PANELHIERARCHY_SIZE, ImGuiCond_Once);
+		ImGui::SetNextWindowSize(PANELHIERARCHY_SIZE, ImGuiCond_Once);*/
 
-		if (ImGui::Begin("Hierarchy", &active))
+		if (ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_AlwaysAutoResize))
 		{
 			
 		}
