@@ -44,8 +44,8 @@ bool ModuleFileSystem::Init()
 	char* write_path = SDL_GetPrefPath(App->GetOrgName(), App->GetAppName());
 
 	// Trun this on while in game mode
-	//if(PHYSFS_setWriteDir(write_path) == 0)
-	//	LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
+	if(PHYSFS_setWriteDir(write_path) == 0)
+		LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
 
 	SDL_free(write_path);
 
@@ -55,7 +55,7 @@ bool ModuleFileSystem::Init()
 // Called before quitting
 bool ModuleFileSystem::CleanUp()
 {
-	//LOG("Freeing File System subsystem");
+	LOG("Freeing File System subsystem");
 
 	return true;
 }
@@ -289,197 +289,202 @@ void ModuleFileSystem::SplitFilePath(const char* full_path, std::string* path, s
 	}
 }
 
-//unsigned int ModuleFileSystem::Load(const char* path, const char* file, char** buffer) const
-//{
-//	std::string full_path(path);
-//	full_path += file;
-//	return Load(full_path.c_str(), buffer);
-//}
-//
-//// Read a whole file and put it in a new buffer
-//uint ModuleFileSystem::Load(const char* file, char** buffer) const
-//{
-//	uint ret = 0;
-//
-//	PHYSFS_file* fs_file = PHYSFS_openRead(file);
-//
-//	if (fs_file != nullptr)
-//	{
-//		PHYSFS_sint32 size = (PHYSFS_sint32)PHYSFS_fileLength(fs_file);
-//
-//		if (size > 0)
-//		{
-//			*buffer = new char[size + 1];
-//			uint readed = (uint)PHYSFS_read(fs_file, *buffer, 1, size);
-//			if (readed != size)
-//			{
-//				LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
-//				RELEASE_ARRAY(buffer);
-//			}
-//			else
-//			{
-//				ret = readed;
-//				//Adding end of file at the end of the buffer. Loading a shader file does not add this for some reason
-//				(*buffer)[size] = '\0';
-//			}
-//		}
-//
-//		if (PHYSFS_close(fs_file) == 0)
-//			LOG("File System error while closing file %s: %s\n", file, PHYSFS_getLastError());
-//	}
-//	else
-//		LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
-//
-//	return ret;
-//}
+unsigned int ModuleFileSystem::Load(const char* path, const char* file, char** buffer) const
+{
+	std::string full_path(path);
+	full_path += file;
+	return Load(full_path.c_str(), buffer);
+}
 
-//bool ModuleFileSystem::DuplicateFile(const char* file, const char* dstFolder, std::string& relativePath)
-//{
-//	std::string fileStr, extensionStr;
-//	SplitFilePath(file, nullptr, &fileStr, &extensionStr);
-//
-//	relativePath = relativePath.append(dstFolder).append("/") + fileStr.append(".") + extensionStr;
-//	std::string finalPath = std::string(*PHYSFS_getSearchPath()).append("/") + relativePath;
-//
-//	return DuplicateFile(file, finalPath.c_str());
-//
-//}
-//
-//bool ModuleFileSystem::DuplicateFile(const char* srcFile, const char* dstFile)
-//{
-//	//TODO: Compare performance to calling Load(srcFile) and then Save(dstFile)
-//	std::ifstream src;
-//	src.open(srcFile, std::ios::binary);
-//	bool srcOpen = src.is_open();
-//	std::ofstream  dst(dstFile, std::ios::binary);
-//	bool dstOpen = dst.is_open();
-//
-//	dst << src.rdbuf();
-//
-//	src.close();
-//	dst.close();
-//
-//	if (srcOpen && dstOpen)
-//	{
-//		LOG("[success] File Duplicated Correctly");
-//		return true;
-//	}
-//	else
-//	{
-//		LOG("[error] File could not be duplicated");
-//		return false;
-//	}
-//}
-//
-//int close_sdl_rwops(SDL_RWops* rw)
-//{
-//	RELEASE_ARRAY(rw->hidden.mem.base);
-//	SDL_FreeRW(rw);
-//	return 0;
-//}
-//
-//// Save a whole buffer to disk
-//uint ModuleFileSystem::Save(const char* file, const void* buffer, unsigned int size, bool append) const
-//{
-//	unsigned int ret = 0;
-//
-//	bool overwrite = PHYSFS_exists(file) != 0;
-//	PHYSFS_file* fs_file = (append) ? PHYSFS_openAppend(file) : PHYSFS_openWrite(file);
-//
-//	if (fs_file != nullptr)
-//	{
-//		uint written = (uint)PHYSFS_write(fs_file, (const void*)buffer, 1, size);
-//		if (written != size)
-//		{
-//			LOG("[error] File System error while writing to file %s: %s", file, PHYSFS_getLastError());
-//		}
-//		else
-//		{
-//			if (append == true)
-//				LOG("Added %u data to [%s%s]", size, GetWriteDir(), file);
-//			else if (overwrite == true)
-//				LOG("File [%s%s] overwritten with %u bytes", GetWriteDir(), file, size);
-//			else
-//				LOG("New file created [%s%s] of %u bytes", GetWriteDir(), file, size);
-//
-//			ret = written;
-//		}
-//
-//		if (PHYSFS_close(fs_file) == 0)
-//			LOG("[error] File System error while closing file %s: %s", file, PHYSFS_getLastError());
-//	}
-//	else
-//		LOG("[error] File System error while opening file %s: %s", file, PHYSFS_getLastError());
-//
-//	return ret;
-//}
-//
-//bool ModuleFileSystem::Remove(const char* file)
-//{
-//	bool ret = false;
-//
-//	if (file != nullptr)
-//	{
-//		//If it is a directory, we need to recursively remove all the files inside
-//		if (IsDirectory(file))
-//		{
-//			std::vector<std::string> containedFiles, containedDirs;
-//			PathNode rootDirectory = GetAllFiles(file);
-//
-//			for (uint i = 0; i < rootDirectory.children.size(); ++i)
-//				Remove(rootDirectory.children[i].path.c_str());
-//		}
-//
-//		if (PHYSFS_delete(file) != 0)
-//		{
-//			LOG("File deleted: [%s]", file);
-//			ret = true;
-//
-//			else
-//				LOG("File System error while trying to delete [%s]: %s", file, PHYSFS_getLastError());
-//
-//		}
-//	}
-//
-//	return ret;
-//}
-//
-//uint ModuleFileSystem::GetLastModTime(const char* filename)
-//{
-//	return PHYSFS_getLastModTime(filename);
-//}
-//
-//std::string ModuleFileSystem::GetUniqueName(const char* path, const char* name) const
-//{
-//	//TODO: modify to distinguix files and dirs?
-//	std::vector<std::string> files, dirs;
-//	DiscoverFiles(path, files, dirs);
-//
-//	std::string finalName(name);
-//	bool unique = false;
-//
-//	for (uint i = 0; i < 50 && unique == false; ++i)
-//	{
-//		unique = true;
-//
-//		//Build the compare name (name_i)
-//		if (i > 0)
-//		{
-//			finalName = std::string(name).append("_");
-//			if (i < 10)
-//				finalName.append("0");
-//			finalName.append(std::to_string(i));
-//		}
-//
-//		//Iterate through all the files to find a matching name
-//		for (uint f = 0; f < files.size(); ++f)
-//		{
-//			if (finalName == files[f])
-//			{
-//				unique = false;
-//				break;
-//			}
-//		}
-//	}
-//	return finalName;
-//}
+// Read a whole file and put it in a new buffer
+uint ModuleFileSystem::Load(const char* file, char** buffer) const
+{
+	uint ret = 0;
+
+	PHYSFS_file* fs_file = PHYSFS_openRead(file);
+
+	if (fs_file != nullptr)
+	{
+		PHYSFS_sint32 size = (PHYSFS_sint32)PHYSFS_fileLength(fs_file);
+
+		if (size > 0)
+		{
+			*buffer = new char[size + 1];
+			uint readed = (uint)PHYSFS_read(fs_file, *buffer, 1, size);
+			if (readed != size)
+			{
+				LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
+				RELEASE_ARRAY(buffer);
+			}
+			else
+			{
+				ret = readed;
+				//Adding end of file at the end of the buffer. Loading a shader file does not add this for some reason
+				(*buffer)[size] = '\0';
+			}
+		}
+
+		if (PHYSFS_close(fs_file) == 0)
+			LOG("File System error while closing file %s: %s\n", file, PHYSFS_getLastError());
+	}
+	else
+	{
+		LOG("File System error while opening file %s: %s\n", file, PHYSFS_getLastError());
+	}
+
+	return ret;
+}
+
+bool ModuleFileSystem::DuplicateFile(const char* file, const char* dstFolder, std::string& relativePath)
+{
+	std::string fileStr, extensionStr;
+	SplitFilePath(file, nullptr, &fileStr, &extensionStr);
+
+	relativePath = relativePath.append(dstFolder).append("/") + fileStr.append(".") + extensionStr;
+	std::string finalPath = std::string(*PHYSFS_getSearchPath()).append("/") + relativePath;
+
+	return DuplicateFile(file, finalPath.c_str());
+}
+
+bool ModuleFileSystem::DuplicateFile(const char* srcFile, const char* dstFile)
+{
+	//TODO: Compare performance to calling Load(srcFile) and then Save(dstFile)
+	std::ifstream src;
+	src.open(srcFile, std::ios::binary);
+	bool srcOpen = src.is_open();
+	std::ofstream  dst(dstFile, std::ios::binary);
+	bool dstOpen = dst.is_open();
+
+	dst << src.rdbuf();
+
+	src.close();
+	dst.close();
+
+	if (srcOpen && dstOpen)
+	{
+		LOG("[success] File Duplicated Correctly");
+		return true;
+	}
+	else
+	{
+		LOG("[error] File could not be duplicated");
+		return false;
+	}
+}
+
+int close_sdl_rwops(SDL_RWops* rw)
+{
+	RELEASE_ARRAY(rw->hidden.mem.base);
+	SDL_FreeRW(rw);
+	return 0;
+}
+
+// Save a whole buffer to disk
+uint ModuleFileSystem::Save(const char* file, const void* buffer, unsigned int size, bool append) const
+{
+	unsigned int ret = 0;
+
+	bool overwrite = PHYSFS_exists(file) != 0;
+	PHYSFS_file* fs_file = (append) ? PHYSFS_openAppend(file) : PHYSFS_openWrite(file);
+
+	if (fs_file != nullptr)
+	{
+		uint written = (uint)PHYSFS_write(fs_file, (const void*)buffer, 1, size);
+		if (written != size)
+		{
+			LOG("[error] File System error while writing to file %s: %s", file, PHYSFS_getLastError());
+		}
+		else
+		{
+			if (append == true)
+			{
+				LOG("Added %u data to [%s%s]", size, GetWriteDir(), file);
+			}
+			else if (overwrite == true)
+			{
+				LOG("File [%s%s] overwritten with %u bytes", GetWriteDir(), file, size);
+			}
+			else
+				LOG("New file created [%s%s] of %u bytes", GetWriteDir(), file, size);
+
+			ret = written;
+		}
+
+		if (PHYSFS_close(fs_file) == 0)
+			LOG("[error] File System error while closing file %s: %s", file, PHYSFS_getLastError());
+	}
+	else
+		LOG("[error] File System error while opening file %s: %s", file, PHYSFS_getLastError());
+
+	return ret;
+}
+
+bool ModuleFileSystem::Remove(const char* file)
+{
+	bool ret = false;
+
+	if (file != nullptr)
+	{
+		//If it is a directory, we need to recursively remove all the files inside
+		if (IsDirectory(file))
+		{
+			std::vector<std::string> containedFiles, containedDirs;
+			PathNode rootDirectory = GetAllFiles(file);
+
+			for (uint i = 0; i < rootDirectory.children.size(); ++i)
+				Remove(rootDirectory.children[i].path.c_str());
+		}
+
+		if (PHYSFS_delete(file) != 0)
+		{
+			LOG("File deleted: [%s]", file);
+			ret = true;
+
+
+		}
+		else
+			LOG("File System error while trying to delete [%s]: %s", file, PHYSFS_getLastError());
+	}
+
+	return ret;
+}
+
+uint ModuleFileSystem::GetLastModTime(const char* filename)
+{
+	return PHYSFS_getLastModTime(filename);
+}
+
+std::string ModuleFileSystem::GetUniqueName(const char* path, const char* name) const
+{
+	//TODO: modify to distinguix files and dirs?
+	std::vector<std::string> files, dirs;
+	DiscoverFiles(path, files, dirs);
+
+	std::string finalName(name);
+	bool unique = false;
+
+	for (uint i = 0; i < 50 && unique == false; ++i)
+	{
+		unique = true;
+
+		//Build the compare name (name_i)
+		if (i > 0)
+		{
+			finalName = std::string(name).append("_");
+			if (i < 10)
+				finalName.append("0");
+			finalName.append(std::to_string(i));
+		}
+
+		//Iterate through all the files to find a matching name
+		for (uint f = 0; f < files.size(); ++f)
+		{
+			if (finalName == files[f])
+			{
+				unique = false;
+				break;
+			}
+		}
+	}
+	return finalName;
+}

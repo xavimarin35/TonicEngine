@@ -50,17 +50,17 @@ public:
 	void SplitFilePath(const char* full_path, std::string* path, std::string* file = nullptr, std::string* extension = nullptr) const;
 
 	// Open for Read/Write
-	//unsigned int Load(const char* path, const char* file, char** buffer) const;
-	//unsigned int Load(const char* file, char** buffer) const;
+	unsigned int Load(const char* path, const char* file, char** buffer) const;
+	unsigned int Load(const char* file, char** buffer) const;
 
-	/*bool DuplicateFile(const char* file, const char* dstFolder, std::string& relativePath);
+	bool DuplicateFile(const char* file, const char* dstFolder, std::string& relativePath);
 	bool DuplicateFile(const char* srcFile, const char* dstFile);
 
 	unsigned int Save(const char* file, const void* buffer, unsigned int size, bool append = false) const;
 	bool Remove(const char* file);
 
 	uint GetLastModTime(const char* filename);
-	std::string GetUniqueName(const char* path, const char* name) const;*/
+	std::string GetUniqueName(const char* path, const char* name) const;
 };
 
 #endif // __MODULEFILESYSTEM_H__
