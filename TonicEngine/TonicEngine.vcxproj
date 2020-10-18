@@ -97,6 +97,7 @@
     <ClInclude Include="MathGeoLib\include\MathGeoLib.h" />
     <ClInclude Include="MathGeoLib\include\MathGeoLibFwd.h" />
     <ClInclude Include="MeshObj.h" />
+    <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleGui.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelHierarchy.h" />
     <ClInclude Include="PanelManager.h" />
+    <ClInclude Include="PathNode.h" />
     <ClInclude Include="pcg-c-0.94\extras\entropy.h" />
     <ClInclude Include="pcg-c-0.94\extras\pcg_spinlock.h" />
     <ClInclude Include="pcg-c-0.94\include\pcg_variants.h" />
@@ -133,6 +135,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshObj.cpp" />
+    <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleImporter.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleGui.cpp" />

@@ -11,6 +11,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleGui.h"
 #include "ModuleImporter.h"
+#include "ModuleFileSystem.h"
 
 
 #include <vector>
@@ -25,6 +26,7 @@ class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleGUI;
 class ModuleImporter;
+class ModuleFileSystem;
 
 class Application
 {
@@ -36,6 +38,7 @@ public:
 	ModuleCamera3D* camera = nullptr;
 	ModuleGUI* gui = nullptr;
 	ModuleImporter* importer = nullptr;
+	ModuleFileSystem* file_system = nullptr;
 
 private: 
 

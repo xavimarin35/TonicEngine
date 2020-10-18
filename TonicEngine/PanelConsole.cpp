@@ -31,7 +31,6 @@ bool PanelConsole::Draw()
 
 	if (App->gui->Pconsole->active)
 	{
-
 		PrintLogs();
 
 		if (ImGui::Begin("Console", &active)) {
@@ -44,8 +43,6 @@ bool PanelConsole::Draw()
 			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
 			
-
-
 			for (list<char*>::iterator item = consoleLogs.begin(); item != consoleLogs.end(); ++item)
 			{
 				ImVec4 color = TEXT_CONSOLE_COLOR;
@@ -63,15 +60,13 @@ bool PanelConsole::Draw()
 				}
 			}
 
-			
 			ImGui::PopStyleVar();
 			ImGui::EndChild();
-
-
-			
 		}
+
 		ImGui::End();
 	}
+
 	return true;
 }
 
