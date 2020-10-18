@@ -43,6 +43,8 @@ bool PanelConsole::Draw()
 
 			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
+			
+
 
 			for (list<char*>::iterator item = consoleLogs.begin(); item != consoleLogs.end(); ++item)
 			{
@@ -61,12 +63,14 @@ bool PanelConsole::Draw()
 				}
 			}
 
+			
 			ImGui::PopStyleVar();
 			ImGui::EndChild();
 
 
-			ImGui::End();
+			
 		}
+		ImGui::End();
 	}
 	return true;
 }
