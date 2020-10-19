@@ -42,6 +42,7 @@ bool ModuleGUI::Start()
 	io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io->DisplaySize.x = SCREEN_WIDTH;
 	io->DisplaySize.y = SCREEN_HEIGHT;
+	
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
@@ -93,7 +94,7 @@ update_status ModuleGUI::Update(float dt)
 		ret = UPDATE_STOP;
 
 	bool opt_fullscreen = true;
-	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
 
 	// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
 	// because it would be confusing to have two docking targets within each others.
@@ -110,6 +111,7 @@ update_status ModuleGUI::Update(float dt)
 		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 	}
 
+	
 	// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
 	if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
 		window_flags |= ImGuiWindowFlags_NoBackground;
@@ -134,9 +136,8 @@ update_status ModuleGUI::Update(float dt)
 		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 	}
 
-	ImGui::End();
-	
 	docking_io = &io;
+	ImGui::End();
 
 	return ret;
 }

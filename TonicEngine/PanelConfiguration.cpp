@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Globals.h"
 #include "PanelConfiguration.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
@@ -38,13 +39,13 @@ bool PanelConfiguration::Draw()
 			if (ImGui::CollapsingHeader("Window"))
 			{
 				App->window->GetWindowSize(w_width, w_height);
-				ImGui::SliderInt("Width", &screen.width, 1, 1920);
-				ImGui::SliderInt("Height", &screen.height, 1, 1080);
+				ImGui::SliderInt("Width", &screen.width, 1, 1440);
+				ImGui::SliderInt("Height", &screen.height, 1, 900);
 				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);
 
-				SDL_SetWindowBrightness(App->window->window, screen.brightness);
 				SDL_SetWindowSize(App->window->window, screen.width, screen.height);
-
+				SDL_SetWindowBrightness(App->window->window, screen.brightness);
+				
 				ImGui::Separator();
 
 				if (ImGui::Checkbox("Full Screen", &win.fullscreen))
