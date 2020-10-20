@@ -18,6 +18,13 @@ public:
 
 	void OnCollision();
 
+	void DrawCube_36v(float x, float y, float z, float size);
+
+	// DRAW CUBE INFO
+	uint id_vertices = 0;
+	uint id_no_dup_vertices = 1;
+	uint id_indices = 2;
+
 };
 
 

@@ -8,6 +8,8 @@
 
 #define MAX_LIGHTS 8
 
+class MeshObj;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -20,6 +22,10 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+
+	void NewVertexBuffer(float* vertex, uint& size, uint& id_vertex);
+	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
+	void Draw(const MeshObj* mesh);
 
 public:
 

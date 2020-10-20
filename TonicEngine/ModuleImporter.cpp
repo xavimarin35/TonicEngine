@@ -2,6 +2,7 @@
 #include "MeshObj.h"
 #include "Primitive.h"
 #include "Application.h"
+#include "ModuleRenderer3D.h"
 #include "SDL/include/SDL.h"
 
 #include "Assimp/include/cimport.h"
@@ -38,6 +39,10 @@ update_status ModuleImporter::PreUpdate(float dt)
 
 update_status ModuleImporter::Update(float dt)
 {
+	for (int i = 0; i < meshes.size(); ++i)
+	{
+		App->renderer3D->Draw(meshes[i]);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -50,6 +55,8 @@ bool ModuleImporter::CleanUp()
 {
 	aiDetachAllLogStreams();
 
+	meshes.clear();
+
 	return true;
 }
 
@@ -59,7 +66,7 @@ bool ModuleImporter::Load(const char* Filename)
 
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
-	if (scene != nullptr && scene->HasMeshes())
+	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes && ret; ++i)
@@ -67,8 +74,33 @@ bool ModuleImporter::Load(const char* Filename)
 			aiMesh* mesh2 = scene->mMeshes[i];
 
 			MeshObj* meshObj = new MeshObj();
-			ret = meshObj->Load(mesh2);
+
+			meshObj->num_vertex = mesh2->mNumVertices;
+			meshObj->vertex = new float[meshObj->num_vertex * 3];
+
+			memcpy(meshObj->vertex, mesh2->mVertices, sizeof(float) * meshObj->num_vertex * 3);
+			App->appLogs.push_back("New mesh loaded");
+
+			if (mesh2->HasFaces())
+			{
+				meshObj->num_index = mesh2->mNumFaces * 3;
+				meshObj->index = new uint[meshObj->num_index];
+
+				for (uint i = 0; i < mesh2->mNumFaces; ++i)
+				{
+					if (mesh2->mFaces[i].mNumIndices != 3)
+						App->appLogs.push_back("ERROR: Geometry face with != 3 indices");
+
+					else
+						memcpy(&meshObj->index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
+				}
+			}
+
+			App->renderer3D->NewVertexBuffer(meshObj->vertex, meshObj->num_vertex, meshObj->id_vertex);
+			App->renderer3D->NewIndexBuffer(meshObj->index, meshObj->num_index, meshObj->id_index);
+
 			meshes.push_back(meshObj);
+
 		}
 
 		aiReleaseImport(scene);
@@ -78,35 +110,4 @@ bool ModuleImporter::Load(const char* Filename)
 		App->appLogs.push_back("ERROR: Cannot load scene");
 
 	return ret;
-}
-
-bool ModuleImporter::Draw()
-{
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
-
-	for (int i = 0; i < meshes.size(); ++i)
-	{
-		MeshObj* meshObj = meshes[i];
-
-		glEnableClientState(GL_VERTEX_ARRAY);
-
-		glBindBuffer(GL_ARRAY_BUFFER, meshObj->id_vertex);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshObj->id_index);
-
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-		glDrawElements(GL_TRIANGLES, meshObj->num_index, GL_UNSIGNED_INT, NULL);
-
-		glPopMatrix();
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-		glDisableClientState(GL_VERTEX_ARRAY);
-
-	}
-
-	return true;
 }

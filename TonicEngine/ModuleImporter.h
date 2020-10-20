@@ -21,8 +21,6 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 
-	bool Draw();
-
 	bool CleanUp();
 
 	bool Load(const char* Filename);
