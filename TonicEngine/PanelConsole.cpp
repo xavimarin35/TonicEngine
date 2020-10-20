@@ -38,6 +38,42 @@ bool PanelConsole::Draw()
 			if (ImGui::Button("Clear"))
 				EraseLogs();
 
+			ImGui::SameLine();
+
+			// Filter Input
+			Filter.Draw("Filter", -100.0f);
+
+			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+			const char* buf = Buf.begin();
+			const char* buf_end = Buf.end();
+			if (Filter.IsActive())
+			{
+
+				for (int line_no = 0; line_no < LineOffsets.Size; line_no++)
+				{
+					const char* line_start = buf + LineOffsets[line_no];
+					const char* line_end = (line_no + 1 < LineOffsets.Size) ? (buf + LineOffsets[line_no + 1] - 1) : buf_end;
+					if (Filter.PassFilter(line_start, line_end))
+						ImGui::TextUnformatted(line_start, line_end);
+				}
+			}
+			else
+			{
+				ImGuiListClipper clipper;
+				clipper.Begin(LineOffsets.Size);
+				while (clipper.Step())
+				{
+					for (int line_no = clipper.DisplayStart; line_no < clipper.DisplayEnd; line_no++)
+					{
+						const char* line_start = buf + LineOffsets[line_no];
+						const char* line_end = (line_no + 1 < LineOffsets.Size) ? (buf + LineOffsets[line_no + 1] - 1) : buf_end;
+						ImGui::TextUnformatted(line_start, line_end);
+					}
+				}
+				clipper.End();
+			}
+			ImGui::PopStyleVar();
+
 			ImGui::Separator();
 
 			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);

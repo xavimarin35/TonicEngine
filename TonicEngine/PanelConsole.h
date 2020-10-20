@@ -28,6 +28,10 @@ private:
 
 	bool consoleEmpty = true;
 	int maxLogs = 100;
+
+	ImGuiTextBuffer     Buf;
+	ImGuiTextFilter     Filter;
+	ImVector<int>       LineOffsets;
 	
 	list<char*> consoleLogs;
 };

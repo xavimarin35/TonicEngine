@@ -157,6 +157,11 @@ bool PanelConfiguration::Draw()
 
 			}
 
+			if (ImGui::CollapsingHeader("Renderer"))
+			{
+				// Checkboxes for view modes (wireframe, vertex, etc)
+			}
+
 		}
 
 		ImGui::End();
