@@ -10,6 +10,7 @@ Application::Application()
 	gui = new ModuleGUI(this);
 	importer = new ModuleImporter(this);
 	file_system = new ModuleFileSystem(this);
+	text_imp = new TextureImporter(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -20,6 +21,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);	
 	AddModule(importer);
+	AddModule(text_imp);
 	AddModule(file_system);
 
 	// Scenes

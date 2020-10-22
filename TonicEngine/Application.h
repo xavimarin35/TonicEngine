@@ -12,6 +12,7 @@
 #include "ModuleGui.h"
 #include "ModuleImporter.h"
 #include "ModuleFileSystem.h"
+#include "TextureImporter.h"
 
 
 #include <vector>
@@ -27,6 +28,7 @@ class ModuleCamera3D;
 class ModuleGUI;
 class ModuleImporter;
 class ModuleFileSystem;
+class TextureImporter;
 
 class Application
 {
@@ -39,6 +41,7 @@ public:
 	ModuleGUI* gui = nullptr;
 	ModuleImporter* importer = nullptr;
 	ModuleFileSystem* file_system = nullptr;
+	TextureImporter* text_imp = nullptr;
 
 private: 
 
