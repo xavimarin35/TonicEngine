@@ -7,9 +7,9 @@
 #include "DevIL/include/IL/ilu.h"
 #include "DevIL/include/IL/ilut.h"
 
-#pragma comment ( lib, "DevIL/lib/x86/Release/DevIL.lib" )
-#pragma comment ( lib, "DevIL/lib/x86/Release/ILU.lib" )
-#pragma comment ( lib, "DevIL/lib/x86/Release/ILUT.lib" )
+#pragma comment ( lib, "DevIL/libx86/DevIL.lib" )
+#pragma comment ( lib, "DevIL/libx86/ILU.lib" )
+#pragma comment ( lib, "DevIL/libx86/ILUT.lib" )
 
 #define CHECKERS_WIDTH 16
 #define CHECKERS_HEIGHT 16
