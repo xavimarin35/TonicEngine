@@ -2,6 +2,9 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include "TextureImporter.h"
+#include "ModuleImporter.h"
+#include "Math.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -17,7 +20,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	LOG("Loading Intro assets");
+	App->appLogs.push_back("Loading Intro assets");
 	App->appLogs.push_back("Loading Scene");
 
 	bool ret = true;
@@ -25,13 +28,19 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
+	uint Texture = App->text_imp->LoadTexture("Assets/Baker_house.png");
+
+	App->importer->Load("Assets/BakerHouse.fbx");
+	App->importer->meshes.at(0)->texture = Texture;
+	App->importer->meshes.at(1)->texture = Texture;
+
 	return ret;
 }
 
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-	LOG("Unloading Intro scene");
+	App->appLogs.push_back("Unloading Intro scene");
 
 	return true;
 }
@@ -44,11 +53,56 @@ update_status ModuleSceneIntro::Update(float dt)
 
 update_status ModuleSceneIntro::PostUpdate(float dt)
 {
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
+	//PLANE -----------------------------
+	glLineWidth(2.0f);
 
-	DrawCube_36v(2, 0, -2, 1);
+	glBegin(GL_LINES);
+	glColor3ub(255, 255, 255);
+	for (float i = -10; i <= 10; ++i)
+	{
+		glVertex3f(i, 0.f, 0.f);
+		glVertex3f(i, 0, 10.f);
+
+		glVertex3f(0.f, 0.f, i);
+		glVertex3f(10.f, 0, i);
+
+		glVertex3f(i, 0.f, 0.f);
+		glVertex3f(i, 0, -10.f);
+
+		glVertex3f(0.f, 0.f, i);
+		glVertex3f(-10.f, 0, i);
+	}
+	glEnd();
+
+	// AXIS ------------------------
+	glLineWidth(4.0f);
+
+	glBegin(GL_LINES);
+	//Y
+	glColor3ub(0, 255, 0);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(0.f, 1.f, 0.f);
+	glEnd();
+
+	glBegin(GL_LINES);
+	//X
+	glColor3ub(255, 0, 0);
+	glVertex3f(0.f, 0.001f, 0.f);
+	glVertex3f(1.f, 0.001f, 0.f);
+	glEnd();
+
+	glBegin(GL_LINES);
+	//Z
+	glColor3ub(0, 0, 255);
+	glVertex3f(0.f, 0.001f, 0.f);
+	glVertex3f(0.f, 0.001f, 1.f);
+	glEnd();
+
+	glColor3ub(255, 255, 255);
+
+	//Draw meshes
+	for (int i = 0; i < App->importer->meshes.size(); ++i)
+		App->renderer3D->DrawObj(App->importer->meshes[i]);
 
 	return UPDATE_CONTINUE;
 }

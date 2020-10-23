@@ -55,6 +55,8 @@ update_status TextureImporter::Update(float dt)
 
 bool TextureImporter::CleanUp()
 {
+	glDeleteTextures(1, (GLuint*)&id_checkers);
+
 	return true;
 }
 
@@ -91,4 +93,75 @@ uint TextureImporter::CreateCheckersText(uint width, uint height) const
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return texture;
+}
+
+uint TextureImporter::CreateTexture(const void* text, uint width, uint height, int format, uint format2) const
+{
+	uint id_texture = 0;
+
+	glGenTextures(1, (GLuint*)&id_texture);
+	glBindTexture(GL_TEXTURE_2D, id_texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	//Enabling anisotropic filtering
+	if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))
+	{
+		float max_anisotropy;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy);
+	}
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, text);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	//Unbind Texture
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	App->appLogs.push_back("Loaded Texture");
+
+	return id_texture;
+}
+
+uint TextureImporter::LoadTexture(const char* path) const
+{
+	uint id_texture = 0;
+	uint id_img = 0;
+
+	if (path != nullptr)
+	{
+		ilGenImages(1, (ILuint*)&id_img);
+		ilBindImage(id_img);
+
+		if (ilLoadImage(path))
+		{
+			ILinfo ImgInfo;
+			iluGetImageInfo(&ImgInfo);
+
+			if (ImgInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+				iluFlipImage();
+
+			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
+			{
+				//Create TExture
+				id_texture = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+			}
+			else
+				App->appLogs.push_back("ERROR: Failed converting image");
+		}
+		else
+		{
+			App->appLogs.push_back("ERROR: Failed loading image");
+		}
+
+	}
+	else
+	{
+		App->appLogs.push_back("ERROR: Could not load image from path!");
+	}
+
+	return id_texture;
 }

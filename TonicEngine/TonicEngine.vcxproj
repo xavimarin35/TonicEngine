@@ -98,10 +98,10 @@
     <ClInclude Include="imgui-1.78\imstb_textedit.h" />
     <ClInclude Include="imgui-1.78\imstb_truetype.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="MathGeoLib\include\MathBuildConfig.h" />
     <ClInclude Include="MathGeoLib\include\MathGeoLib.h" />
     <ClInclude Include="MathGeoLib\include\MathGeoLibFwd.h" />
-    <ClInclude Include="MeshObj.h" />
     <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
@@ -140,7 +140,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MeshObj.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleImporter.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />

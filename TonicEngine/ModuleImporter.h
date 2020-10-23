@@ -4,9 +4,25 @@
 #include "Application.h"
 #include "Module.h"
 
-#include <vector>
+#include "MathGeoLib/include/MathBuildConfig.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
-class MeshObj;
+struct MeshObj
+{
+	uint id_index = 0;
+	uint num_index = 0;
+	uint* index = nullptr;
+
+	uint id_vertex = 0;
+	uint num_vertex = 0;
+	float3* vertex = nullptr;
+
+	uint id_text_coords = 0;
+	uint num_text_coords = 0;
+	float* text_coords = nullptr;
+
+	uint texture = 0;
+};
 
 class ModuleImporter : public Module
 {
@@ -15,21 +31,20 @@ public:
 	ModuleImporter(Application* app, bool start_enabled = true);
 	~ModuleImporter();
 
+	bool Init();
 	bool Start();
 
-	update_status PreUpdate(float dt);
 	update_status Update(float dt);
-	update_status PostUpdate(float dt);
 
 	bool CleanUp();
 
-	bool Load(const char* Filename);
+	void Load(const char* Filename);
 
 
-private:
+public:
 
 	std::vector<MeshObj*> meshes;
-	bool enabled;
+	bool enabled = true;
 
 };
 

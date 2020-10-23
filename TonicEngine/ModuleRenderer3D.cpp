@@ -1,7 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "MeshObj.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -21,15 +20,12 @@ ModuleRenderer3D::~ModuleRenderer3D()
 bool ModuleRenderer3D::Init()
 {
 	App->appLogs.push_back("Loading 3D Renderer Context");
-	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if(context == NULL)
 	{
-
-		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
@@ -40,7 +36,7 @@ bool ModuleRenderer3D::Init()
 
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
-			LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+			App->appLogs.push_back("ERROR: Unable to set VSync");
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);
@@ -50,7 +46,6 @@ bool ModuleRenderer3D::Init()
 		GLenum error = glGetError();
 		if(error != GL_NO_ERROR)
 		{
-			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			ret = false;
 		}
 
@@ -62,7 +57,6 @@ bool ModuleRenderer3D::Init()
 		error = glGetError();
 		if(error != GL_NO_ERROR)
 		{
-			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			ret = false;
 		}
 		
@@ -76,7 +70,6 @@ bool ModuleRenderer3D::Init()
 		error = glGetError();
 		if(error != GL_NO_ERROR)
 		{
-			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			ret = false;
 		}
 		
@@ -129,6 +122,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	App->scene_intro->Draw();
+
 	// Drawing Panels
 	App->gui->Draw();
 
@@ -140,8 +135,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
-	LOG("Destroying 3D Renderer");
-
 	SDL_GL_DeleteContext(context);
 
 	return true;
@@ -161,7 +154,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::NewVertexBuffer(float* vertex, uint& size, uint& id_vertex)
+void ModuleRenderer3D::NewVertexBuffer(float3* vertex, uint& size, uint& id_vertex)
 {
 	glGenBuffers(1, (GLuint*)&(id_vertex));
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
@@ -177,19 +170,33 @@ void ModuleRenderer3D::NewIndexBuffer(uint* index, uint& size, uint& id_index)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::Draw(const MeshObj* mesh)
+void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords)
 {
+	glGenBuffers(1, (GLuint*)&(id_text_coords));
+	glBindBuffer(GL_ARRAY_BUFFER, id_text_coords);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_text_coords * 2, text_coords, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
+void ModuleRenderer3D::DrawObj(const MeshObj* mesh)
+{
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	glBindTexture(GL_TEXTURE_2D, mesh->texture);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_text_coords);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_index);
 	glDrawElements(GL_TRIANGLES, mesh->num_index, GL_UNSIGNED_INT, nullptr);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

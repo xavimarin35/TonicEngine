@@ -20,10 +20,9 @@ public:
 
 public:
 
-	uint LoadImage() const;
-	uint CreateTexture(const char* path) const;
+	uint CreateTexture(const void* texture, uint width, uint height, int format, uint format2) const;
 	uint CreateCheckersText(uint width, uint height) const;
-	uint GetCheckerText() const;
+	uint LoadTexture(const char* path) const;
 
 	uint id_checkers = 0;
 };
