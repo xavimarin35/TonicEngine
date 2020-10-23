@@ -99,6 +99,19 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
+	// Zoom In & Zoom Out
+	if (App->input->GetMouseZ() != 0)
+	{
+		vec3 Distance = Position - Reference;
+		vec3 newPos = { 0,0,0 };
+
+		if (App->input->GetMouseZ() > 0 || App->input->GetMouseZ() < 0) // <--- Mouse scroll Up or Down
+		{
+			newPos -= Z * App->input->GetMouseZ() * length(Distance) / 10;
+			Position += newPos;
+		}
+	}
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
