@@ -11,8 +11,8 @@
 #pragma comment ( lib, "DevIL/libx86/ILU.lib" )
 #pragma comment ( lib, "DevIL/libx86/ILUT.lib" )
 
-#define CHECKERS_WIDTH 16
-#define CHECKERS_HEIGHT 16
+#define CHECKERS_WIDTH 128
+#define CHECKERS_HEIGHT 128
 
 TextureImporter::TextureImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { }
 TextureImporter::~TextureImporter() { }

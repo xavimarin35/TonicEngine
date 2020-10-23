@@ -23,11 +23,6 @@ bool ModuleImporter::Init()
 	return true;
 }
 
-bool ModuleImporter::Start()
-{
-	return true;
-}
-
 update_status ModuleImporter::Update(float dt)
 {
 	return UPDATE_CONTINUE;
@@ -47,7 +42,7 @@ void ModuleImporter::Load(const char* Filename)
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
 		// mNumMeshes iterates on mMeshes[]
-		for (int i = 0; i < scene->mNumMeshes; ++i)
+		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
 			MeshObj* mesh = new MeshObj; 
 			aiMesh* mesh2 = scene->mMeshes[i];
