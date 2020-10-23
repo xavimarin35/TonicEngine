@@ -27,6 +27,7 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
+	float scrollSensitivity = 10.0f;
 
 private:
 
