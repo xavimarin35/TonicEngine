@@ -29,6 +29,7 @@ public:
 	
 	vec3 X, Y, Z, Position, Reference;
 	float zoomValue = 30.0f; // Increases the sensitivity of zoom
+	float wheelSpeedValue = 0.5f; // Increases sensitivity of clicking wheel movement
 
 private:
 

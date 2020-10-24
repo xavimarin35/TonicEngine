@@ -114,6 +114,24 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 	}
 
+	// Wheel Movement
+	if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
+	{
+		ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeAll);
+
+		int dx = -App->input->GetMouseXMotion();
+		int dy = -App->input->GetMouseYMotion();
+
+		if (dx != 0 || dy != 0)
+		{
+			newPos -= Y * dy * App->GetDT() * wheelSpeedValue;
+			newPos += X * dx * App->GetDT() * wheelSpeedValue;
+		}
+
+		Position += newPos;
+		Reference += newPos;
+	}
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
