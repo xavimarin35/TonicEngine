@@ -45,14 +45,18 @@ bool PanelAbout::Draw()
 				App->RequestBrowser("https://www.opengl.org/"); ImGui::SameLine();
 			if (ImGui::Selectable("Glew", false, 0, { 35, 13 }))
 				App->RequestBrowser("http://glew.sourceforge.net/"); ImGui::SameLine();
-			if (ImGui::Selectable("SDL", false, 0, { 35, 13 }))
+			if (ImGui::Selectable("SDL", false, 0, { 30, 13 }))
 				App->RequestBrowser("https://www.libsdl.org/"); ImGui::SameLine();
 			if (ImGui::Selectable("ImGui", false, 0, { 40, 13 }))
 				App->RequestBrowser("https://github.com/ocornut/imgui"); ImGui::SameLine();
-			if (ImGui::Selectable("PCG", false, 0, { 35, 13 }))
+			if (ImGui::Selectable("PCG", false, 0, { 30, 13 }))
 				App->RequestBrowser("http://www.pcg-random.org/"); ImGui::SameLine();
-			if (ImGui::Selectable("MathGeoLib", false, 0, { 90, 13 }))
-				App->RequestBrowser("https://github.com/juj/MathGeoLib");
+			if (ImGui::Selectable("MathGeoLib", false, 0, { 75, 13 }))
+				App->RequestBrowser("https://github.com/juj/MathGeoLib"); ImGui::SameLine();
+			if (ImGui::Selectable("Assimp", false, 0, { 45, 13 }))
+				App->RequestBrowser("https://www.assimp.org/"); ImGui::SameLine();
+			if (ImGui::Selectable("DeviIL", false, 0, { 45, 13 }))
+				App->RequestBrowser("http://openil.sourceforge.net/");
 
 			ImGui::Separator();
 
