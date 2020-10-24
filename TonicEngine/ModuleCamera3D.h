@@ -28,9 +28,7 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
-	float zoomValue;
-	float zoomSpeed = 20.0f;
-	bool initialPos = false;
+	float zoomValue = 30.0f; // Increases the sensitivity of zoom
 
 private:
 

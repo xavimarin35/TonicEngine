@@ -23,11 +23,9 @@ bool ModuleGUI::Init()
 	Pabout = new PanelAbout();
 	Phierarchy = new PanelHierarchy();
 	Pconsole = new PanelConsole();
-
-	panels.push_back(Pconfig);
-	panels.push_back(Pabout);
-	panels.push_back(Phierarchy);
-	panels.push_back(Pconsole);
+	Pinspector = new PanelInspector();
+	
+	PushBackPanels();
 
 	return true;
 }
@@ -43,7 +41,6 @@ bool ModuleGUI::Start()
 	io->DisplaySize.x = SCREEN_WIDTH;
 	io->DisplaySize.y = SCREEN_HEIGHT;
 	
-
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
 
@@ -212,6 +209,15 @@ bool ModuleGUI::Draw()
 void ModuleGUI::EnableInput(SDL_Event* event)
 {
 	ImGui_ImplSDL2_ProcessEvent(event);
+}
+
+void ModuleGUI::PushBackPanels()
+{
+	panels.push_back(Pconfig);
+	panels.push_back(Pabout);
+	panels.push_back(Phierarchy);
+	panels.push_back(Pconsole);
+	panels.push_back(Pinspector);
 }
 
 bool ModuleGUI::CleanUp()

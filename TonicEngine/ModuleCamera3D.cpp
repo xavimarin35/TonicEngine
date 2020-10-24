@@ -105,22 +105,14 @@ update_status ModuleCamera3D::Update(float dt)
 		vec3 Distance = Position - Reference;
 		vec3 newPos = { 0,0,0 };
 
-		zoomValue = length(Distance) / zoomSpeed;
-
-		if (App->input->GetMouseZ() > 0)
+		if (App->input->GetMouseZ() > 0 || App->input->GetMouseZ() < 0)
 		{
-			newPos -= Z * zoomValue;
-		}
-		else if (App->input->GetMouseZ() < 0) 
-		{
-			newPos += Z * zoomValue;
+			newPos -= Z * App->input->GetMouseZ() * length(Distance) / zoomValue;
+			Position += newPos;
 		}
 
 		Position += newPos;
 	}
-
-	if (initialPos)
-		GoInitialPos();
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();

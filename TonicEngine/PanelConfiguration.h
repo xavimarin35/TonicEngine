@@ -9,10 +9,6 @@
 #include <vector>
 #include <list>
 
-// Temporal hard-coded until implement Docking 
-#define PANELCONFIG_POS ImVec2(1152.0f, 18.0f)
-#define PANELCONFIG_SIZE ImVec2((float)w_width / 5, (float)w_height - 18)
-
 class Application;
 
 class PanelConfiguration : public PanelManager

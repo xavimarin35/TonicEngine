@@ -1,5 +1,4 @@
 #include "PanelAbout.h"
-#include "Application.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
 

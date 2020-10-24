@@ -1,4 +1,3 @@
-#include "Application.h"
 #include "Globals.h"
 #include "PanelConfiguration.h"
 #include "ModuleGUI.h"
@@ -30,9 +29,6 @@ bool PanelConfiguration::Draw()
 
 	if (App->gui->Pconfig->active)
 	{
-		
-		/*ImGui::SetNextWindowPos(PANELCONFIG_POS, ImGuiCond_Once);
-		ImGui::SetNextWindowSize((PANELCONFIG_SIZE), ImGuiCond_Once);*/
 
 		if (ImGui::Begin("Configuration", &active))
 		{
@@ -118,7 +114,7 @@ bool PanelConfiguration::Draw()
 				if (SDL_HasSSE2)
 					ImGui::TextColored(ImVec4(PanelTextColor), "SSE2"); ImGui::SameLine();
 				if (SDL_HasSSE3)
-					ImGui::TextColored(ImVec4(PanelTextColor), "SSE3"); /*ImGui::SameLine();*/
+					ImGui::TextColored(ImVec4(PanelTextColor), "SSE3"); 
 				if (SDL_HasSSE41)
 					ImGui::TextColored(ImVec4(PanelTextColor), "SSE41"); ImGui::SameLine();
 				if (SDL_HasSSE42)
@@ -160,23 +156,27 @@ bool PanelConfiguration::Draw()
 			if (ImGui::CollapsingHeader("Renderer"))
 			{
 				if (ImGui::Checkbox("Wireframe", &wireframe))
-					App->renderer3D->WireframeView(wireframe);
+					App->renderer3D->WireframeView(wireframe); 
+				ImGui::SameLine();
 				if (ImGui::Checkbox("Depth", &depth_test))
 					App->renderer3D->DepthView(depth_test);
+				ImGui::SameLine();
 				if (ImGui::Checkbox("Cull Face", &cull_face))
 					App->renderer3D->CullFaceView(cull_face);
+				
 				if (ImGui::Checkbox("Lighting", &lighting))
 					App->renderer3D->LightingView(lighting);
+				ImGui::SameLine();
 				if (ImGui::Checkbox("Alpha", &alpha))
 					App->renderer3D->AlphaView(alpha);
+				ImGui::SameLine();
 				if (ImGui::Checkbox("Texture 2D", &texture2D))
 					App->renderer3D->Texture2DView(texture2D);
 			}
-			
+
 			if (ImGui::CollapsingHeader("Camera"))
 			{
-				ImGui::Checkbox("Initial Position", &App->camera->initialPos);
-				ImGui::SliderFloat("Zoom", &App->camera->zoomSpeed, 1.0f, 100.0f);
+				ImGui::SliderFloat("Zoom", &App->camera->zoomValue, 10.0f, 100.0f);
 			}
 
 		}
