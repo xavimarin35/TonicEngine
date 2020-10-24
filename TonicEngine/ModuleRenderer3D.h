@@ -1,9 +1,8 @@
-#pragma once
-#include "Module.h"
-#include "Globals.h"
+#ifndef __ModuleRenderer3D__
+#define __ModuleRenderer3D__
+
 #include "Math.h"
 #include "Light.h"
-#include "ModuleImporter.h"
 
 #define MAX_LIGHTS 8
 
@@ -43,3 +42,5 @@ public:
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
 };
+
+#endif 

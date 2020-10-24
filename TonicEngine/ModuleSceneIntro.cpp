@@ -1,4 +1,3 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"

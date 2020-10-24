@@ -1,13 +1,13 @@
 #ifndef __PANELCONFIGURATION_H__
 #define __PANELCONFIGURATION_H__
 
-#include "Module.h"
-#include "Globals.h"
 #include "Application.h"
-#include "PanelManager.h"
 
 #include <vector>
 #include <list>
+
+// Yellow Color to call in ImGui::TextColored
+#define YELLOW_COLOR ImVec4(1.0f, 1.0f, 0.0f, 1.0f)
 
 class Application;
 

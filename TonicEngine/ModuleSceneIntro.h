@@ -1,8 +1,7 @@
 #ifndef __ModuleSceneIntro__
 #define __ModuleSceneIntro__
 
-#include "Module.h"
-#include "Globals.h"
+#include "Application.h"
 #include "Primitive.h"
 
 class ModuleSceneIntro : public Module

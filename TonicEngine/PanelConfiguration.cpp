@@ -76,7 +76,7 @@ bool PanelConfiguration::Draw()
 
 				ImGui::Text("Limit Framerate:");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%d", App->framerateCap);
+				ImGui::TextColored(YELLOW_COLOR, "%d", App->framerateCap);
 
 				char title[25];
 				sprintf_s(title, 25, "Framerate %.1f", App->fpsVec[App->fpsVec.size() - 1]);
@@ -90,74 +90,74 @@ bool PanelConfiguration::Draw()
 			{
 				ImGui::Text("SDL Version:");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
+				ImGui::TextColored(YELLOW_COLOR, "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 
 				ImGui::Separator();
 
 				ImGui::Text("CPUs: ");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%d", SDL_GetCPUCount());
+				ImGui::TextColored(YELLOW_COLOR, "%d", SDL_GetCPUCount());
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "(Cache: %d kb)", SDL_GetCPUCacheLineSize());
+				ImGui::TextColored(YELLOW_COLOR, "(Cache: %d kb)", SDL_GetCPUCacheLineSize());
 
 				ImGui::Text("System RAM: ");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%f Gb", SDL_GetSystemRAM() / 1024.0f);
+				ImGui::TextColored(YELLOW_COLOR, "%f Gb", SDL_GetSystemRAM() / 1024.0f);
 
 				ImGui::Text("Caps: "); ImGui::SameLine();
 				if (SDL_HasRDTSC)
-					ImGui::TextColored(PanelTextColor, "RDTSC"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "RDTSC"); ImGui::SameLine();
 				if (SDL_HasMMX)
-					ImGui::TextColored(PanelTextColor, "MMX"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "MMX"); ImGui::SameLine();
 				if (SDL_HasSSE)
-					ImGui::TextColored(PanelTextColor, "SSE"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "SSE"); ImGui::SameLine();
 				if (SDL_HasSSE2)
-					ImGui::TextColored(PanelTextColor, "SSE2"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "SSE2"); ImGui::SameLine();
 				if (SDL_HasSSE3)
-					ImGui::TextColored(PanelTextColor, "SSE3"); 
+					ImGui::TextColored(YELLOW_COLOR, "SSE3");
 				if (SDL_HasSSE41)
-					ImGui::TextColored(PanelTextColor, "SSE41"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "SSE41"); ImGui::SameLine();
 				if (SDL_HasSSE42)
-					ImGui::TextColored(PanelTextColor, "SSE42"); ImGui::SameLine();
+					ImGui::TextColored(YELLOW_COLOR, "SSE42"); ImGui::SameLine();
 				if (SDL_HasAVX)
-					ImGui::TextColored(PanelTextColor, "AVX");
+					ImGui::TextColored(YELLOW_COLOR, "AVX");
 
 				ImGui::Separator();
 
 				ImGui::Text("GPU: ");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%s", glGetString(GL_RENDERER));
+				ImGui::TextColored(YELLOW_COLOR, "%s", glGetString(GL_RENDERER));
 
 				ImGui::Text("Brand: ");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%s", glGetString(GL_VENDOR));
+				ImGui::TextColored(YELLOW_COLOR, "%s", glGetString(GL_VENDOR));
 
 				ImGui::Text("Version: ");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%s", glGetString(GL_VERSION));
+				ImGui::TextColored(YELLOW_COLOR, "%s", glGetString(GL_VERSION));
 
 				glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &hardware.VRAM_budget);
 				ImGui::Text("VRAM Budget:");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%f", float(hardware.VRAM_budget) / (1024.0f));
+				ImGui::TextColored(YELLOW_COLOR, "%f", float(hardware.VRAM_budget) / (1024.0f));
 
 				glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &hardware.VRAM_available);
 				ImGui::Text("VRAM Available:");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%f", float(hardware.VRAM_usage) / (1024.f));
+				ImGui::TextColored(YELLOW_COLOR, "%f", float(hardware.VRAM_usage) / (1024.f));
 
 				hardware.VRAM_usage = hardware.VRAM_budget - hardware.VRAM_available;
 				ImGui::Text("VRAM Usage:");
 				ImGui::SameLine();
-				ImGui::TextColored(PanelTextColor, "%f", float(hardware.VRAM_available) / (1024.f));
+				ImGui::TextColored(YELLOW_COLOR, "%f", float(hardware.VRAM_available) / (1024.f));
 
 			}
 
 			if (ImGui::CollapsingHeader("Input"))
 			{
-				ImGui::Text("Mouse Position:"); ImGui::SameLine(); ImGui::TextColored(PanelTextColor, "%i, %i", App->input->GetMouseX(), App->input->GetMouseY());
-				ImGui::Text("Mouse Motion:"); ImGui::SameLine(); ImGui::TextColored(PanelTextColor, "%i,%i", App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
-				ImGui::Text("Mouse Wheel:"); ImGui::SameLine(); ImGui::TextColored(PanelTextColor, "%i", App->input->GetMouseZ());
+				ImGui::Text("Mouse Position:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i, %i", App->input->GetMouseX(), App->input->GetMouseY());
+				ImGui::Text("Mouse Motion:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i,%i", App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
+				ImGui::Text("Mouse Wheel:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", App->input->GetMouseZ());
 			}
 
 			if (ImGui::CollapsingHeader("Renderer"))

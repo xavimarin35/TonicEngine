@@ -1,8 +1,8 @@
-#include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
 
 #include "glew/include/GL/glew.h"
+#include "SDL/include/SDL.h"
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {

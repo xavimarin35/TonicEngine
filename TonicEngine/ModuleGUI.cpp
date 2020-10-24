@@ -1,11 +1,6 @@
 #include "ModuleGUI.h"
 #include "Application.h"
-#include "ModuleWindow.h"
-#include "ModuleRenderer3D.h"
-#include "imgui-1.78/imgui_impl_opengl3.h"
-//#include "imgui-1.78/examples/libs/glfw/include/GLFW/glfw3.h"
 
-//#pragma comment (lib, "imgui-1.78/examples/libs/glfw/lib-vc2010-32/glfw3.lib")
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)

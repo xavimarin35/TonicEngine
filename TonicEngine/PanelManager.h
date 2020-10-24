@@ -1,13 +1,7 @@
 #ifndef __PANELMANAGER_H__
 #define __PANELMANAGER_H__
 
-#include "Globals.h"
 #include "Application.h"
-#include "Module.h"
-
-#include "glew/include/GL/glew.h"
-
-#include <list>
 
 class PanelManager
 {

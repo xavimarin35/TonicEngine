@@ -1,8 +1,6 @@
 #ifndef __MODULEGUI_H__
 #define __MODULEGUI_H__
 
-#include "Globals.h"
-#include "Module.h"
 #include "PanelManager.h"
 
 #include "imgui-1.78/imgui.h"
