@@ -48,6 +48,8 @@ public:
 		GLint VRAM_usage = 0;
 	}hardware;
 	
+public:
+
 };
 
 #endif

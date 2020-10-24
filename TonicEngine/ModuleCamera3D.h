@@ -19,6 +19,7 @@ public:
 	void LookAt(const vec3 &Spot);
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
+	void GoInitialPos();
 
 private:
 
@@ -27,7 +28,9 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
-	float scrollSensitivity = 10.0f;
+	float zoomValue;
+	float zoomSpeed = 20.0f;
+	bool initialPos = false;
 
 private:
 

@@ -161,6 +161,12 @@ bool PanelConfiguration::Draw()
 			{
 				// Checkboxes for view modes (wireframe, vertex, etc)
 			}
+			
+			if (ImGui::CollapsingHeader("Camera"))
+			{
+				ImGui::Checkbox("Initial Position", &App->camera->initialPos);
+				ImGui::SliderFloat("Zoom", &App->camera->zoomSpeed, 1.0f, 100.0f);
+			}
 
 		}
 
