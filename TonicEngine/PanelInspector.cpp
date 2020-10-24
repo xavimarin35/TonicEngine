@@ -29,6 +29,20 @@ bool PanelInspector::Draw()
 	{
 		if (ImGui::Begin("Inspector", &active))
 		{
+			if (ImGui::CollapsingHeader("Transform"))
+			{
+
+			}
+			
+			if (ImGui::CollapsingHeader("Mesh"))
+			{
+
+			}
+
+			if (ImGui::CollapsingHeader("Texture"))
+			{
+
+			}
 
 		}
 
