@@ -50,6 +50,13 @@ public:
 	
 public:
 
+	// View Mode
+	bool	wireframe = false;
+	bool	depth_test = true;
+	bool	cull_face = true;
+	bool	lighting = true;
+	bool	texture2D = true;
+	bool	alpha = true;
 };
 
 #endif

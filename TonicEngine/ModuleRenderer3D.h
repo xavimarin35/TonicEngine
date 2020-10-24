@@ -27,6 +27,14 @@ public:
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
 	void DrawObj(const MeshObj* mesh);
 
+	// View Mode
+	void WireframeView(bool active);
+	void DepthView(bool active);
+	void CullFaceView(bool active);
+	void LightingView(bool active);
+	void AlphaView(bool active);
+	void Texture2DView(bool active);
+
 public:
 
 	Light lights[MAX_LIGHTS];

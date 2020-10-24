@@ -159,7 +159,18 @@ bool PanelConfiguration::Draw()
 
 			if (ImGui::CollapsingHeader("Renderer"))
 			{
-				// Checkboxes for view modes (wireframe, vertex, etc)
+				if (ImGui::Checkbox("Wireframe", &wireframe))
+					App->renderer3D->WireframeView(wireframe);
+				if (ImGui::Checkbox("Depth", &depth_test))
+					App->renderer3D->DepthView(depth_test);
+				if (ImGui::Checkbox("Cull Face", &cull_face))
+					App->renderer3D->CullFaceView(cull_face);
+				if (ImGui::Checkbox("Lighting", &lighting))
+					App->renderer3D->LightingView(lighting);
+				if (ImGui::Checkbox("Alpha", &alpha))
+					App->renderer3D->AlphaView(alpha);
+				if (ImGui::Checkbox("Texture 2D", &texture2D))
+					App->renderer3D->Texture2DView(texture2D);
 			}
 			
 			if (ImGui::CollapsingHeader("Camera"))

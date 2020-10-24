@@ -206,3 +206,55 @@ void ModuleRenderer3D::DrawObj(const MeshObj* mesh)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
+
+// View Modes
+
+void ModuleRenderer3D::WireframeView(bool active)
+{
+	if (active)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void ModuleRenderer3D::DepthView(bool active)
+{
+	if (active)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
+}
+
+void ModuleRenderer3D::CullFaceView(bool active)
+{
+	if (active)
+		glEnable(GL_CULL_FACE);
+	else
+		glDisable(GL_CULL_FACE);
+}
+
+void ModuleRenderer3D::LightingView(bool active)
+{
+	if (active)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+}
+
+void ModuleRenderer3D::AlphaView(bool active)
+{
+	if (active)
+		glEnable(GL_BLEND);
+
+	else
+		glDisable(GL_BLEND);
+}
+
+void ModuleRenderer3D::Texture2DView(bool active)
+{
+	if (active)
+		glEnable(GL_TEXTURE_2D);
+	else
+		glDisable(GL_TEXTURE_2D);
+}
+
