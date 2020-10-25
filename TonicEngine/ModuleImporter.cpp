@@ -1,5 +1,7 @@
 #include "ModuleImporter.h"
 #include "Application.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleGUI.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"

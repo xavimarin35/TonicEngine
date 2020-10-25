@@ -2,6 +2,7 @@
 #define __PANELCONFIGURATION_H__
 
 #include "Application.h"
+#include "ModuleGUI.h"
 
 #include <vector>
 #include <list>

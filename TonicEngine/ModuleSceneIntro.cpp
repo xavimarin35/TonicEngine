@@ -3,6 +3,9 @@
 #include "Primitive.h"
 #include "TextureImporter.h"
 #include "ModuleImporter.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleGUI.h"
+#include "ModuleCamera3D.h"
 #include "Math.h"
 
 #include "SDL\include\SDL_opengl.h"

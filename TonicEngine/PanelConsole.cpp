@@ -1,5 +1,5 @@
 #include "PanelConsole.h"
-#include "ModuleGUI.h"
+#include "Globals.h"
 #include "ModuleWindow.h"
 
 #include "SDL/include/SDL_opengl.h"

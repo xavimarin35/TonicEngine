@@ -2,6 +2,7 @@
 #define __PANELCONSOLE_H__
 
 #include "Application.h"
+#include "ModuleGUI.h"
 
 
 #include <list>

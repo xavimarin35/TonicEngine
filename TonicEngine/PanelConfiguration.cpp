@@ -2,6 +2,9 @@
 #include "PanelConfiguration.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"

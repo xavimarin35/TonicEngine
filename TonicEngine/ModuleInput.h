@@ -1,9 +1,7 @@
 #ifndef __ModuleInput__
 #define __ModuleInput__
 
-
 #include "Module.h"
-#include "Globals.h"
 
 #define MAX_MOUSE_BUTTONS 5
 

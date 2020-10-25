@@ -1,5 +1,6 @@
 #include "TextureImporter.h"
 #include "Application.h"
+#include "ModuleGUI.h"
 
 #include "glew/include/GL/glew.h"
 

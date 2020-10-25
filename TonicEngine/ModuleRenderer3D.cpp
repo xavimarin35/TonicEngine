@@ -2,6 +2,10 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleImporter.h"
+#include "ModuleWindow.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleGUI.h"
+#include "ModuleCamera3D.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>

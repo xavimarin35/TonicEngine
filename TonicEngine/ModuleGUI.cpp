@@ -1,5 +1,7 @@
 #include "ModuleGUI.h"
 #include "Application.h"
+#include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
 
 
 
