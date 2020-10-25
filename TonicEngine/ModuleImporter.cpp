@@ -20,6 +20,14 @@ bool ModuleImporter::Init()
 
 	aiAttachLogStream(&stream);
 
+	if (aiGetErrorString() != NULL)
+		App->appLogs.push_back("Initializing ASSIMP");
+	else
+	{
+		App->appLogs.push_back("ERROR: Could not initialize ASSIMP");
+		return false;
+	}
+
 	return true;
 }
 
