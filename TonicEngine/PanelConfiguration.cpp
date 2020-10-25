@@ -185,6 +185,7 @@ bool PanelConfiguration::Draw()
 			{
 				ImGui::Text("Sensitivity");
 				ImGui::Separator();
+				ImGui::SliderFloat("WASD Move", &App->camera->WASDValue, 0.0f, 5.0f);
 				ImGui::SliderFloat("Wheel Move", &App->camera->wheelSpeedValue, 0.0f, 2.0f);
 				ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 10.0f, 100.0f);
 			}
