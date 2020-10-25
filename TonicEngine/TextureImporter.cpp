@@ -23,13 +23,13 @@ bool TextureImporter::Init()
 
 	if (ilGetInteger(IL_VERSION_NUM) < IL_VERSION || iluGetInteger(ILU_VERSION_NUM) < ILU_VERSION || iluGetInteger(ILUT_VERSION_NUM) < ILUT_VERSION)
 	{
-		App->appLogs.push_back("DevIL version not correct");
+		LOG_IMGUI_CONSOLE("ERROR: DevIL version not correct");
 		ret = false;
 	}
 
 	else
 	{
-		App->appLogs.push_back("DevIL initializing...");
+		LOG_IMGUI_CONSOLE("Initializing DevIL");
 
 		ilInit();
 		iluInit();
@@ -121,7 +121,7 @@ uint TextureImporter::CreateTexture(const void* text, uint width, uint height, i
 	//Unbind Texture
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	App->appLogs.push_back("Loaded Texture");
+	LOG_IMGUI_CONSOLE("Loaded Texture (%i x %i): ID %i", width, height, id_texture);
 
 	return id_texture;
 }
@@ -150,17 +150,17 @@ uint TextureImporter::LoadTexture(const char* path) const
 				id_texture = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
 			}
 			else
-				App->appLogs.push_back("ERROR: Failed converting image");
+				LOG_IMGUI_CONSOLE("ERROR: Failed converting image: %s", path);
 		}
 		else
 		{
-			App->appLogs.push_back("ERROR: Failed loading image");
+			LOG_IMGUI_CONSOLE("ERROR: Failed loading image: %s", path);
 		}
 
 	}
 	else
 	{
-		App->appLogs.push_back("ERROR: Could not load image from path!");
+		LOG_IMGUI_CONSOLE("ERROR: Could not load image from %s", path);
 	}
 
 	return id_texture;

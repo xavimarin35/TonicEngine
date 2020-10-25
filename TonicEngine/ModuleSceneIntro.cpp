@@ -39,7 +39,7 @@ bool ModuleSceneIntro::Start()
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-	App->appLogs.push_back("Unloading Intro scene");
+	LOG_IMGUI_CONSOLE("Unloading Intro scene");
 
 	return true;
 }

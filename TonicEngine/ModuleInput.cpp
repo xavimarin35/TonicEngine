@@ -122,7 +122,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 				if (dropDirection != nullptr)
 				{
-					App->appLogs.push_back("New file dropped on window!");
+					LOG_IMGUI_CONSOLE("New file dropped on window!");
 
 					App->importer->Load(dropDirection);
 

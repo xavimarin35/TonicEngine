@@ -49,7 +49,7 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	appLogs.push_back("Init Application");
+	LOG_IMGUI_CONSOLE("Init Application");
 
 	// Needed to initialize PCG (Random Number Generator Library)
 	InitSeed();

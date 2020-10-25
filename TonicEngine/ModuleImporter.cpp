@@ -21,10 +21,12 @@ bool ModuleImporter::Init()
 	aiAttachLogStream(&stream);
 
 	if (aiGetErrorString() != NULL)
-		App->appLogs.push_back("Initializing ASSIMP");
+	{
+		LOG_IMGUI_CONSOLE("Initializing ASSIMP");
+	}
 	else
 	{
-		App->appLogs.push_back("ERROR: Could not initialize ASSIMP");
+		LOG_IMGUI_CONSOLE("ERROR: Could not initialize ASSIMP");
 		return false;
 	}
 
@@ -73,8 +75,9 @@ void ModuleImporter::Load(const char* Filename)
 				for (uint i = 0; i < mesh2->mNumFaces; ++i)
 				{
 					if (mesh2->mFaces[i].mNumIndices != 3)
-						App->appLogs.push_back("ERROR: Geometry face with != 3 indices");
-
+					{
+						LOG_IMGUI_CONSOLE("ERROR: Geometry face with != 3 indices");
+					}
 					else
 						memcpy(&mesh->index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
 				}
@@ -101,9 +104,9 @@ void ModuleImporter::Load(const char* Filename)
 		}
 
 		aiReleaseImport(scene);
-		App->appLogs.push_back("Succesfully loaded mesh");
+		LOG_IMGUI_CONSOLE("Succesfully loaded mesh with path: %s", Filename);
 	}
 
 	else
-		App->appLogs.push_back("ERROR: Cannot load scene");
+		LOG_IMGUI_CONSOLE("ERROR: Cannot load scene %s", Filename);
 }

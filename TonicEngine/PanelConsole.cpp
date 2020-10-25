@@ -32,7 +32,7 @@ bool PanelConsole::Draw()
 	{
 		PrintLogs();
 
-		if (ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollWithMouse)) {
+		if (ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollWithMouse || ImGuiWindowFlags_NoScrollbar)) {
 
 			if (ImGui::Button("Clear"))
 				EraseLogs();
@@ -75,14 +75,13 @@ bool PanelConsole::Draw()
 
 			ImGui::Separator();
 
-			ImGui::BeginChild("Scroll", ImVec2(0, 200), false, ImGuiWindowFlags_HorizontalScrollbar);
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
 			
 			for (list<char*>::iterator item = consoleLogs.begin(); item != consoleLogs.end(); ++item)
 			{
 				ImVec4 color = TEXT_CONSOLE_COLOR;
 				bool has_color = true;
-				if (strstr((*item), "error:"))
+				if (strstr((*item), "ERROR:"))
 				{
 					color = ERROR_CONSOLE_COLOR;
 					has_color = true;
@@ -96,7 +95,6 @@ bool PanelConsole::Draw()
 			}
 
 			ImGui::PopStyleVar();
-			ImGui::EndChild();
 		}
 
 		ImGui::End();
