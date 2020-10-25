@@ -29,6 +29,7 @@ bool ModuleGUI::Start()
 {
 	bool ret = true;
 
+
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	io = &ImGui::GetIO(); (void)io;
@@ -213,6 +214,17 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Phierarchy);
 	panels.push_back(Pconsole);
 	panels.push_back(Pinspector);
+}
+
+void ModuleGUI::LogConsole(char* text, ...)
+{
+	char buf[1024];
+	va_list args;
+	va_start(args, text);
+	vsnprintf(buf, IM_ARRAYSIZE(buf), text, args);
+	buf[IM_ARRAYSIZE(buf) - 1] = 0;
+	va_end(args);
+	App->appLogs.push_back(Strdup(buf));
 }
 
 bool ModuleGUI::CleanUp()

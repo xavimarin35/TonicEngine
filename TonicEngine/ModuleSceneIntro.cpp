@@ -19,8 +19,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	App->appLogs.push_back("Loading Intro assets");
-	App->appLogs.push_back("Loading Scene");
+	LOG_IMGUI_CONSOLE("Loading Intro assets");
+	LOG_IMGUI_CONSOLE("Loading Scene");
 
 	bool ret = true;
 

@@ -32,7 +32,7 @@ bool PanelConsole::Draw()
 	{
 		PrintLogs();
 
-		if (ImGui::Begin("Console", &active)) {
+		if (ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollWithMouse)) {
 
 			if (ImGui::Button("Clear"))
 				EraseLogs();

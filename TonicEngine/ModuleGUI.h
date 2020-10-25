@@ -46,6 +46,10 @@ public:
 
 	void EnableInput(SDL_Event* event);
 	void PushBackPanels();
+
+	// Console
+	void LogConsole(char* text, ...);
+	static char* Strdup(const char* str) { size_t len = strlen(str) + 1; void* buf = malloc(len); IM_ASSERT(buf); return (char*)memcpy(buf, (const void*)str, len); }
 	
 	PanelConfiguration* Pconfig = nullptr;
 	PanelAbout* Pabout = nullptr;
