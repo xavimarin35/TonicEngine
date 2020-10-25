@@ -29,14 +29,24 @@ bool PanelAbout::Draw()
 	{
 		if (ImGui::Begin("About", &active, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
-			ImGui::Text("%s ", SDL_GetWindowTitle(App->window->window));
+			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));
 			ImGui::Separator();
 
 			ImGui::Text("This is a 3D Game Engine developed during our Game Design and Development Bachelor's Degree.");
-			ImGui::Text("By Pol Casau and Xavi Marin\n");
+			ImGui::Separator();
 
-			if (ImGui::Button("GitHub"))
-				App->RequestBrowser("https://github.com/xavimarin35/TonicEngine"); 
+			if (ImGui::TreeNodeEx("Github Links", ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_SpanAvailWidth))
+			{
+				if (ImGui::Button("Repository"))
+					App->RequestBrowser("https://github.com/xavimarin35/TonicEngine"); ImGui::SameLine();
+				if (ImGui::Button("Pol Casau"))
+					App->RequestBrowser("https://github.com/Bullseye14"); ImGui::SameLine();
+				if (ImGui::Button("Xavi Marin"))
+					App->RequestBrowser("https://github.com/xavimarin35");
+
+				ImGui::TreePop();
+			}
+			
 
 			ImGui::Separator();
 
@@ -56,7 +66,10 @@ bool PanelAbout::Draw()
 			if (ImGui::Selectable("Assimp", false, 0, { 45, 13 }))
 				App->RequestBrowser("https://www.assimp.org/"); ImGui::SameLine();
 			if (ImGui::Selectable("DeviIL", false, 0, { 45, 13 }))
-				App->RequestBrowser("http://openil.sourceforge.net/");
+				App->RequestBrowser("http://openil.sourceforge.net/"); ImGui::SameLine();
+			if (ImGui::Selectable("PhysFS", false, 0, { 45, 13 }))
+				App->RequestBrowser("https://icculus.org/physfs/");
+
 
 			ImGui::Separator();
 

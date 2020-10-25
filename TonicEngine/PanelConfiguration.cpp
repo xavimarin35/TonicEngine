@@ -38,8 +38,8 @@ bool PanelConfiguration::Draw()
 			if (ImGui::CollapsingHeader("Window"))
 			{
 				App->window->GetWindowSize(w_width, w_height);
-				ImGui::SliderInt("Width", &screen.width, 1, 1440);
-				ImGui::SliderInt("Height", &screen.height, 1, 900);
+				ImGui::SliderInt("Width", &screen.width, 1, 1920);
+				ImGui::SliderInt("Height", &screen.height, 1, 1080);
 				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);
 
 				SDL_SetWindowSize(App->window->window, screen.width, screen.height);
@@ -67,15 +67,15 @@ bool PanelConfiguration::Draw()
 					App->ApplyAppName(appName);
 
 				// Organization Name
-				static char orgName[60];
+				/*static char orgName[60];
 				if (App->GetOrgName() != nullptr)
 					strcpy_s(orgName, 60, App->GetOrgName());
 				if (ImGui::InputText("Organization Name", orgName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
-					App->ApplyOrgName(orgName);
+					App->ApplyOrgName(orgName);*/
 
 				ImGui::Separator();
 
-				ImGui::SliderInt("Max FPS", &App->framerateCap, 1, 200);
+				ImGui::SliderInt("Max FPS", &App->framerateCap, 1, 60);
 
 				ImGui::Text("Limit Framerate:");
 				ImGui::SameLine();
