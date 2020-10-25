@@ -164,15 +164,15 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 void ModuleRenderer3D::NewVertexBuffer(float3* vertex, uint& size, uint& id_vertex)
 {
-	glGenBuffers(1, (GLuint*)&(id_vertex));
+	glGenBuffers(1, (GLuint*) &(id_vertex));
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size, vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float3) * size, vertex, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void ModuleRenderer3D::NewIndexBuffer(uint* index, uint& size, uint& id_index)
 {
-	glGenBuffers(1, (GLuint*)&(id_index));
+	glGenBuffers(1, (GLuint*) &(id_index));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * size, index, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -180,7 +180,7 @@ void ModuleRenderer3D::NewIndexBuffer(uint* index, uint& size, uint& id_index)
 
 void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords)
 {
-	glGenBuffers(1, (GLuint*)&(id_text_coords));
+	glGenBuffers(1, (GLuint*) &(id_text_coords));
 	glBindBuffer(GL_ARRAY_BUFFER, id_text_coords);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_text_coords * 2, text_coords, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
