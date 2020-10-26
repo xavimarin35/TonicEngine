@@ -1,5 +1,5 @@
-#ifndef __MODULE_IMPORTER_H__
-#define __MODULE_IMPORTER_H__
+#ifndef __MESH_IMPORTER_H__
+#define __MESH_IMPORTER_H__
 
 #include "Application.h"
 #include "Module.h"
@@ -7,12 +7,12 @@
 #include "MathGeoLib/include/MathBuildConfig.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 
-class ModuleImporter : public Module
+class MeshImporter : public Module
 {
 
 public:
-	ModuleImporter(Application* app, bool start_enabled = true);
-	~ModuleImporter();
+	MeshImporter(Application* app, bool start_enabled = true);
+	~MeshImporter();
 
 	bool Init();
 

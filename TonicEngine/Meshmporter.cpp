@@ -1,4 +1,4 @@
-#include "ModuleImporter.h"
+#include "MeshImporter.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleGUI.h"
@@ -12,11 +12,11 @@
 
 #pragma comment ( lib, "Assimp/libx86/assimp.lib" )
 
-ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { enabled = true; }
+MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { enabled = true; }
 
-ModuleImporter::~ModuleImporter() {}
+MeshImporter::~MeshImporter() {}
 
-bool ModuleImporter::Init()
+bool MeshImporter::Init()
 {
 	struct aiLogStream stream;
 
@@ -37,19 +37,19 @@ bool ModuleImporter::Init()
 	return true;
 }
 
-update_status ModuleImporter::Update(float dt)
+update_status MeshImporter::Update(float dt)
 {
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleImporter::CleanUp()
+bool MeshImporter::CleanUp()
 {
 	aiDetachAllLogStreams();
 
 	return true;
 }
 
-void ModuleImporter::Load(const char* Filename)
+void MeshImporter::Load(const char* Filename)
 {
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 

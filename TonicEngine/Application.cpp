@@ -15,7 +15,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	gui = new ModuleGUI(this);
-	importer = new ModuleImporter(this);
+	mesh_imp = new MeshImporter(this);
 	file_system = new ModuleFileSystem(this);
 	tex_imp = new TextureImporter(this);
 
@@ -27,7 +27,7 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);	
-	AddModule(importer);
+	AddModule(mesh_imp);
 	AddModule(tex_imp);
 	AddModule(file_system);
 

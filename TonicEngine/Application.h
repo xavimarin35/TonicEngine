@@ -8,7 +8,7 @@
 
 
 #include "PanelManager.h"
-#include "ModuleImporter.h"
+#include "MeshImporter.h"
 #include "ModuleFileSystem.h"
 #include "TextureImporter.h"
 
@@ -24,7 +24,7 @@ class ModuleSceneIntro;
 class ModuleRenderer3D;
 class ModuleCamera3D;
 class ModuleGUI;
-class ModuleImporter;
+class MeshImporter;
 class ModuleFileSystem;
 class TextureImporter;
 
@@ -37,7 +37,7 @@ public:
 	ModuleRenderer3D* renderer3D = nullptr;
 	ModuleCamera3D* camera = nullptr;
 	ModuleGUI* gui = nullptr;
-	ModuleImporter* importer = nullptr;
+	MeshImporter* mesh_imp = nullptr;
 	ModuleFileSystem* file_system = nullptr;
 	TextureImporter* tex_imp = nullptr;
 

@@ -108,7 +108,7 @@
     <ClInclude Include="MathGeoLib\include\MathGeoLib.h" />
     <ClInclude Include="MathGeoLib\include\MathGeoLibFwd.h" />
     <ClInclude Include="ModuleFileSystem.h" />
-    <ClInclude Include="ModuleImporter.h" />
+    <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleGui.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
@@ -152,7 +152,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
-    <ClCompile Include="ModuleImporter.cpp" />
+    <ClCompile Include="Meshmporter.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleGui.cpp" />
     <ClCompile Include="ModuleInput.cpp" />

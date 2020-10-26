@@ -151,9 +151,6 @@
     <ClInclude Include="PanelConsole.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleImporter.h">
-      <Filter>Sources\Meshes</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleFileSystem.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -183,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="ComponentTexture.h">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshImporter.h">
+      <Filter>Sources\Meshes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,9 +267,6 @@
     <ClCompile Include="RandomNumGenerator.cpp">
       <Filter>Sources\PCG</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleImporter.cpp">
-      <Filter>Sources\Meshes</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleFileSystem.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -293,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshmporter.cpp">
+      <Filter>Sources\Meshes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

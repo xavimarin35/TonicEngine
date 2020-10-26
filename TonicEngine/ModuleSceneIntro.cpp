@@ -2,7 +2,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "TextureImporter.h"
-#include "ModuleImporter.h"
+#include "MeshImporter.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 	uint Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
 
-	App->importer->Load("Assets/BakerHouse.fbx");
+	App->mesh_imp->Load("Assets/BakerHouse.fbx");
 
 	return ret;
 }
