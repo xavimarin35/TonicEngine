@@ -30,15 +30,17 @@ bool PanelHierarchy::Draw()
 	{
 		if (ImGui::Begin("Hierarchy", &active))
 		{
-			for (int i = 0; i < App->scene_intro->gameobjectsList.size(); ++i)
+			for (std::vector<GameObject*>::iterator it = App->scene_intro->gameobjectsList.begin(); it != App->scene_intro->gameobjectsList.end(); it++)
 			{
-				if (ImGui::Selectable(App->scene_intro->gameobjectsList.at(i)->nameGO.data(), App->scene_intro->GOselectedID == i))
+
+				if (ImGui::Selectable((*it)->oData.GOname.c_str(), (*it)->oData.active = false))
 				{
-					App->scene_intro->GOselected = App->scene_intro->gameobjectsList.at(i);
-					App->scene_intro->GOselectedID = i;
+
 				}
-	
+
 			}
+
+
 		}
 
 		ImGui::End();

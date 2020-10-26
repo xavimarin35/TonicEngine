@@ -4,7 +4,7 @@
 
 GameObject::GameObject(std::string name)
 {
-	this->oData.name = name;
+	this->oData.GOname = name;
 	this->oData.active = true;
 	ComponentFactory(COMPONENT_TYPE::TRANSFORM, true);
 	ComponentFactory(COMPONENT_TYPE::MESH, true);
@@ -95,6 +95,6 @@ Component* GameObject::GetComponent(const COMPONENT_TYPE& type)
 
 void GameObject::AssignNameToGO(const char* name)
 {
-	this->nameGO = name;
+	this->oData.GOname = name;
 }
 

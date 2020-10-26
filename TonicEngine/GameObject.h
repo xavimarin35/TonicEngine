@@ -20,8 +20,8 @@ enum class SHAPE_TYPE {
 };
 
 struct objData {
-	uint id;
-	string name;
+	uint GOid = 0;
+	string GOname;
 	bool active = true;
 };
 
@@ -51,7 +51,6 @@ public:
 	Component* cTexture = nullptr;
 
 	void AssignNameToGO(const char* name);
-	string nameGO;
 
 };
 

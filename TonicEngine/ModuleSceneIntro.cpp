@@ -122,17 +122,23 @@ GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
 	return nullptr;
 }
 
-GameObject* ModuleSceneIntro::CreateGO()
+GameObject* ModuleSceneIntro::CreateGO(string objName)
 {
-	std::string n = "GO1";
-	n.append(std::to_string(gameobjectsList.size()));
+	string n = AssignNameToGO(objName);
 
-	GameObject* GO = new GameObject(n.data());
-	GO->oData.id = gameobjectsList.size();
+	GameObject* GO = new GameObject(n);
+	GO->oData.GOid = gameobjectsList.size();
 
 	gameobjectsList.push_back(GO);
 
 	return GO;
+}
+
+string ModuleSceneIntro::AssignNameToGO(string name_go)
+{
+	string name = name_go.append(std::to_string(gameobjectsList.size()));
+
+	return name;
 }
 
 void ModuleSceneIntro::DestroySelectedGO(GameObject* GO)

@@ -61,7 +61,7 @@ void ModuleImporter::Load(const char* Filename)
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
 
-			GameObject* meshGO = App->scene_intro->CreateGO();
+			GameObject* meshGO = App->scene_intro->CreateGO("GameObject_");
 
 			//MeshObj* mesh = new MeshObj; 
 			aiMesh* mesh2 = scene->mMeshes[i];
