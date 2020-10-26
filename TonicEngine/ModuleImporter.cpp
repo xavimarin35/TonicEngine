@@ -60,7 +60,7 @@ void ModuleImporter::Load(const char* Filename)
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
-			// testing GO
+
 			GameObject* meshGO = App->scene_intro->CreateGO();
 
 			//MeshObj* mesh = new MeshObj; 

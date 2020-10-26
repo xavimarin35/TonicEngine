@@ -1,4 +1,5 @@
 #include "ComponentMesh.h"
+#include "ModuleGUI.h"
 
 ComponentMesh::ComponentMesh(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::MESH, gameObject)
 {

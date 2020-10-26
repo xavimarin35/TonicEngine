@@ -1,6 +1,7 @@
 #include "PanelInspector.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
+#include "ModuleSceneIntro.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -44,6 +45,7 @@ bool PanelInspector::Draw()
 
 			}
 
+			
 		}
 
 		ImGui::End();

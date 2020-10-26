@@ -43,12 +43,20 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG_IMGUI_CONSOLE("Unloading Intro scene");
 
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+		delete gameobjectsList[i];
+
+	gameobjectsList.clear();
+
 	return true;
 }
 
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+		gameobjectsList[i]->Update();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -110,8 +118,45 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::OnCollision()
+GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
 {
+	return nullptr;
+}
+
+GameObject* ModuleSceneIntro::CreateGO()
+{
+	std::string n = "GO1";
+	n.append(std::to_string(gameobjectsList.size()));
+
+	GameObject* GO = new GameObject(n.data());
+	GO->oData.id = gameobjectsList.size();
+
+	gameobjectsList.push_back(GO);
+
+	return GO;
+}
+
+void ModuleSceneIntro::DestroySelectedGO(GameObject* GO)
+{
+	if (GOselected == GO)
+		GOselected = nullptr;
+
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+	{
+		if (gameobjectsList[i] == GO)
+		{
+			gameobjectsList.erase(gameobjectsList.begin() + i);
+		}
+	}
+
+	delete GO;
+}
+
+string ModuleSceneIntro::AssignNameToGO(string name)
+{
+	nameObj = name.append(std::to_string(gameobjectsList.size()));
+
+	return nameObj;
 }
 
 void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)
@@ -167,29 +212,4 @@ void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glDisableClientState(GL_VERTEX_ARRAY);
 
-}
-
-GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
-{
-	return nullptr;
-}
-
-GameObject* ModuleSceneIntro::CreateGO()
-{
-	std::string n = "GO1";
-	n.append(std::to_string(gameobjectsList.size()));
-
-	GameObject* GO = new GameObject(n.data());
-	GO->oData.id = gameobjectsList.size();
-
-	gameobjectsList.push_back(GO);
-
-	return GO;
-}
-
-string ModuleSceneIntro::AssignNameToGO(string name)
-{
-	nameObj = name.append(std::to_string(gameobjectsList.size()));
-
-	return nameObj;
 }

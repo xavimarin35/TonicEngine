@@ -16,8 +16,6 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void OnCollision();
-
 	void DrawCube_36v(float x, float y, float z, float size);
 
 	// DRAW CUBE INFO
@@ -27,8 +25,11 @@ public:
 
 	GameObject* CreateShape(SHAPE_TYPE type);
 	GameObject* CreateGO();
+	void DestroySelectedGO(GameObject* GO);
 	string AssignNameToGO(string name);
 	std::vector<GameObject*> gameobjectsList;
+
+	GameObject* GOselected = nullptr;
 
 	string nameObj;
 	

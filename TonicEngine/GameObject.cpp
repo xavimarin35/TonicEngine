@@ -2,7 +2,6 @@
 #include "ModuleGUI.h"
 #include "Component.h"
 
-
 GameObject::GameObject(std::string name)
 {
 	this->oData.name = name;
@@ -31,6 +30,14 @@ void GameObject::CleanUp()
 	{
 		if (componentsList[i] != nullptr && componentsList[i]->active)
 			componentsList[i]->CleanUp();
+	}
+}
+
+void GameObject::Draw()
+{
+	for (int i = 0; i < componentsList.size(); ++i)
+	{
+		componentsList[i]->Draw();
 	}
 }
 

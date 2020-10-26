@@ -33,6 +33,7 @@ public:
 
 	void Update();
 	void CleanUp();
+	void Draw();
 
 	void EnableGameObject();
 	void DisableGameObject();
