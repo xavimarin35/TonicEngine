@@ -22,13 +22,14 @@ public:
 	virtual bool Update();
 	virtual bool CleanUp();
 
+	virtual void Draw();
 	virtual void EnableComponent();
 	virtual void DisableComponent();
 
 public:
 	bool active = true;
 	COMPONENT_TYPE type;
-	GameObject* gameobject;
+	GameObject* object;
 };
 
 

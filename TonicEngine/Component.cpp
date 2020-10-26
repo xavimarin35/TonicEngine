@@ -3,7 +3,7 @@
 Component::Component(COMPONENT_TYPE type, GameObject* GO, bool active)
 {
 	this->type = type;
-	this->gameobject = GO;
+	this->object = GO;
 	this->active = active;
 }
 
@@ -19,6 +19,10 @@ bool Component::Update()
 bool Component::CleanUp()
 {
 	return true;
+}
+
+void Component::Draw()
+{
 }
 
 void Component::EnableComponent()
