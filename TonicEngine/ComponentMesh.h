@@ -6,6 +6,22 @@
 
 class GameObject;
 
+struct meshData {
+	uint id_index = 0; 
+	uint num_index = 0;
+	uint* index = nullptr;
+
+	uint id_vertex = 0;
+	uint num_vertex = 0;
+	float3* vertex = nullptr;
+
+	uint id_tex_coords = 0;
+	uint num_tex_coords = 0;
+	float* tex_coords = nullptr;
+
+	bool draw_normals = false;
+};
+
 class ComponentMesh : public Component
 {
 public:
@@ -17,8 +33,8 @@ public:
 	void DrawVertexNormals();
 
 public:
-
-
+	
+	meshData data;
 
 };
 

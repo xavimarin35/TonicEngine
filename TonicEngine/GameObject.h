@@ -35,8 +35,11 @@ public:
 	void DisableGameObject();
 
 	Component* ComponentFactory(COMPONENT_TYPE type, bool active = true);
-	Component* GetComponent(COMPONENT_TYPE& type);
+	Component* GetComponent(const COMPONENT_TYPE& type);
 
+	ComponentTexture* GetComponentTransform(COMPONENT_TYPE type);
+	ComponentMesh* GetComponentMesh(COMPONENT_TYPE type);
+	ComponentTexture* GetComponentTexture(COMPONENT_TYPE type);
 
 public:
 	objData data;

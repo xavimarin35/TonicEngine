@@ -6,6 +6,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
+#include "GameObject.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>

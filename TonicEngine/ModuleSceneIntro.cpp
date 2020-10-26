@@ -107,6 +107,11 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	for (int i = 0; i < App->importer->meshes.size(); ++i)
 		App->renderer3D->DrawObj(App->importer->meshes[i]);
 
+	//for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
+	//{
+	//	App->renderer3D->Draw(*it); <---------- Must change Draw() parameter
+	//}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -176,16 +181,20 @@ GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
 
 GameObject* ModuleSceneIntro::CreateGO(string nameGO)
 {
-	AssignNameToGO(nameGO);
+	nameObj = AssignNameToGO(nameGO);
 
-	GameObject* GO = new GameObject(nameGO);
+	GameObject* GO = new GameObject(nameObj);
 	GO->data.id = gameobjectsList.size();
 	gameobjectsList.push_back(GO);
+
+	LOG_IMGUI_CONSOLE("name GO: %s", nameObj);
 
 	return nullptr;
 }
 
-void ModuleSceneIntro::AssignNameToGO(string name)
+string ModuleSceneIntro::AssignNameToGO(string name)
 {
-	name.append(std::to_string(gameobjectsList.size()));
+	nameObj = name.append(std::to_string(gameobjectsList.size()));
+
+	return nameObj;
 }

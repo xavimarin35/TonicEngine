@@ -27,8 +27,10 @@ public:
 
 	GameObject* CreateShape(SHAPE_TYPE type);
 	GameObject* CreateGO(string nameGO);
-	void AssignNameToGO(string name);
+	string AssignNameToGO(string name);
 	std::vector<GameObject*> gameobjectsList;
+
+	string nameObj;
 	
 };
 

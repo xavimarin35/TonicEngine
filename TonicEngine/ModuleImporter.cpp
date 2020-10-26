@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleGUI.h"
+#include "GameObject.h"
+#include "ModuleSceneIntro.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -51,13 +53,24 @@ void ModuleImporter::Load(const char* Filename)
 {
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
+
+
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
+			// testing GO
+			GameObject* meshGO = App->scene_intro->CreateGO("GameObjectMesh");
+
 			MeshObj* mesh = new MeshObj; 
 			aiMesh* mesh2 = scene->mMeshes[i];
+
+			//---------------------------------------------------------
+			// testing
+			//meshGO->cMesh->num_vertex = mesh2->mNumVertices;
+			//meshGO->cMesh->vertex = new float3[meshGO->cMesh->num_vertex];
+			//---------------------------------------------------------
 
 			mesh->num_vertex = mesh2->mNumVertices;
 			mesh->vertex = new float3[mesh->num_vertex];
