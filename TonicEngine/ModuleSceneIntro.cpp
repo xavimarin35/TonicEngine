@@ -31,11 +31,9 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	uint Texture = App->text_imp->LoadTexture("Assets/Baker_house.png");
+	uint Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
 
 	App->importer->Load("Assets/BakerHouse.fbx");
-	App->importer->meshes.at(0)->texture = Texture;
-	App->importer->meshes.at(1)->texture = Texture;
 
 	return ret;
 }
@@ -103,14 +101,11 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 
 	glColor3ub(255, 255, 255);
 
-	//Draw meshes
-	for (int i = 0; i < App->importer->meshes.size(); ++i)
-		App->renderer3D->DrawObj(App->importer->meshes[i]);
 
-	//for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
-	//{
-	//	App->renderer3D->Draw(*it); <---------- Must change Draw() parameter
-	//}
+	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
+	{
+		App->renderer3D->DrawObj((*it)->GetComponent(COMPONENT_TYPE::MESH));
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -179,17 +174,17 @@ GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
 	return nullptr;
 }
 
-GameObject* ModuleSceneIntro::CreateGO(string nameGO)
+GameObject* ModuleSceneIntro::CreateGO()
 {
-	nameObj = AssignNameToGO(nameGO);
+	std::string n = "GO1";
+	n.append(std::to_string(gameobjectsList.size()));
 
-	GameObject* GO = new GameObject(nameObj);
-	GO->data.id = gameobjectsList.size();
+	GameObject* GO = new GameObject(n.data());
+	GO->oData.id = gameobjectsList.size();
+
 	gameobjectsList.push_back(GO);
 
-	LOG_IMGUI_CONSOLE("name GO: %s", nameObj);
-
-	return nullptr;
+	return GO;
 }
 
 string ModuleSceneIntro::AssignNameToGO(string name)

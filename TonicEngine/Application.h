@@ -39,7 +39,7 @@ public:
 	ModuleGUI* gui = nullptr;
 	ModuleImporter* importer = nullptr;
 	ModuleFileSystem* file_system = nullptr;
-	TextureImporter* text_imp = nullptr;
+	TextureImporter* tex_imp = nullptr;
 
 private: 
 

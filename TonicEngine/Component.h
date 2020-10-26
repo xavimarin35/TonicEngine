@@ -13,6 +13,24 @@ enum class COMPONENT_TYPE
 	TEXTURE
 };
 
+struct meshData {
+	uint id_index = 0;
+	uint num_index = 0;
+	uint* index = nullptr;
+
+	uint id_vertex = 0;
+	uint num_vertex = 0;
+	float3* vertex = nullptr;
+
+	uint id_tex_coords = 0;
+	uint num_tex_coords = 0;
+	float* tex_coords = nullptr;
+
+	bool draw_normals = false;
+
+	uint texture = 0;
+};
+
 class Component
 {
 public:
@@ -31,6 +49,8 @@ public:
 	bool active = true;
 	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
 	GameObject* object;
+
+	meshData mData;
 };
 
 

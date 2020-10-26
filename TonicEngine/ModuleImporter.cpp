@@ -61,31 +61,25 @@ void ModuleImporter::Load(const char* Filename)
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
 			// testing GO
-			GameObject* meshGO = App->scene_intro->CreateGO("GameObjectMesh");
+			GameObject* meshGO = App->scene_intro->CreateGO();
 
-			MeshObj* mesh = new MeshObj; 
+			//MeshObj* mesh = new MeshObj; 
 			aiMesh* mesh2 = scene->mMeshes[i];
 
-			//---------------------------------------------------------
-			// testing
-			//meshGO->cMesh->num_vertex = mesh2->mNumVertices;
-			//meshGO->cMesh->vertex = new float3[meshGO->cMesh->num_vertex];
-			//---------------------------------------------------------
-
-			mesh->num_vertex = mesh2->mNumVertices;
-			mesh->vertex = new float3[mesh->num_vertex];
+			meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_vertex = mesh2->mNumVertices;
+			meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex = new float3[meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_vertex];
 
 			for (uint i = 0; i < mesh2->mNumVertices; ++i)
 			{
-				mesh->vertex[i].x = mesh2->mVertices[i].x;
-				mesh->vertex[i].y = mesh2->mVertices[i].y;
-				mesh->vertex[i].z = mesh2->mVertices[i].z;
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex[i].x = mesh2->mVertices[i].x;
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex[i].y = mesh2->mVertices[i].y;
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
 
 			if (mesh2->HasFaces())
 			{
-				mesh->num_index = mesh2->mNumFaces * 3;
-				mesh->index = new uint[mesh->num_index];
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_index = mesh2->mNumFaces * 3;
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.index = new uint[meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_index];
 
 				for (uint i = 0; i < mesh2->mNumFaces; ++i)
 				{
@@ -94,27 +88,27 @@ void ModuleImporter::Load(const char* Filename)
 						LOG_IMGUI_CONSOLE("ERROR: Geometry face with != 3 indices");
 					}
 					else
-						memcpy(&mesh->index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
+						memcpy(&meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
 				}
 			}
 
 			if (mesh2->HasTextureCoords(0))
 			{
-				mesh->num_text_coords = mesh->num_vertex;
-				mesh->text_coords = new float[mesh->num_text_coords * 2];
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_tex_coords = meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_vertex;
+				meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.tex_coords = new float[meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_tex_coords * 2];
 
-				for (int i = 0; i < mesh->num_text_coords; ++i)
+				for (int i = 0; i < meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_tex_coords; ++i)
 				{
-					mesh->text_coords[i * 2] = mesh2->mTextureCoords[0][i].x;
-					mesh->text_coords[(i * 2) + 1] = mesh2->mTextureCoords[0][i].y;
+					meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.tex_coords[i * 2] = mesh2->mTextureCoords[0][i].x;
+					meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.tex_coords[(i * 2) + 1] = mesh2->mTextureCoords[0][i].y;
 				}
 			}
 
-			App->renderer3D->NewVertexBuffer(mesh->vertex, mesh->num_vertex, mesh->id_vertex);
-			App->renderer3D->NewIndexBuffer(mesh->index, mesh->num_index, mesh->id_index);
-			App->renderer3D->NewTextBuffer(mesh->text_coords, mesh->num_text_coords, mesh->id_text_coords);
+			App->renderer3D->NewVertexBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_vertex, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_vertex);
+			App->renderer3D->NewIndexBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.index, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_index, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_index);
+			App->renderer3D->NewTextBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.tex_coords, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_tex_coords, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_tex_coords);
 
-			meshes.push_back(mesh);
+			//meshes.push_back(mesh);
 
 		}
 

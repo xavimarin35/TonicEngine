@@ -1,17 +1,15 @@
 #include "GameObject.h"
 #include "ModuleGUI.h"
 #include "Component.h"
-#include "ComponentTransform.h"
-#include "ComponentMesh.h"
-#include "ComponentTexture.h"
 
-GameObject::GameObject(string name)
+
+GameObject::GameObject(std::string name)
 {
-	this->data.name = name;
-	this->data.active = true;
-	//ComponentFactory(COMPONENT_TYPE::TRANSFORM, true);
+	this->oData.name = name;
+	this->oData.active = true;
+	ComponentFactory(COMPONENT_TYPE::TRANSFORM, true);
 	ComponentFactory(COMPONENT_TYPE::MESH, true);
-	//ComponentFactory(COMPONENT_TYPE::TEXTURE, true);
+	ComponentFactory(COMPONENT_TYPE::TEXTURE, true);
 }
 
 GameObject::~GameObject()
@@ -38,14 +36,14 @@ void GameObject::CleanUp()
 
 void GameObject::EnableGameObject()
 {
-	if (data.active)
-		data.active = true;
+	if (oData.active)
+		oData.active = true;
 }
 
 void GameObject::DisableGameObject()
 {
-	if (data.active)
-		data.active = false;
+	if (oData.active)
+		oData.active = false;
 }
 
 Component* GameObject::ComponentFactory(COMPONENT_TYPE type, bool active)
@@ -88,17 +86,3 @@ Component* GameObject::GetComponent(const COMPONENT_TYPE& type)
 	return nullptr;
 }
 
-ComponentTexture* GameObject::GetComponentTransform(COMPONENT_TYPE type)
-{
-	return nullptr;
-}
-
-ComponentMesh* GameObject::GetComponentMesh(COMPONENT_TYPE type)
-{
-	return nullptr;
-}
-
-ComponentTexture* GameObject::GetComponentTexture(COMPONENT_TYPE type)
-{
-	return nullptr;
-}

@@ -147,7 +147,7 @@ uint TextureImporter::LoadTexture(const char* path) const
 
 			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 			{
-				//Create TExture
+				//Create Texture
 				id_texture = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
 			}
 			else

@@ -3,10 +3,11 @@
 
 #include "Math.h"
 #include "Light.h"
+#include "GameObject.h"
 
 #define MAX_LIGHTS 8
 
-struct MeshObj;
+//struct MeshObj;
 
 class ModuleRenderer3D : public Module
 {
@@ -24,7 +25,7 @@ public:
 	void NewVertexBuffer(float3* vertex, uint& size, uint& id_vertex);
 	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
-	void DrawObj(const MeshObj* mesh);
+	void DrawObj(const Component* mesh);
 
 	// View Mode
 	void WireframeView(bool active);

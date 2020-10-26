@@ -191,21 +191,21 @@ void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::DrawObj(const MeshObj* mesh)
+void ModuleRenderer3D::DrawObj(const Component* mesh)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertex);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindTexture(GL_TEXTURE_2D, mesh->texture);
+	glBindTexture(GL_TEXTURE_2D, mesh->mData.texture);
 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_text_coords);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->mData.id_tex_coords);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_index);
-	glDrawElements(GL_TRIANGLES, mesh->num_index, GL_UNSIGNED_INT, nullptr);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->mData.id_index);
+	glDrawElements(GL_TRIANGLES, mesh->mData.num_index, GL_UNSIGNED_INT, nullptr);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

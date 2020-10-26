@@ -26,7 +26,7 @@ public:
 	uint id_indices = 2;
 
 	GameObject* CreateShape(SHAPE_TYPE type);
-	GameObject* CreateGO(string nameGO);
+	GameObject* CreateGO();
 	string AssignNameToGO(string name);
 	std::vector<GameObject*> gameobjectsList;
 

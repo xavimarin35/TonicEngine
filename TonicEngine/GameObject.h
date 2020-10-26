@@ -11,6 +11,9 @@ class ComponentTransform;
 class ComponentMesh;
 class ComponentTexture;
 
+struct objData;
+struct meshData;
+
 enum class SHAPE_TYPE {
 	NONE = -1, 
 	CUBE
@@ -25,7 +28,7 @@ struct objData {
 class GameObject
 {
 public:
-	GameObject(string name);
+	GameObject(std::string name);
 	virtual ~GameObject();
 
 	void Update();
@@ -37,18 +40,14 @@ public:
 	Component* ComponentFactory(COMPONENT_TYPE type, bool active = true);
 	Component* GetComponent(const COMPONENT_TYPE& type);
 
-	ComponentTexture* GetComponentTransform(COMPONENT_TYPE type);
-	ComponentMesh* GetComponentMesh(COMPONENT_TYPE type);
-	ComponentTexture* GetComponentTexture(COMPONENT_TYPE type);
-
 public:
-	objData data;
+	objData oData;
 
 	std::vector<Component*> componentsList;
 
-	ComponentTransform* cTransform = nullptr;
-	ComponentMesh* cMesh = nullptr;
-	ComponentTexture* cTexture = nullptr;
+	Component* cTransform = nullptr;
+	Component* cMesh = nullptr;
+	Component* cTexture = nullptr;
 
 };
 
