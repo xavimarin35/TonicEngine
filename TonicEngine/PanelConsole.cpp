@@ -73,9 +73,9 @@ bool PanelConsole::Draw()
 			}
 			ImGui::PopStyleVar();
 
-			ImGui::Separator();
-
 			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
+
+			ImGui::Separator();
 			
 			for (list<char*>::iterator item = consoleLogs.begin(); item != consoleLogs.end(); ++item)
 			{

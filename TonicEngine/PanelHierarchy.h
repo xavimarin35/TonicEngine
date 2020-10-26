@@ -14,8 +14,6 @@ public:
 	bool Draw();
 
 private:
-	int		w_width = 0;
-	int		w_height = 0;
 };
 
 #endif

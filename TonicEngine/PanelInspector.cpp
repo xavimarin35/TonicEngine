@@ -30,22 +30,31 @@ bool PanelInspector::Draw()
 	{
 		if (ImGui::Begin("Inspector", &active))
 		{
-			if (ImGui::CollapsingHeader("Transform"))
+			if (App->scene_intro->GOselected != nullptr)
 			{
+				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
 
+				ImGui::Checkbox("Active", &App->scene_intro->GOselected->oData.active); ImGui::SameLine();
+				ImGui::InputText("Name", (char*)App->scene_intro->GOselected->oData.GOname.c_str(), 25, flags);
+
+				if (App->scene_intro->GOselected->oData.active)
+				{
+					if (ImGui::CollapsingHeader("Transform"))
+					{
+
+					}
+
+					if (ImGui::CollapsingHeader("Mesh"))
+					{
+
+					}
+
+					if (ImGui::CollapsingHeader("Texture"))
+					{
+
+					}
+				}
 			}
-			
-			if (ImGui::CollapsingHeader("Mesh"))
-			{
-
-			}
-
-			if (ImGui::CollapsingHeader("Texture"))
-			{
-
-			}
-
-			
 		}
 
 		ImGui::End();

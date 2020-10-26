@@ -111,6 +111,7 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 
 	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
 	{
+		if((*it)->oData.active)
 		App->renderer3D->DrawObj((*it)->GetComponent(COMPONENT_TYPE::MESH));
 	}
 
