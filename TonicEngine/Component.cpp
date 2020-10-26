@@ -25,6 +25,11 @@ void Component::Draw()
 {
 }
 
+COMPONENT_TYPE Component::GetComponentType() const
+{
+	return type;
+}
+
 void Component::EnableComponent()
 {
 	if (active)

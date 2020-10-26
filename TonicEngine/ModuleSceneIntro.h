@@ -1,8 +1,9 @@
 #ifndef __ModuleSceneIntro__
 #define __ModuleSceneIntro__
 
-#include "Application.h"
+#include "Globals.h"
 #include "Primitive.h"
+#include "GameObject.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -24,6 +25,11 @@ public:
 	uint id_no_dup_vertices = 1;
 	uint id_indices = 2;
 
+	GameObject* CreateShape(SHAPE_TYPE type);
+	GameObject* CreateGO(string nameGO);
+	void AssignNameToGO(string name);
+	std::vector<GameObject*> gameobjectsList;
+	
 };
 
 

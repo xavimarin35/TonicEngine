@@ -7,6 +7,7 @@
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
 #include "Math.h"
+#include "Component.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -166,4 +167,25 @@ void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glDisableClientState(GL_VERTEX_ARRAY);
 
+}
+
+GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
+{
+	return nullptr;
+}
+
+GameObject* ModuleSceneIntro::CreateGO(string nameGO)
+{
+	AssignNameToGO(nameGO);
+
+	GameObject* GO = new GameObject(nameGO);
+	GO->data.id = gameobjectsList.size();
+	gameobjectsList.push_back(GO);
+
+	return nullptr;
+}
+
+void ModuleSceneIntro::AssignNameToGO(string name)
+{
+	name.append(std::to_string(gameobjectsList.size()));
 }
