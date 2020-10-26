@@ -109,7 +109,6 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 
 	glColor3ub(255, 255, 255);
 
-
 	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
 	{
 		App->renderer3D->DrawObj((*it)->GetComponent(COMPONENT_TYPE::MESH));
@@ -150,13 +149,6 @@ void ModuleSceneIntro::DestroySelectedGO(GameObject* GO)
 	}
 
 	delete GO;
-}
-
-string ModuleSceneIntro::AssignNameToGO(string name)
-{
-	nameObj = name.append(std::to_string(gameobjectsList.size()));
-
-	return nameObj;
 }
 
 void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)

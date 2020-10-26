@@ -50,6 +50,9 @@ public:
 	Component* cMesh = nullptr;
 	Component* cTexture = nullptr;
 
+	void AssignNameToGO(const char* name);
+	string nameGO;
+
 };
 
 

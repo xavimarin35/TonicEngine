@@ -26,12 +26,10 @@ public:
 	GameObject* CreateShape(SHAPE_TYPE type);
 	GameObject* CreateGO();
 	void DestroySelectedGO(GameObject* GO);
-	string AssignNameToGO(string name);
 	std::vector<GameObject*> gameobjectsList;
 
 	GameObject* GOselected = nullptr;
-
-	string nameObj;
+	uint GOselectedID = 0;
 	
 };
 

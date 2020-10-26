@@ -93,3 +93,8 @@ Component* GameObject::GetComponent(const COMPONENT_TYPE& type)
 	return nullptr;
 }
 
+void GameObject::AssignNameToGO(const char* name)
+{
+	this->nameGO = name;
+}
+
