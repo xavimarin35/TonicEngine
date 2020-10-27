@@ -7,6 +7,10 @@
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
+#include "Math.h"
+
+#include "MathGeoLib/include/MathBuildConfig.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -190,33 +194,66 @@ void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::DrawTexture(Component* t)
+void ModuleRenderer3D::DrawTexture(GameObject* t)
 {
-	//if (texture = house)
-	glBindTexture(GL_TEXTURE_2D, App->tex_imp->CheckersTexture.id);
-	//else if (texture = checkers)
-	//glBindTexture(GL_TEXTURE_2D, t->mData.textureCheckers);
-
-	glBindBuffer(GL_ARRAY_BUFFER, t->mData.id_tex_coords);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	if (t->GetComponentTexture()->EnableCheckersTexture)
+		glBindTexture(GL_TEXTURE_2D, App->tex_imp->CheckersTexture.id);
+	else
+		glBindTexture(GL_TEXTURE_2D, t->GetComponentTexture()->tData.id);
 }
 
-void ModuleRenderer3D::DrawMesh(Component* m)
+void ModuleRenderer3D::DrawMesh(GameObject* m)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m->mData.id_vertex);
+	glBindBuffer(GL_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->mData.id_index);
-	glDrawElements(GL_TRIANGLES, m->mData.num_index, GL_UNSIGNED_INT, nullptr);
+	glBindBuffer(GL_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_tex_coords);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_index);
+	glDrawElements(GL_TRIANGLES, m->GetComponentMesh()->mData.num_index, GL_UNSIGNED_INT, nullptr);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
+
+
+	if (m->GetComponentMesh()->showFaceNormals)
+	{
+		/*glBegin(GL_LINES);
+		glColor3f(1, 0, 1);*/
+
+		//float3 mid;
+		//float3 normal;
+		//
+		//for (int j = 0; j < m->GetComponentMesh()->mData.num_index; j += 3)
+		//{
+		//	// Declaring each vertex of the triangle
+		//	float3 vert1 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j]];
+		//	float3 vert2 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j + 1]];
+		//	float3 vert3 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j + 2]];
+
+		//	mid = (vert1 + vert2 + vert3) / 3;
+
+		//	// Get normal vector with cross product
+		//	float3 edge_a = vert2 - vert1;
+		//	float3 edge_b = vert3 - vert1;
+
+		//	float3 normal = Cross(edge_a, edge_b);
+		//	normal.Normalize();
+
+		//	glVertex3f(mid.x, mid.y, mid.z);
+		//	glVertex3f(mid.x + normal.x, mid.y + normal.y, mid.z + normal.z);
+		//}
+
+		//glColor3f(1, 1, 1);
+		//glEnd();
+	}
 }
 
 // View Modes

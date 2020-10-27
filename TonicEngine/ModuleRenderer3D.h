@@ -1,6 +1,7 @@
 #ifndef __ModuleRenderer3D__
 #define __ModuleRenderer3D__
 
+#include "Application.h"
 #include "Math.h"
 #include "Light.h"
 #include "GameObject.h"
@@ -26,8 +27,8 @@ public:
 	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
 
-	void DrawMesh(Component* m);
-	void DrawTexture(Component* t);
+	void DrawMesh(GameObject* m);
+	void DrawTexture(GameObject* t);
 
 	// View Mode
 	void WireframeView(bool active);

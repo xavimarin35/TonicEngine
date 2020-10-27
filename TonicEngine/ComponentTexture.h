@@ -21,7 +21,7 @@ public:
 	bool EnableCheckersTexture;
 	bool EnableHouseTexture;
 
-	texData texture;
+	texData tData;
 };
 
 #endif

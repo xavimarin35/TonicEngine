@@ -34,7 +34,7 @@ public:
 	texData LoadTexture(const char* path) const;
 
 	uint id_checkers = 0;
-	texData tData;
+	//texData tData;
 
 	// Textures
 	texData CheckersTexture;

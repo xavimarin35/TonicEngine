@@ -291,7 +291,7 @@
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Meshmporter.cpp">
+    <ClCompile Include="MeshImporter.cpp">
       <Filter>Sources\Meshes</Filter>
     </ClCompile>
   </ItemGroup>

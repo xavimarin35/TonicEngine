@@ -132,7 +132,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					for (int i = 0; i < App->scene_intro->gameobjectsList.size(); i++)
 					{
-						App->scene_intro->gameobjectsList[i]->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dropDirection);
+						App->scene_intro->gameobjectsList[i]->GetComponentTexture()->tData = App->tex_imp->LoadTexture(dropDirection);
 					}
 										
 					LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);

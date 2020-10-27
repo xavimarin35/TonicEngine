@@ -36,8 +36,8 @@ bool ModuleSceneIntro::Start()
 
 	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
 
-	gameobjectsList.at(0)->GetComponentTexture()->texture = Texture;
-	gameobjectsList.at(1)->GetComponentTexture()->texture = Texture;
+	gameobjectsList.at(0)->GetComponentTexture()->tData = Texture;
+	gameobjectsList.at(1)->GetComponentTexture()->tData = Texture;
 
 	return ret;
 }
@@ -74,8 +74,8 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	{
 		if ((*it)->oData.active)
 		{
-			App->renderer3D->DrawMesh((*it)->GetComponent(COMPONENT_TYPE::MESH));
-			App->renderer3D->DrawTexture((*it)->GetComponent(COMPONENT_TYPE::TEXTURE));
+			App->renderer3D->DrawMesh((*it));
+			App->renderer3D->DrawTexture((*it));
 		}
 	}
 
