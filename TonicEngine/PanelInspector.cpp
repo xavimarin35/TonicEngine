@@ -2,6 +2,8 @@
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
 #include "ModuleSceneIntro.h"
+#include "Component.h"
+#include "GameObject.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -39,19 +41,14 @@ bool PanelInspector::Draw()
 
 				if (App->scene_intro->GOselected->oData.active)
 				{
-					if (ImGui::CollapsingHeader("Transform"))
+					
+					for (std::vector<Component*>::iterator it = App->scene_intro->GOselected->componentsList.begin(); it != App->scene_intro->GOselected->componentsList.end(); ++it)
 					{
+						if (*it != nullptr)
+						{
+							(*it)->Draw();
 
-					}
-
-					if (ImGui::CollapsingHeader("Mesh"))
-					{
-
-					}
-
-					if (ImGui::CollapsingHeader("Texture"))
-					{
-
+						}
 					}
 				}
 			}

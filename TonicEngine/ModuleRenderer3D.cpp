@@ -209,14 +209,6 @@ void ModuleRenderer3D::DrawMesh(Component* m)
 	glBindBuffer(GL_ARRAY_BUFFER, m->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	//if (texture = house)
-	glBindTexture(GL_TEXTURE_2D, App->tex_imp->CheckersTexture.id);
-	//else if (texture = checkers)
-	//glBindTexture(GL_TEXTURE_2D, t->mData.textureCheckers);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m->mData.id_tex_coords);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->mData.id_index);
 	glDrawElements(GL_TRIANGLES, m->mData.num_index, GL_UNSIGNED_INT, nullptr);
 
