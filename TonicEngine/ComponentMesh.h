@@ -15,10 +15,12 @@ public:
 	virtual ~ComponentMesh();
 
 	void Draw();
-	void DrawFaceNormals();
-	void DrawVertexNormals();
+	void DrawFaceNormals(GameObject* comp);
+	void DrawVertexNormals(Component* comp);
 
 public:
+
+	bool showFaceNormals = false;
 	
 	/*meshData data;*/
 

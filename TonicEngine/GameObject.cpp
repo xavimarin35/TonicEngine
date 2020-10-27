@@ -6,9 +6,9 @@ GameObject::GameObject(std::string name)
 {
 	this->oData.GOname = name;
 	this->oData.active = true;
-	ComponentFactory(COMPONENT_TYPE::TRANSFORM, true);
-	ComponentFactory(COMPONENT_TYPE::MESH, true);
-	ComponentFactory(COMPONENT_TYPE::TEXTURE, true);
+	CreateComponent(COMPONENT_TYPE::TRANSFORM, true);
+	CreateComponent(COMPONENT_TYPE::MESH, true);
+	CreateComponent(COMPONENT_TYPE::TEXTURE, true);
 }
 
 GameObject::~GameObject()
@@ -53,7 +53,7 @@ void GameObject::DisableGameObject()
 		oData.active = false;
 }
 
-Component* GameObject::ComponentFactory(COMPONENT_TYPE type, bool active)
+Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 {
 	Component* component = nullptr;
 

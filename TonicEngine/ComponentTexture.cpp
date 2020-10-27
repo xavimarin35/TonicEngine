@@ -3,6 +3,7 @@
 
 ComponentTexture::ComponentTexture(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::TEXTURE, gameObject)
 {
+	type = COMPONENT_TYPE::TEXTURE;
 }
 
 ComponentTexture::~ComponentTexture()

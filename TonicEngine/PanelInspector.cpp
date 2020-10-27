@@ -36,18 +36,20 @@ bool PanelInspector::Draw()
 			{
 				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
 
+				ImGui::Spacing();
+
 				ImGui::Checkbox("Active", &App->scene_intro->GOselected->oData.active); ImGui::SameLine();
 				ImGui::InputText("Name", (char*)App->scene_intro->GOselected->oData.GOname.c_str(), 25, flags);
 
+				ImGui::Spacing();
+
 				if (App->scene_intro->GOselected->oData.active)
 				{
-					
 					for (std::vector<Component*>::iterator it = App->scene_intro->GOselected->componentsList.begin(); it != App->scene_intro->GOselected->componentsList.end(); ++it)
 					{
 						if (*it != nullptr)
 						{
 							(*it)->Draw();
-
 						}
 					}
 				}
