@@ -20,7 +20,7 @@ public:
 
 	bool CleanUp();
 
-	void Load(const char* Filename);
+	void LoadMesh(const char* Filename);
 
 
 public:

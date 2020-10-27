@@ -12,9 +12,6 @@
 #pragma comment ( lib, "DevIL/libx86/ILU.lib" )
 #pragma comment ( lib, "DevIL/libx86/ILUT.lib" )
 
-#define CHECKERS_WIDTH 128
-#define CHECKERS_HEIGHT 128
-
 TextureImporter::TextureImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { }
 TextureImporter::~TextureImporter() { }
 
@@ -44,7 +41,8 @@ bool TextureImporter::Init()
 
 bool TextureImporter::Start()
 {
-	id_checkers = CreateCheckersText(CHECKERS_WIDTH, CHECKERS_HEIGHT);
+	CheckersTexture = CreateCheckersTexture();
+	AssignedTexture = CreateEmptyTexture();
 
 	return true;
 }
@@ -61,7 +59,7 @@ bool TextureImporter::CleanUp()
 	return true;
 }
 
-uint TextureImporter::CreateCheckersText(uint width, uint height) const
+texData TextureImporter::CreateCheckersTexture() const
 {
 	GLubyte checkImage[CHECKERS_WIDTH][CHECKERS_HEIGHT][4];
 
@@ -78,11 +76,11 @@ uint TextureImporter::CreateCheckersText(uint width, uint height) const
 		}
 	}
 
-	GLuint texture = 0;
+	texData texture;
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glGenTextures(1, &texture.id);
+	glBindTexture(GL_TEXTURE_2D, texture.id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -92,6 +90,17 @@ uint TextureImporter::CreateCheckersText(uint width, uint height) const
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return texture;
+}
+
+texData TextureImporter::CreateEmptyTexture()
+{
+	texData texture;
+	texture.id = 0;
+	texture.width = 0;
+	texture.height = 0;
+	texture.path = "none";
 
 	return texture;
 }
@@ -127,9 +136,9 @@ uint TextureImporter::CreateTexture(const void* text, uint width, uint height, i
 	return id_texture;
 }
 
-uint TextureImporter::LoadTexture(const char* path) const
+texData TextureImporter::LoadTexture(const char* path) const
 {
-	uint id_texture = 0;
+	texData id_texture;
 	uint id_img = 0;
 
 	if (path != nullptr)
@@ -148,7 +157,7 @@ uint TextureImporter::LoadTexture(const char* path) const
 			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 			{
 				//Create Texture
-				id_texture = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+				id_texture.id = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
 			}
 			else
 				LOG_IMGUI_CONSOLE("ERROR: Failed converting image: %s", path);

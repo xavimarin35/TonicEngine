@@ -31,9 +31,9 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	uint Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
+	texData Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
 
-	App->mesh_imp->Load("Assets/BakerHouse.fbx");
+	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
 
 	return ret;
 }
@@ -58,8 +58,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	{
 		gameobjectsList[i]->Update();
 	}
-		
-
+	
 	return UPDATE_CONTINUE;
 }
 

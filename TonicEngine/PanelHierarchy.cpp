@@ -26,19 +26,25 @@ bool PanelHierarchy::Draw()
 	if (!App->gui->Phierarchy->active)
 		return false;
 
-	uint clickedGO = 0;
-
 	if (App->gui->Phierarchy->active)
 	{
+
 		if (ImGui::Begin("Hierarchy", &active, ImGuiWindowFlags_NoFocusOnAppearing))
 		{
+			
+
 			for (uint i = 0; i < App->scene_intro->gameobjectsList.size(); ++i)
 			{
 				if (ImGui::Selectable(App->scene_intro->gameobjectsList.at(i)->oData.GOname.data(), App->scene_intro->gameobjectsList.at(i)->oData.GOid == i))
 				{
-					App->scene_intro->GOselected = App->scene_intro->gameobjectsList.at(i);
-					App->scene_intro->GOselected->oData.GOid = i;
-					
+					if (ImGui::IsItemActive) 
+					{
+						App->scene_intro->GOselected = App->scene_intro->gameobjectsList.at(i);
+						// ------------------
+						App->scene_intro->GOselected->oData.GOid = i; 
+						selectedGO = App->scene_intro->gameobjectsList.at(i)->oData.GOid;
+					}
+
 					switch (i) 
 					{
 						case 0:
@@ -48,11 +54,8 @@ bool PanelHierarchy::Draw()
 							LOG_IMGUI_CONSOLE("Selected GameObject i = %i", i);
 							break;
 					}
-
 				}
-
-			}
-
+			}	
 			
 		}
 

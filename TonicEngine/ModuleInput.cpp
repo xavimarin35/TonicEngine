@@ -126,7 +126,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					LOG_IMGUI_CONSOLE("New file dropped on window!");
 
-					App->mesh_imp->Load(dropDirection);
+					App->mesh_imp->LoadMesh(dropDirection);
 
 					SDL_free(dropDirection);
 				}

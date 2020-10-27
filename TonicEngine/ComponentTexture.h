@@ -7,6 +7,7 @@
 
 class GameObject;
 
+
 class ComponentTexture : public Component
 {
 public:
@@ -16,7 +17,11 @@ public:
 	void Draw();
 
 public:
-	string texPath;
+	
+	bool EnableCheckersTexture;
+	bool EnableHouseTexture;
+
+	texData texture;
 };
 
 #endif

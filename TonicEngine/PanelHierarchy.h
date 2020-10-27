@@ -13,6 +13,8 @@ public:
 	bool Start();
 	bool Draw();
 
+	uint selectedGO = 0;
+
 private:
 };
 

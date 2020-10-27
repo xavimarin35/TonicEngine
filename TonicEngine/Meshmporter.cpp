@@ -49,7 +49,7 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-void MeshImporter::Load(const char* Filename)
+void MeshImporter::LoadMesh(const char* Filename)
 {
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -107,8 +107,6 @@ void MeshImporter::Load(const char* Filename)
 			App->renderer3D->NewVertexBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.vertex, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_vertex, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_vertex);
 			App->renderer3D->NewIndexBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.index, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_index, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_index);
 			App->renderer3D->NewTextBuffer(meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.tex_coords, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.num_tex_coords, meshGO->GetComponent(COMPONENT_TYPE::MESH)->mData.id_tex_coords);
-
-			//meshes.push_back(mesh);
 
 		}
 
