@@ -12,8 +12,13 @@ public:
 
 	bool Start();
 	bool Draw();
+	void DrawMenuHovering();
+	void DrawMenuNotHovering();
 
-	uint selectedGO = 0;
+	bool openMenuHovering = false;
+	bool openMenuNotHovering = false;
+
+	int clickedGO = -1;
 
 private:
 };

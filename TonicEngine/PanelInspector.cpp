@@ -39,7 +39,7 @@ bool PanelInspector::Draw()
 				ImGui::Spacing();
 
 				ImGui::Checkbox("Active", &App->scene_intro->GOselected->oData.active); ImGui::SameLine();
-				ImGui::InputText("Name", (char*)App->scene_intro->GOselected->oData.GOname.c_str(), 25, flags);
+				ImGui::InputText(" ", (char*)App->scene_intro->GOselected->oData.GOname.c_str(), 25, flags);
 
 				ImGui::Spacing();
 

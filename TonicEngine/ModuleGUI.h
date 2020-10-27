@@ -46,6 +46,7 @@ public:
 
 	void EnableInput(SDL_Event* event);
 	void PushBackPanels();
+	void ApplyDocking(bool* window);
 
 	// Console
 	void LogConsole(char* text, ...);
@@ -67,6 +68,7 @@ private:
 
 	ImGuiIO* io = nullptr;
 	ImGuiIO* docking_io = nullptr;
+	bool* windowDocking;
 	bool p_open = true;
 
 	bool show_demo_window = false;
