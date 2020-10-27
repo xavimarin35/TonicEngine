@@ -17,6 +17,7 @@ public:
 	bool CleanUp();
 
 	void DrawCube_36v(float x, float y, float z, float size);
+	void DrawGridAndAxis();
 
 	// DRAW CUBE INFO
 	uint id_vertices = 0;

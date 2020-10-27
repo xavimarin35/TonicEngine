@@ -153,7 +153,6 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-
 void ModuleRenderer3D::OnResize(int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -191,21 +190,27 @@ void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::DrawObj(const Component* mesh)
+void ModuleRenderer3D::DrawTexture(Component* t)
+{
+	//if (texture = house)
+	glBindTexture(GL_TEXTURE_2D, t->mData.texture);
+	//else if (texture = checkers)
+	//glBindTexture(GL_TEXTURE_2D, t->mData.textureCheckers);
+
+	glBindBuffer(GL_ARRAY_BUFFER, t->mData.id_tex_coords);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+}
+
+void ModuleRenderer3D::DrawMesh(Component* m)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->mData.id_vertex);
+	glBindBuffer(GL_ARRAY_BUFFER, m->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindTexture(GL_TEXTURE_2D, mesh->mData.texture);
-
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->mData.id_tex_coords);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->mData.id_index);
-	glDrawElements(GL_TRIANGLES, mesh->mData.num_index, GL_UNSIGNED_INT, nullptr);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->mData.id_index);
+	glDrawElements(GL_TRIANGLES, m->mData.num_index, GL_UNSIGNED_INT, nullptr);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
