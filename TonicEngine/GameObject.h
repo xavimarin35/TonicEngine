@@ -41,6 +41,10 @@ public:
 	Component* ComponentFactory(COMPONENT_TYPE type, bool active = true);
 	Component* GetComponent(const COMPONENT_TYPE& type);
 
+	ComponentTransform* GetComponentTransform();
+	ComponentMesh* GetComponentMesh();
+	ComponentTexture* GetComponentTexture();
+
 public:
 	objData oData;
 

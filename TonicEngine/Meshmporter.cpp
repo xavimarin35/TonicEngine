@@ -53,14 +53,11 @@ void MeshImporter::LoadMesh(const char* Filename)
 {
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
-
-
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
-
 			GameObject* meshGO = App->scene_intro->CreateGO("GameObject_");
 
 			//MeshObj* mesh = new MeshObj; 

@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleGUI.h"
+#include "ModuleSceneIntro.h"
 
 #define MAX_KEYS 300
 
@@ -120,16 +121,26 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 			{
-				char* dropDirection = e.drop.file;
+				dropDirection = e.drop.file;
 
-				if (dropDirection != nullptr)
+				if (GetFileExtension(dropDirection) == "FBX" || GetFileExtension(dropDirection) == "fbx")
 				{
-					LOG_IMGUI_CONSOLE("New file dropped on window!");
-
 					App->mesh_imp->LoadMesh(dropDirection);
-
-					SDL_free(dropDirection);
+					LOG_IMGUI_CONSOLE("New file dropped on window with path: %s", dropDirection);
 				}
+				else if (GetFileExtension(dropDirection) == "png")
+				{
+					for (int i = 0; i < App->scene_intro->gameobjectsList.size(); i++)
+					{
+						App->scene_intro->gameobjectsList[i]->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dropDirection);
+					}
+										
+					LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);
+				}
+				else
+					LOG_IMGUI_CONSOLE("ERROR: File dropped extension not supported! Try '.fbx' or '.png'");
+
+				SDL_free((char*)dropDirection);
 				break;
 			}
 		}
@@ -147,4 +158,12 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+const std::string ModuleInput::GetFileExtension(const std::string FileName)
+{
+	if (FileName.find_last_of(".") != std::string::npos)
+		return (FileName.substr(FileName.find_last_of(".") + 1));
+	else
+		return "";
 }

@@ -8,6 +8,7 @@
 #include "ModuleCamera3D.h"
 #include "Math.h"
 #include "Component.h"
+#include "ComponentTexture.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -34,6 +35,9 @@ bool ModuleSceneIntro::Start()
 	texData Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
 
 	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
+
+	gameobjectsList.at(0)->GetComponentTexture()->texture = Texture;
+	gameobjectsList.at(1)->GetComponentTexture()->texture = Texture;
 
 	return ret;
 }

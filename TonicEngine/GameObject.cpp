@@ -93,6 +93,45 @@ Component* GameObject::GetComponent(const COMPONENT_TYPE& type)
 	return nullptr;
 }
 
+ComponentTransform* GameObject::GetComponentTransform()
+{
+	Component* transform = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::TRANSFORM)
+		{
+			return (ComponentTransform*)*i;
+		}
+	}
+	return (ComponentTransform*)transform;
+}
+
+ComponentMesh* GameObject::GetComponentMesh()
+{
+	Component* mesh = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::MESH)
+		{
+			return (ComponentMesh*)*i;
+		}
+	}
+	return (ComponentMesh*)mesh;
+}
+
+ComponentTexture* GameObject::GetComponentTexture()
+{
+	Component* texture = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::TEXTURE)
+		{
+			return (ComponentTexture*)*i;
+		}
+	}
+	return (ComponentTexture*)texture;
+}
+
 void GameObject::AssignNameToGO(const char* name)
 {
 	this->oData.GOname = name;
