@@ -54,8 +54,8 @@ Clock impl;
 
 void Clock::InitClockData()
 {
-	if (appStartTime == 0)
-		appStartTime = Tick();
+	/*if (appStartTime == 0)
+		appStartTime = Tick();*/
 
 #ifdef WIN32
 	if (!QueryPerformanceFrequency(&ddwTimerFrequency))
@@ -104,13 +104,13 @@ void Clock::Sleep(int milliseconds)
 #elif defined(WIN32)
 	::Sleep(milliseconds);
 #elif !defined(__native_client__) && !defined(EMSCRIPTEN)
-	// http://linux.die.net/man/2/nanosleep
-	timespec ts;
-	ts.tv_sec = milliseconds / 1000;
-	ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
-	int ret = nanosleep(&ts, NULL);
-	if (ret == -1)
-		LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
+	//// http://linux.die.net/man/2/nanosleep
+	//timespec ts;
+	//ts.tv_sec = milliseconds / 1000;
+	//ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
+	//int ret = nanosleep(&ts, NULL);
+	//if (ret == -1)
+	//	LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
 #else
 #warning Clock::Sleep has not been implemented!
 #endif
@@ -188,118 +188,118 @@ int Clock::Sec()
 #endif
 }
 
-unsigned long Clock::SystemTime()
-{
-#ifdef WIN32
-#if WINVER >= 0x0600 /* Vista or newer */ && !defined(MATH_ENABLE_WINXP_SUPPORT)
-	return (unsigned long)GetTickCount64();
-#else
-// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
-#if _MSC_VER >= 1700 // VS2012
-#pragma warning(push)
-#pragma warning(disable:28159) // warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
-#endif
-	return (unsigned long)GetTickCount();
-#if _MSC_VER >= 1700 // VS2012
-#pragma warning(pop)
-#endif
-
-#endif
-#else
-	return TickU32();
-#endif
-}
+//unsigned long Clock::SystemTime()
+//{
+//#ifdef WIN32
+//#if WINVER >= 0x0600 /* Vista or newer */ && !defined(MATH_ENABLE_WINXP_SUPPORT)
+//	return (unsigned long)GetTickCount64();
+//#else
+//// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
+//#if _MSC_VER >= 1700 // VS2012
+//#pragma warning(push)
+//#pragma warning(disable:28159) // warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
+//#endif
+//	return (unsigned long)GetTickCount();
+//#if _MSC_VER >= 1700 // VS2012
+//#pragma warning(pop)
+//#endif
+//
+//#endif
+//#else
+//	return TickU32();
+//#endif
+//}
 /*
 tick_t Clock::ApplicationStartupTick()
 {
 	return appStartTime;
 }
 */
-unsigned long Clock::Time()
-{
-	return (unsigned long)(Tick() - appStartTime);
-}
+//unsigned long Clock::Time()
+//{
+//	return (unsigned long)(Tick() - appStartTime);
+//}
 
-tick_t Clock::Tick()
-{
-#if defined(ANDROID)
-	struct timespec res;
-	clock_gettime(CLOCK_REALTIME, &res);
-	return 1000000000ULL*res.tv_sec + (tick_t)res.tv_nsec;
-#elif defined(EMSCRIPTEN)
-	// emscripten_get_now() returns a wallclock time as a float in milliseconds (1e-3).
-	// scale it to microseconds (1e-6) and return as a tick.
-	return (tick_t)(((double)emscripten_get_now()) * 1e3);
+//tick_t Clock::Tick()
+//{
+//#if defined(ANDROID)
+//	struct timespec res;
+//	clock_gettime(CLOCK_REALTIME, &res);
+//	return 1000000000ULL*res.tv_sec + (tick_t)res.tv_nsec;
+//#elif defined(EMSCRIPTEN)
+//	// emscripten_get_now() returns a wallclock time as a float in milliseconds (1e-3).
+//	// scale it to microseconds (1e-6) and return as a tick.
+//	return (tick_t)(((double)emscripten_get_now()) * 1e3);
+////	return (tick_t)clock();
+//#elif defined(WIN32)
+//	LARGE_INTEGER ddwTimer;
+//	BOOL success = QueryPerformanceCounter(&ddwTimer);
+//	assume(success != 0);
+//	MARK_UNUSED(success);
+//	return ddwTimer.QuadPart;
+//#elif defined(__APPLE__)
+//	return mach_absolute_time();
+//#elif defined(_POSIX_MONOTONIC_CLOCK)
+//	timespec t;
+//	clock_gettime(CLOCK_MONOTONIC, &t);
+//	return (tick_t)t.tv_sec * 1000 * 1000 * 1000 + (tick_t)t.tv_nsec;
+//#elif defined(_POSIX_C_SOURCE)
+//	timeval t;
+//	gettimeofday(&t, NULL);
+//	return (tick_t)t.tv_sec * 1000 * 1000 + (tick_t)t.tv_usec;
+//#else
 //	return (tick_t)clock();
-#elif defined(WIN32)
-	LARGE_INTEGER ddwTimer;
-	BOOL success = QueryPerformanceCounter(&ddwTimer);
-	assume(success != 0);
-	MARK_UNUSED(success);
-	return ddwTimer.QuadPart;
-#elif defined(__APPLE__)
-	return mach_absolute_time();
-#elif defined(_POSIX_MONOTONIC_CLOCK)
-	timespec t;
-	clock_gettime(CLOCK_MONOTONIC, &t);
-	return (tick_t)t.tv_sec * 1000 * 1000 * 1000 + (tick_t)t.tv_nsec;
-#elif defined(_POSIX_C_SOURCE)
-	timeval t;
-	gettimeofday(&t, NULL);
-	return (tick_t)t.tv_sec * 1000 * 1000 + (tick_t)t.tv_usec;
-#else
-	return (tick_t)clock();
-#endif
-}
+//#endif
+//}
 
-unsigned long Clock::TickU32()
-{
-#ifdef WIN32
-	LARGE_INTEGER ddwTimer;
-	BOOL success = QueryPerformanceCounter(&ddwTimer);
-	assume(success != 0);
-	MARK_UNUSED(success);
-	return ddwTimer.LowPart;
-#else
-	return (unsigned long)Tick();
-#endif
-}
+//unsigned long Clock::TickU32()
+//{
+//#ifdef WIN32
+//	LARGE_INTEGER ddwTimer;
+//	BOOL success = QueryPerformanceCounter(&ddwTimer);
+//	assume(success != 0);
+//	MARK_UNUSED(success);
+//	return ddwTimer.LowPart;
+//#else
+//	return (unsigned long)Tick();
+//#endif
+//}
 
-tick_t Clock::TicksPerSec()
-{
-#if defined(ANDROID)
-	return 1000000000ULL; // 1e9 == nanoseconds.
-#elif defined(EMSCRIPTEN)
-	return 1000000ULL; // 1e6 == microseconds.
+//tick_t Clock::TicksPerSec()
+//{
+//#if defined(ANDROID)
+//	return 1000000000ULL; // 1e9 == nanoseconds.
+//#elif defined(EMSCRIPTEN)
+//	return 1000000ULL; // 1e6 == microseconds.
+////	return CLOCKS_PER_SEC;
+//#elif defined(WIN32)
+//	return ddwTimerFrequency.QuadPart;
+//#elif defined(__APPLE__)
+//	return ticksPerSecond;
+//#elif defined(_POSIX_MONOTONIC_CLOCK)
+//	return 1000 * 1000 * 1000;
+//#elif defined(_POSIX_C_SOURCE) || defined(__APPLE__)
+//	return 1000 * 1000;
+//#else
 //	return CLOCKS_PER_SEC;
-#elif defined(WIN32)
-	return ddwTimerFrequency.QuadPart;
-#elif defined(__APPLE__)
-	return ticksPerSecond;
-#elif defined(_POSIX_MONOTONIC_CLOCK)
-	return 1000 * 1000 * 1000;
-#elif defined(_POSIX_C_SOURCE) || defined(__APPLE__)
-	return 1000 * 1000;
-#else
-	return CLOCKS_PER_SEC;
-#endif
-}
+//#endif
+//}
 
-unsigned long long Clock::Rdtsc()
-{
-#if defined(_MSC_VER) && !defined(WIN8PHONE)
-	return __rdtsc();
-#elif defined(__x86_64__)
-	unsigned hi, lo;
-	__asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
-	return ((unsigned long long)lo) | (((unsigned long long)hi) << 32);
-#elif defined(__i386__) || defined(__X86__) || defined(_X86_)
-	unsigned long long int x;
-	__asm__ volatile ("rdtsc" : "=A" (x));
-	return x;
-#else
-	return Clock::Tick();
-#endif
-}
+//unsigned long long Clock::Rdtsc()
+//{
+//#if defined(_MSC_VER) && !defined(WIN8PHONE)
+//	return __rdtsc();
+//#elif defined(__x86_64__)
+//	unsigned hi, lo;
+//	__asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
+//	return ((unsigned long long)lo) | (((unsigned long long)hi) << 32);
+//#elif defined(__i386__) || defined(__X86__) || defined(_X86_)
+//	unsigned long long int x;
+//	__asm__ volatile ("rdtsc" : "=A" (x));
+//	return x;
+//#else
+//	return Clock::Tick();
+//#endif
+//}
 
 MATH_END_NAMESPACE

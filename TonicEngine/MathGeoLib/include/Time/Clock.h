@@ -61,21 +61,21 @@ public:
 	static int Sec();
 
 	/// @return The current system time counter in milliseconds.
-	static unsigned long SystemTime();
+	//static unsigned long SystemTime();
 
 	/// @return The number of milliseconds since application start.
-	static unsigned long Time();
+	//static unsigned long Time();
 
 	/// @return The low part of the current tick-time (using whatever high-resolution counter available)
-	static unsigned long TickU32();
+	//static unsigned long TickU32();
 
 	/// @return The current tick-time (using whatever high-resolution counter available)
-	static tick_t Tick();
+	//static tick_t Tick();
 
 	/// @return How many ticks make up a second.
-	static tick_t TicksPerSec();
+	//static tick_t TicksPerSec();
 
-	static inline tick_t TicksPerMillisecond() { return TicksPerSec() / 1000; }
+	//static inline tick_t TicksPerMillisecond() { return TicksPerSec() / 1000; }
 
 	/// Returns the number of ticks occurring between the two wallclock times.
 	static inline tick_t TicksInBetween(tick_t newTick, tick_t oldTick)
@@ -89,7 +89,7 @@ public:
 		return TicksInBetween(newTick, oldTick) < ((tick_t)(-1) >> 1);
 	}
 
-	static inline float MillisecondsSinceF(tick_t oldTick) { return TimespanToMillisecondsF(oldTick, Tick()); }
+	/*static inline float MillisecondsSinceF(tick_t oldTick) { return TimespanToMillisecondsF(oldTick, Tick()); }
 	static inline double MillisecondsSinceD(tick_t oldTick) { return TimespanToMillisecondsD(oldTick, Tick()); }
 
 	static inline float SecondsSinceF(tick_t oldTick) { return TimespanToSecondsF(oldTick, Tick()); }
@@ -99,15 +99,15 @@ public:
 	static inline double TicksToMillisecondsD(tick_t ticks) { return ticks * 1000.0 / TicksPerSec(); }
 
 	static inline float TicksToSecondsF(tick_t ticks) { return ticks / (float)TicksPerSec(); }
-	static inline double TicksToSecondsD(tick_t ticks) { return ticks / (double)TicksPerSec(); }
+	static inline double TicksToSecondsD(tick_t ticks) { return ticks / (double)TicksPerSec(); }*/
 
-	static inline float TimespanToMillisecondsF(tick_t oldTick, tick_t newTick) { return TicksToMillisecondsF(TicksInBetween(newTick, oldTick)); }
+	/*static inline float TimespanToMillisecondsF(tick_t oldTick, tick_t newTick) { return TicksToMillisecondsF(TicksInBetween(newTick, oldTick)); }
 	static inline double TimespanToMillisecondsD(tick_t oldTick, tick_t newTick) { return TicksToMillisecondsD(TicksInBetween(newTick, oldTick)); }
 
 	static inline float TimespanToSecondsF(tick_t oldTick, tick_t newTick) { return TicksToSecondsF(TicksInBetween(newTick, oldTick)); }
-	static inline double TimespanToSecondsD(tick_t oldTick, tick_t newTick) { return TicksToSecondsD(TicksInBetween(newTick, oldTick)); }
+	static inline double TimespanToSecondsD(tick_t oldTick, tick_t newTick) { return TicksToSecondsD(TicksInBetween(newTick, oldTick)); }*/
 
-	static unsigned long long Rdtsc();
+	//static unsigned long long Rdtsc();
 
 private:
 	static tick_t appStartTime;      ///< Application startup time in ticks.

@@ -30,14 +30,15 @@ public:
 	ComponentMesh(GameObject* gameObject, bool active);
 	virtual ~ComponentMesh();
 
+	bool Update();
 	void Draw();
-	void DrawFaceNormals(Component* mesh);
-	void DrawVertexNormals(Component* mesh);
+	void DrawFaceNormals(GameObject* m);
+	void DrawVertexNormals(GameObject* m);
 
 public:
 
 	bool showFaceNormals = false;
-	bool showIndexNormals = false;
+	bool showVertexNormals = false;
 	
 	meshData mData;
 

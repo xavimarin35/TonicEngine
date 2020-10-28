@@ -26,7 +26,7 @@ MATH_BEGIN_NAMESPACE
 
 LCG::LCG()
 {
-	Seed(Clock::TickU32());
+	//Seed(Clock::TickU32());
 }
 
 /** If you want to give different parameters for the generator, you should remember that:
