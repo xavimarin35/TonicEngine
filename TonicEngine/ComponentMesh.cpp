@@ -38,11 +38,6 @@ void ComponentMesh::Draw()
 	{
 		ImGui::Spacing();
 
-		/*ImGui::Checkbox("Face Normals", &showFaceNormals); ImGui::SameLine();
-		ImGui::Checkbox("Vertex Normals", &showVertexNormals);
-
-		ImGui::Separator();*/
-
 		ImGui::Text("Number of polygons:");
 		ImGui::SameLine();
 		ImGui::TextColored(YELLOW_COLOR, "%d", mData.num_index / 3);
@@ -77,8 +72,6 @@ void ComponentMesh::Draw()
 			ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(150); ImGui::ColorEdit3(" ", (float*)&go->GetComponentMesh()->vertexColor, flags);
 			ImGui::TreePop();
 		}
-
-
 
 	}
 

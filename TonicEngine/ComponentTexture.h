@@ -16,10 +16,13 @@ public:
 
 	void Draw();
 
+	void OpenTexturesMenu();
+
 public:
 	
 	bool EnableCheckersTexture = false;
 	bool EnableHouseTexture = true;
+	bool noTexture = false;
 
 	texData tData;
 };

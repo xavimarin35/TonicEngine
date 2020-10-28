@@ -89,6 +89,10 @@ texData TextureImporter::CreateCheckersTexture() const
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
 
+	texture.height = CHECKERS_HEIGHT;
+	texture.width = CHECKERS_WIDTH;
+	texture.path = "NULL";
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return texture;
@@ -158,6 +162,9 @@ texData TextureImporter::LoadTexture(const char* path) const
 			{
 				//Create Texture
 				id_texture.id = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+				id_texture.height = ilGetInteger(IL_IMAGE_HEIGHT);
+				id_texture.width = ilGetInteger(IL_IMAGE_WIDTH);
+				id_texture.path = path;
 			}
 			else
 				LOG_IMGUI_CONSOLE("ERROR: Failed converting image: %s", path);
