@@ -7,10 +7,7 @@
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
-#include "Math.h"
-
-#include "MathGeoLib/include/MathBuildConfig.h"
-#include "MathGeoLib/include/MathGeoLib.h"
+//#include "Math.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>

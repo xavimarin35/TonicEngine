@@ -32,20 +32,22 @@ bool PanelInspector::Draw()
 	{
 		if (ImGui::Begin("Inspector", &active))
 		{
-			if (App->scene_intro->GOselected != nullptr)
+			GameObject* obj = App->scene_intro->GOselected;
+
+			if (obj != nullptr)
 			{
 				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
 
 				ImGui::Spacing();
 
-				ImGui::Checkbox("Active", &App->scene_intro->GOselected->oData.active); ImGui::SameLine();
-				ImGui::InputText(" ", (char*)App->scene_intro->GOselected->oData.GOname.c_str(), 25, flags);
+				ImGui::Checkbox("Active", &obj->oData.active); ImGui::SameLine();
+				ImGui::InputText(" ", (char*)obj->oData.GOname.c_str(), 25, flags);
 
 				ImGui::Spacing();
 
-				if (App->scene_intro->GOselected->oData.active)
+				if (obj->oData.active)
 				{
-					for (std::vector<Component*>::iterator it = App->scene_intro->GOselected->componentsList.begin(); it != App->scene_intro->GOselected->componentsList.end(); ++it)
+					for (std::vector<Component*>::iterator it = obj->componentsList.begin(); it != obj->componentsList.end(); ++it)
 					{
 						if (*it != nullptr)
 						{

@@ -2,7 +2,6 @@
 #define __ModuleRenderer3D__
 
 #include "Application.h"
-#include "Math.h"
 #include "Light.h"
 #include "GameObject.h"
 

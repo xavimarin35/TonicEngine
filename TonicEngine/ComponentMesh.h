@@ -21,6 +21,8 @@ struct meshData {
 
 	bool draw_normals = false;
 
+	string path;
+
 	uint texture = 0;
 };
 
@@ -32,8 +34,8 @@ public:
 
 	bool Update();
 	void Draw();
-	void DrawFaceNormals(GameObject* m);
-	void DrawVertexNormals(GameObject* m);
+	bool DrawFaceNormals(GameObject* m, bool active = false);
+	bool DrawVertexNormals(GameObject* m, bool active = false);
 
 public:
 
