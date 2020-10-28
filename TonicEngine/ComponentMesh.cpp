@@ -38,6 +38,11 @@ void ComponentMesh::Draw()
 	{
 		ImGui::Spacing();
 
+		/*ImGui::Checkbox("Face Normals", &showFaceNormals); ImGui::SameLine();
+		ImGui::Checkbox("Vertex Normals", &showVertexNormals);
+
+		ImGui::Separator();*/
+
 		ImGui::Text("Number of polygons:");
 		ImGui::SameLine();
 		ImGui::TextColored(YELLOW_COLOR, "%d", mData.num_index / 3);
@@ -52,13 +57,28 @@ void ComponentMesh::Draw()
 
 		ImGui::Separator();
 
-		ImGui::Checkbox("Face Normals", &showFaceNormals); ImGui::SameLine();
-		ImGui::Checkbox("Vertex Normals", &showVertexNormals);
+		ImGui::Text("File:"); ImGui::SameLine();
+		ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->mData.path.c_str());
 
 		ImGui::Separator();
 
-		ImGui::Text("File:"); ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->mData.path.c_str());
+		if (ImGui::TreeNode("Face Normals:")) {
+			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawF"); ImGui::Checkbox(" ", &showFaceNormals); ImGui::PopID();
+			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtF"); ImGui::InputFloat(" ", &go->GetComponentMesh()->faceLenght, 0.1f, 4.0f); ImGui::PopID(); 
+			ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(150); ImGui::ColorEdit3(" ", (float*)&go->GetComponentMesh()->faceColor, flags);
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Vertex Normals:")) {
+			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawV"); ImGui::Checkbox(" ", &showVertexNormals); ImGui::PopID();
+			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtV"); ImGui::InputFloat(" ", &go->GetComponentMesh()->vertexLenght, 0.1f, 4.0f); ImGui::PopID();
+			ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(150); ImGui::ColorEdit3(" ", (float*)&go->GetComponentMesh()->vertexColor, flags);
+			ImGui::TreePop();
+		}
+
+
 
 	}
 
@@ -68,8 +88,6 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 {
 	if (active)
 	{
-		glBegin(GL_LINES);
-		glColor3f(0, 0, 1);
 
 		float3 mid;
 		float3 normal;
@@ -90,11 +108,14 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 			normal = Cross(edge_a, edge_b);
 			normal.Normalize();
 
+			glBegin(GL_LINES);
+			glColor3f(m->GetComponentMesh()->faceColor.r, m->GetComponentMesh()->faceColor.g, m->GetComponentMesh()->faceColor.b);
+
 			glVertex3f(mid.x, mid.y, mid.z);
-			glVertex3f(mid.x + normal.x, mid.y + normal.y, mid.z + normal.z);
+			glVertex3f(mid.x + normal.x * m->GetComponentMesh()->faceLenght, mid.y + normal.y * m->GetComponentMesh()->faceLenght, mid.z + normal.z * m->GetComponentMesh()->faceLenght);
+
 		}
 
-		glColor3f(0, 1, 1);
 		glEnd();
 	}
 	else 

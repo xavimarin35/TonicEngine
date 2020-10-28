@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "glmath.h"
+#include "Color.h"
 
 class GameObject;
 
@@ -41,6 +42,12 @@ public:
 
 	bool showFaceNormals = false;
 	bool showVertexNormals = false;
+
+	float faceLenght = 1.0f;
+	Color faceColor = Red;
+
+	float vertexLenght = 1.0f;
+	Color vertexColor = Blue;
 	
 	meshData mData;
 

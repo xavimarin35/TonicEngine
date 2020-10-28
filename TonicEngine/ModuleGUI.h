@@ -64,6 +64,9 @@ public:
 
 	bool quitApp = false;
 
+	static void HelpMarker(const char* desc);
+	
+
 private:
 
 	ImGuiIO* io = nullptr;

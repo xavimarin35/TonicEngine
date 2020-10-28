@@ -187,6 +187,7 @@ void ModuleGUI::LogConsole(char* text, ...)
 	App->appLogs.push_back(Strdup(buf));
 }
 
+
 bool ModuleGUI::CleanUp()
 {
 	bool ret = true;
@@ -212,6 +213,19 @@ void ModuleGUI::Render()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y);
 	
+}
+
+void ModuleGUI::HelpMarker(const char* desc)
+{
+	ImGui::TextDisabled("(?)");
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::BeginTooltip();
+		ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+		ImGui::TextUnformatted(desc);
+		ImGui::PopTextWrapPos();
+		ImGui::EndTooltip();
+	}
 }
 
 void ModuleGUI::ApplyDocking(bool* window)
