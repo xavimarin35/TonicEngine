@@ -27,8 +27,7 @@ public:
 	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
 
-	void DrawMesh(GameObject* m);
-	void DrawTexture(GameObject* t);
+	void DrawObject(GameObject* GO);
 
 	// View Mode
 	void WireframeView(bool active);

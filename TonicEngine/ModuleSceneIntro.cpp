@@ -74,8 +74,7 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	{
 		if ((*it)->oData.active)
 		{
-			App->renderer3D->DrawMesh((*it));
-			App->renderer3D->DrawTexture((*it));
+			App->renderer3D->DrawObject((*it));
 		}
 	}
 

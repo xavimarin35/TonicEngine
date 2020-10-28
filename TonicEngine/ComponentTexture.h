@@ -18,8 +18,8 @@ public:
 
 public:
 	
-	bool EnableCheckersTexture;
-	bool EnableHouseTexture;
+	bool EnableCheckersTexture = false;
+	bool EnableHouseTexture = true;
 
 	texData tData;
 };

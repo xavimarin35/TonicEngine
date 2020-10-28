@@ -194,27 +194,24 @@ void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::DrawTexture(GameObject* t)
-{
-	if (t->GetComponentTexture()->EnableCheckersTexture)
-		glBindTexture(GL_TEXTURE_2D, App->tex_imp->CheckersTexture.id);
-	else
-		glBindTexture(GL_TEXTURE_2D, t->GetComponentTexture()->tData.id);
-}
-
-void ModuleRenderer3D::DrawMesh(GameObject* m)
+void ModuleRenderer3D::DrawObject(GameObject* GO)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_vertex);
+	glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_tex_coords);
+	if (GO->GetComponentTexture()->EnableCheckersTexture)
+		glBindTexture(GL_TEXTURE_2D, App->tex_imp->CheckersTexture.id);
+	else
+		glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->tData.id);
+
+	glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_tex_coords);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->GetComponentMesh()->mData.id_index);
-	glDrawElements(GL_TRIANGLES, m->GetComponentMesh()->mData.num_index, GL_UNSIGNED_INT, nullptr);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_index);
+	glDrawElements(GL_TRIANGLES, GO->GetComponentMesh()->mData.num_index, GL_UNSIGNED_INT, nullptr);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -223,7 +220,7 @@ void ModuleRenderer3D::DrawMesh(GameObject* m)
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 
-	if (m->GetComponentMesh()->showFaceNormals)
+	if (GO->GetComponentMesh()->showFaceNormals)
 	{
 		/*glBegin(GL_LINES);
 		glColor3f(1, 0, 1);*/
