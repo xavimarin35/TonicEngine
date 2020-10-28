@@ -191,6 +191,7 @@ bool PanelConfiguration::Draw()
 				ImGui::SliderFloat("WASD Move", &App->camera->WASDValue, 0.0f, 5.0f);
 				ImGui::SliderFloat("Wheel Move", &App->camera->wheelSpeedValue, 0.0f, 2.0f);
 				ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 0.0f, 2.0f);
+				ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 30.0f);
 			}
 
 		}

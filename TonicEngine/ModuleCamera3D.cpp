@@ -3,6 +3,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
 #include "ModuleGUI.h"
+#include "ModuleSceneIntro.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -46,6 +47,22 @@ update_status ModuleCamera3D::Update(float dt)
 
 	vec3 newPos(0,0,0);
 	float speed = 3.0f * App->GetDT() * WASDValue;
+
+	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+		if (App->scene_intro->GOselected != nullptr)
+		{
+			vec3 distance =
+			{
+				App->scene_intro->GOselected->GetComponentTransform()->position.x - Reference.x,
+				App->scene_intro->GOselected->GetComponentTransform()->position.y - Reference.y,
+				App->scene_intro->GOselected->GetComponentTransform()->position.z - Reference.z
+			};
+
+			Reference += distance;
+			Position = Reference + Z * (distanceFocus + 3);
+		}
+	}
 
 	// Double the speed
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
