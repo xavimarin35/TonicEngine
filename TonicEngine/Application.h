@@ -4,13 +4,11 @@
 #include "Globals.h"
 #include "Timer.h"
 #include "Module.h"
+#include "Math.h" // Include MathGeoLib
 
 
 
-#include "PanelManager.h"
-#include "MeshImporter.h"
-#include "ModuleFileSystem.h"
-#include "TextureImporter.h"
+
 
 
 #include <vector>

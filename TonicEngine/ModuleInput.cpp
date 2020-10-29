@@ -4,6 +4,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
+#include "MeshImporter.h"
 
 #define MAX_KEYS 300
 
@@ -123,12 +124,12 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				dropDirection = e.drop.file;
 
-				if (GetFileExtension(dropDirection) == "FBX" || GetFileExtension(dropDirection) == "fbx")
+				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr)
 				{
 					App->mesh_imp->LoadMesh(dropDirection);
 					LOG_IMGUI_CONSOLE("New file dropped on window with path: %s", dropDirection);
 				}
-				else if (GetFileExtension(dropDirection) == "png" || GetFileExtension(dropDirection) == "dds")
+				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
 				{
 					for (int i = 0; i < App->scene_intro->gameobjectsList.size(); i++)
 					{

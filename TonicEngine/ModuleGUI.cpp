@@ -3,6 +3,7 @@
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleSceneIntro.h"
+#include "MeshImporter.h"
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -165,6 +166,13 @@ bool ModuleGUI::Draw()
 		if (ImGui::BeginMenu("Help"))
 		{
 			ImGui::MenuItem("About Panel", NULL, &Pabout->active);
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Debug"))
+		{
+			if (ImGui::MenuItem("Number of GameObjects"))
+				App->scene_intro->NumberOfGO();
+
 			ImGui::EndMenu();
 		}
 

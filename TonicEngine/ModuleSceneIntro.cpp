@@ -81,11 +81,6 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-GameObject* ModuleSceneIntro::CreateShape(SHAPE_TYPE type)
-{
-	return nullptr;
-}
-
 GameObject* ModuleSceneIntro::CreateGO(string objName)
 {
 	string n = AssignNameToGO(objName);
@@ -131,59 +126,9 @@ void ModuleSceneIntro::RemoveAllGO()
 	gameobjectsList.clear();
 }
 
-void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)
+void ModuleSceneIntro::NumberOfGO()
 {
-	float vertices[] =
-	{
-		x + 0.f,	 y + size,		z + 0.f,
-		x + 0.f,	 y + 0.f,		z + 0.f,
-		x + 0.f,	 y + 0.f,		z + size,
-		x + 0.f,	 y + size,		z + 0.f,
-		x + 0.f,	 y + 0.f,		z + size,
-		x + 0.f,	 y + size,		z + size,
-		x + 0.f,	 y + size,		z + size,
-		x + 0.f,	 y + 0.f,		z + size,
-		x + size,	 y + 0.f,		z + size,
-		x + 0.f,	 y + size,		z + size,
-		x + size,	 y + 0.f,		z + size,
-		x + size,	 y + size,		z + size,
-		x + 0.f,	 y + size,		z + 0.f,
-		x + 0.f,	 y + size,		z + size,
-		x + size,	 y + size,		z + size,
-		x + 0.f,	 y + size,		z + 0.f,
-		x + size,	 y + size,		z + size,
-		x + size,	 y + size,		z + 0.f,
-		x + size,	 y + 0.f,		z + size,
-		x + size,	 y + 0.f,		z + 0.f,
-		x + size,	 y + size,		z + 0.f,
-		x + size,	 y + size,		z + size,
-		x + size,	 y + 0.f,		z + size,
-		x + size,	 y + size,		z + 0.f,
-		x + size,	 y + 0.f,		z + 0.f,
-		x + 0.f,	 y + 0.f,		z + 0.f,
-		x + 0.f,	 y + size,		z + 0.f,
-		x + size,	 y + size,		z + 0.f,
-		x + size,	 y + 0.f,		z + 0.f,
-		x + 0.f,	 y + size,		z + 0.f,
-		x + size,	 y + 0.f,		z + size,
-		x + 0.f,	 y + 0.f,		z + size,
-		x + 0.f,	 y + 0.f,		z + 0.f,
-		x + size,	 y + 0.f,		z + 0.f,
-		x + size,	 y + 0.f,		z + size,
-		x + 0.f,	 y + 0.f,		z + 0.f
-	};
-
-	glGenBuffers(1, (GLuint*)&(id_vertices));
-	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 108, vertices, GL_STATIC_DRAW);
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glDisableClientState(GL_VERTEX_ARRAY);
-
+	LOG_IMGUI_CONSOLE("There are %i GameObjects", gameobjectsList.size());
 }
 
 void ModuleSceneIntro::DrawGridAndAxis()

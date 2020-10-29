@@ -3,6 +3,7 @@
 
 #include "Application.h"
 #include "ModuleGUI.h"
+#include "PanelManager.h"
 
 #include <vector>
 #include <list>

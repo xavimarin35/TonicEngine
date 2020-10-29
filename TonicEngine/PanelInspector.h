@@ -2,6 +2,7 @@
 #define __PANELINSPECTOR_H__
 
 #include "Application.h"
+#include "PanelManager.h"
 
 
 class PanelInspector : public PanelManager

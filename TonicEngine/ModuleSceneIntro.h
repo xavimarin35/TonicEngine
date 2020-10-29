@@ -29,6 +29,7 @@ public:
 	string AssignNameToGO(string name_go);
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
+	void NumberOfGO();
 	std::vector<GameObject*> gameobjectsList;
 
 	GameObject* GOselected = nullptr;

@@ -2,6 +2,7 @@
 #define __PANELHIERARCHY_H__
 
 #include "Application.h"
+#include "PanelManager.h"
 
 
 class PanelHierarchy : public PanelManager

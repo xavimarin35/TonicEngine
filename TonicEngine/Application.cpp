@@ -6,6 +6,10 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleGui.h"
+#include "PanelManager.h"
+#include "MeshImporter.h"
+#include "ModuleFileSystem.h"
+#include "TextureImporter.h"
 
 Application::Application()
 {
