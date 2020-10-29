@@ -44,16 +44,16 @@ bool ModuleGUI::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init(NULL);
 
-	bool show_demo_window = true;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+bool show_demo_window = true;
+bool show_another_window = false;
+ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
-	{
-		ret = (*it)->Start();
-	}
+for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
+{
+	ret = (*it)->Start();
+}
 
-	return ret;
+return ret;
 }
 
 update_status ModuleGUI::PreUpdate(float dt)
@@ -88,7 +88,7 @@ update_status ModuleGUI::Update(float dt)
 	if (quitApp)
 		ret = UPDATE_STOP;
 
-	
+
 
 	return ret;
 }
@@ -97,7 +97,7 @@ update_status ModuleGUI::PostUpdate(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it) 
+	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
 	{
 		ret = (*it)->PostUpdate(dt);
 	}
@@ -142,6 +142,23 @@ bool ModuleGUI::Draw()
 				App->scene_intro->RemoveAllGO();
 
 			ImGui::Separator();
+
+			if (ImGui::BeginMenu("Create Basic Shape"))
+			{
+				if (ImGui::MenuItem("Cube"))
+					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCube.fbx");
+
+				if (ImGui::MenuItem("Sphere"))
+					App->mesh_imp->LoadMesh("Assets/BasicShapes/bSphere.fbx");
+
+				if (ImGui::MenuItem("Cone"))
+					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCone.fbx");
+
+				if (ImGui::MenuItem("Cylinder"))
+					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCylinder.fbx");
+
+				ImGui::EndMenu();
+			}
 
 			ImGui::EndMenu();
 		}

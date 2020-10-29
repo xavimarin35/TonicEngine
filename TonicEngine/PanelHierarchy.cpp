@@ -103,16 +103,30 @@ void PanelHierarchy::DrawMenuNotHovering()
 		
 		if (ImGui::BeginMenu("Create Shape"))
 		{
-			if (ImGui::MenuItem("Sphere"))
-			{
-				// Call Function
-				openMenuHovering = false;
-			}
 			if (ImGui::MenuItem("Cube"))
 			{
-				// Call Function
+				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCube.fbx");
 				openMenuHovering = false;
 			}
+
+			if (ImGui::MenuItem("Sphere"))
+			{
+				App->mesh_imp->LoadMesh("Assets/BasicShapes/bSphere.fbx");
+				openMenuHovering = false;
+			}
+
+			if (ImGui::MenuItem("Cone"))
+			{
+				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCone.fbx");
+				openMenuHovering = false;
+			}
+
+			if (ImGui::MenuItem("Cylinder"))
+			{
+				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCylinder.fbx");
+				openMenuHovering = false;
+			}
+
 			ImGui::EndMenu();
 		}
 
