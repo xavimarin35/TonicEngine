@@ -1,6 +1,7 @@
 #include "TextureImporter.h"
 #include "Application.h"
 #include "ModuleGUI.h"
+#include "ModuleSceneIntro.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -181,4 +182,96 @@ texData TextureImporter::LoadTexture(const char* path) const
 	}
 
 	return id_texture;
+}
+
+uint TextureImporter::GenerateTexture(const char* path)
+{
+	if (App->scene_intro->GOselected != nullptr)
+		App->scene_intro->GOselected->GetComponentTexture()->texture_path = path;
+
+	ilInit();
+	iluInit();
+
+	ilEnable(IL_CONV_PAL);
+	ilutEnable(ILUT_OPENGL_CONV);
+	ilutRenderer(ILUT_OPENGL);
+
+	ilutInit();
+
+	ILuint pic;
+	uint aux_texture;
+
+	ilGenImages(1, &pic);
+	ilBindImage(pic);
+
+	if (!ilLoadImage(path)) {
+		ilDeleteImages(1, &pic);
+		return 0;
+	}
+	else
+	{
+		aux_texture = ilutGLBindTexImage();
+
+		long width;
+		long height;
+		long bit_depth;
+		long format;
+
+		ILubyte* texdata = 0;
+
+		width = ilGetInteger(IL_IMAGE_WIDTH);
+		height = ilGetInteger(IL_IMAGE_HEIGHT);
+		bit_depth = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
+		format = ilGetInteger(IL_IMAGE_FORMAT);
+		texdata = ilGetData();
+
+		glGenTextures(1, &aux_texture);
+
+		glBindTexture(GL_TEXTURE_2D, aux_texture);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		gluBuild2DMipmaps(GL_TEXTURE_2D, bit_depth, width, height, format, GL_UNSIGNED_BYTE, texdata);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		ilBindImage(0);
+		ilDeleteImage(pic);
+
+		if (App->scene_intro->GOselected != nullptr)
+			App->scene_intro->GOselected->GetComponentTexture()->original_texture = aux_texture;
+
+		return aux_texture;
+	}
+}
+
+void TextureImporter::GenerateCheckersTexture()
+{
+	GLubyte checkImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
+
+	for (int i = 0; i < CHECKERS_HEIGHT; i++)
+	{
+		for (int j = 0; j < CHECKERS_WIDTH; j++)
+		{
+			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			checkImage[i][j][0] = (GLubyte)c;
+			checkImage[i][j][1] = (GLubyte)c;
+			checkImage[i][j][2] = (GLubyte)c;
+			checkImage[i][j][3] = (GLubyte)255;
+		}
+	}
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &checker_texture);
+	glBindTexture(GL_TEXTURE_2D, checker_texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

@@ -38,6 +38,8 @@ public:
 	bool DrawFaceNormals(GameObject* m, bool active = false);
 	bool DrawVertexNormals(GameObject* m, bool active = false);
 
+	void IsMeshComponentActive(GameObject* go);
+
 public:
 
 	bool showFaceNormals = false;

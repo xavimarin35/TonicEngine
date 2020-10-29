@@ -14,17 +14,19 @@ public:
 	~MeshImporter();
 
 	bool Init();
-
 	update_status Update(float dt);
-
 	bool CleanUp();
 
 	void LoadMesh(const char* Filename);
+	void GenerateMesh(const char* path, uint tex = 0);
 
 
 public:
 
 	bool enabled = true;
+
+	uint texture;
+	uint checker_texture;
 
 };
 

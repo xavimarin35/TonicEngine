@@ -18,6 +18,9 @@ public:
 	bool Update();
 
 	void OpenTexturesMenu();
+	void OpenTexturesMenu2();
+
+	void IsTextureComponentActive(GameObject* go);
 
 public:
 	
@@ -25,8 +28,13 @@ public:
 	bool EnableHouseTexture = true;
 	bool noTexture = false;
 	bool openMenuTex = false;
+	bool openMenuTex2 = false;
 
 	texData tData;
+	
+	string texture_path;
+	uint texture = 0;
+	uint original_texture = 0;
 };
 
 #endif

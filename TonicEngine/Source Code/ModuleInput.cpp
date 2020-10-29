@@ -126,17 +126,21 @@ update_status ModuleInput::PreUpdate(float dt)
 
 				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr)
 				{
-					App->mesh_imp->LoadMesh(dropDirection);
+					App->mesh_imp->GenerateMesh(dropDirection);
 					LOG_IMGUI_CONSOLE("New file dropped on window with path: %s", dropDirection);
 				}
 				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
 				{
-					for (int i = 0; i < App->scene_intro->gameobjectsList.size(); i++)
+					if (App->scene_intro->GOselected != nullptr)
 					{
-						App->scene_intro->gameobjectsList[i]->GetComponentTexture()->tData = App->tex_imp->LoadTexture(dropDirection);
+						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->GenerateTexture(dropDirection);
+						LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);
 					}
-										
-					LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);
+					else
+					{
+						LOG_IMGUI_CONSOLE("ERROR: You must select a GameObject to drop a texture!");
+					}
+					
 				}
 				else
 					LOG_IMGUI_CONSOLE("ERROR: File dropped extension not supported! Try '.fbx', '.png' or 'dds'");

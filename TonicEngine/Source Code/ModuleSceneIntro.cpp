@@ -32,12 +32,14 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	texData Texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
+	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
 
 	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
 
-	gameobjectsList.at(0)->GetComponentTexture()->tData = Texture;
-	gameobjectsList.at(1)->GetComponentTexture()->tData = Texture;
+	App->tex_imp->GenerateCheckersTexture();
+
+	gameobjectsList.at(0)->GetComponentTexture()->texture = texture;
+	gameobjectsList.at(1)->GetComponentTexture()->texture = texture;
 
 	return ret;
 }
@@ -74,7 +76,8 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	{
 		if ((*it)->oData.active)
 		{
-			App->renderer3D->DrawObject((*it));
+			//App->renderer3D->DrawObject((*it));
+			App->renderer3D->GenerateObject((*it));
 		}
 	}
 

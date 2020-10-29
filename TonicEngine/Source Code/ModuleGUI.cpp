@@ -110,6 +110,8 @@ bool ModuleGUI::Draw()
 {
 	bool ret = true;
 
+	GameObject* GO = App->scene_intro->GOselected;
+
 	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
 	{
 		ret = (*it)->Draw();
@@ -172,6 +174,31 @@ bool ModuleGUI::Draw()
 		{
 			if (ImGui::MenuItem("Number of GameObjects"))
 				App->scene_intro->NumberOfGO();
+
+			// --------------------------
+			if (GO == nullptr)
+			{
+				HelpMarker("You must select a GO to use this tool");
+				ImGui::SameLine();
+			}
+
+			if (ImGui::BeginMenu("Is Component Active"))
+			{
+				if (GO != nullptr)
+				{
+					if (ImGui::MenuItem("Transform"))
+						GO->GetComponentTransform()->IsTransformComponentActive(GO);
+
+					if (ImGui::MenuItem("Mesh"))
+						GO->GetComponentMesh()->IsMeshComponentActive(GO);
+
+					if (ImGui::MenuItem("Texture"))
+						GO->GetComponentTexture()->IsTextureComponentActive(GO);
+				}
+
+				ImGui::EndMenu();
+			}
+			// ---------------------------
 
 			ImGui::EndMenu();
 		}

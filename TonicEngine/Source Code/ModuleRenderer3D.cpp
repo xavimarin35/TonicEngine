@@ -220,6 +220,38 @@ void ModuleRenderer3D::DrawObject(GameObject* GO)
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+void ModuleRenderer3D::GenerateObject(GameObject* GO)
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_vertex);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+
+	if (GO->GetComponentTexture()->EnableHouseTexture)
+		glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture);
+	else if (GO->GetComponentTexture()->EnableCheckersTexture)
+		glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture);
+
+	glActiveTexture(GL_TEXTURE0);
+	/*else if (GO->GetComponentTexture()->EnableHouseTexture)
+		glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->tData.id);*/
+	
+
+	glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_tex_coords);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_index);
+	glDrawElements(GL_TRIANGLES, GO->GetComponentMesh()->mData.num_index, GL_UNSIGNED_INT, nullptr);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 // View Modes
 
 void ModuleRenderer3D::WireframeView(bool active)

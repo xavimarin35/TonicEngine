@@ -33,8 +33,14 @@ public:
 	texData CreateEmptyTexture() const;
 	texData LoadTexture(const char* path) const;
 
+	uint GenerateTexture(const char* path);
+	void GenerateCheckersTexture();
+
 	uint id_checkers = 0;
 	//texData tData;
+
+	uint texture;
+	uint checker_texture;
 
 	// Textures
 	texData CheckersTexture;

@@ -27,6 +27,7 @@ public:
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
 
 	void DrawObject(GameObject* GO);
+	void GenerateObject(GameObject* GO);
 
 	// View Mode
 	void WireframeView(bool active);

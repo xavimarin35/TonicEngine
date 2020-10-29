@@ -14,6 +14,8 @@ public:
 
 	void Draw();
 
+	void IsTransformComponentActive(GameObject* go);
+
 public:
 	vec3 position;
 	vec3 rotation;

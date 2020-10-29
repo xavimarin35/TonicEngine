@@ -1,5 +1,6 @@
 #include "ComponentTransform.h"
 #include "ModuleGUI.h"
+#include "ModuleSceneIntro.h"
 
 ComponentTransform::ComponentTransform(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::TRANSFORM, gameObject)
 {
@@ -35,5 +36,19 @@ void ComponentTransform::Draw()
 		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("X", &scale.x, 0.5F); ImGui::PopID(); ImGui::SameLine();
 		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("Y", &scale.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
 		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("Z", &scale.z, 0.5F); ImGui::PopID();
+	}
+}
+
+void ComponentTransform::IsTransformComponentActive(GameObject* go)
+{
+	go = App->scene_intro->GOselected;
+
+	if (go->GetComponentMesh()->active)
+	{
+		LOG_IMGUI_CONSOLE("Transform Component is active");
+	}
+	else
+	{
+		LOG_IMGUI_CONSOLE("ERROR: Transform Component is NOT active");
 	}
 }

@@ -130,3 +130,18 @@ bool ComponentMesh::DrawVertexNormals(GameObject* mesh, bool active)
 	}
 	
 }
+
+void ComponentMesh::IsMeshComponentActive(GameObject* go)
+{
+	go = App->scene_intro->GOselected;
+
+	if (go->GetComponentMesh()->active)
+	{
+		LOG_IMGUI_CONSOLE("Mesh Component is active");
+	}
+	else
+	{
+		LOG_IMGUI_CONSOLE("ERROR: Mesh Component is NOT active");
+	}
+		
+}
