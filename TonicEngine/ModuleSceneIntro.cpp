@@ -105,7 +105,7 @@ string ModuleSceneIntro::AssignNameToGO(string name_go)
 	return name;
 }
 
-void ModuleSceneIntro::DestroySelectedGO(GameObject* GO)
+void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 {
 	if (GOselected == GO)
 		GOselected = nullptr;
@@ -119,6 +119,16 @@ void ModuleSceneIntro::DestroySelectedGO(GameObject* GO)
 	}
 
 	delete GO;
+}
+
+void ModuleSceneIntro::RemoveAllGO()
+{
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+	{
+		delete gameobjectsList.at(i);
+	}
+
+	gameobjectsList.clear();
 }
 
 void ModuleSceneIntro::DrawCube_36v(float x, float y, float z, float size)

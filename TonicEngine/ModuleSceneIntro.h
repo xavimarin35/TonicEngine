@@ -27,7 +27,8 @@ public:
 	GameObject* CreateShape(SHAPE_TYPE type);
 	GameObject* CreateGO(string objName);
 	string AssignNameToGO(string name_go);
-	void DestroySelectedGO(GameObject* GO);
+	void RemoveSelectedGO(GameObject* GO);
+	void RemoveAllGO();
 	std::vector<GameObject*> gameobjectsList;
 
 	GameObject* GOselected = nullptr;

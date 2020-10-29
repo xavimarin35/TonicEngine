@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
-
+#include "ModuleSceneIntro.h"
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -130,6 +130,18 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
 			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
 			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
+
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("GameObjects"))
+		{
+			if (ImGui::MenuItem("Create GameObject"))
+				App->scene_intro->CreateGO("GameObject_");
+
+			if (ImGui::MenuItem("Remove GameObjects"))
+				App->scene_intro->RemoveAllGO();
+
+			ImGui::Separator();
 
 			ImGui::EndMenu();
 		}

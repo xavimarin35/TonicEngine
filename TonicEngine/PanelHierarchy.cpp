@@ -103,12 +103,12 @@ void PanelHierarchy::DrawMenuNotHovering()
 		
 		if (ImGui::BeginMenu("Create Shape"))
 		{
-			if (ImGui::MenuItem("Cube"))
+			if (ImGui::MenuItem("Sphere"))
 			{
 				// Call Function
 				openMenuHovering = false;
 			}
-			if (ImGui::MenuItem("Sphere"))
+			if (ImGui::MenuItem("Cube"))
 			{
 				// Call Function
 				openMenuHovering = false;
@@ -132,7 +132,7 @@ void PanelHierarchy::DrawMenuHovering()
 		if (ImGui::MenuItem("Remove GameObject"))
 		{
 			if (App->scene_intro->GOselected != nullptr)
-				App->scene_intro->DestroySelectedGO(App->scene_intro->GOselected);
+				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
 			openMenuHovering = false;
 		}
 
