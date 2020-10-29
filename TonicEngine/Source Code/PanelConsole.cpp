@@ -1,7 +1,7 @@
 #include "PanelConsole.h"
 #include "Globals.h"
 #include "ModuleWindow.h"
-
+#include "ModuleCamera3D.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -35,6 +35,9 @@ bool PanelConsole::Draw()
 
 		if (ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollWithMouse || ImGuiWindowFlags_NoScrollbar)) {
 
+			if (ImGui::IsWindowHovered()) App->camera->isOnScreen = false;
+			else App->camera->isOnScreen = true;
+
 			if (ImGui::Button("Clear"))
 				EraseLogs();
 
@@ -48,7 +51,6 @@ bool PanelConsole::Draw()
 			const char* buf_end = Buf.end();
 			if (Filter.IsActive())
 			{
-
 				for (int line_no = 0; line_no < LineOffsets.Size; line_no++)
 				{
 					const char* line_start = buf + LineOffsets[line_no];

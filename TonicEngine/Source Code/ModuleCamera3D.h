@@ -20,6 +20,8 @@ public:
 	float* GetViewMatrix();
 	void GoInitialPos();
 
+	bool isOnScreen = true;
+
 private:
 
 	void CalculateViewMatrix();
