@@ -1,7 +1,7 @@
 #include "Globals.h"
 
-#include "pcg-c-0.94/include/pcg_variants.h"
-#include "pcg-c-0.94/extras/entropy.h"
+#include "Libraries/pcg-c-0.94/include/pcg_variants.h"
+#include "Libraries/pcg-c-0.94/extras/entropy.h"
 
 #include <time.h>
 #include <math.h>
