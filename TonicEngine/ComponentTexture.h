@@ -15,6 +15,7 @@ public:
 	virtual ~ComponentTexture();
 
 	void Draw();
+	bool Update();
 
 	void OpenTexturesMenu();
 
@@ -23,6 +24,7 @@ public:
 	bool EnableCheckersTexture = false;
 	bool EnableHouseTexture = true;
 	bool noTexture = false;
+	bool openMenuTex = false;
 
 	texData tData;
 };

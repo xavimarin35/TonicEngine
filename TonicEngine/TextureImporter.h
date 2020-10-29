@@ -30,7 +30,7 @@ public:
 
 	uint CreateTexture(const void* texture, uint width, uint height, int format, uint format2) const;
 	texData CreateCheckersTexture() const;
-	texData CreateEmptyTexture();
+	texData CreateEmptyTexture() const;
 	texData LoadTexture(const char* path) const;
 
 	uint id_checkers = 0;

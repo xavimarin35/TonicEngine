@@ -54,21 +54,17 @@ update_status TextureImporter::Update(float dt)
 
 bool TextureImporter::CleanUp()
 {
-	glDeleteTextures(1, (GLuint*)&id_checkers);
+	glDeleteTextures(1, (GLuint*)&CheckersTexture.id);
 
 	return true;
 }
 
 texData TextureImporter::CreateCheckersTexture() const
 {
-	GLubyte checkImage[CHECKERS_WIDTH][CHECKERS_HEIGHT][4];
-
-	for (int i = 0; i < CHECKERS_WIDTH; i++)
-	{
-		for (int j = 0; j < CHECKERS_HEIGHT; j++)
-		{
+	GLubyte checkImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
+	for (int i = 0; i < CHECKERS_HEIGHT; i++) {
+		for (int j = 0; j < CHECKERS_WIDTH; j++) {
 			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
-
 			checkImage[i][j][0] = (GLubyte)c;
 			checkImage[i][j][1] = (GLubyte)c;
 			checkImage[i][j][2] = (GLubyte)c;
@@ -76,29 +72,33 @@ texData TextureImporter::CreateCheckersTexture() const
 		}
 	}
 
-	texData texture;
+	texData tex;
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &texture.id);
-	glBindTexture(GL_TEXTURE_2D, texture.id);
+	glGenTextures(1, &tex.id);
+	glBindTexture(GL_TEXTURE_2D, tex.id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
 
-	texture.height = CHECKERS_HEIGHT;
-	texture.width = CHECKERS_WIDTH;
-	texture.path = "NULL";
+	tex.height = CHECKERS_HEIGHT;
+	tex.width = CHECKERS_WIDTH;
+	tex.path = "NULL";
 
+
+	// Unbind texture
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return texture;
+
+	return tex;
 }
 
-texData TextureImporter::CreateEmptyTexture()
+texData TextureImporter::CreateEmptyTexture() const
 {
 	texData texture;
 	texture.id = 0;
