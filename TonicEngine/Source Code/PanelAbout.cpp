@@ -1,6 +1,7 @@
 #include "PanelAbout.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
+#include "ModuleCamera3D.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -29,6 +30,9 @@ bool PanelAbout::Draw()
 	{
 		if (ImGui::Begin("About", &active, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
+			if (ImGui::IsWindowHovered()) App->camera->isOnAbout = true;
+			else App->camera->isOnAbout = false;
+			
 			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));
 			ImGui::Separator();
 

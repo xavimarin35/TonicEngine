@@ -6,7 +6,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 
-
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
 
@@ -36,6 +35,9 @@ bool PanelConfiguration::Draw()
 
 		if (ImGui::Begin("Configuration", &active))
 		{
+			if (ImGui::IsWindowHovered()) App->camera->isOnConfiguration = true;
+			else App->camera->isOnConfiguration = false;
+
 			if (ImGui::CollapsingHeader("Window"))
 			{
 				App->window->GetWindowSize(w_width, w_height);

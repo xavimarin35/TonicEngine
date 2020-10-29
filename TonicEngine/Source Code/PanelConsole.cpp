@@ -35,8 +35,8 @@ bool PanelConsole::Draw()
 
 		if (ImGui::Begin("Console", &active, ImGuiWindowFlags_NoScrollWithMouse || ImGuiWindowFlags_NoScrollbar)) {
 
-			if (ImGui::IsWindowHovered()) App->camera->isOnScreen = false;
-			else App->camera->isOnScreen = true;
+			if (ImGui::IsWindowHovered()) App->camera->isOnConsole = true;
+			else App->camera->isOnConsole= false;
 
 			if (ImGui::Button("Clear"))
 				EraseLogs();

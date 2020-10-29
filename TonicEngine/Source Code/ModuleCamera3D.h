@@ -20,7 +20,11 @@ public:
 	float* GetViewMatrix();
 	void GoInitialPos();
 
-	bool isOnScreen = true;
+	bool isOnConsole = false;
+	bool isOnHierarchy = false;
+	bool isOnAbout = false;
+	bool isOnInspector = false;
+	bool isOnConfiguration = false;
 
 private:
 

@@ -4,7 +4,7 @@
 #include "ModuleSceneIntro.h"
 #include "Component.h"
 #include "GameObject.h"
-
+#include "ModuleCamera3D.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -33,6 +33,9 @@ bool PanelInspector::Draw()
 	{
 		if (ImGui::Begin("Inspector", &active))
 		{
+			if (ImGui::IsWindowHovered()) App->camera->isOnInspector = true;
+			else App->camera->isOnInspector = false;
+
 			GameObject* obj = App->scene_intro->GOselected;
 
 			if (obj != nullptr)

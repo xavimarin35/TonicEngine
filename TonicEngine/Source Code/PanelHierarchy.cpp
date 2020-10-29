@@ -4,7 +4,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
 #include "MeshImporter.h"
-
+#include "ModuleCamera3D.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -33,6 +33,9 @@ bool PanelHierarchy::Draw()
 	{
 		if (ImGui::Begin("Hierarchy", &active))
 		{
+			if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
+			else App->camera->isOnHierarchy = false;
+
 			if (openMenuHovering)
 				DrawMenuHovering();
 			else if (openMenuNotHovering)
@@ -97,6 +100,9 @@ void PanelHierarchy::DrawMenuNotHovering()
 
 	if (ImGui::BeginPopupContextWindow())
 	{
+		if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
+		else App->camera->isOnHierarchy = false;
+
 		if (ImGui::MenuItem("Create GameObject"))
 		{
 			App->scene_intro->CreateGO("GameObject_");
@@ -145,6 +151,9 @@ void PanelHierarchy::DrawMenuHovering()
 
 	if (ImGui::BeginPopupContextWindow())
 	{
+		if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
+		else App->camera->isOnHierarchy = false;
+
 		if (ImGui::MenuItem("Remove GameObject"))
 		{
 			if (App->scene_intro->GOselected != nullptr)
