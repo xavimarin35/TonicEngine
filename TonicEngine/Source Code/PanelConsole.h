@@ -28,6 +28,8 @@ private:
 	void PrintLogs();
 	void EraseLogs();
 
+	bool autoScroll = false;
+
 	bool consoleEmpty = true;
 	int maxLogs = 100;
 
