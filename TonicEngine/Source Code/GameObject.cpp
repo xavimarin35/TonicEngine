@@ -5,7 +5,7 @@
 GameObject::GameObject(std::string name)
 {
 	this->oData.GOname = name;
-	this->oData.active = true;
+	//this->oData.active = true;
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 	CreateComponent(COMPONENT_TYPE::MESH);
 	CreateComponent(COMPONENT_TYPE::TEXTURE);
@@ -19,7 +19,7 @@ void GameObject::Update()
 {
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
-		if (componentsList[i] != nullptr && componentsList[i]->active)
+		if (componentsList[i]->active)
 			componentsList[i]->Update();
 	}
 }

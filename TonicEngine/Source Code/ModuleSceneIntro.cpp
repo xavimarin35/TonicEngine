@@ -32,9 +32,11 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+	
 
 	App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx");
+
+	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
 
 	App->tex_imp->GenerateCheckersTexture();
 

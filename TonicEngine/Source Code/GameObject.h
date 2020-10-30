@@ -23,7 +23,7 @@ enum class SHAPE_TYPE {
 struct objData {
 	uint GOid = 0;
 	string GOname;
-	bool active = true;
+	bool active;
 };
 
 class GameObject

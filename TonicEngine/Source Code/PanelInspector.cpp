@@ -51,11 +51,11 @@ bool PanelInspector::Draw()
 
 				if (obj->oData.active)
 				{
-					for (std::vector<Component*>::iterator it = obj->componentsList.begin(); it != obj->componentsList.end(); ++it)
+					for (int i = 0; i < obj->componentsList.size(); ++i)
 					{
-						if (*it != nullptr)
+						if (obj->componentsList[i] != nullptr)
 						{
-							(*it)->Draw();
+							obj->componentsList[i]->Draw();
 						}
 					}
 				}

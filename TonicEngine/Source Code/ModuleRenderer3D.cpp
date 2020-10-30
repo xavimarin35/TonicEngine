@@ -201,10 +201,13 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 
-	if (GO->GetComponentTexture()->EnableHouseTexture)
-		glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture);
-	else if (GO->GetComponentTexture()->EnableCheckersTexture)
-		glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture);
+	if (GO->GetComponentTexture()->active)
+	{
+		if (GO->GetComponentTexture()->EnableHouseTexture)
+			glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture);
+		else if (GO->GetComponentTexture()->EnableCheckersTexture)
+			glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture);
+	}
 	else
 		glBindTexture(GL_TEXTURE_2D, NULL);
 
