@@ -124,7 +124,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				dropDirection = e.drop.file;
 
-				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr)
+				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr || strstr(dropDirection, ".obj") != nullptr || strstr(dropDirection, ".OBJ") != nullptr)
 				{
 					App->mesh_imp->GenerateMesh(dropDirection);
 					MeshFileDroped = true;
@@ -145,7 +145,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					
 				}
 				else
-					LOG_IMGUI_CONSOLE("ERROR: File dropped extension not supported! Try '.fbx', '.png' or 'dds'");
+					LOG_IMGUI_CONSOLE("ERROR: File dropped extension not supported! Try '.fbx', '.obj', '.png' or 'dds'");
 
 				SDL_free((char*)dropDirection);
 				break;

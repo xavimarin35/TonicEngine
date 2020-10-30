@@ -189,3 +189,29 @@ void ModuleSceneIntro::DrawGridAndAxis()
 
 	glColor3ub(255, 255, 255);
 }
+
+void ModuleSceneIntro::Create3DObject(Objects3D object)
+{
+	switch (object)
+	{
+	case Objects3D::B_SPHERE:
+		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
+		break;
+
+	case Objects3D::B_CUBE:
+		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
+		break;
+
+	case Objects3D::B_CYLINDER:
+		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
+		break;
+
+	case Objects3D::B_CONE:
+		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
+		break;
+
+	case Objects3D::B_TREE:
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Tree/Tree_Mesh.fbx");
+		break;
+	}
+}

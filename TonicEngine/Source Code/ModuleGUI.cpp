@@ -149,16 +149,24 @@ bool ModuleGUI::Draw()
 			if (ImGui::BeginMenu("Create Basic Shape"))
 			{
 				if (ImGui::MenuItem("Cube"))
-					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
+					App->scene_intro->Create3DObject(Objects3D::B_CUBE);
 
 				if (ImGui::MenuItem("Sphere"))
-					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
+					App->scene_intro->Create3DObject(Objects3D::B_SPHERE);
 
 				if (ImGui::MenuItem("Cone"))
-					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
+					App->scene_intro->Create3DObject(Objects3D::B_CONE);
 
 				if (ImGui::MenuItem("Cylinder"))
-					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
+					App->scene_intro->Create3DObject(Objects3D::B_CYLINDER);
+
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Create Other"))
+			{
+				if (ImGui::MenuItem("Tree"))
+					App->scene_intro->Create3DObject(Objects3D::B_TREE);
 
 				ImGui::EndMenu();
 			}
