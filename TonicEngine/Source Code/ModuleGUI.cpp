@@ -149,16 +149,16 @@ bool ModuleGUI::Draw()
 			if (ImGui::BeginMenu("Create Basic Shape"))
 			{
 				if (ImGui::MenuItem("Cube"))
-					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCube.fbx");
+					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx", App->scene_intro->texture_shapes);
 
 				if (ImGui::MenuItem("Sphere"))
-					App->mesh_imp->LoadMesh("Assets/BasicShapes/bSphere.fbx");
+					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx", App->scene_intro->texture_shapes);
 
 				if (ImGui::MenuItem("Cone"))
-					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCone.fbx");
+					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx", App->scene_intro->texture_shapes);
 
 				if (ImGui::MenuItem("Cylinder"))
-					App->mesh_imp->LoadMesh("Assets/BasicShapes/bCylinder.fbx");
+					App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx", App->scene_intro->texture_shapes);
 
 				ImGui::EndMenu();
 			}
@@ -200,6 +200,12 @@ bool ModuleGUI::Draw()
 			}
 			// ---------------------------
 
+			if (ImGui::MenuItem("Get Texture Path"))
+			{
+				if (GO != nullptr)
+					GO->GetComponentTexture()->GetTexturePath();
+			}
+				
 			ImGui::EndMenu();
 		}
 

@@ -33,6 +33,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));	
 
 	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+	texture_shapes = App->tex_imp->GenerateTexture("Assets/lenna_text.png");
 
 	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
 
@@ -123,7 +124,8 @@ void ModuleSceneIntro::RemoveAllGO()
 {
 	for (int i = 0; i < gameobjectsList.size(); ++i)
 	{
-		delete gameobjectsList.at(i);
+		if(GOselected != nullptr)
+		gameobjectsList.erase(gameobjectsList.begin() + i);
 	}
 
 	gameobjectsList.clear();

@@ -30,7 +30,7 @@ struct meshData {
 class ComponentMesh : public Component
 {
 public:
-	ComponentMesh(GameObject* gameObject, bool active);
+	ComponentMesh(GameObject* gameObject);
 	virtual ~ComponentMesh();
 
 	bool Update();

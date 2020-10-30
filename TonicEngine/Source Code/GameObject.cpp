@@ -6,9 +6,9 @@ GameObject::GameObject(std::string name)
 {
 	this->oData.GOname = name;
 	this->oData.active = true;
-	CreateComponent(COMPONENT_TYPE::TRANSFORM, true);
-	CreateComponent(COMPONENT_TYPE::MESH, true);
-	CreateComponent(COMPONENT_TYPE::TEXTURE, true);
+	CreateComponent(COMPONENT_TYPE::TRANSFORM);
+	CreateComponent(COMPONENT_TYPE::MESH);
+	CreateComponent(COMPONENT_TYPE::TEXTURE);
 }
 
 GameObject::~GameObject()
@@ -60,15 +60,15 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 	switch (type) 
 	{
 	case COMPONENT_TYPE::TRANSFORM:
-		component = new ComponentTransform(this, true);
+		component = new ComponentTransform(this);
 		LOG_IMGUI_CONSOLE("Component transform added to the list");
 		break;
 	case COMPONENT_TYPE::MESH:
-		component = new ComponentMesh(this, true);
+		component = new ComponentMesh(this);
 		LOG_IMGUI_CONSOLE("Component mesh added to the list");
 		break;
 	case COMPONENT_TYPE::TEXTURE:
-		component = new ComponentTexture(this, true);
+		component = new ComponentTexture(this);
 		LOG_IMGUI_CONSOLE("Component texture added to the list");
 		break;
 	}

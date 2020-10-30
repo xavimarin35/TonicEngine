@@ -11,7 +11,7 @@ class GameObject;
 class ComponentTexture : public Component
 {
 public:
-	ComponentTexture(GameObject* gameObject, bool active);
+	ComponentTexture(GameObject* gameObject);
 	virtual ~ComponentTexture();
 
 	void Draw();
@@ -21,6 +21,7 @@ public:
 	void OpenTexturesMenu2();
 
 	void IsTextureComponentActive(GameObject* go);
+	void GetTexturePath();
 
 public:
 	
@@ -35,6 +36,9 @@ public:
 	string texture_path;
 	uint texture = 0;
 	uint original_texture = 0;
+
+	int iterator = 0;
+	uint selectTexture = 0;
 };
 
 #endif

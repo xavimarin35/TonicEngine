@@ -2,7 +2,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 
-ComponentMesh::ComponentMesh(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::MESH, gameObject)
+ComponentMesh::ComponentMesh(GameObject* gameObject) : Component(COMPONENT_TYPE::MESH, gameObject)
 {
 	type = COMPONENT_TYPE::MESH;
 }

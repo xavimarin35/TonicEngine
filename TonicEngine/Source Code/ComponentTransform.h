@@ -9,7 +9,7 @@ class GameObject;
 class ComponentTransform : public Component
 {
 public:
-	ComponentTransform(GameObject* gameObject, bool active);
+	ComponentTransform(GameObject* gameObject);
 	virtual ~ComponentTransform();
 
 	void Draw();

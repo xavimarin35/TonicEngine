@@ -18,7 +18,7 @@ enum class COMPONENT_TYPE
 class Component
 {
 public:
-	Component(COMPONENT_TYPE type, GameObject* GO, bool active = true);
+	Component(COMPONENT_TYPE type, GameObject* GO = nullptr, bool active = true);
 	virtual ~Component();
 
 	virtual bool Update();
@@ -32,7 +32,7 @@ public:
 public:
 	bool active;
 	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
-	GameObject* object;
+	GameObject* object = nullptr;
 
 };
 

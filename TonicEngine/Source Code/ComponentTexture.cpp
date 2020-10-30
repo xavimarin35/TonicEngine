@@ -3,7 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 
-ComponentTexture::ComponentTexture(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::TEXTURE, gameObject)
+ComponentTexture::ComponentTexture(GameObject* gameObject) : Component(COMPONENT_TYPE::TEXTURE, gameObject)
 {
 	type = COMPONENT_TYPE::TEXTURE;
 }
@@ -20,7 +20,7 @@ bool ComponentTexture::Update()
 	if (openMenuTex2)
 		OpenTexturesMenu2();
 
-	if (!active)
+	if (noTexture)
 		texture = NULL;
 
 	return true;
@@ -31,6 +31,8 @@ void ComponentTexture::Draw()
 	ImGui::Spacing();
 
 	GameObject* go = App->scene_intro->GOselected;
+	uint tex = 0;
+	Color c = Red;
 
 	if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen))
 	{
@@ -44,19 +46,27 @@ void ComponentTexture::Draw()
 		//	// code
 		//}
 
-		ImGui::Checkbox("Active", &active);
+		//ImGui::Checkbox("Active", &active);
 		
 		if (ImGui::Button("Select Texture")) 
 			openMenuTex2 = true;
 
-
+		//ImGui::SameLine();
+		//if(ImGui::Button("Delete Texture"))
+			
+		
 		ImGui::Text("File:"); ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, go->GetComponentTexture()->tData.path.c_str());
+		ImGui::TextColored(YELLOW_COLOR, texture_path.c_str()); // El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
 
 		ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i",&go->GetComponentTexture()->tData.width); // Not working well
 		ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &go->GetComponentTexture()->tData.height); // Not working well
 		
-		ImGui::Image((void*)go->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+		if (EnableHouseTexture)
+			tex = texture;
+		else if (EnableCheckersTexture)
+			tex = App->tex_imp->checker_texture;
+
+		ImGui::Image((void*)tex, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 	}
 }
 
@@ -89,7 +99,7 @@ void ComponentTexture::OpenTexturesMenu2()
 {
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex2, ImGuiWindowFlags_AlwaysAutoResize))
 	{
-		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200)))
+		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = true;
@@ -123,6 +133,11 @@ void ComponentTexture::IsTextureComponentActive(GameObject* go)
 	{
 		LOG_IMGUI_CONSOLE("ERROR: Texture Component is NOT active");
 	}
+}
+
+void ComponentTexture::GetTexturePath()
+{
+	LOG_IMGUI_CONSOLE("Texture path is: %s", texture_path.c_str());
 }
 
 

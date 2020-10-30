@@ -2,7 +2,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 
-ComponentTransform::ComponentTransform(GameObject* gameObject, bool active) : Component(COMPONENT_TYPE::TRANSFORM, gameObject)
+ComponentTransform::ComponentTransform(GameObject* gameObject) : Component(COMPONENT_TYPE::TRANSFORM, gameObject)
 {
 	type = COMPONENT_TYPE::TRANSFORM;
 }

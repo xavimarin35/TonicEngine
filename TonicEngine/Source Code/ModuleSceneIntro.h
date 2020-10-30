@@ -31,10 +31,10 @@ public:
 	std::vector<GameObject*> gameobjectsList;
 
 	GameObject* GOselected = nullptr;
-	uint GOselectedID = 0;
 
 	uint texture;
 	uint checkers_texture;
+	uint texture_shapes;
 	
 };
 
