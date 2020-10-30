@@ -20,8 +20,8 @@ ModuleWindow::~ModuleWindow()
 // Called before render is available
 bool ModuleWindow::Init()
 {
-	LOG_IMGUI_CONSOLE("Init SDL window & surface");
-	LOG_IMGUI_CONSOLE("Loading Window");
+	LOG_C("Init SDL window & surface");
+	LOG_C("Loading Window");
 	bool ret = true;
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)

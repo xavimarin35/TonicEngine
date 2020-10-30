@@ -56,10 +56,10 @@ bool PanelHierarchy::Draw()
 					switch (i) 
 					{
 						case 0:
-							LOG_IMGUI_CONSOLE("Selected GameObject i = %i", i);
+							LOG_C("Selected GameObject i = %i", i);
 							break;
 						case 1:
-							LOG_IMGUI_CONSOLE("Selected GameObject i = %i", i);
+							LOG_C("Selected GameObject i = %i", i);
 							break;
 					}
 				}

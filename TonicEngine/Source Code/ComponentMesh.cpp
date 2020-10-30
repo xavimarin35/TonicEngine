@@ -137,11 +137,11 @@ void ComponentMesh::IsMeshComponentActive(GameObject* go)
 
 	if (go->GetComponentMesh()->active)
 	{
-		LOG_IMGUI_CONSOLE("Mesh Component is active");
+		LOG_C("Mesh Component is active");
 	}
 	else
 	{
-		LOG_IMGUI_CONSOLE("ERROR: Mesh Component is NOT active");
+		LOG_C("ERROR: Mesh Component is NOT active");
 	}
 		
 }

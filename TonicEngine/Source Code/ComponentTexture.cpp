@@ -117,17 +117,17 @@ void ComponentTexture::IsTextureComponentActive(GameObject* go)
 
 	if (go->GetComponentTexture()->active)
 	{
-		LOG_IMGUI_CONSOLE("Texture Component is active");
+		LOG_C("Texture Component is active");
 	}
 	else
 	{
-		LOG_IMGUI_CONSOLE("ERROR: Texture Component is NOT active");
+		LOG_C("ERROR: Texture Component is NOT active");
 	}
 }
 
 void ComponentTexture::GetTexturePath()
 {
-	LOG_IMGUI_CONSOLE("Texture path is: %s", texture_path.c_str());
+	LOG_C("Texture path is: %s", texture_path.c_str());
 }
 
 

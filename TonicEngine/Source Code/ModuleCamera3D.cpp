@@ -23,7 +23,7 @@ ModuleCamera3D::~ModuleCamera3D()
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Start()
 {
-	LOG_IMGUI_CONSOLE("Loading Camera 3D");
+	LOG_C("Loading Camera 3D");
 	//App->appLogs.push_back("error: NO MAMES TE LA CRESITE");
 	LOG("Setting up the camera");
 	bool ret = true;

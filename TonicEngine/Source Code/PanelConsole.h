@@ -12,7 +12,7 @@
 #define TEXT_CONSOLE_COLOR ImColor(192,192,192)
 #define ERROR_CONSOLE_COLOR ImColor(220,20,60)
 
-#define LOG_IMGUI_CONSOLE(text, ...) App->gui->LogConsole(text, __VA_ARGS__); 
+#define LOG_C(text, ...) App->gui->LogConsole(text, __VA_ARGS__); 
 
 class PanelConsole : public PanelManager
 {

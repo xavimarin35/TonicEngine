@@ -22,13 +22,13 @@ bool TextureImporter::Init()
 
 	if (ilGetInteger(IL_VERSION_NUM) < IL_VERSION || iluGetInteger(ILU_VERSION_NUM) < ILU_VERSION || iluGetInteger(ILUT_VERSION_NUM) < ILUT_VERSION)
 	{
-		LOG_IMGUI_CONSOLE("ERROR: DevIL version not correct");
+		LOG_C("ERROR: DevIL version not correct");
 		ret = false;
 	}
 
 	else
 	{
-		LOG_IMGUI_CONSOLE("Initializing DevIL");
+		LOG_C("Initializing DevIL");
 
 		ilInit();
 		iluInit();
@@ -85,7 +85,7 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 
-	LOG_IMGUI_CONSOLE("Loaded Texture(% i x % i) with path: %s", width, height, path);
+	LOG_C("Loaded Texture(% i x % i) with path: %s", width, height, path);
 	
 
 	return tex;

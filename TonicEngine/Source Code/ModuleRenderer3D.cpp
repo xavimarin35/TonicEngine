@@ -27,7 +27,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
-	LOG_IMGUI_CONSOLE("Loading 3D Renderer Context");
+	LOG_C("Loading 3D Renderer Context");
 	bool ret = true;
 	
 	//Create context
@@ -44,7 +44,7 @@ bool ModuleRenderer3D::Init()
 
 		//Use Vsync
 		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
-			LOG_IMGUI_CONSOLE("ERROR: Unable to set VSync");
+			LOG_C("ERROR: Unable to set VSync");
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);

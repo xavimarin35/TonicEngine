@@ -24,8 +24,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	LOG_IMGUI_CONSOLE("Loading Intro assets");
-	LOG_IMGUI_CONSOLE("Loading Scene");
+	LOG_C("Loading Intro assets");
+	LOG_C("Loading Scene");
 
 	bool ret = true;
 
@@ -49,7 +49,7 @@ bool ModuleSceneIntro::Start()
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-	LOG_IMGUI_CONSOLE("Unloading Intro scene");
+	LOG_C("Unloading Intro scene");
 
 	for (int i = 0; i < gameobjectsList.size(); ++i)
 		delete gameobjectsList[i];
@@ -137,7 +137,7 @@ void ModuleSceneIntro::RemoveAllGO()
 
 void ModuleSceneIntro::NumberOfGO()
 {
-	LOG_IMGUI_CONSOLE("There are %i GameObjects", gameobjectsList.size());
+	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
 void ModuleSceneIntro::DrawGridAndAxis()

@@ -45,10 +45,10 @@ void ComponentTransform::IsTransformComponentActive(GameObject* go)
 
 	if (go->GetComponentMesh()->active)
 	{
-		LOG_IMGUI_CONSOLE("Transform Component is active");
+		LOG_C("Transform Component is active");
 	}
 	else
 	{
-		LOG_IMGUI_CONSOLE("ERROR: Transform Component is NOT active");
+		LOG_C("ERROR: Transform Component is NOT active");
 	}
 }

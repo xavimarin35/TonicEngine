@@ -58,7 +58,7 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	LOG_IMGUI_CONSOLE("Init Application");
+	LOG_C("Init Application");
 
 	// Needed to initialize PCG (Random Number Generator Library)
 	InitSeed();

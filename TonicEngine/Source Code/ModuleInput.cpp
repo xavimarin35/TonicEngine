@@ -24,7 +24,7 @@ ModuleInput::~ModuleInput()
 // Called before render is available
 bool ModuleInput::Init()
 {
-	LOG_IMGUI_CONSOLE("Loading Input");
+	LOG_C("Loading Input");
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
@@ -128,7 +128,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					App->mesh_imp->GenerateMesh(dropDirection);
 					MeshFileDroped = true;
-					LOG_IMGUI_CONSOLE("New file dropped on window with path: %s", dropDirection);
+					LOG_C("New file dropped on window with path: %s", dropDirection);
 				}
 				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
 				{
@@ -136,16 +136,16 @@ update_status ModuleInput::PreUpdate(float dt)
 					{
 						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->GenerateTexture(dropDirection);
 						TextureFileDropped = true;
-						LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);
+						LOG_C("New texture dropped on window with path: %s", dropDirection);
 					}
 					else
 					{
-						LOG_IMGUI_CONSOLE("ERROR: You must select a GameObject to drop a texture!");
+						LOG_C("ERROR: You must select a GameObject to drop a texture!");
 					}
 					
 				}
 				else
-					LOG_IMGUI_CONSOLE("ERROR: File dropped extension not supported! Try '.fbx', '.obj', '.png' or 'dds'");
+					LOG_C("ERROR: File dropped extension not supported! Try '.fbx', '.obj', '.png' or 'dds'");
 
 				SDL_free((char*)dropDirection);
 				break;

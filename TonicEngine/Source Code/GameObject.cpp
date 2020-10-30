@@ -61,15 +61,15 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 	{
 	case COMPONENT_TYPE::TRANSFORM:
 		component = new ComponentTransform(this);
-		LOG_IMGUI_CONSOLE("Component transform added to the list");
+		LOG_C("Component transform added to the list");
 		break;
 	case COMPONENT_TYPE::MESH:
 		component = new ComponentMesh(this);
-		LOG_IMGUI_CONSOLE("Component mesh added to the list");
+		LOG_C("Component mesh added to the list");
 		break;
 	case COMPONENT_TYPE::TEXTURE:
 		component = new ComponentTexture(this);
-		LOG_IMGUI_CONSOLE("Component texture added to the list");
+		LOG_C("Component texture added to the list");
 		break;
 	}
 

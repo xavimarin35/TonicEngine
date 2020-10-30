@@ -27,11 +27,11 @@ bool MeshImporter::Init()
 
 	if (aiGetErrorString() != NULL)
 	{
-		LOG_IMGUI_CONSOLE("Initializing ASSIMP");
+		LOG_C("Initializing ASSIMP");
 	}
 	else
 	{
-		LOG_IMGUI_CONSOLE("ERROR: Could not initialize ASSIMP");
+		LOG_C("ERROR: Could not initialize ASSIMP");
 		return false;
 	}
 
@@ -88,7 +88,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 				{
 					if (mesh2->mFaces[i].mNumIndices != 3)
 					{
-						LOG_IMGUI_CONSOLE("ERROR: Geometry face with != 3 indices");
+						LOG_C("ERROR: Geometry face with != 3 indices");
 					}
 					else
 						memcpy(&meshGO->GetComponentMesh()->mData.index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
@@ -122,9 +122,9 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 		}
 
 		aiReleaseImport(scene);
-		LOG_IMGUI_CONSOLE("Succesfully loaded mesh with path: %s", Filename);
+		LOG_C("Succesfully loaded mesh with path: %s", Filename);
 	}
 
 	else
-		LOG_IMGUI_CONSOLE("ERROR: Cannot load scene %s", Filename);
+		LOG_C("ERROR: Cannot load scene %s", Filename);
 }
