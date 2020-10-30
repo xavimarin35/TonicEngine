@@ -113,25 +113,25 @@ void PanelHierarchy::DrawMenuNotHovering()
 		{
 			if (ImGui::MenuItem("Cube"))
 			{
-				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCube.fbx");
+				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Sphere"))
 			{
-				App->mesh_imp->LoadMesh("Assets/BasicShapes/bSphere.fbx");
+				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Cone"))
 			{
-				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCone.fbx");
+				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Cylinder"))
 			{
-				App->mesh_imp->LoadMesh("Assets/BasicShapes/bCylinder.fbx");
+				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
 				openMenuHovering = false;
 			}
 

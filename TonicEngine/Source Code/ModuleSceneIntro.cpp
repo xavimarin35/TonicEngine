@@ -33,9 +33,8 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));	
 
 	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
-	texture_shapes = App->tex_imp->GenerateTexture("Assets/lenna_text.png");
 
-	App->mesh_imp->LoadMesh("Assets/BakerHouse.fbx");
+	App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx");
 
 	App->tex_imp->GenerateCheckersTexture();
 
@@ -61,10 +60,20 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+
+	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
+	{
+		if ((*it)->oData.active)
+		{
+			App->renderer3D->GenerateObject((*it));
+		}
+	}
 	for (int i = 0; i < gameobjectsList.size(); ++i)
 	{
 		gameobjectsList[i]->Update();
 	}
+
+
 	
 	return UPDATE_CONTINUE;
 }
@@ -73,14 +82,7 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 {
 	DrawGridAndAxis();
 
-	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
-	{
-		if ((*it)->oData.active)
-		{
-			//App->renderer3D->DrawObject((*it));
-			App->renderer3D->GenerateObject((*it));
-		}
-	}
+
 
 	return UPDATE_CONTINUE;
 }

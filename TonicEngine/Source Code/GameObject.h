@@ -6,6 +6,7 @@
 #include "ComponentTransform.h"
 #include "ComponentMesh.h"
 #include "ComponentTexture.h"
+#include "ModuleInput.h"
 
 class ComponentTransform;
 class ComponentMesh;
@@ -49,10 +50,6 @@ public:
 	objData oData;
 
 	std::vector<Component*> componentsList;
-
-	Component* cTransform = nullptr;
-	Component* cMesh = nullptr;
-	Component* cTexture = nullptr;
 
 	void AssignNameToGO(const char* name);
 

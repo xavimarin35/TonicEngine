@@ -26,7 +26,6 @@ public:
 	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
 	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
 
-	void DrawObject(GameObject* GO);
 	void GenerateObject(GameObject* GO);
 
 	// View Mode

@@ -17,7 +17,6 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void LoadMesh(const char* Filename);
 	void GenerateMesh(const char* path, uint tex = 0);
 
 

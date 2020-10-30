@@ -2,6 +2,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleInput.h"
 
 ComponentTexture::ComponentTexture(GameObject* gameObject) : Component(COMPONENT_TYPE::TEXTURE, gameObject)
 {
@@ -14,11 +15,9 @@ ComponentTexture::~ComponentTexture()
 
 bool ComponentTexture::Update()
 {
+
 	if (openMenuTex)
 		OpenTexturesMenu();
-
-	if (openMenuTex2)
-		OpenTexturesMenu2();
 
 	if (noTexture)
 		texture = NULL;
@@ -45,21 +44,15 @@ void ComponentTexture::Draw()
 		//{
 		//	// code
 		//}
-
-		//ImGui::Checkbox("Active", &active);
 		
 		if (ImGui::Button("Select Texture")) 
-			openMenuTex2 = true;
-
-		//ImGui::SameLine();
-		//if(ImGui::Button("Delete Texture"))
+			openMenuTex = true;
 			
-		
-		ImGui::Text("File:"); ImGui::SameLine();
+		// Aixo no va be perque al principi deu inicialitzar primer els components, llavors el que primer s'ha de fer es inicialitzar els panels (crec)
+		ImGui::Text("Dropped File Path:"); ImGui::SameLine();
 		ImGui::TextColored(YELLOW_COLOR, texture_path.c_str()); // El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
-
-		ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i",&go->GetComponentTexture()->tData.width); // Not working well
-		ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &go->GetComponentTexture()->tData.height); // Not working well
+		//ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &App->tex_imp->wi); // Not working well
+		//ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &App->tex_imp->he); // Not working well
 		
 		if (EnableHouseTexture)
 			tex = texture;
@@ -70,34 +63,10 @@ void ComponentTexture::Draw()
 	}
 }
 
+
 void ComponentTexture::OpenTexturesMenu()
 {
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
-	{
-		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->tData.id, ImVec2(200, 200)))
-		{
-			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
-			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = true;
-			openMenuTex = false;
-		}
-		
-		ImGui::SameLine();
-
-		if (ImGui::ImageButton((void*)App->tex_imp->CheckersTexture.id, ImVec2(200, 200)))
-		{
-			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = false;
-			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = true;
-			openMenuTex = false;
-		}
-			
-
-		ImGui::End();
-	}
-}
-
-void ComponentTexture::OpenTexturesMenu2()
-{
-	if (ImGui::Begin("Select Texture Menu", &openMenuTex2, ImGuiWindowFlags_AlwaysAutoResize))
 	{
 		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{

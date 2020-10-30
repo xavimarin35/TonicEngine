@@ -72,6 +72,8 @@ private:
 	//int mouse_z_motion;
 
 	const char* dropDirection;
+	bool MeshFileDroped = false;
+	bool TextureFileDropped = false;
 };
 
 #endif __ModuleInput__

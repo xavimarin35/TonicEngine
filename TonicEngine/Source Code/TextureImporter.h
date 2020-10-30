@@ -28,10 +28,8 @@ public:
 
 public:
 
-	uint CreateTexture(const void* texture, uint width, uint height, int format, uint format2) const;
-	texData CreateCheckersTexture() const;
-	texData CreateEmptyTexture() const;
-	texData LoadTexture(const char* path) const;
+	uint CreateTexture(const void* texture, const char* path, uint width, uint height, int format, uint format2) const;
+	uint CreateEmptyTexture() const;
 
 	uint GenerateTexture(const char* path);
 	void GenerateCheckersTexture();
@@ -41,6 +39,9 @@ public:
 
 	uint texture;
 	uint checker_texture;
+
+	uint wi;
+	uint he;
 
 	// Textures
 	texData CheckersTexture;

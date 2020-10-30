@@ -127,6 +127,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr)
 				{
 					App->mesh_imp->GenerateMesh(dropDirection);
+					MeshFileDroped = true;
 					LOG_IMGUI_CONSOLE("New file dropped on window with path: %s", dropDirection);
 				}
 				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
@@ -134,6 +135,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					if (App->scene_intro->GOselected != nullptr)
 					{
 						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->GenerateTexture(dropDirection);
+						TextureFileDropped = true;
 						LOG_IMGUI_CONSOLE("New texture dropped on window with path: %s", dropDirection);
 					}
 					else

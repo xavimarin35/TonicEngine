@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "glmath.h"
 #include "TextureImporter.h"
+#include "ModuleInput.h"
 
 class GameObject;
 
@@ -18,7 +19,6 @@ public:
 	bool Update();
 
 	void OpenTexturesMenu();
-	void OpenTexturesMenu2();
 
 	void IsTextureComponentActive(GameObject* go);
 	void GetTexturePath();
@@ -29,9 +29,7 @@ public:
 	bool EnableHouseTexture = true;
 	bool noTexture = false;
 	bool openMenuTex = false;
-	bool openMenuTex2 = false;
-
-	texData tData;
+	//bool openMenuTex2 = false;
 	
 	string texture_path;
 	uint texture = 0;
