@@ -33,6 +33,9 @@ bool PanelHierarchy::Draw()
 	{
 		if (ImGui::Begin("Hierarchy", &active))
 		{
+			if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN)
+				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
+
 			if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
 			else App->camera->isOnHierarchy = false;
 
