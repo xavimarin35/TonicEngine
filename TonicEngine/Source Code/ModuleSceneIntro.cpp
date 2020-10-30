@@ -190,28 +190,44 @@ void ModuleSceneIntro::DrawGridAndAxis()
 	glColor3ub(255, 255, 255);
 }
 
-void ModuleSceneIntro::Create3DObject(Objects3D object)
+void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 {
 	switch (object)
 	{
-	case Objects3D::B_SPHERE:
+	case OBJECTS3D::B_SPHERE:
 		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
 		break;
 
-	case Objects3D::B_CUBE:
+	case OBJECTS3D::B_CUBE:
 		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
 		break;
 
-	case Objects3D::B_CYLINDER:
+	case OBJECTS3D::B_CYLINDER:
 		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
 		break;
 
-	case Objects3D::B_CONE:
+	case OBJECTS3D::B_CONE:
 		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
 		break;
 
-	case Objects3D::B_TREE:
+	case OBJECTS3D::B_TREE:
 		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Tree/Tree_Mesh.fbx");
+		break;
+
+	case OBJECTS3D::GERALT:
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Gerald_LowMesh.obj");
+		break;
+
+	case OBJECTS3D::LIGHTPOST:
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost_Low.obj");
+		break;
+
+	case OBJECTS3D::CARRIAGE:
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage_LowPoly.obj");
+		break;
+
+	case OBJECTS3D::ROCK:
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/BigRock.obj");
 		break;
 	}
 }

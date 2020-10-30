@@ -149,24 +149,42 @@ bool ModuleGUI::Draw()
 			if (ImGui::BeginMenu("Create Basic Shape"))
 			{
 				if (ImGui::MenuItem("Cube"))
-					App->scene_intro->Create3DObject(Objects3D::B_CUBE);
+					App->scene_intro->Create3DObject(OBJECTS3D::B_CUBE);
 
 				if (ImGui::MenuItem("Sphere"))
-					App->scene_intro->Create3DObject(Objects3D::B_SPHERE);
+					App->scene_intro->Create3DObject(OBJECTS3D::B_SPHERE);
 
 				if (ImGui::MenuItem("Cone"))
-					App->scene_intro->Create3DObject(Objects3D::B_CONE);
+					App->scene_intro->Create3DObject(OBJECTS3D::B_CONE);
 
 				if (ImGui::MenuItem("Cylinder"))
-					App->scene_intro->Create3DObject(Objects3D::B_CYLINDER);
+					App->scene_intro->Create3DObject(OBJECTS3D::B_CYLINDER);
 
 				ImGui::EndMenu();
 			}
 
+			HelpMarker("Game assets from The Witcher: Ties of Destiny");
+			ImGui::SameLine();
+
 			if (ImGui::BeginMenu("Create Other"))
 			{
-				if (ImGui::MenuItem("Tree"))
-					App->scene_intro->Create3DObject(Objects3D::B_TREE);
+				
+				if (ImGui::MenuItem("Geralt of Rivia"))
+					App->scene_intro->Create3DObject(OBJECTS3D::GERALT);
+
+				if (ImGui::MenuItem("Light post"))
+					App->scene_intro->Create3DObject(OBJECTS3D::LIGHTPOST);
+
+				if (ImGui::MenuItem("Carriage"))
+					App->scene_intro->Create3DObject(OBJECTS3D::CARRIAGE);
+
+				if (ImGui::MenuItem("Rock"))
+					App->scene_intro->Create3DObject(OBJECTS3D::ROCK);
+
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("Visit Ties of Destiny!"))
+					App->RequestBrowser("https://tiesofdestiny.com/index.html");
 
 				ImGui::EndMenu();
 			}
@@ -289,7 +307,7 @@ void ModuleGUI::Render()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y);
+	glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y); // I think this lines gives problems when modifying the window width
 	
 }
 
@@ -311,8 +329,6 @@ void ModuleGUI::ApplyDocking(bool* window)
 	bool opt_fullscreen = true;
 	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
 
-	// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-	// because it would be confusing to have two docking targets within each others.
 	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
 	if (opt_fullscreen)
 	{
@@ -326,16 +342,9 @@ void ModuleGUI::ApplyDocking(bool* window)
 		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 	}
 
-
-	// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
 	if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
 		window_flags |= ImGuiWindowFlags_NoBackground;
 
-	// Important: note that we proceed even if Begin() returns false (aka window is collapsed).
-	// This is because we want to keep our DockSpace() active. If a DockSpace() is inactive,
-	// all active windows docked into it will lose their parent and become undocked.
-	// We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
-	// any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 	ImGui::Begin("DockSpace Demo", &p_open, window_flags);
 	ImGui::PopStyleVar();

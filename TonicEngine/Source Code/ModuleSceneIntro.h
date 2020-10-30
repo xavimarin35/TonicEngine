@@ -5,14 +5,18 @@
 #include "Primitive.h"
 #include "GameObject.h"
 
-enum Objects3D
+enum class OBJECTS3D
 {
 	NONE = -1,
 	B_SPHERE,
 	B_CUBE,
 	B_CYLINDER,
 	B_CONE,
-	B_TREE
+	B_TREE,
+	LIGHTPOST, 
+	CARRIAGE, 
+	GERALT,
+	ROCK
 };
 
 class ModuleSceneIntro : public Module
@@ -27,7 +31,7 @@ public:
 	bool CleanUp();
 
 	void DrawGridAndAxis();
-	void Create3DObject(Objects3D object);
+	void Create3DObject(OBJECTS3D object);
 
 	// DRAW CUBE INFO
 	uint id_vertices = 0;

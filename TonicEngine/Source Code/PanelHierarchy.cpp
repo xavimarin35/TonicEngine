@@ -113,25 +113,25 @@ void PanelHierarchy::DrawMenuNotHovering()
 		{
 			if (ImGui::MenuItem("Cube"))
 			{
-				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
+				App->scene_intro->Create3DObject(OBJECTS3D::B_CUBE);
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Sphere"))
 			{
-				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
+				App->scene_intro->Create3DObject(OBJECTS3D::B_SPHERE);
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Cone"))
 			{
-				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
+				App->scene_intro->Create3DObject(OBJECTS3D::B_CONE);
 				openMenuHovering = false;
 			}
 
 			if (ImGui::MenuItem("Cylinder"))
 			{
-				App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
+				App->scene_intro->Create3DObject(OBJECTS3D::B_CYLINDER);
 				openMenuHovering = false;
 			}
 
