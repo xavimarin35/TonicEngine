@@ -138,7 +138,7 @@ bool ModuleGUI::Draw()
 		}
 		if (ImGui::BeginMenu("GameObjects"))
 		{
-			if (ImGui::MenuItem("Create GameObject"))
+			if (ImGui::MenuItem("Create Empty GameObject"))
 				App->scene_intro->CreateGO("GameObject_");
 
 			if (ImGui::MenuItem("Remove GameObjects"))

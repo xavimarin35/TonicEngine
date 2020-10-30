@@ -215,19 +215,19 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::GERALT:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Gerald_LowMesh.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Geralt.obj");
 		break;
 
 	case OBJECTS3D::LIGHTPOST:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost_Low.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost.obj");
 		break;
 
 	case OBJECTS3D::CARRIAGE:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage_LowPoly.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage.obj");
 		break;
 
 	case OBJECTS3D::ROCK:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/BigRock.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/Rock.obj");
 		break;
 	}
 }
