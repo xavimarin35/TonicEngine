@@ -51,6 +51,10 @@ bool PanelHierarchy::Draw()
 				if (clickedGO == i)
 					select_flags |= ImGuiTreeNodeFlags_Selected;
 
+				// Deselect GO when right-clicking in the hierarchy window (except another GO) 
+				if (ImGui::IsMouseClicked(0) && ImGui::IsWindowHovered())
+					App->scene_intro->GOselected = nullptr;
+
 				if (App->scene_intro->GOselected != nullptr)
 				{
 					if (ImGui::TreeNodeEx((void*)(intptr_t)i, select_flags, App->scene_intro->gameobjectsList[i]->oData.GOname.data()))
@@ -69,17 +73,21 @@ bool PanelHierarchy::Draw()
 					App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
 				}
 
-				// Create Menus (Right Click)
-				if (!ImGui::IsItemFocused() && ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered())
-				{
-					openMenuNotHovering = true;
-				}
+				
+
+				// Create menu when item is selected
 				if (ImGui::IsItemClicked(1) && ImGui::IsWindowHovered())
 				{
 					openMenuHovering = true;
 					clickedGO = i;
 					App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
 				}
+			}
+
+			// Create menu when item is not selected (Right Click)
+			if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered())
+			{
+				openMenuNotHovering = true;
 			}
 		}
 
@@ -99,7 +107,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 		if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
 		else App->camera->isOnHierarchy = false;
 
-		if (ImGui::MenuItem("Create GameObject"))
+		if (ImGui::MenuItem("Create Empty GameObject"))
 		{
 			App->scene_intro->CreateGO("GameObject_");
 			openMenuHovering = false;
