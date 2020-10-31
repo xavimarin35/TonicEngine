@@ -29,7 +29,7 @@ private:
 	void EraseLogs();
 
 	bool autoScroll = false;
-
+	bool warningShown = false;
 	bool consoleEmpty = true;
 	int maxLogs = 100;
 

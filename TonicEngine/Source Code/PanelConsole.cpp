@@ -42,7 +42,12 @@ bool PanelConsole::Draw()
 
 			if (ImGui::Button("Clear"))
 			{
-				LOG_C("WARNING: You have erased all the previous LOGs");
+				if (!warningShown)
+				{
+					LOG_C("WARNING: You have erased all the previous LOGs");
+					warningShown = true;
+				}
+
 				EraseLogs();
 			}
 				
