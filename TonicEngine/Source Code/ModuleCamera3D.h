@@ -38,6 +38,8 @@ public:
 	float WASDValue = 1.0f; // Increases or decreases the sensitivity of moving with WASD
 	float distanceFocus = 8.0f; // Increases or decreases the distance from the game object when pressing F
 
+	bool focusError = false;
+
 private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;

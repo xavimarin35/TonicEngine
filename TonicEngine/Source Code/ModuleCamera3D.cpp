@@ -46,11 +46,22 @@ update_status ModuleCamera3D::Update(float dt)
 	// Now we can make this movememnt frame rate independant!
 
 	if (isOnAbout || isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
+		{
+			LOG_C("You have to be inside the scene to focus the camera to the selected Game Object!");
+			focusError = true;
+		}
+
 		return UPDATE_CONTINUE;
+	}
+
+	focusError = false;
 
 	vec3 newPos(0,0,0);
 	float speed = 3.0f * App->GetDT() * WASDValue;
 
+	// Focus
 	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{
 		if (App->scene_intro->GOselected != nullptr)
