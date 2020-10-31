@@ -95,6 +95,13 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 				}
 			}
 
+			// Copies normals
+			if (mesh2->HasNormals())
+			{
+				meshGO->GetComponentMesh()->mData.normals = new float3[meshGO->GetComponentMesh()->mData.num_vertex];
+				memcpy(meshGO->GetComponentMesh()->mData.normals, mesh2->mNormals, sizeof(float3) * meshGO->GetComponentMesh()->mData.num_vertex);
+			}
+
 			// Copies UVs
 			if (mesh2->HasTextureCoords(0))
 			{

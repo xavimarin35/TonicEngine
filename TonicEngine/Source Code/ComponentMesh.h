@@ -20,6 +20,8 @@ struct meshData {
 	uint num_tex_coords = 0;
 	float* tex_coords = nullptr;
 
+	float3* normals = nullptr;
+
 	bool draw_normals = false;
 
 	string path;

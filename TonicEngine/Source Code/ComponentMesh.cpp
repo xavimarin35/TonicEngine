@@ -15,14 +15,15 @@ bool ComponentMesh::Update()
 {
 	
 	if (showFaceNormals)
-	{
 		DrawFaceNormals(App->scene_intro->GOselected, true);
-	}
 	else
 		DrawFaceNormals(App->scene_intro->GOselected, false);
 	
 
 	if (showVertexNormals)
+		DrawVertexNormals(App->scene_intro->GOselected, true);
+	else
+		DrawVertexNormals(App->scene_intro->GOselected, false);
 
 	return true;
 }
@@ -57,7 +58,7 @@ void ComponentMesh::Draw()
 
 		ImGui::Separator();
 
-		if (ImGui::TreeNode("Face Normals:")) {
+		if (ImGui::TreeNodeEx("Face Normals:", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawF"); ImGui::Checkbox(" ", &showFaceNormals); ImGui::PopID();
 			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtF"); ImGui::InputFloat(" ", &go->GetComponentMesh()->faceLenght, 0.1f, 4.0f); ImGui::PopID(); 
@@ -65,7 +66,7 @@ void ComponentMesh::Draw()
 			ImGui::TreePop();
 		}
 
-		if (ImGui::TreeNode("Vertex Normals:")) {
+		if (ImGui::TreeNodeEx("Vertex Normals:", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawV"); ImGui::Checkbox(" ", &showVertexNormals); ImGui::PopID();
 			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtV"); ImGui::InputFloat(" ", &go->GetComponentMesh()->vertexLenght, 0.1f, 4.0f); ImGui::PopID();
@@ -81,7 +82,6 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 {
 	if (active)
 	{
-
 		float3 mid;
 		float3 normal;
 
@@ -95,12 +95,10 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 			mid = (vert1 + vert2 + vert3) / 3;
 
 			// Get normal vector with cross product
-			float3 edge_a = vert2 - vert1;
-			float3 edge_b = vert3 - vert1;
-
-			normal = Cross(edge_a, edge_b);
+			normal = Cross((vert2 - vert1), (vert3 - vert1));
 			normal.Normalize();
 
+			glLineWidth(1.5f);
 			glBegin(GL_LINES);
 			glColor3f(m->GetComponentMesh()->faceColor.r, m->GetComponentMesh()->faceColor.g, m->GetComponentMesh()->faceColor.b);
 
@@ -118,11 +116,25 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 	
 }
 
-bool ComponentMesh::DrawVertexNormals(GameObject* mesh, bool active)
+bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 {
 	if (active)
 	{
+		if (m->GetComponentMesh()->mData.normals != nullptr)
+		{
+			for (int j = 0; j < m->GetComponentMesh()->mData.num_vertex; ++j)
+			{
+				float3 vert = m->GetComponentMesh()->mData.vertex[j];
+				float3 norm = m->GetComponentMesh()->mData.normals[j];
 
+				glLineWidth(1.5f);
+				glBegin(GL_LINES);
+				glColor3f(m->GetComponentMesh()->vertexColor.r, m->GetComponentMesh()->vertexColor.g, m->GetComponentMesh()->vertexColor.b);
+
+				glVertex3f(vert.x, vert.y, vert.z);
+				glVertex3f(vert.x + norm.x * m->GetComponentMesh()->vertexLenght, vert.y + norm.y * m->GetComponentMesh()->faceLenght, vert.z + norm.z * m->GetComponentMesh()->faceLenght);
+			}
+		}
 	}
 	else
 	{
