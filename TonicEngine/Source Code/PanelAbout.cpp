@@ -33,9 +33,6 @@ bool PanelAbout::Draw()
 	{
 		if (ImGui::Begin("About", &active, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
-			if (ImGui::IsWindowHovered()) App->camera->isOnAbout = true;
-			else App->camera->isOnAbout = false;
-
 			ImGui::Image((void*)texIcon, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
 			
 			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));

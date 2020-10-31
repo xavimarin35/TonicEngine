@@ -44,7 +44,8 @@ bool PanelInspector::Draw()
 
 				ImGui::Spacing();
 
-				ImGui::Checkbox("Active", &obj->oData.active); ImGui::SameLine();
+				ImGui::Checkbox("Active", &obj->oData.active);
+				ImGui::SameLine();
 				ImGui::InputText(" ", (char*)obj->oData.GOname.c_str(), 25, flags);
 
 				ImGui::Spacing();

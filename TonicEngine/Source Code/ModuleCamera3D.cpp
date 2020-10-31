@@ -42,12 +42,12 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 	// Now we can make this movememnt frame rate independant!
 
-	if (isOnAbout || isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
 	{
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
 		{
-			LOG_C("WARNING: You have to be inside the scene to focus the camera to the selected Game Object!");
+			LOG_C("WARNING: You have to be inside the scene to focus the camera to the selected GameObject");
 			focusError = true;
 		}
 

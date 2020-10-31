@@ -22,7 +22,6 @@ public:
 
 	bool isOnConsole = false;
 	bool isOnHierarchy = false;
-	bool isOnAbout = false;
 	bool isOnInspector = false;
 	bool isOnConfiguration = false;
 

@@ -41,7 +41,11 @@ bool PanelConsole::Draw()
 			ImGui::SameLine();
 
 			if (ImGui::Button("Clear"))
+			{
+				LOG_C("WARNING: You have erased all the previous LOGs");
 				EraseLogs();
+			}
+				
 
 			ImGui::Separator();
 

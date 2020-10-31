@@ -36,7 +36,11 @@ void ComponentTexture::Draw()
 		if (active)
 		{
 			if (ImGui::Button("Select Texture"))
+			{
+				LOG_C("WARNING: Select texture in the new emergent window");
 				openMenuTex = true;
+			}
+				
 
 			ImGui::SameLine();
 
@@ -74,6 +78,8 @@ void ComponentTexture::OpenTexturesMenu()
 {
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
+		
+
 		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
