@@ -15,12 +15,8 @@ ComponentTexture::~ComponentTexture()
 
 bool ComponentTexture::Update()
 {
-
 	if (openMenuTex)
 		OpenTexturesMenu();
-
-	if (noTexture)
-		texture = NULL;
 
 	return true;
 }
@@ -31,21 +27,11 @@ void ComponentTexture::Draw()
 
 	GameObject* go = App->scene_intro->GOselected;
 	uint tex = 0;
-	Color c = Red;
 
 	if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ImGui::Spacing();
 
-		//if (ImGui::Checkbox("Active", &noTexture))
-		//	App->renderer3D->Texture2DView(noTexture);
-
-		//if (go->GetComponentTexture()->active)
-		//{
-		//	// code
-		//}
-
-		//ImGui::Checkbox("active", &active);
 
 		if (active)
 		{
@@ -59,10 +45,9 @@ void ComponentTexture::Draw()
 
 
 			// Aixo no va be perque al principi deu inicialitzar primer els components, llavors el que primer s'ha de fer es inicialitzar els panels (crec)
-			ImGui::Text("Dropped File Path:"); ImGui::SameLine();
-			ImGui::TextColored(YELLOW_COLOR, texture_path.c_str()); // El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
-			//ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &App->tex_imp->wi); // Not working well
-			//ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &App->tex_imp->he); // Not working well
+			// El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
+			//ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &texture_width); // Not working well
+			//ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &texture_height); // Not working well
 
 			if (EnableHouseTexture)
 				tex = texture;

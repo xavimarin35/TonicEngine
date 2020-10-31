@@ -2,6 +2,7 @@
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
 #include "ModuleCamera3D.h"
+#include "TextureImporter.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -17,6 +18,8 @@ PanelAbout::~PanelAbout()
 bool PanelAbout::Start()
 {
 	this->active = false;
+	
+	texIcon = App->tex_imp->GenerateTexture("Assets/iconEngine.ico");
 
 	return true;
 }
@@ -32,6 +35,8 @@ bool PanelAbout::Draw()
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnAbout = true;
 			else App->camera->isOnAbout = false;
+
+			ImGui::Image((void*)texIcon, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
 			
 			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));
 			ImGui::Separator();
@@ -100,5 +105,6 @@ bool PanelAbout::Draw()
 			ImGui::End();
 		}
 	}
+
 	return true;
 }

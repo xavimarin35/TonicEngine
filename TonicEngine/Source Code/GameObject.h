@@ -15,11 +15,6 @@ class ComponentTexture;
 struct objData;
 struct meshData;
 
-enum class SHAPE_TYPE {
-	NONE = -1, 
-	CUBE
-};
-
 struct objData {
 	uint GOid = 0;
 	string GOname;

@@ -13,6 +13,8 @@ public:
 
 	bool Start();
 	bool Draw();
+
+	uint texIcon = 0;
 };
 
 #endif

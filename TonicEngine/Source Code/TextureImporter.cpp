@@ -66,7 +66,7 @@ uint TextureImporter::CreateEmptyTexture() const
 	return texture;
 }
 
-uint TextureImporter::CreateTexture(const void* text, const char* path, uint width, uint height, int format, uint format2) const
+uint TextureImporter::CreateTexture(const void* text, const char* path, uint width, uint height, int format, uint format2)
 {
 	uint tex = 0;
 
@@ -85,8 +85,13 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 
-	LOG_C("Loaded Texture(% i x % i) with path: %s", width, height, path);
+	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 	
+	if (App->scene_intro->GOselected != nullptr)
+	{
+		App->scene_intro->GOselected->GetComponentTexture()->texture_width = width;
+		App->scene_intro->GOselected->GetComponentTexture()->texture_height = height;
+	}
 
 	return tex;
 }

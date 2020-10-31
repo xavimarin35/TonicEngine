@@ -32,6 +32,9 @@ public:
 	//bool openMenuTex2 = false;
 	
 	string texture_path;
+	uint texture_width = 0;
+	uint texture_height = 0;
+
 	uint texture = 0;
 	uint original_texture = 0;
 

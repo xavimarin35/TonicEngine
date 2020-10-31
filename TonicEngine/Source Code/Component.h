@@ -30,7 +30,7 @@ public:
 	virtual void DisableComponent();
 
 public:
-	bool active;
+	bool active = false;
 	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
 	GameObject* object = nullptr;
 

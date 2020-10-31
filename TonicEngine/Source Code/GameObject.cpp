@@ -5,7 +5,6 @@
 GameObject::GameObject(std::string name)
 {
 	this->oData.GOname = name;
-	//this->oData.active = true;
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 	CreateComponent(COMPONENT_TYPE::MESH);
 	CreateComponent(COMPONENT_TYPE::TEXTURE);

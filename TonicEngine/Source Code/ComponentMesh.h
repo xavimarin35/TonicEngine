@@ -22,8 +22,6 @@ struct meshData {
 
 	float3* normals = nullptr;
 
-	bool draw_normals = false;
-
 	string path;
 
 	uint texture = 0;

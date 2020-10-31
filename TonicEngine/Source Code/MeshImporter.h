@@ -22,10 +22,10 @@ public:
 
 public:
 
-	bool enabled = true;
+	bool active = true;
 
-	uint texture;
-	uint checker_texture;
+	uint texture = 0;
+	uint checker_texture = 0;
 
 };
 

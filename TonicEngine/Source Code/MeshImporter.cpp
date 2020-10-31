@@ -13,7 +13,10 @@
 
 #pragma comment ( lib, "Assimp/libx86/assimp.lib" )
 
-MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { enabled = true; }
+MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, start_enabled) 
+{ 
+	active = true; 
+}
 
 MeshImporter::~MeshImporter() {}
 
@@ -67,7 +70,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			// Gets path
 			meshGO->GetComponentMesh()->mData.path = Filename;
 
-			// Copies vertices
+			// Vertices
 			meshGO->GetComponentMesh()->mData.num_vertex = mesh2->mNumVertices;
 			meshGO->GetComponentMesh()->mData.vertex = new float3[meshGO->GetComponentMesh()->mData.num_vertex];
 
@@ -78,7 +81,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 				meshGO->GetComponentMesh()->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
 
-			// Copies faces
+			// Faces
 			if (mesh2->HasFaces())
 			{
 				meshGO->GetComponentMesh()->mData.num_index = mesh2->mNumFaces * 3;
@@ -95,14 +98,14 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 				}
 			}
 
-			// Copies normals
+			// Normals
 			if (mesh2->HasNormals())
 			{
 				meshGO->GetComponentMesh()->mData.normals = new float3[meshGO->GetComponentMesh()->mData.num_vertex];
 				memcpy(meshGO->GetComponentMesh()->mData.normals, mesh2->mNormals, sizeof(float3) * meshGO->GetComponentMesh()->mData.num_vertex);
 			}
 
-			// Copies UVs
+			// UVs
 			if (mesh2->HasTextureCoords(0))
 			{
 				meshGO->GetComponentMesh()->mData.num_tex_coords = meshGO->GetComponentMesh()->mData.num_vertex;

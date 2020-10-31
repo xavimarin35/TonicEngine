@@ -111,6 +111,8 @@ void PanelHierarchy::DrawMenuNotHovering()
 			App->scene_intro->CreateGO("GameObject_");
 			openMenuHovering = false;
 		}
+
+		ImGui::Separator();
 		
 		if (ImGui::BeginMenu("Create Shape"))
 		{
@@ -140,6 +142,10 @@ void PanelHierarchy::DrawMenuNotHovering()
 
 			ImGui::EndMenu();
 		}
+
+
+		App->gui->HelpMarker("Game assets from The Witcher: Ties of Destiny");
+		ImGui::SameLine();
 
 		if (ImGui::BeginMenu("Create Other"))
 		{
