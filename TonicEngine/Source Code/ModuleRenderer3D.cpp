@@ -129,6 +129,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+	//Environment Color
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -141,6 +144,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	App->gui->Draw();
 
 	SDL_GL_SwapWindow(App->window->window);
+
 
 	return UPDATE_CONTINUE;
 }

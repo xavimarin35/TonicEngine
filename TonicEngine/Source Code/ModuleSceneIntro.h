@@ -30,7 +30,7 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void DrawGridAndAxis();
+	bool DrawGridAndAxis(bool active);
 	void Create3DObject(OBJECTS3D object);
 	uint LoadNewTexture(uint id);
 
@@ -49,6 +49,12 @@ public:
 	GameObject* GOselected = nullptr;
 
 	uint texture = -1;
+
+	bool drawGrid = true;
+	Color gridColor = White;
+	float gridSize = 1.0f;
+	float gridWidth = 1.0f;
+	float axisLength = 1.0f;
 };
 
 #endif __ModuleSceneIntro__

@@ -41,6 +41,8 @@ bool ModuleSceneIntro::Start()
 	gameobjectsList.at(0)->GetComponentTexture()->texture = texture;
 	gameobjectsList.at(1)->GetComponentTexture()->texture = texture;
 
+	
+
 	return ret;
 }
 
@@ -78,7 +80,10 @@ update_status ModuleSceneIntro::Update(float dt)
 
 update_status ModuleSceneIntro::PostUpdate(float dt)
 {
-	DrawGridAndAxis();
+	if (drawGrid)
+		DrawGridAndAxis(true);
+	else
+		DrawGridAndAxis(false);
 
 	return UPDATE_CONTINUE;
 }
@@ -134,54 +139,63 @@ void ModuleSceneIntro::NumberOfGO()
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
-void ModuleSceneIntro::DrawGridAndAxis()
+bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 {
-	//PLANE -----------------------------
-	glLineWidth(2.0f);
-
-	glBegin(GL_LINES);
-	glColor3ub(255, 255, 255);
-	for (float i = -10; i <= 10; ++i)
+	if (active)
 	{
-		glVertex3f(i, 0.f, 0.f);
-		glVertex3f(i, 0, 10.f);
+		//PLANE -----------------------------
+		glLineWidth(gridWidth);
 
-		glVertex3f(0.f, 0.f, i);
-		glVertex3f(10.f, 0, i);
+		glBegin(GL_LINES);
+		glColor3f(gridColor.r, gridColor.g, gridColor.g);
+		for (float i = -10; i <= 10; ++i)
+		{
+			glVertex3f(i * gridSize, 0.f * gridSize, 0.f * gridSize);
+			glVertex3f(i * gridSize, 0 * gridSize, 10.f * gridSize);
 
-		glVertex3f(i, 0.f, 0.f);
-		glVertex3f(i, 0, -10.f);
+			glVertex3f(0.f * gridSize, 0.f * gridSize, i * gridSize);
+			glVertex3f(10.f * gridSize, 0 * gridSize, i * gridSize);
 
-		glVertex3f(0.f, 0.f, i);
-		glVertex3f(-10.f, 0, i);
+			glVertex3f(i * gridSize, 0.f * gridSize, 0.f * gridSize);
+			glVertex3f(i * gridSize, 0 * gridSize, -10.f * gridSize);
+
+			glVertex3f(0.f * gridSize, 0.f * gridSize, i * gridSize);
+			glVertex3f(-10.f * gridSize, 0 * gridSize, i * gridSize);
+		}
+		glEnd();
+
+		// AXIS ------------------------
+		glLineWidth(4.0f);
+
+		glBegin(GL_LINES);
+		//Y
+		glColor3ub(0, 255, 0);
+		glVertex3f(0.f, 0.f, 0.f);
+		glVertex3f(0.f, 1.f, 0.f);
+		glEnd();
+
+		glBegin(GL_LINES);
+		//X
+		glColor3ub(255, 0, 0);
+		glVertex3f(0.f, 0.001f, 0.f);
+		glVertex3f(1.f, 0.001f, 0.f);
+		glEnd();
+
+		glBegin(GL_LINES);
+		//Z
+		glColor3ub(0, 0, 255);
+		glVertex3f(0.f, 0.001f, 0.f);
+		glVertex3f(0.f, 0.001f, 1.f);
+		glEnd();
+
+		glColor3ub(255, 255, 255);
+
+		return true;
 	}
-	glEnd();
-
-	// AXIS ------------------------
-	glLineWidth(4.0f);
-
-	glBegin(GL_LINES);
-	//Y
-	glColor3ub(0, 255, 0);
-	glVertex3f(0.f, 0.f, 0.f);
-	glVertex3f(0.f, 1.f, 0.f);
-	glEnd();
-
-	glBegin(GL_LINES);
-	//X
-	glColor3ub(255, 0, 0);
-	glVertex3f(0.f, 0.001f, 0.f);
-	glVertex3f(1.f, 0.001f, 0.f);
-	glEnd();
-
-	glBegin(GL_LINES);
-	//Z
-	glColor3ub(0, 0, 255);
-	glVertex3f(0.f, 0.001f, 0.f);
-	glVertex3f(0.f, 0.001f, 1.f);
-	glEnd();
-
-	glColor3ub(255, 255, 255);
+	else {
+		return false;
+	}
+	
 }
 
 void ModuleSceneIntro::Create3DObject(OBJECTS3D object)

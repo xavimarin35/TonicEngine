@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleSceneIntro.h"
 
 #include "SDL/include/SDL_opengl.h"
 #include "imgui-1.78/imgui_impl_sdl.h"
@@ -167,6 +168,17 @@ bool PanelConfiguration::Draw()
 
 			if (ImGui::CollapsingHeader("Renderer"))
 			{
+				ImGui::Spacing();
+
+				if (ImGui::TreeNodeEx("Grid:", ImGuiTreeNodeFlags_None)) {
+					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+					ImGui::Spacing();
+					ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawG"); ImGui::Checkbox(" ", &App->scene_intro->drawGrid); ImGui::PopID();
+					ImGui::Text("Size:  ");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtG"); ImGui::InputFloat(" ", &App->scene_intro->gridSize, 0.1f, 10.0f); ImGui::PopID();
+					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->scene_intro->gridColor, flags);
+					ImGui::TreePop();
+				}
+
 				if (ImGui::Checkbox("Wireframe", &wireframe))
 					App->renderer3D->WireframeView(wireframe); 
 				ImGui::SameLine();
