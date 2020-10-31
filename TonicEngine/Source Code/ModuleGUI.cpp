@@ -126,6 +126,7 @@ bool ModuleGUI::Draw()
 
 			ImGui::EndMenu();
 		}
+
 		if (ImGui::BeginMenu("View"))
 		{
 			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
@@ -136,6 +137,7 @@ bool ModuleGUI::Draw()
 
 			ImGui::EndMenu();
 		}
+
 		if (ImGui::BeginMenu("GameObjects"))
 		{
 			if (ImGui::MenuItem("Create Empty GameObject"))
@@ -191,11 +193,7 @@ bool ModuleGUI::Draw()
 
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Help"))
-		{
-			ImGui::MenuItem("About Panel", NULL, &Pabout->active);
-			ImGui::EndMenu();
-		}
+
 		if (ImGui::BeginMenu("Debug"))
 		{
 			if (ImGui::MenuItem("Number of GameObjects"))
@@ -232,6 +230,26 @@ bool ModuleGUI::Draw()
 					GO->GetComponentTexture()->GetTexturePath();
 			}
 				
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Help"))
+		{
+			ImGui::MenuItem("About us...", NULL, &Pabout->active);
+
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Documentation"))
+				App->RequestBrowser("https://github.com/xavimarin35/TonicEngine/blob/master/README.md");
+
+			if (ImGui::MenuItem("Download Latest Version"))
+				App->RequestBrowser("https://github.com/xavimarin35/TonicEngine/releases");
+
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Report Bug"))
+				App->RequestBrowser("https://github.com/xavimarin35/TonicEngine/issues");
+
 			ImGui::EndMenu();
 		}
 
