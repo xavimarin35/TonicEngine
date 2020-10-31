@@ -127,17 +127,6 @@ bool ModuleGUI::Draw()
 			ImGui::EndMenu();
 		}
 
-		if (ImGui::BeginMenu("View"))
-		{
-			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
-			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
-			ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
-			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
-			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
-
-			ImGui::EndMenu();
-		}
-
 		if (ImGui::BeginMenu("GameObjects"))
 		{
 			if (ImGui::MenuItem("Create Empty GameObject"))
@@ -230,6 +219,17 @@ bool ModuleGUI::Draw()
 					GO->GetComponentTexture()->GetTexturePath();
 			}
 				
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Windows"))
+		{
+			ImGui::MenuItem("Configuration Window", NULL, &Pconfig->active);
+			ImGui::MenuItem("Demo Window", NULL, &show_demo_window);
+			ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
+			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
+			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
+
 			ImGui::EndMenu();
 		}
 
