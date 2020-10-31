@@ -157,7 +157,7 @@ update_status ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
+	if(quit == true || (keyboard[SDL_SCANCODE_LALT] == KEY_UP && keyboard[SDL_SCANCODE_F4] == KEY_UP))
 		return UPDATE_STOP;
 
 	return UPDATE_CONTINUE;

@@ -19,7 +19,7 @@ public:
 	bool openMenuHovering = false;
 	bool openMenuNotHovering = false;
 
-	int clickedGO = -1;
+	uint clickedGO = -1;
 
 private:
 };

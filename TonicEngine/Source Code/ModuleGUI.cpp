@@ -89,8 +89,6 @@ update_status ModuleGUI::Update(float dt)
 	if (quitApp)
 		ret = UPDATE_STOP;
 
-
-
 	return ret;
 }
 
@@ -121,7 +119,7 @@ bool ModuleGUI::Draw()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("Quit"))
+			if (ImGui::MenuItem("Quit", "Alt + F4"))
 				quitApp = true;
 
 			ImGui::EndMenu();
