@@ -141,6 +141,43 @@ void PanelHierarchy::DrawMenuNotHovering()
 			ImGui::EndMenu();
 		}
 
+		if (ImGui::BeginMenu("Create Other"))
+		{
+			if (ImGui::MenuItem("Geralt of Rivia"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::GERALT);
+				openMenuHovering = false;
+			}
+
+			if (ImGui::MenuItem("Light Post"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::LIGHTPOST);
+				openMenuHovering = false;
+			}
+
+			if (ImGui::MenuItem("Carriage"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::CARRIAGE);
+				openMenuHovering = false;
+			}
+
+			if (ImGui::MenuItem("Rock"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::ROCK);
+				openMenuHovering = false;
+			}
+
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Visit Ties of Destiny!"))
+			{
+				App->RequestBrowser("https://tiesofdestiny.com/index.html");
+				openMenuHovering = false;
+			}
+
+			ImGui::EndMenu();
+		}
+
 		ImGui::EndPopup();
 	}
 }
