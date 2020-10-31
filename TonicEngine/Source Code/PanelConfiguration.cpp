@@ -170,7 +170,8 @@ bool PanelConfiguration::Draw()
 			{
 				ImGui::Spacing();
 
-				if (ImGui::TreeNodeEx("Grid:", ImGuiTreeNodeFlags_None)) {
+				if (ImGui::TreeNodeEx("Grid:", ImGuiTreeNodeFlags_None)) 
+				{
 					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 					ImGui::Spacing();
 					ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawG"); ImGui::Checkbox(" ", &App->scene_intro->drawGrid); ImGui::PopID();
@@ -179,23 +180,40 @@ bool PanelConfiguration::Draw()
 					ImGui::TreePop();
 				}
 
-				if (ImGui::Checkbox("Wireframe", &wireframe))
-					App->renderer3D->WireframeView(wireframe); 
-				ImGui::SameLine();
-				if (ImGui::Checkbox("Depth", &depth_test))
-					App->renderer3D->DepthView(depth_test);
-				ImGui::SameLine();
-				if (ImGui::Checkbox("Cull Face", &cull_face))
-					App->renderer3D->CullFaceView(cull_face);
-				
-				if (ImGui::Checkbox("Lighting", &lighting))
-					App->renderer3D->LightingView(lighting);
-				ImGui::SameLine();
-				if (ImGui::Checkbox("Alpha", &alpha))
-					App->renderer3D->AlphaView(alpha);
-				ImGui::SameLine();
-				if (ImGui::Checkbox("Texture 2D", &texture2D))
-					App->renderer3D->Texture2DView(texture2D);
+				ImGui::Spacing();
+
+				if (ImGui::TreeNodeEx("Meshes:", ImGuiTreeNodeFlags_DefaultOpen)) 
+				{
+					ImGui::Spacing(); 
+
+					if (ImGui::Checkbox("Wireframe", &wireframe))
+						App->renderer3D->WireframeView(wireframe);
+
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Depth", &depth_test))
+						App->renderer3D->DepthView(depth_test);
+					
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Cull Face", &cull_face))
+						App->renderer3D->CullFaceView(cull_face);
+
+					if (ImGui::Checkbox("Lighting", &lighting))
+						App->renderer3D->LightingView(lighting);
+
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Alpha", &alpha))
+						App->renderer3D->AlphaView(alpha);
+
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Texture 2D", &texture2D))
+						App->renderer3D->Texture2DView(texture2D);
+
+					ImGui::TreePop();
+				}
 			}
 
 			if (ImGui::CollapsingHeader("Camera"))
