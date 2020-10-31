@@ -37,7 +37,7 @@ bool ModuleGUI::Start()
 	ImGui::CreateContext();
 	io = &ImGui::GetIO(); (void)io;
 	io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	
+
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
 
@@ -45,16 +45,16 @@ bool ModuleGUI::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init(NULL);
 
-bool show_demo_window = true;
-bool show_another_window = false;
-ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	bool show_demo_window = true;
+	bool show_another_window = false;
+	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
-{
-	ret = (*it)->Start();
-}
+	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
+	{
+		ret = (*it)->Start();
+	}
 
-return ret;
+	return ret;
 }
 
 update_status ModuleGUI::PreUpdate(float dt)
@@ -149,6 +149,11 @@ bool ModuleGUI::Draw()
 				if (ImGui::MenuItem("Cylinder"))
 					App->scene_intro->Create3DObject(OBJECTS3D::B_CYLINDER);
 
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("Baker House"))
+					App->scene_intro->Create3DObject(OBJECTS3D::BAKER_HOUSE);
+
 				ImGui::EndMenu();
 			}
 
@@ -209,12 +214,13 @@ bool ModuleGUI::Draw()
 
 				ImGui::EndMenu();
 			}
-			// ---------------------------
 
 			if (ImGui::MenuItem("Get Texture Path"))
 			{
 				if (GO != nullptr)
 					GO->GetComponentTexture()->GetTexturePath();
+
+				LOG_C("WARNING: This tool is not usable yet");
 			}
 				
 			ImGui::EndMenu();
@@ -379,8 +385,3 @@ void ModuleGUI::ApplyDocking(bool* window)
 	docking_io = &io;
 	ImGui::End();
 }
-
-
-
-
-

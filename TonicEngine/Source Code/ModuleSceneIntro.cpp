@@ -237,6 +237,10 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 	case OBJECTS3D::ROCK:
 		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/Rock.obj", 4);
 		break;
+
+	case OBJECTS3D::BAKER_HOUSE:
+		App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx", 5);
+		break;
 	}
 }
 
@@ -260,6 +264,10 @@ uint ModuleSceneIntro::LoadNewTexture(uint id)
 
 	case 4:
 		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Rock/Rock.png");
+		break;
+
+	case 5:
+		texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
 		break;
 	}
 

@@ -80,13 +80,10 @@ bool PanelHierarchy::Draw()
 					clickedGO = i;
 					App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
 				}
-
 			}
-			
 		}
 
 		ImGui::End();
-
 	}
 
 	return true;
@@ -136,9 +133,16 @@ void PanelHierarchy::DrawMenuNotHovering()
 				openMenuHovering = false;
 			}
 
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Baker House"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::BAKER_HOUSE);
+				openMenuHovering = false;
+			}
+
 			ImGui::EndMenu();
 		}
-
 
 		App->gui->HelpMarker("Game assets from The Witcher: Ties of Destiny");
 		ImGui::SameLine();

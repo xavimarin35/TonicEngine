@@ -16,7 +16,8 @@ enum class OBJECTS3D
 	LIGHTPOST, 
 	CARRIAGE, 
 	GERALT,
-	ROCK
+	ROCK,
+	BAKER_HOUSE
 };
 
 class ModuleSceneIntro : public Module
