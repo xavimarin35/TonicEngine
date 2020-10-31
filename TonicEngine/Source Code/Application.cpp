@@ -160,6 +160,7 @@ bool Application::CleanUp()
 
 void Application::RequestBrowser(const char* link) const
 {
+	LOG_C("WARNING: Browser Opened")
 	ShellExecuteA(NULL, "open", link, NULL, NULL, SW_SHOWNORMAL);
 }
 
