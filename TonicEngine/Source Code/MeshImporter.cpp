@@ -142,13 +142,13 @@ string MeshImporter::GetName(const char* path)
 {
 	// Finding the last slash of the path
 	std::string originalString = path;
-	std::size_t findSlash = originalString.find_last_of("/");
+	std::size_t findSlash = originalString.find_last_of("/\\");
 
 	// Erasing everything previous to the slash
 	std::string stringWithPoint = originalString.substr(findSlash + 1);
 
 	// Finding the point
-	std::size_t findPoint = stringWithPoint.find(".");
+	std::size_t findPoint = stringWithPoint.find_last_of(".");
 
 	// Returns the name of the file
 	return stringWithPoint.substr(0, findPoint);
