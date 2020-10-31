@@ -44,24 +44,22 @@ bool PanelHierarchy::Draw()
 			else if (openMenuNotHovering)
 				DrawMenuNotHovering();
 
-			ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
-
 			for (uint i = 0; i < App->scene_intro->gameobjectsList.size(); ++i)
 			{
+				ImGuiTreeNodeFlags select_flags = ImGuiTreeNodeFlags_Leaf;
 
-				if (ImGui::Selectable(App->scene_intro->gameobjectsList.at(i)->oData.GOname.data(), App->scene_intro->gameobjectsList.at(i), base_flags))
+				if (clickedGO == i)
+					select_flags |= ImGuiTreeNodeFlags_Selected;
+
+				if (App->scene_intro->GOselected != nullptr)
 				{
-					App->scene_intro->GOselected = App->scene_intro->gameobjectsList.at(i);
-
-					switch (i) 
-					{
-						case 0:
-							LOG_C("Selected GameObject i = %i", i);
-							break;
-						case 1:
-							LOG_C("Selected GameObject i = %i", i);
-							break;
-					}
+					if (ImGui::TreeNodeEx((void*)(intptr_t)i, select_flags, App->scene_intro->gameobjectsList[i]->oData.GOname.data()))
+						ImGui::TreePop();
+				}
+				else
+				{
+					if (ImGui::TreeNodeEx((void*)(intptr_t)i, ImGuiTreeNodeFlags_Leaf, App->scene_intro->gameobjectsList[i]->oData.GOname.data()))
+						ImGui::TreePop();
 				}
 				
 				// Select active GO (Left Click)
@@ -96,9 +94,7 @@ bool PanelHierarchy::Draw()
 
 void PanelHierarchy::DrawMenuNotHovering()
 {
-	if (ImGui::IsMouseReleased(0) || ImGui::IsMouseReleased(2))
-		openMenuNotHovering = false;
-	else if (ImGui::IsMouseClicked(1))
+	if (ImGui::IsMouseClicked(1))
 		openMenuNotHovering = false;
 
 	if (ImGui::BeginPopupContextWindow())
@@ -190,9 +186,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 
 void PanelHierarchy::DrawMenuHovering()
 {
-	if (ImGui::IsMouseReleased(0) || ImGui::IsMouseReleased(2))
-		openMenuHovering = false;
-	else if (ImGui::IsMouseClicked(1))
+	if (ImGui::IsMouseClicked(1))
 		openMenuHovering = false;
 
 	if (ImGui::BeginPopupContextWindow())
