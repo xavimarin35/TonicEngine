@@ -4,7 +4,6 @@
 #include "Application.h"
 #include "PanelManager.h"
 
-
 class PanelInspector : public PanelManager
 {
 public:
@@ -13,9 +12,6 @@ public:
 
 	bool Start();
 	bool Draw();
-
-
-private:
 
 };
 

@@ -120,16 +120,20 @@ update_status ModuleInput::PreUpdate(float dt)
 				break;
 			}
 
+			// File Dropped on scene
 			case SDL_DROPFILE:
 			{
 				dropDirection = e.drop.file;
 
+				// FBX or OBJ
 				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr || strstr(dropDirection, ".obj") != nullptr || strstr(dropDirection, ".OBJ") != nullptr)
 				{
 					App->mesh_imp->GenerateMesh(dropDirection);
 					MeshFileDroped = true;
 					LOG_C("New file dropped on window with path: %s", dropDirection);
 				}
+
+				// PNG or DDS
 				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
 				{
 					if (App->scene_intro->GOselected != nullptr)

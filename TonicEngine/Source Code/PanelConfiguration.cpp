@@ -11,7 +11,6 @@
 
 PanelConfiguration::PanelConfiguration() : PanelManager()
 {
-	
 }
 
 PanelConfiguration::~PanelConfiguration()
@@ -196,7 +195,6 @@ bool PanelConfiguration::Draw()
 				ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 0.0f, 2.0f);
 				ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 30.0f);
 			}
-
 		}
 
 		ImGui::End();
@@ -204,5 +202,3 @@ bool PanelConfiguration::Draw()
 
 	return true;
 }
-
-

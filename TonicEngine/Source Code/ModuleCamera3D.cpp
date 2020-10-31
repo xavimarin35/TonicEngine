@@ -20,7 +20,6 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 ModuleCamera3D::~ModuleCamera3D()
 {}
 
-// -----------------------------------------------------------------
 bool ModuleCamera3D::Start()
 {
 	LOG_C("Loading Camera 3D");
@@ -31,7 +30,6 @@ bool ModuleCamera3D::Start()
 	return ret;
 }
 
-// -----------------------------------------------------------------
 bool ModuleCamera3D::CleanUp()
 {
 	LOG("Cleaning camera");
@@ -39,7 +37,6 @@ bool ModuleCamera3D::CleanUp()
 	return true;
 }
 
-// -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
 	// Implement a debug camera with keys and mouse
@@ -47,6 +44,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (isOnAbout || isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
 	{
+		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
 		{
 			LOG_C("You have to be inside the scene to focus the camera to the selected Game Object!");
@@ -82,7 +80,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = speed * 2;
 
-	// Mouse motion ----------------
+	// Mouse motion
 
 	// Camera Orbit
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
@@ -208,15 +206,12 @@ update_status ModuleCamera3D::Update(float dt)
 		Reference += newPos;
 	}
 
-	// Recalculate matrix -------------
+	// Recalculate matrix
 	CalculateViewMatrix();
-
-	
 
 	return UPDATE_CONTINUE;
 }
 
-// -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
 {
 	this->Position = Position;
@@ -235,7 +230,6 @@ void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool Rota
 	CalculateViewMatrix();
 }
 
-// -----------------------------------------------------------------
 void ModuleCamera3D::LookAt( const vec3 &Spot)
 {
 	Reference = Spot;
@@ -247,8 +241,6 @@ void ModuleCamera3D::LookAt( const vec3 &Spot)
 	CalculateViewMatrix();
 }
 
-
-// -----------------------------------------------------------------
 void ModuleCamera3D::Move(const vec3 &Movement)
 {
 	Position += Movement;
@@ -257,7 +249,6 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 	CalculateViewMatrix();
 }
 
-// -----------------------------------------------------------------
 float* ModuleCamera3D::GetViewMatrix()
 {
 	return &ViewMatrix;
@@ -275,7 +266,6 @@ void ModuleCamera3D::GoInitialPos()
 	CalculateViewMatrix();
 }
 
-// -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);

@@ -5,7 +5,6 @@
 #include "ModuleGUI.h"
 #include "PanelManager.h"
 
-
 #include <list>
 
 // Colors for console text

@@ -7,7 +7,6 @@
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
-//#include "Math.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -191,7 +190,6 @@ void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-
 void ModuleRenderer3D::GenerateObject(GameObject* GO)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -199,7 +197,6 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 
 	glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_vertex);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
-
 
 	if (GO->GetComponentTexture()->active)
 	{
@@ -210,7 +207,6 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 	}
 	else
 		glBindTexture(GL_TEXTURE_2D, NULL);
-
 
 	glActiveTexture(GL_TEXTURE0);
 	
@@ -277,4 +273,3 @@ void ModuleRenderer3D::Texture2DView(bool active)
 	else
 		glDisable(GL_TEXTURE_2D);
 }
-

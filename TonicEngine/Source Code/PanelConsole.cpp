@@ -105,5 +105,3 @@ void PanelConsole::EraseLogs()
 
 	autoScroll = true;
 }
-
-

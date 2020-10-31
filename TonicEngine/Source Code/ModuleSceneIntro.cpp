@@ -73,16 +73,12 @@ update_status ModuleSceneIntro::Update(float dt)
 		gameobjectsList[i]->Update();
 	}
 
-
-	
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleSceneIntro::PostUpdate(float dt)
 {
 	DrawGridAndAxis();
-
-
 
 	return UPDATE_CONTINUE;
 }

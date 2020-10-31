@@ -48,11 +48,7 @@ public:
 
 	GameObject* GOselected = nullptr;
 
-	uint texture;
-	uint checkers_texture;
-	uint texture_shapes;
-	
+	uint texture = -1;
 };
-
 
 #endif __ModuleSceneIntro__

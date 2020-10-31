@@ -14,12 +14,12 @@
 
 ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	// needs to be created before Init so other modules can use it
+	// Needs to be created before Init so other modules can use it
 	char* base_path = SDL_GetBasePath();
 	PHYSFS_init(nullptr);
 	SDL_free(base_path);
 
-	//Setting the working directory as the writing directory
+	// Setting the working directory as the writing directory
 	if (PHYSFS_setWriteDir(".") == 0)
 		LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
 

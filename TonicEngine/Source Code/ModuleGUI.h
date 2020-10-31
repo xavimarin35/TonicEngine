@@ -17,13 +17,11 @@
 #include "PanelHierarchy.h"
 #include "PanelInspector.h"
 
-
 class PanelConfiguration;
 class PanelAbout;
 class PanelConsole;
 class PanelHierarchy;
 class PanelInspector;
-
 
 class ModuleGUI : public Module
 {
@@ -65,7 +63,6 @@ public:
 	bool quitApp = false;
 
 	static void HelpMarker(const char* desc);
-	
 
 private:
 
