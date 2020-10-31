@@ -120,12 +120,11 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			App->renderer3D->NewIndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
 			App->renderer3D->NewTextBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
 
-
 			if (tex == 0 && Filename == "Assets/BakerHouse.fbx")
 				meshGO->GetComponentTexture()->texture = texture;
 
 			else
-				meshGO->GetComponentTexture()->texture = tex;
+				meshGO->GetComponentTexture()->texture = App->scene_intro->LoadNewTexture(tex);
 		}
 
 		aiReleaseImport(scene);

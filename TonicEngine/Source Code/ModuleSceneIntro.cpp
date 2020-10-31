@@ -32,8 +32,6 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	
-
 	App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx");
 
 	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
@@ -215,19 +213,45 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::GERALT:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Geralt.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Geralt.obj", 1);
 		break;
 
 	case OBJECTS3D::LIGHTPOST:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost.obj", 2);
 		break;
 
 	case OBJECTS3D::CARRIAGE:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage.obj", 3);
 		break;
 
 	case OBJECTS3D::ROCK:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/Rock.obj");
+		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/Rock.obj", 4);
 		break;
 	}
+}
+
+uint ModuleSceneIntro::LoadNewTexture(uint id)
+{
+	uint texture = -1;
+
+	switch (id)
+	{
+	case 1:
+		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Geralt/Geralt.png");
+		break;
+
+	case 2:
+		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/LightPost/LightPost.png");
+		break;
+
+	case 3:
+		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Carriage/Carriage.png");
+		break;
+
+	case 4:
+		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Rock/Rock.png");
+		break;
+	}
+
+	return texture;
 }
