@@ -47,7 +47,7 @@ update_status ModuleCamera3D::Update(float dt)
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
 		{
-			LOG_C("You have to be inside the scene to focus the camera to the selected Game Object!");
+			LOG_C("WARNING: You have to be inside the scene to focus the camera to the selected Game Object!");
 			focusError = true;
 		}
 

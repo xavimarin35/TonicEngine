@@ -63,7 +63,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
-			GameObject* meshGO = App->scene_intro->CreateGO("GameObject_");
+			GameObject* meshGO = App->scene_intro->CreateGO(GetName(Filename));
 
 			aiMesh* mesh2 = scene->mMeshes[i];
 
@@ -136,4 +136,20 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 
 	else
 		LOG_C("ERROR: Cannot load scene %s", Filename);
+}
+
+string MeshImporter::GetName(const char* path)
+{
+	// Finding the last slash of the path
+	std::string originalString = path;
+	std::size_t findSlash = originalString.find_last_of("/");
+
+	// Erasing everything previous to the slash
+	std::string stringWithPoint = originalString.substr(findSlash + 1);
+
+	// Finding the point
+	std::size_t findPoint = stringWithPoint.find(".");
+
+	// Returns the name of the file
+	return stringWithPoint.substr(0, findPoint);
 }

@@ -59,6 +59,11 @@ bool PanelConsole::Draw()
 					color = ERROR_CONSOLE_COLOR;
 					has_color = true;
 				}
+				if (strstr((*item), "WARNING:"))
+				{
+					color = WARNING_CONSOLE_COLOR;
+					has_color = true;
+				}
 				if (has_color)
 				{
 					ImGui::PushStyleColor(ImGuiCol_Text, color);

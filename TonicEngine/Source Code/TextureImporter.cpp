@@ -84,7 +84,6 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	//Unbind Texture
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 	
 	if (App->scene_intro->GOselected != nullptr)
