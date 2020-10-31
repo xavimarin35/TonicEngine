@@ -150,17 +150,17 @@ bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 		glColor3f(gridColor.r, gridColor.g, gridColor.g);
 		for (float i = -10; i <= 10; ++i)
 		{
-			glVertex3f(i * gridSize, 0.f * gridSize, 0.f * gridSize);
-			glVertex3f(i * gridSize, 0 * gridSize, 10.f * gridSize);
+			glVertex3f(i * gridSize, 0.f, 0.f);
+			glVertex3f(i * gridSize, 0, 10.f * gridSize);
 
-			glVertex3f(0.f * gridSize, 0.f * gridSize, i * gridSize);
-			glVertex3f(10.f * gridSize, 0 * gridSize, i * gridSize);
+			glVertex3f(0.f, 0.f, i * gridSize);
+			glVertex3f(10.f * gridSize, 0, i * gridSize);
 
-			glVertex3f(i * gridSize, 0.f * gridSize, 0.f * gridSize);
-			glVertex3f(i * gridSize, 0 * gridSize, -10.f * gridSize);
+			glVertex3f(i * gridSize, 0.f, 0.f * gridSize);
+			glVertex3f(i * gridSize, 0, -10.f * gridSize);
 
-			glVertex3f(0.f * gridSize, 0.f * gridSize, i * gridSize);
-			glVertex3f(-10.f * gridSize, 0 * gridSize, i * gridSize);
+			glVertex3f(0.f, 0.f, i * gridSize);
+			glVertex3f(-10.f * gridSize, 0, i * gridSize);
 		}
 		glEnd();
 
@@ -171,21 +171,21 @@ bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 		//Y
 		glColor3ub(0, 255, 0);
 		glVertex3f(0.f, 0.f, 0.f);
-		glVertex3f(0.f, 1.f, 0.f);
+		glVertex3f(0.f, 1.f * axisLength, 0.f);
 		glEnd();
 
 		glBegin(GL_LINES);
 		//X
 		glColor3ub(255, 0, 0);
 		glVertex3f(0.f, 0.001f, 0.f);
-		glVertex3f(1.f, 0.001f, 0.f);
+		glVertex3f(1.f * axisLength, 0.001f, 0.f);
 		glEnd();
 
 		glBegin(GL_LINES);
 		//Z
 		glColor3ub(0, 0, 255);
 		glVertex3f(0.f, 0.001f, 0.f);
-		glVertex3f(0.f, 0.001f, 1.f);
+		glVertex3f(0.f, 0.001f, 1.f * axisLength);
 		glEnd();
 
 		glColor3ub(255, 255, 255);

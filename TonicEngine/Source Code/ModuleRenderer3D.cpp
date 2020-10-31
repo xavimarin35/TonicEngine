@@ -130,7 +130,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 		lights[i].Render();
 
 	//Environment Color
-	glClearColor(0.f, 0.f, 0.f, 1.f);
+	glClearColor(bg_color.r, bg_color.g, bg_color.b, 1.f);
 
 	return UPDATE_CONTINUE;
 }

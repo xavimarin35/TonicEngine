@@ -170,6 +170,17 @@ bool PanelConfiguration::Draw()
 			{
 				ImGui::Spacing();
 
+				if (ImGui::TreeNodeEx("Background:", ImGuiTreeNodeFlags_None))
+				{
+					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+					ImGui::Spacing();
+					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->renderer3D->bg_color, flags);
+					ImGui::TreePop();
+				}
+
+				ImGui::Separator();
+				ImGui::Spacing();
+
 				if (ImGui::TreeNodeEx("Grid:", ImGuiTreeNodeFlags_None)) 
 				{
 					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
@@ -180,6 +191,17 @@ bool PanelConfiguration::Draw()
 					ImGui::TreePop();
 				}
 
+				ImGui::Separator();
+				ImGui::Spacing();
+
+				if (ImGui::TreeNodeEx("Axis:", ImGuiTreeNodeFlags_None))
+				{
+					ImGui::Spacing();
+					ImGui::Text("Length:  "); ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtG"); ImGui::InputFloat(" ", &App->scene_intro->axisLength, 0.1f, 10.0f); ImGui::PopID();
+					ImGui::TreePop();
+				}
+
+				ImGui::Separator();
 				ImGui::Spacing();
 
 				if (ImGui::TreeNodeEx("Meshes:", ImGuiTreeNodeFlags_DefaultOpen)) 
