@@ -218,14 +218,6 @@ bool ModuleGUI::Draw()
 				ImGui::EndMenu();
 			}
 
-			if (ImGui::MenuItem("Get Texture Path"))
-			{
-				if (GO != nullptr)
-					GO->GetComponentTexture()->GetTexturePath();
-
-				LOG_C("WARNING: This tool is not usable yet");
-			}
-
 			if (ImGui::MenuItem("Get active GO index"))
 			{
 				if (GO != nullptr)
@@ -343,8 +335,6 @@ void ModuleGUI::Render()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	//glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y); // I think this lines gives problems when modifying the window width
-	
 }
 
 void ModuleGUI::HelpMarker(const char* desc)

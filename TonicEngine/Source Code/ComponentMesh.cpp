@@ -1,6 +1,7 @@
 #include "ComponentMesh.h"
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleRenderer3D.h"
 
 ComponentMesh::ComponentMesh(GameObject* gameObject) : Component(COMPONENT_TYPE::MESH, gameObject)
 {
@@ -9,21 +10,31 @@ ComponentMesh::ComponentMesh(GameObject* gameObject) : Component(COMPONENT_TYPE:
 
 ComponentMesh::~ComponentMesh()
 {
+	App->renderer3D->DeleteBuffer(mData.id_index);
+	App->renderer3D->DeleteBuffer(mData.id_vertex);
+	App->renderer3D->DeleteBuffer(mData.id_tex_coords);
+
+	RELEASE_ARRAY(mData.vertex);
+	RELEASE_ARRAY(mData.index);
+	RELEASE_ARRAY(mData.tex_coords);
+	RELEASE_ARRAY(mData.normals);
 }
 
 bool ComponentMesh::Update()
 {
-	
-	if (showFaceNormals)
-		DrawFaceNormals(App->scene_intro->GOselected, true);
-	else
-		DrawFaceNormals(App->scene_intro->GOselected, false);
-	
+	if (App->scene_intro->GOselected != nullptr)
+	{
+		if (showFaceNormals)
+			DrawFaceNormals(App->scene_intro->GOselected, true);
+		else
+			DrawFaceNormals(App->scene_intro->GOselected, false);
 
-	if (showVertexNormals)
-		DrawVertexNormals(App->scene_intro->GOselected, true);
-	else
-		DrawVertexNormals(App->scene_intro->GOselected, false);
+
+		if (showVertexNormals)
+			DrawVertexNormals(App->scene_intro->GOselected, true);
+		else
+			DrawVertexNormals(App->scene_intro->GOselected, false);
+	}
 
 	return true;
 }

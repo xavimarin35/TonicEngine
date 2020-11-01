@@ -42,6 +42,8 @@ void ComponentTexture::Draw()
 			if (ImGui::Button("Disable Texture"))
 				active = false;
 
+			ImGui::Spacing();
+			ImGui::Separator();
 
 			if (App->scene_intro->GOselected != nullptr)
 			{
@@ -63,7 +65,7 @@ void ComponentTexture::Draw()
 			else if (EnableCheckersTexture)
 				tex = App->tex_imp->checker_texture;
 
-			ImGui::Image((void*)tex, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+			ImGui::Image((void*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
 		else
 		{
@@ -82,7 +84,6 @@ void ComponentTexture::OpenTexturesMenu()
 {
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
-		
 
 		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{

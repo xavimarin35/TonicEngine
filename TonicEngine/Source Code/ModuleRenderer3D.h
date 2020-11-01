@@ -22,9 +22,10 @@ public:
 
 	void OnResize(int width, int height);
 
-	void NewVertexBuffer(float3* vertex, uint& size, uint& id_vertex);
-	void NewIndexBuffer(uint* index, uint& size, uint& id_index);
-	void NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
+	void VertexBuffer(float3* vertex, uint& size, uint& id_vertex);
+	void IndexBuffer(uint* index, uint& size, uint& id_index);
+	void TextureBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords);
+	void DeleteBuffer(uint& type);
 
 	void GenerateObject(GameObject* GO);
 

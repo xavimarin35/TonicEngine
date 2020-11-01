@@ -18,7 +18,9 @@ MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, s
 	active = true; 
 }
 
-MeshImporter::~MeshImporter() {}
+MeshImporter::~MeshImporter() 
+{
+}
 
 bool MeshImporter::Init()
 {
@@ -119,9 +121,9 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			}
 
 			// Import data to buffers
-			App->renderer3D->NewVertexBuffer(meshGO->GetComponentMesh()->mData.vertex, meshGO->GetComponentMesh()->mData.num_vertex, meshGO->GetComponentMesh()->mData.id_vertex);
-			App->renderer3D->NewIndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
-			App->renderer3D->NewTextBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
+			App->renderer3D->VertexBuffer(meshGO->GetComponentMesh()->mData.vertex, meshGO->GetComponentMesh()->mData.num_vertex, meshGO->GetComponentMesh()->mData.id_vertex);
+			App->renderer3D->IndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
+			App->renderer3D->TextureBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
 
 			if (tex == 0 && Filename == "Assets/BakerHouse.fbx")
 				meshGO->GetComponentTexture()->texture = texture;

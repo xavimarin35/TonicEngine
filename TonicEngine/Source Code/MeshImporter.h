@@ -4,8 +4,6 @@
 #include "Application.h"
 #include "Module.h"
 
-
-
 class MeshImporter : public Module
 {
 

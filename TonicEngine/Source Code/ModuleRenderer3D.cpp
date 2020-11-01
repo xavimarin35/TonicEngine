@@ -170,7 +170,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::NewVertexBuffer(float3* vertex, uint& size, uint& id_vertex)
+void ModuleRenderer3D::VertexBuffer(float3* vertex, uint& size, uint& id_vertex)
 {
 	glGenBuffers(1, (GLuint*) &(id_vertex));
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
@@ -178,7 +178,7 @@ void ModuleRenderer3D::NewVertexBuffer(float3* vertex, uint& size, uint& id_vert
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::NewIndexBuffer(uint* index, uint& size, uint& id_index)
+void ModuleRenderer3D::IndexBuffer(uint* index, uint& size, uint& id_index)
 {
 	glGenBuffers(1, (GLuint*) &(id_index));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
@@ -186,12 +186,17 @@ void ModuleRenderer3D::NewIndexBuffer(uint* index, uint& size, uint& id_index)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleRenderer3D::NewTextBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords)
+void ModuleRenderer3D::TextureBuffer(float* text_coords, uint& num_text_coords, uint& id_text_coords)
 {
 	glGenBuffers(1, (GLuint*) &(id_text_coords));
 	glBindBuffer(GL_ARRAY_BUFFER, id_text_coords);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_text_coords * 2, text_coords, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void ModuleRenderer3D::DeleteBuffer(uint& type)
+{
+	glDeleteBuffers(1, &(GLuint)type);
 }
 
 void ModuleRenderer3D::GenerateObject(GameObject* GO)
