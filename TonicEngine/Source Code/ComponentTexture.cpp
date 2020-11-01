@@ -32,21 +32,15 @@ void ComponentTexture::Draw()
 	{
 		ImGui::Spacing();
 
-
 		if (active)
 		{
 			if (ImGui::Button("Select Texture"))
-			{
-				LOG_C("WARNING: Select texture in the new emergent window");
 				openMenuTex = true;
-			}
 				
-
 			ImGui::SameLine();
 
 			if (ImGui::Button("Disable Texture"))
 				active = false;
-
 
 			// Aixo no va be perque al principi deu inicialitzar primer els components, llavors el que primer s'ha de fer es inicialitzar els panels (crec)
 			// El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
@@ -69,7 +63,6 @@ void ComponentTexture::Draw()
 
 			App->gui->HelpMarker("Click 'Enable' button to select a texture");
 		}
-
 	}
 }
 

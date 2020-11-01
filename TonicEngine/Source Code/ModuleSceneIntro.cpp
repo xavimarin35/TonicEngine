@@ -63,15 +63,18 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 
-	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
-	{
-		if ((*it)->oData.active)
-		{
-			App->renderer3D->GenerateObject((*it));
-		}
-	}
+	//for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
+	//{
+	//	if ((*it)->oData.active)
+	//	{
+	//		App->renderer3D->GenerateObject((*it));
+	//	}
+	//}
 	for (int i = 0; i < gameobjectsList.size(); ++i)
 	{
+		if(gameobjectsList[i]->oData.active)
+		App->renderer3D->GenerateObject(gameobjectsList[i]);
+
 		gameobjectsList[i]->Update();
 	}
 
@@ -137,6 +140,31 @@ void ModuleSceneIntro::RemoveAllGO()
 void ModuleSceneIntro::NumberOfGO()
 {
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
+}
+
+void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
+{
+	GO = App->scene_intro->GOselected;
+
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+	{
+		if (gameobjectsList[i] == GO)
+		{
+			LOG_C("Active GO has the index %i in the list", i);
+		}
+	}
+}
+
+void ModuleSceneIntro::GetSizeOfList()
+{
+	int size = 0;
+
+	for (int i = 0; i < gameobjectsList.size(); ++i)
+	{
+		size = gameobjectsList.size();
+	}
+
+	LOG_C("There are %i GO in the list", size);
 }
 
 bool ModuleSceneIntro::DrawGridAndAxis(bool active)

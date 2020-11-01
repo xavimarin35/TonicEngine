@@ -54,6 +54,7 @@ update_status TextureImporter::Update(float dt)
 bool TextureImporter::CleanUp()
 {
 	glDeleteTextures(1, (GLuint*)&checker_texture);
+	glDeleteTextures(1, (GLuint*)&texture);
 
 	return true;
 }
@@ -85,12 +86,6 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
-	
-	if (App->scene_intro->GOselected != nullptr)
-	{
-		App->scene_intro->GOselected->GetComponentTexture()->texture_width = width;
-		App->scene_intro->GOselected->GetComponentTexture()->texture_height = height;
-	}
 
 	return tex;
 }
@@ -112,11 +107,6 @@ uint TextureImporter::GenerateTexture(const char* path)
 
 			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 				t = CreateTexture(ilGetData(), path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
-			
-			if (App->scene_intro->GOselected != nullptr)
-			{
-				App->scene_intro->GOselected->GetComponentTexture()->texture_path = path;
-			}
 
 			return t;
 		}

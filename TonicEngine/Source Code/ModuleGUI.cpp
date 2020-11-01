@@ -162,9 +162,12 @@ bool ModuleGUI::Draw()
 
 			if (ImGui::BeginMenu("Create Other"))
 			{
-				
+
 				if (ImGui::MenuItem("Geralt of Rivia"))
+				{
 					App->scene_intro->Create3DObject(OBJECTS3D::GERALT);
+					LOG_C("WARNING: This 3D model has so many polys. The performance of the engine could be affected");
+				}
 
 				if (ImGui::MenuItem("Light post"))
 					App->scene_intro->Create3DObject(OBJECTS3D::LIGHTPOST);
@@ -222,6 +225,17 @@ bool ModuleGUI::Draw()
 
 				LOG_C("WARNING: This tool is not usable yet");
 			}
+
+			if (ImGui::MenuItem("Get active GO index"))
+			{
+				if (GO != nullptr)
+					App->scene_intro->GetGameObjectSelectedIndex(GO);
+				else
+					LOG_C("WARNING: You must select a GO to get the index");
+			}
+
+			if (ImGui::MenuItem("Get size of the list"))
+				App->scene_intro->GetSizeOfList();
 				
 			ImGui::EndMenu();
 		}

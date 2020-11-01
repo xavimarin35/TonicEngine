@@ -158,6 +158,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 			if (ImGui::MenuItem("Geralt of Rivia"))
 			{
 				App->scene_intro->Create3DObject(OBJECTS3D::GERALT);
+				LOG_C("WARNING: This 3D model has so many polys. The performance of the engine could be affected");
 				openMenuHovering = false;
 			}
 

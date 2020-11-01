@@ -29,7 +29,6 @@ public:
 	bool EnableHouseTexture = true;
 	bool noTexture = false;
 	bool openMenuTex = false;
-	//bool openMenuTex2 = false;
 	
 	string texture_path;
 	uint texture_width = 0;

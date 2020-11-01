@@ -45,6 +45,8 @@ public:
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
 	void NumberOfGO();
+	void GetGameObjectSelectedIndex(GameObject* GO);
+	void GetSizeOfList();
 	std::vector<GameObject*> gameobjectsList;
 
 	GameObject* GOselected = nullptr;
