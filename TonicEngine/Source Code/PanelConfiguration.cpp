@@ -40,6 +40,8 @@ bool PanelConfiguration::Draw()
 
 			if (ImGui::CollapsingHeader("Window"))
 			{
+				ImGui::Spacing();
+
 				App->window->GetWindowSize(w_width, w_height);
 				ImGui::SliderInt("Width", &screen.width, 1, 1920);
 				ImGui::SliderInt("Height", &screen.height, 1, 1080);
@@ -49,8 +51,9 @@ bool PanelConfiguration::Draw()
 				SDL_SetWindowBrightness(App->window->window, screen.brightness);
 				
 				ImGui::Separator();
+				ImGui::Spacing();
 
-				if (ImGui::Checkbox("Full", &win.fullscreen))
+				if (ImGui::Checkbox("Full Screen", &win.fullscreen))
 					App->window->SetFullScreen(win.fullscreen);
 				ImGui::SameLine();
 				if (ImGui::Checkbox("Resizable", &win.resizable))
@@ -58,10 +61,14 @@ bool PanelConfiguration::Draw()
 				ImGui::SameLine();
 				if (ImGui::Checkbox("Borderless", &win.borderless))
 					App->window->SetBorderless(win.borderless);
+
+				ImGui::Spacing();
 			}
 
 			if (ImGui::CollapsingHeader("Application"))
 			{
+				ImGui::Spacing();
+
 				// App Name
 				static char appName[60];
 				if (App->GetAppName() != nullptr)
@@ -76,13 +83,19 @@ bool PanelConfiguration::Draw()
 				if (ImGui::InputText("Organization Name", orgName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
 					App->ApplyOrgName(orgName);*/
 
+				ImGui::Spacing();
 				ImGui::Separator();
+				ImGui::Spacing();
 
 				ImGui::SliderInt("Max FPS", &App->framerateCap, 1, 60);
+
+				ImGui::Spacing();
 
 				ImGui::Text("Limit Framerate:");
 				ImGui::SameLine();
 				ImGui::TextColored(YELLOW_COLOR, "%d", App->framerateCap);
+
+				ImGui::Spacing();
 
 				char title[25];
 				sprintf_s(title, 25, "Framerate %.1f", App->fpsVec[App->fpsVec.size() - 1]);
@@ -90,10 +103,13 @@ bool PanelConfiguration::Draw()
 				sprintf_s(title, 25, "Milliseconds %0.1f", App->msVec[App->msVec.size() - 1]);
 				ImGui::PlotHistogram("##milliseconds", &App->msVec[0], App->msVec.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 
+				ImGui::Spacing();
 			}
 
 			if (ImGui::CollapsingHeader("Hardware"))
 			{
+				ImGui::Spacing();
+
 				ImGui::Text("SDL Version:");
 				ImGui::SameLine();
 				ImGui::TextColored(YELLOW_COLOR, "%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
@@ -157,13 +173,18 @@ bool PanelConfiguration::Draw()
 				ImGui::SameLine();
 				ImGui::TextColored(YELLOW_COLOR, "%f", float(hardware.VRAM_available) / (1024.f));
 
+				ImGui::Spacing();
 			}
 
 			if (ImGui::CollapsingHeader("Input"))
 			{
+				ImGui::Spacing();
+
 				ImGui::Text("Mouse Position:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i, %i", App->input->GetMouseX(), App->input->GetMouseY());
 				ImGui::Text("Mouse Motion:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i,%i", App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
 				ImGui::Text("Mouse Wheel:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", App->input->GetMouseZ());
+
+				ImGui::Spacing();
 			}
 
 			if (ImGui::CollapsingHeader("Renderer"))
@@ -236,16 +257,26 @@ bool PanelConfiguration::Draw()
 
 					ImGui::TreePop();
 				}
+
+				ImGui::Spacing();
 			}
 
 			if (ImGui::CollapsingHeader("Camera"))
 			{
-				ImGui::Text("Sensitivity");
-				ImGui::Separator();
-				ImGui::SliderFloat("WASD Move", &App->camera->WASDValue, 0.0f, 5.0f);
-				ImGui::SliderFloat("Wheel Move", &App->camera->wheelSpeedValue, 0.0f, 2.0f);
-				ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 0.0f, 2.0f);
-				ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 30.0f);
+				ImGui::Spacing();
+
+				if (ImGui::TreeNodeEx("Sensitivity", ImGuiTreeNodeFlags_DefaultOpen))
+				{
+					ImGui::Spacing();
+					ImGui::PushItemWidth(200);
+					ImGui::SliderFloat("WASD Move", &App->camera->WASDValue, 0.0f, 5.0f); 
+					ImGui::SliderFloat("Wheel Move", &App->camera->wheelSpeedValue, 0.0f, 2.0f);
+					ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 0.0f, 2.0f);
+					ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 30.0f);
+					ImGui::TreePop();
+				}
+
+				ImGui::Spacing();
 			}
 		}
 

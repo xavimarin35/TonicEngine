@@ -73,8 +73,6 @@ bool PanelHierarchy::Draw()
 					App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
 				}
 
-				
-
 				// Create menu when item is selected
 				if (ImGui::IsItemClicked(1) && ImGui::IsWindowHovered())
 				{

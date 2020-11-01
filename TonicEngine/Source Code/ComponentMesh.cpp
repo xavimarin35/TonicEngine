@@ -132,7 +132,7 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 				glColor3f(m->GetComponentMesh()->vertexColor.r, m->GetComponentMesh()->vertexColor.g, m->GetComponentMesh()->vertexColor.b);
 
 				glVertex3f(vert.x, vert.y, vert.z);
-				glVertex3f(vert.x + norm.x * m->GetComponentMesh()->vertexLenght, vert.y + norm.y * m->GetComponentMesh()->faceLenght, vert.z + norm.z * m->GetComponentMesh()->faceLenght);
+				glVertex3f(vert.x + norm.x * m->GetComponentMesh()->vertexLenght, vert.y + norm.y * m->GetComponentMesh()->vertexLenght, vert.z + norm.z * m->GetComponentMesh()->vertexLenght);
 			}
 		}
 	}

@@ -329,7 +329,7 @@ void ModuleGUI::Render()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y); // I think this lines gives problems when modifying the window width
+	//glViewport(0,0,(int)docking_io->DisplaySize.x, (int)docking_io->DisplaySize.y); // I think this lines gives problems when modifying the window width
 	
 }
 
@@ -349,30 +349,28 @@ void ModuleGUI::HelpMarker(const char* desc)
 void ModuleGUI::ApplyDocking(bool* window)
 {
 	bool opt_fullscreen = true;
-	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
+	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
-	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-	if (opt_fullscreen)
-	{
-		ImGuiViewport* viewport = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(viewport->Pos);
-		ImGui::SetNextWindowSize(viewport->Size);
-		ImGui::SetNextWindowViewport(viewport->ID);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-		window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-	}
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 
-	if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-		window_flags |= ImGuiWindowFlags_NoBackground;
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->Pos);
+	ImGui::SetNextWindowSize(viewport->Size);
+	ImGui::SetNextWindowViewport(viewport->ID);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+	
+
+	dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
+	window_flags |= ImGuiWindowFlags_NoBackground;
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 	ImGui::Begin("DockSpace Demo", &p_open, window_flags);
 	ImGui::PopStyleVar();
 
-	if (opt_fullscreen)
-		ImGui::PopStyleVar(2);
+	ImGui::PopStyleVar(2);
 
 	// DockSpace
 	ImGuiIO& io = ImGui::GetIO();
@@ -382,6 +380,5 @@ void ModuleGUI::ApplyDocking(bool* window)
 		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 	}
 
-	docking_io = &io;
 	ImGui::End();
 }
