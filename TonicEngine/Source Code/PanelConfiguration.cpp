@@ -43,8 +43,8 @@ bool PanelConfiguration::Draw()
 				ImGui::Spacing();
 
 				App->window->GetWindowSize(w_width, w_height);
-				ImGui::SliderInt("Width", &screen.width, 1, 1920);
-				ImGui::SliderInt("Height", &screen.height, 1, 1080);
+				ImGui::DragInt("Width", &screen.width, 1, 1920);
+				ImGui::DragInt("Height", &screen.height, 1, 1080);
 				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);
 
 				SDL_SetWindowSize(App->window->window, screen.width, screen.height);
