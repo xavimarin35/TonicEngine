@@ -4,6 +4,14 @@ TonicEngine is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi
 
 ## Information
 
+### Basic Features
+
+* **Drag & Drop** functionality (models and textures)
+* Creation of **different Game Objects**
+* **Configuration window** to change renderer and camera options
+* **Inspector window** to change and enable/disable textures and to show/hide normals
+* Other editor tools found in the **main menu** 
+
 ### Camera Controls
 
 * **Right Click + WASD, QE**: Move camera in different directions.
@@ -33,10 +41,12 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 ### Pol Casaú
 
 - Github: [Bullseye14](https://github.com/Bullseye14)
+- LinkedIn: [Pol Casaú](https://www.linkedin.com/in/polcasau8/)
 	
 ### Xavi Marín
 
 - Github: [XaviMarin35](https://github.com/xavimarin35)
+- LinkedIn: [Xavi Marín](https://www.linkedin.com/in/xavi-marin-sola/)
 
 ## Contact
 
