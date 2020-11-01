@@ -48,8 +48,9 @@ public:
 
 	void AssignNameToGO(const char* name);
 
+	uint textureWidth = 1024;
+	uint textureHeight = 1024;
+
 };
-
-
 
 #endif

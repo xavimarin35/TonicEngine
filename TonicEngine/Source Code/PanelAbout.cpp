@@ -19,7 +19,7 @@ bool PanelAbout::Start()
 {
 	this->active = false;
 	
-	texIcon = App->tex_imp->GenerateTexture("Assets/iconEngine.ico");
+	//texIcon = App->tex_imp->GenerateTexture("Assets/iconEngine.ico");
 
 	return true;
 }
@@ -33,7 +33,7 @@ bool PanelAbout::Draw()
 	{
 		if (ImGui::Begin("About", &active, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
-			ImGui::Image((void*)texIcon, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
+			//ImGui::Image((void*)texIcon, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
 			
 			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));
 			ImGui::Separator();

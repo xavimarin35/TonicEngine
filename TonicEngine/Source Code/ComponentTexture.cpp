@@ -42,10 +42,21 @@ void ComponentTexture::Draw()
 			if (ImGui::Button("Disable Texture"))
 				active = false;
 
-			// Aixo no va be perque al principi deu inicialitzar primer els components, llavors el que primer s'ha de fer es inicialitzar els panels (crec)
-			// El path no surt al principi perque nomes s'assigna a texture_path quan selecionem un GO  
-			//ImGui::Text("Texture Size:"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &texture_width); // Not working well
-			//ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR, "%i", &texture_height); // Not working well
+
+			if (App->scene_intro->GOselected != nullptr)
+			{
+				uint width, height;
+
+				width = App->scene_intro->GOselected->textureWidth;
+				height = App->scene_intro->GOselected->textureHeight;
+
+				// It has to be improved, but works
+				ImGui::Text("Texture Size:"); ImGui::SameLine();
+				ImGui::TextColored(YELLOW_COLOR, "%i", width);
+
+				ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine();
+				ImGui::TextColored(YELLOW_COLOR, "%i", height);
+			}
 
 			if (EnableHouseTexture)
 				tex = texture;
