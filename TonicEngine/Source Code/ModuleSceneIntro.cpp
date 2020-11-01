@@ -63,13 +63,6 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 
-	//for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)
-	//{
-	//	if ((*it)->oData.active)
-	//	{
-	//		App->renderer3D->GenerateObject((*it));
-	//	}
-	//}
 	for (int i = 0; i < gameobjectsList.size(); ++i)
 	{
 		if(gameobjectsList[i]->oData.active)
