@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleFileSystem.h"
 
 #include "glew/include/GL/glew.h"
 
@@ -59,6 +60,30 @@ bool TextureImporter::CleanUp()
 	return true;
 }
 
+bool TextureImporter::DuplicateTexture() const
+{
+	bool ret = false;
+	
+	std::string new_test = "Testing the file system";
+
+	ILuint size;
+	ILubyte* data;
+
+	ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+	size = ilSaveL(IL_DDS, NULL, 0);
+
+	if (size > 0)
+	{
+		data = new ILubyte[size];
+
+		if (ilSaveL(IL_DDS, data, size) > 0)
+			ret = App->file_system->SaveUnique(new_test, data, size, LIBRARY_TEXTURES_FOLDER, "new_texture_test", "dds");
+
+		RELEASE_ARRAY(data);
+	}
+
+	return ret;
+}
 
 uint TextureImporter::CreateEmptyTexture() const
 {
@@ -90,6 +115,8 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	App->scene_intro->gameobjectsList[actualGO]->textureHeight = height;
 
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
+
+	DuplicateTexture();
 
 	return tex;
 }

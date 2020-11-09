@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source Code\Importer.h" />
     <ClInclude Include="Source Code\Application.h" />
     <ClInclude Include="Source Code\Color.h" />
     <ClInclude Include="Source Code\Component.h" />
@@ -106,6 +107,8 @@
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imstb_rectpack.h" />
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imstb_textedit.h" />
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imstb_truetype.h" />
+    <ClInclude Include="Source Code\Libraries\mmgr\mmgr.h" />
+    <ClInclude Include="Source Code\Libraries\mmgr\nommgr.h" />
     <ClInclude Include="Source Code\Light.h" />
     <ClInclude Include="Source Code\Math.h" />
     <ClInclude Include="Source Code\Libraries\MathGeoLib\include\Algorithm\Random\LCG.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="Source Code\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source Code\Importer.cpp" />
     <ClCompile Include="Source Code\Application.cpp" />
     <ClCompile Include="Source Code\Color.cpp" />
     <ClCompile Include="Source Code\Component.cpp" />
@@ -207,6 +211,7 @@
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui_impl_sdl.cpp" />
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui_widgets.cpp" />
+    <ClCompile Include="Source Code\Libraries\mmgr\mmgr.cpp" />
     <ClCompile Include="Source Code\Light.cpp" />
     <ClCompile Include="Source Code\log.cpp" />
     <ClCompile Include="Source Code\Main.cpp" />

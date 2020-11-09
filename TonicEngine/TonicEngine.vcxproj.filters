@@ -58,6 +58,9 @@
     <Filter Include="Sources\Libraries\PCG">
       <UniqueIdentifier>{d8e7dd81-f92c-4421-a840-48a3b2c64d81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\mmgr">
+      <UniqueIdentifier>{424182d2-2cfc-48c9-b11d-607288196698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -364,6 +367,15 @@
     <ClInclude Include="Source Code\Libraries\MathGeoLib\include\Math\TransformOps.h">
       <Filter>Sources\Libraries\MathGeoLib\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\Libraries\mmgr\mmgr.h">
+      <Filter>Sources\Libraries\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Libraries\mmgr\nommgr.h">
+      <Filter>Sources\Libraries\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Importer.h">
+      <Filter>Sources\Importers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -563,6 +575,12 @@
     </ClCompile>
     <ClCompile Include="Source Code\Libraries\MathGeoLib\include\Math\TransformOps.cpp">
       <Filter>Sources\Libraries\MathGeoLib\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Libraries\mmgr\mmgr.cpp">
+      <Filter>Sources\Libraries\mmgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Importer.cpp">
+      <Filter>Sources\Importers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

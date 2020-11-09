@@ -20,6 +20,8 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	bool DuplicateTexture() const;
+
 public:
 
 	uint CreateTexture(const void* texture, const char* path, uint width, uint height, int format, uint format2);

@@ -4,7 +4,7 @@
 #include "ModuleGUI.h"
 #include "GameObject.h"
 #include "ModuleSceneIntro.h"
-
+#include "ModuleFileSystem.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -57,8 +57,9 @@ bool MeshImporter::CleanUp()
 
 void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 {
-	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
+	App->tex_imp->DuplicateTexture();
 
+	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
@@ -124,6 +125,13 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			App->renderer3D->VertexBuffer(meshGO->GetComponentMesh()->mData.vertex, meshGO->GetComponentMesh()->mData.num_vertex, meshGO->GetComponentMesh()->mData.id_vertex);
 			App->renderer3D->IndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
 			App->renderer3D->TextureBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
+
+			if (mesh2->HasPositions())
+			{
+				meshGO->GetComponentTransform()->position.x = mesh2->mVertices->x;
+				meshGO->GetComponentTransform()->position.y = mesh2->mVertices->y;
+				meshGO->GetComponentTransform()->position.z = mesh2->mVertices->z;
+			}
 
 			if (tex == 0 && Filename == "Assets/BakerHouse.fbx")
 				meshGO->GetComponentTexture()->texture = texture;
