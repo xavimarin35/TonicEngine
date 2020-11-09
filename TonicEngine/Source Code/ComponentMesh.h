@@ -7,7 +7,8 @@
 
 class GameObject;
 
-struct meshData {
+struct meshData 
+{
 	uint id_index = 0;
 	uint num_index = 0;
 	uint* index = nullptr;
@@ -20,6 +21,8 @@ struct meshData {
 	uint num_tex_coords = 0;
 	float* tex_coords = nullptr;
 
+	uint num_normals = 0;
+	float3* face_center = nullptr;
 	float3* normals = nullptr;
 
 	string path;

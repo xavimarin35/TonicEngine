@@ -87,7 +87,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source Code\Importer.h" />
     <ClInclude Include="Source Code\Application.h" />
     <ClInclude Include="Source Code\Color.h" />
     <ClInclude Include="Source Code\Component.h" />
@@ -98,6 +97,7 @@
     <ClInclude Include="Source Code\Libraries\glew\include\GL\glew.h" />
     <ClInclude Include="Source Code\glmath.h" />
     <ClInclude Include="Source Code\Globals.h" />
+    <ClInclude Include="Source Code\Importer.h" />
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imconfig.h" />
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imgui.h" />
     <ClInclude Include="Source Code\Libraries\imgui-1.78\imgui_impl_opengl2.h" />
@@ -194,7 +194,6 @@
     <ClInclude Include="Source Code\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Code\Importer.cpp" />
     <ClCompile Include="Source Code\Application.cpp" />
     <ClCompile Include="Source Code\Color.cpp" />
     <ClCompile Include="Source Code\Component.cpp" />
@@ -204,6 +203,7 @@
     <ClCompile Include="Source Code\GameObject.cpp" />
     <ClCompile Include="Source Code\Libraries\glew\src\glew.c" />
     <ClCompile Include="Source Code\glmath.cpp" />
+    <ClCompile Include="Source Code\Importer.cpp" />
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui.cpp" />
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui_demo.cpp" />
     <ClCompile Include="Source Code\Libraries\imgui-1.78\imgui_draw.cpp" />
