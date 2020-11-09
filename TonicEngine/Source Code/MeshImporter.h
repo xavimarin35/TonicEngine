@@ -16,7 +16,6 @@ public:
 	bool CleanUp();
 
 	void GenerateMesh(const char* path, uint tex = 0);
-	string GetName(const char* path);
 
 public:
 

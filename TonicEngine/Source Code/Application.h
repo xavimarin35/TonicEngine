@@ -61,6 +61,9 @@ public:
 	string appName;
 	string orgName;
 
+	std::string GetPathName(std::string path);
+	std::string GetPathDir(std::string path);
+
 	list<char*> appLogs;
 
 	//Frame rate

@@ -195,4 +195,24 @@ float Application::GetDT() const
 	return dt;
 }
 
+std::string Application::GetPathName(std::string path)
+{
+	std::string string1 = path;
+	uint num = string1.find_last_of("/\\");
 
+	string1 = string1.substr(num + 1, string1.size());
+
+	uint dot = string1.find_last_of(".");
+	string1 = string1.substr(0, dot);
+
+	return string1;
+}
+
+std::string Application::GetPathDir(std::string path)
+{
+	size_t found = path.find_last_of("/\\");
+
+	std::string dir = path.substr(0, found);
+
+	return dir;
+}

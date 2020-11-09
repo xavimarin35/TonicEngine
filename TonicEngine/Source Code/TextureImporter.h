@@ -20,7 +20,7 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	bool DuplicateTexture() const;
+	bool DuplicateTexture(const char* path) const;
 
 public:
 

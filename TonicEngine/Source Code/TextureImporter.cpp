@@ -60,11 +60,12 @@ bool TextureImporter::CleanUp()
 	return true;
 }
 
-bool TextureImporter::DuplicateTexture() const
+bool TextureImporter::DuplicateTexture(const char* path) const
 {
 	bool ret = false;
 	
-	std::string new_test = "Testing the file system";
+	std::string name = App->GetPathName(path);
+	std::string output_file = "Testing the file system";
 
 	ILuint size;
 	ILubyte* data;
@@ -77,7 +78,7 @@ bool TextureImporter::DuplicateTexture() const
 		data = new ILubyte[size];
 
 		if (ilSaveL(IL_DDS, data, size) > 0)
-			ret = App->file_system->SaveUnique(new_test, data, size, LIBRARY_TEXTURES_FOLDER, "new_texture_test", "dds");
+			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "dds");
 
 		RELEASE_ARRAY(data);
 	}
@@ -116,8 +117,6 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 
-	DuplicateTexture();
-
 	return tex;
 }
 
@@ -138,6 +137,8 @@ uint TextureImporter::GenerateTexture(const char* path)
 
 			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 				t = CreateTexture(ilGetData(), path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+
+			DuplicateTexture(path);
 
 			return t;
 		}
