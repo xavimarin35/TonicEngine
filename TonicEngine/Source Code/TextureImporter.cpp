@@ -111,9 +111,9 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	//Unbind Texture
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	int actualGO = App->scene_intro->gameobjectsList.size() - 1;
-	App->scene_intro->gameobjectsList[actualGO]->textureWidth = width;
-	App->scene_intro->gameobjectsList[actualGO]->textureHeight = height;
+	//int actualGO = App->scene_intro->gameobjectsList.size() - 1;
+	//App->scene_intro->gameobjectsList[actualGO]->textureWidth = width;
+	//App->scene_intro->gameobjectsList[actualGO]->textureHeight = height;
 
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 

@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFileSystem.h"
+#include "Importer.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -59,12 +60,16 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 {
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
+	GameObject* rootChild = App->scene_intro->CreateGO(App->GetPathName(Filename));
+	App->scene_intro->GOroot->SetChild(rootChild);
+
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
 		// mNumMeshes iterates on mMeshes[]
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
 			GameObject* meshGO = App->scene_intro->CreateGO(App->GetPathName(Filename));
+			rootChild->SetChild(meshGO);
 
 			aiMesh* mesh2 = scene->mMeshes[i];
 
@@ -123,6 +128,11 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			App->renderer3D->VertexBuffer(meshGO->GetComponentMesh()->mData.vertex, meshGO->GetComponentMesh()->mData.num_vertex, meshGO->GetComponentMesh()->mData.id_vertex);
 			App->renderer3D->IndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
 			App->renderer3D->TextureBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
+
+			Importer import;
+			std::string file;
+			const char* name = meshGO->oData.GOname.c_str();
+			import.Import(name, file, meshGO->GetComponentMesh());
 
 			if (mesh2->HasPositions())
 			{

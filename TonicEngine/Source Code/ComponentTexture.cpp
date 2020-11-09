@@ -28,7 +28,7 @@ void ComponentTexture::Draw()
 	GameObject* go = App->scene_intro->GOselected;
 	uint tex = 0;
 
-	if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTexture() != nullptr)
 	{
 		ImGui::Spacing();
 

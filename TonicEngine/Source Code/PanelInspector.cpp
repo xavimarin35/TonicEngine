@@ -57,6 +57,7 @@ bool PanelInspector::Draw()
 						if (obj->componentsList[i] != nullptr)
 						{
 							obj->componentsList[i]->Draw();
+							obj->componentsList[i]->Update();
 						}
 					}
 				}

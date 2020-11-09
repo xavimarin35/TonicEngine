@@ -41,12 +41,11 @@ bool ComponentMesh::Update()
 
 void ComponentMesh::Draw()
 {
-	
 	ImGui::Spacing();
 
 	GameObject* go = App->scene_intro->GOselected;
 
-	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentMesh() != nullptr)
 	{
 		ImGui::Spacing();
 
@@ -145,6 +144,8 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 				glVertex3f(vert.x, vert.y, vert.z);
 				glVertex3f(vert.x + norm.x * m->GetComponentMesh()->vertexLenght, vert.y + norm.y * m->GetComponentMesh()->vertexLenght, vert.z + norm.z * m->GetComponentMesh()->vertexLenght);
 			}
+
+			glEnd();
 		}
 	}
 	else

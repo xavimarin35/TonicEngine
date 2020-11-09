@@ -3,6 +3,7 @@
 
 #include "Application.h"
 #include "PanelManager.h"
+#include "GameObject.h"
 
 
 class PanelHierarchy : public PanelManager
@@ -20,6 +21,7 @@ public:
 	bool openMenuNotHovering = false;
 
 	uint clickedGO = -1;
+	void ManageNodesOnHierarchy(GameObject* GO);
 
 private:
 };

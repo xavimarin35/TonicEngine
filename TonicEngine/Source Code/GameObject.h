@@ -16,7 +16,7 @@ struct objData;
 struct meshData;
 
 struct objData {
-	uint GOid = 0;
+	uint GOid = -1;
 	string GOname;
 	bool active = true;
 };
@@ -41,12 +41,20 @@ public:
 	ComponentMesh* GetComponentMesh();
 	ComponentTexture* GetComponentTexture();
 
+	void AssignNameToGO(const char* name);
+	void SetChild(GameObject* GO);
+	void RemoveChild(GameObject* GO);
+
+
 public:
 	objData oData;
 
 	std::vector<Component*> componentsList;
 
-	void AssignNameToGO(const char* name);
+	//uint id = -1;
+	std::vector<GameObject*> childrenList;
+	GameObject* GOparent = nullptr;
+	
 
 	uint textureWidth = 1024;
 	uint textureHeight = 1024;

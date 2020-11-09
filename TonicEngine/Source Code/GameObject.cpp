@@ -21,6 +21,11 @@ void GameObject::Update()
 		if (componentsList[i]->active)
 			componentsList[i]->Update();
 	}
+
+	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
+	{
+		(*it)->Update();
+	}
 }
 
 void GameObject::CleanUp()
@@ -134,5 +139,26 @@ ComponentTexture* GameObject::GetComponentTexture()
 void GameObject::AssignNameToGO(const char* name)
 {
 	this->oData.GOname = name;
+}
+
+void GameObject::SetChild(GameObject* GO)
+{
+	if (GO->GOparent != nullptr)
+		RemoveChild(GO);
+
+	GO->GOparent = this;
+	childrenList.push_back(GO);
+}
+
+void GameObject::RemoveChild(GameObject* GO)
+{
+	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); it++)
+	{
+		if ((*it)->oData.GOid == GO->oData.GOid)
+		{
+			childrenList.erase(it);
+			break;
+		}
+	}
 }
 

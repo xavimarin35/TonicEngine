@@ -21,6 +21,15 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 ModuleSceneIntro::~ModuleSceneIntro()
 {}
 
+bool ModuleSceneIntro::Init()
+{
+	bool ret = true;
+
+	GOroot = CreateGO("Root");
+
+	return ret;
+}
+
 // Load assets
 bool ModuleSceneIntro::Start()
 {
@@ -38,10 +47,10 @@ bool ModuleSceneIntro::Start()
 
 	App->tex_imp->GenerateCheckersTexture();
 
-	gameobjectsList.at(0)->GetComponentTexture()->texture = texture;
-	gameobjectsList.at(1)->GetComponentTexture()->texture = texture;
+	/*gameobjectsList.at(0)->GetComponentTexture()->texture = texture;
+	gameobjectsList.at(1)->GetComponentTexture()->texture = texture;*/
 
-	
+	GOroot->childrenList.at(0)->GetComponentTexture()->texture = texture;
 
 	return ret;
 }
@@ -62,18 +71,18 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)	
+	/*for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)	
 	{		
 		if ((*it)->oData.active)	
 		{
 			App->renderer3D->GenerateObject((*it));		
 		}		
-	}
+	}*/
 
-	for (int i = 0; i < gameobjectsList.size(); ++i)
-	{
-		gameobjectsList[i]->Update();
-	}
+	//for (int i = 0; i < gameobjectsList.size(); ++i)
+	//{
+	//	gameobjectsList[i]->Update();
+	//}
 
 	return UPDATE_CONTINUE;
 }
@@ -85,7 +94,26 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGridAndAxis(false);
 
+	DrawGameObjectNodes(GOroot);
+
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
+{
+	// Not the root and GO is active
+	if (GO->oData.GOid != 0 && GO->oData.active == true)
+	{
+		App->renderer3D->GenerateObject(GO);
+	}
+
+	if (GO->childrenList.size() > 0)
+	{
+		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
+		{
+			DrawGameObjectNodes(*it);
+		}
+	}
 }
 
 GameObject* ModuleSceneIntro::CreateGO(string objName)
@@ -93,16 +121,16 @@ GameObject* ModuleSceneIntro::CreateGO(string objName)
 	string n = AssignNameToGO(objName);
 
 	GameObject* GO = new GameObject(n);
-	GO->oData.GOid = gameobjectsList.size();
+	GO->oData.GOid = numGO;
 
-	gameobjectsList.push_back(GO);
+	numGO++;
 
 	return GO;
 }
 
 string ModuleSceneIntro::AssignNameToGO(string name_go)
 {
-	string name = name_go.append(std::to_string(gameobjectsList.size()));
+	string name = name_go.append(std::to_string(numGO));
 
 	return name;
 }
@@ -163,6 +191,8 @@ void ModuleSceneIntro::GetSizeOfList()
 
 	LOG_C("There are %i GO in the list", size);
 }
+
+
 
 bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 {

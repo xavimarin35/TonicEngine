@@ -26,6 +26,7 @@ public:
 	ModuleSceneIntro(Application* app, bool start_enabled = true);
 	~ModuleSceneIntro();
 
+	bool Init();
 	bool Start();
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
@@ -49,7 +50,10 @@ public:
 	void GetSizeOfList();
 	std::vector<GameObject*> gameobjectsList;
 
+	void DrawGameObjectNodes(GameObject* GO);
 	GameObject* GOselected = nullptr;
+	GameObject* GOroot = nullptr;
+	uint numGO = 0;
 
 	uint texture = -1;
 

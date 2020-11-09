@@ -13,7 +13,9 @@ ComponentTransform::~ComponentTransform()
 
 void ComponentTransform::Draw()
 {
-	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
+	GameObject* go = App->scene_intro->GOselected;
+
+	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTransform() != nullptr)
 	{
 		ImGui::Spacing();
 
