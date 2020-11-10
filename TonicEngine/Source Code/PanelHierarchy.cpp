@@ -99,16 +99,28 @@ bool PanelHierarchy::Draw()
 
 void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 {
-	static ImGuiTreeNodeFlags flag = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
-	ImGuiTreeNodeFlags node_falg = flag;
+	ImGuiTreeNodeFlags flag = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags node_flag = flag;
+
+	ImVec4 c = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	if (GO == App->scene_intro->GOselected)
-		node_falg |= ImGuiTreeNodeFlags_Selected;
+		node_flag |= ImGuiTreeNodeFlags_Selected;
+
+	// if GO are not active, print them grey
+	if (!GO->oData.active)
+		c = { 0.5f, 0.5f, 0.5f, 1.0f };
+
+	ImGui::PushStyleColor(ImGuiCol_Text, c);
 
 	bool node_open = false;
 
 	if (GO->oData.active == true)
-		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_falg, GO->oData.GOname.c_str());
+		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag, GO->oData.GOname.c_str());
+	else 
+	{
+		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag |= ImGuiTreeNodeFlags_Leaf, GO->oData.GOname.c_str());
+	}
 
 	// when node is clicked
 	if (ImGui::IsItemClicked(0))
@@ -130,6 +142,8 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 
 		ImGui::TreePop();
 	}
+
+	ImGui::PopStyleColor();
 }
 
 void PanelHierarchy::DrawMenuNotHovering()

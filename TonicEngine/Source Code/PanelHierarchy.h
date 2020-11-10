@@ -21,6 +21,7 @@ public:
 	bool openMenuNotHovering = false;
 
 	uint clickedGO = -1;
+	bool notActiveColor = true;
 	void ManageNodesOnHierarchy(GameObject* GO);
 
 private:
