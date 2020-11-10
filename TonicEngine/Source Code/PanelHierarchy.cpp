@@ -6,9 +6,6 @@
 #include "MeshImporter.h"
 #include "ModuleCamera3D.h"
 
-#include "SDL/include/SDL_opengl.h"
-#include "imgui-1.78/imgui_impl_sdl.h"
-
 PanelHierarchy::PanelHierarchy() : PanelManager()
 {
 }
@@ -107,7 +104,7 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	if (GO == App->scene_intro->GOselected)
 		node_flag |= ImGuiTreeNodeFlags_Selected;
 
-	// if GO are not active, print them grey
+	// if GOs are not active, print them grey
 	if (!GO->oData.active)
 		c = { 0.5f, 0.5f, 0.5f, 1.0f };
 
@@ -118,9 +115,7 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	if (GO->oData.active == true)
 		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag, GO->oData.GOname.c_str());
 	else 
-	{
 		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag |= ImGuiTreeNodeFlags_Leaf, GO->oData.GOname.c_str());
-	}
 
 	// when node is clicked
 	if (ImGui::IsItemClicked(0))
@@ -128,12 +123,33 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 		App->scene_intro->GOselected = GO;
 	}
 
-	//if node is opened draw his childs
+	// If node is opened
 	if (node_open)
 	{
-		// only if it has childs 
-		if (GO->childrenList.size() > 0)
+		// If list has childs
+		if (!GO->childrenList.empty())
 		{
+			if (ImGui::BeginDragDropSource())
+			{
+				ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
+				ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->oData.GOname.data());
+				draggedGO = GO;
+
+				ImGui::EndDragDropSource();
+			}
+
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Node Dragged"))
+				{
+					// transform dragged GO to child and reparent
+					draggedGO = nullptr;
+				}
+
+				ImGui::EndDragDropTarget();
+			}
+
+			// Draw childs
 			for (std::vector<GameObject*>::iterator iterator = GO->childrenList.begin(); iterator != GO->childrenList.end(); iterator++)
 			{
 				ManageNodesOnHierarchy(*iterator);
@@ -145,6 +161,7 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 
 	ImGui::PopStyleColor();
 }
+
 
 void PanelHierarchy::DrawMenuNotHovering()
 {

@@ -172,3 +172,5 @@ void GameObject::RemoveChild(GameObject* GO)
 	}
 }
 
+
+

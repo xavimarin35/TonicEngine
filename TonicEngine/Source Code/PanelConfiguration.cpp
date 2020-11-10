@@ -7,9 +7,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
 
-#include "SDL/include/SDL_opengl.h"
-#include "imgui-1.78/imgui_impl_sdl.h"
-
 PanelConfiguration::PanelConfiguration() : PanelManager()
 {
 }

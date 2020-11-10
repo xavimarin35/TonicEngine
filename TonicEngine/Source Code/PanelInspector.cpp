@@ -6,8 +6,6 @@
 #include "GameObject.h"
 #include "ModuleCamera3D.h"
 
-#include "SDL/include/SDL_opengl.h"
-#include "imgui-1.78/imgui_impl_sdl.h"
 
 PanelInspector::PanelInspector() : PanelManager()
 {

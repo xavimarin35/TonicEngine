@@ -45,7 +45,6 @@ public:
 	void SetChild(GameObject* GO);
 	void RemoveChild(GameObject* GO);
 
-
 public:
 	objData oData;
 

@@ -4,9 +4,6 @@
 #include "ModuleCamera3D.h"
 #include "TextureImporter.h"
 
-#include "SDL/include/SDL_opengl.h"
-#include "imgui-1.78/imgui_impl_sdl.h"
-
 PanelAbout::PanelAbout() : PanelManager()
 {
 }
