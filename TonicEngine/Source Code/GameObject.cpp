@@ -47,14 +47,24 @@ void GameObject::Draw()
 
 void GameObject::EnableGameObject()
 {
-	if (oData.active)
-		oData.active = true;
+	if (!this->oData.active)
+		this->oData.active = true;
+
+	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
+	{
+		(*it)->EnableGameObject();
+	}
 }
 
 void GameObject::DisableGameObject()
 {
-	if (oData.active)
-		oData.active = false;
+	if (this->oData.active)
+		this->oData.active = false;
+
+	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
+	{
+		(*it)->DisableGameObject();
+	}
 }
 
 Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)

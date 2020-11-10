@@ -44,9 +44,14 @@ bool PanelInspector::Draw()
 
 				ImGui::Spacing();
 
-				ImGui::Checkbox("Active", &obj->oData.active);
+				ImGui::Checkbox("Active", &activeGO);
 				ImGui::SameLine();
 				ImGui::InputText(" ", (char*)obj->oData.GOname.c_str(), 25, flags);
+
+				if (activeGO)
+					obj->EnableGameObject();
+				else
+					obj->DisableGameObject();
 
 				ImGui::Spacing();
 
