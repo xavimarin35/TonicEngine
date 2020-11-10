@@ -39,17 +39,13 @@ bool PanelInspector::Draw()
 			if (obj != nullptr)
 			{
 				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
+				activeGO = obj->oData.active;
 
 				ImGui::Spacing();
 
 				ImGui::Checkbox("Active", &activeGO);
 				ImGui::SameLine();
 				ImGui::InputText(" ", (char*)obj->oData.GOname.c_str(), 25, flags);
-
-				if (activeGO)
-					obj->EnableGameObject();
-				else
-					obj->DisableGameObject();
 
 				ImGui::Spacing();
 
@@ -64,7 +60,13 @@ bool PanelInspector::Draw()
 						}
 					}
 				}
+
+				if (activeGO)
+					obj->EnableGameObject();
+				else
+					obj->DisableGameObject();
 			}
+
 		}
 
 		ImGui::End();

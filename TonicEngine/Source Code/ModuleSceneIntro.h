@@ -43,7 +43,7 @@ public:
 
 	GameObject* CreateGO(string objName);
 	string AssignNameToGO(string name_go);
-	void RemoveSelectedGO(GameObject* GO);
+	void RemoveSelectedGO(GameObject* GO, bool isParent);
 	void RemoveAllGO();
 	void NumberOfGO();
 	void GetGameObjectSelectedIndex(GameObject* GO);

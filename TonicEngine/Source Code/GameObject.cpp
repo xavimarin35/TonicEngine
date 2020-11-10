@@ -22,19 +22,42 @@ void GameObject::Update()
 			componentsList[i]->Update();
 	}
 
-	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
+	/*for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
 		(*it)->Update();
-	}
+	}*/
 }
 
 void GameObject::CleanUp()
 {
+	// Deleting Components
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i] != nullptr && componentsList[i]->active)
 			componentsList[i]->CleanUp();
+
+		delete componentsList[i];
+		componentsList[i] = nullptr;
 	}
+
+	componentsList.clear();
+
+	// Deleting GOs
+	if (GOparent != nullptr)
+	{
+		GOparent->RemoveChild(this);
+	}
+
+	for (uint i = 0; i < childrenList.size(); ++i)
+	{
+		if (childrenList[i] != nullptr)
+		{
+			childrenList[i]->CleanUp();
+		}
+	}
+
+	childrenList.clear();
+
 }
 
 void GameObject::Draw()
@@ -54,6 +77,7 @@ void GameObject::EnableGameObject()
 	{
 		(*it)->EnableGameObject();
 	}
+
 }
 
 void GameObject::DisableGameObject()
@@ -65,6 +89,7 @@ void GameObject::DisableGameObject()
 	{
 		(*it)->DisableGameObject();
 	}
+
 }
 
 Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
@@ -164,7 +189,7 @@ void GameObject::RemoveChild(GameObject* GO)
 {
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); it++)
 	{
-		if ((*it)->oData.GOid == GO->oData.GOid)
+		if ((*it) == GO)
 		{
 			childrenList.erase(it);
 			break;

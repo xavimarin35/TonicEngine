@@ -30,8 +30,9 @@ bool PanelHierarchy::Draw()
 	{
 		if (ImGui::Begin("Hierarchy", &active))
 		{
-			if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN)
-				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
+			// old
+			/*if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN)
+				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);*/
 
 			if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
 			else App->camera->isOnHierarchy = false;
@@ -123,32 +124,33 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 		App->scene_intro->GOselected = GO;
 	}
 
+	// not working payload yet
+	if (ImGui::BeginDragDropSource())
+	{
+		ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
+		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->oData.GOname.data());
+		draggedGO = GO;
+
+		ImGui::EndDragDropSource();
+	}
+
+	if (ImGui::BeginDragDropTarget())
+	{
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Node Dragged"))
+		{
+			GO->SetChild(draggedGO); 
+			draggedGO = nullptr;
+		}
+
+		ImGui::EndDragDropTarget();
+	}
+
 	// If node is opened
 	if (node_open)
 	{
 		// If list has childs
 		if (!GO->childrenList.empty())
 		{
-			if (ImGui::BeginDragDropSource())
-			{
-				ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
-				ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->oData.GOname.data());
-				draggedGO = GO;
-
-				ImGui::EndDragDropSource();
-			}
-
-			if (ImGui::BeginDragDropTarget())
-			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Node Dragged"))
-				{
-					// transform dragged GO to child and reparent
-					draggedGO = nullptr;
-				}
-
-				ImGui::EndDragDropTarget();
-			}
-
 			// Draw childs
 			for (std::vector<GameObject*>::iterator iterator = GO->childrenList.begin(); iterator != GO->childrenList.end(); iterator++)
 			{
@@ -275,8 +277,9 @@ void PanelHierarchy::DrawMenuHovering()
 
 		if (ImGui::MenuItem("Remove GameObject"))
 		{
-			if (App->scene_intro->GOselected != nullptr)
-				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
+			// old
+			/*if (App->scene_intro->GOselected != nullptr)
+				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);*/
 			openMenuHovering = false;
 		}
 

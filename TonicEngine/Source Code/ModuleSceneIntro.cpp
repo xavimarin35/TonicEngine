@@ -135,22 +135,26 @@ string ModuleSceneIntro::AssignNameToGO(string name_go)
 	return name;
 }
 
-void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
+void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO, bool isParent)
 {
-	if (GOselected == GO)
-		GOselected = nullptr;
+	if (GO->GOparent != nullptr && isParent == true)
+		GO->GOparent->RemoveChild(GO);
 
-	for (int i = 0; i < gameobjectsList.size(); ++i)
+	if (GO->childrenList.size() > 0)
 	{
-		if (gameobjectsList[i] == GO)
+		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
 		{
-			gameobjectsList.erase(gameobjectsList.begin() + i);
+			RemoveSelectedGO(*it, false);
 		}
+
+		GO->childrenList.clear();
 	}
 
+	GO->CleanUp();
 	delete GO;
 }
 
+// old
 void ModuleSceneIntro::RemoveAllGO()
 {
 	for (int i = 0; i < gameobjectsList.size(); ++i)
@@ -162,11 +166,13 @@ void ModuleSceneIntro::RemoveAllGO()
 	gameobjectsList.clear();
 }
 
+// old
 void ModuleSceneIntro::NumberOfGO()
 {
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
+// old
 void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 {
 	GO = App->scene_intro->GOselected;
@@ -180,6 +186,7 @@ void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 	}
 }
 
+// old
 void ModuleSceneIntro::GetSizeOfList()
 {
 	int size = 0;
