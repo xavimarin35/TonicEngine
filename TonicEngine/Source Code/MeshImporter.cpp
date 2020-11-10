@@ -73,7 +73,21 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 
 			aiMesh* mesh2 = scene->mMeshes[i];
 
-			// Gets path
+			// Gets texture
+			aiMaterial* material = scene->mMaterials[mesh2->mMaterialIndex];
+			uint numTextures = material->GetTextureCount(aiTextureType_DIFFUSE);
+
+			aiString path;
+			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+
+			if (path.C_Str() != nullptr)
+			{
+				meshGO->GetComponentTexture()->texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+			}
+			else
+				meshGO->GetComponentTexture()->texture = App->scene_intro->LoadNewTexture(tex); // not working, now it must return the path not the uint id of the texture
+
+			// Gets mesh path
 			meshGO->GetComponentMesh()->mData.path = Filename;
 
 			// Vertices
@@ -141,11 +155,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 				meshGO->GetComponentTransform()->position.z = mesh2->mVertices->z;
 			}
 
-			if (tex == 0 && Filename == "Assets/BakerHouse.fbx")
-				meshGO->GetComponentTexture()->texture = texture;
-
-			else
-				meshGO->GetComponentTexture()->texture = App->scene_intro->LoadNewTexture(tex);
+			
 		}
 
 		aiReleaseImport(scene);
