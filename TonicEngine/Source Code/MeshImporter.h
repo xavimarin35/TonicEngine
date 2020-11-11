@@ -20,8 +20,8 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void LoadFile(const char* path);
-	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file);
+	void LoadFile(const char* path, const char* texture_path = "Assets/Lenna.png");
+	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file, const char* texture_path);
 
 public:
 	bool active;

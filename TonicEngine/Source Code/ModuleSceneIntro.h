@@ -34,7 +34,6 @@ public:
 
 	bool DrawGridAndAxis(bool active);
 	void Create3DObject(OBJECTS3D object);
-	Texture LoadNewTexture(uint id);
 
 	// DRAW CUBE INFO
 	uint id_vertices = 0;

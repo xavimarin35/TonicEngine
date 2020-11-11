@@ -56,7 +56,7 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-void MeshImporter::LoadFile(const char* path)
+void MeshImporter::LoadFile(const char* path, const char* texture_path)
 {
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -88,7 +88,7 @@ void MeshImporter::LoadFile(const char* path)
 
 		if (root_node->mNumChildren > 0)
 			for (int i = 0; i < root_node->mNumChildren; ++i)
-				LoadNode(scene, root_node->mChildren[i], Empty, path, ex, file);
+				LoadNode(scene, root_node->mChildren[i], Empty, path, ex, file, texture_path);
 
 		aiReleaseImport(scene);
 
@@ -97,7 +97,7 @@ void MeshImporter::LoadFile(const char* path)
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
 }
 
-void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file)
+void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file, const char* texture_path)
 {
 	if (node != nullptr && node->mNumMeshes > 0)
 	{
@@ -140,10 +140,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			if (pathStr.C_Str() != nullptr)
 			{
-				std::string dir = App->GetPathDir(path);
-				dir.append("/"); dir.append(pathStr.C_Str());
-
-				obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dir.c_str());
+				obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(texture_path);
 			}
 			else obj->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 
@@ -225,5 +222,5 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 	if (node->mNumChildren > 0)
 		for (int i = 0; i < node->mNumChildren; ++i)
-			LoadNode(scene, node->mChildren[i], parent, path, ex, file);
+			LoadNode(scene, node->mChildren[i], parent, path, ex, file, texture_path);
 }

@@ -46,6 +46,7 @@ bool TextureImporter::Init()
 
 bool TextureImporter::Start()
 {
+	checker_texture = GenerateCheckersTexture();
 
 	return true;
 }
