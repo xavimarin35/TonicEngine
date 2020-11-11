@@ -25,6 +25,5 @@ int GenerateRandomInt()
 
 int GenerateRandomBetween(int bound)
 {
-	// From 0 to 5
 	return pcg32_boundedrand_r(&rndNum, bound);
 }

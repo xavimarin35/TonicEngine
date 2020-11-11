@@ -39,17 +39,17 @@ bool PanelInspector::Draw()
 			if (obj != nullptr)
 			{
 				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
-				activeGO = obj->oData.active;
+				activeGO = obj->data.active;
 
 				ImGui::Spacing();
 
 				ImGui::Checkbox("Active", &activeGO);
 				ImGui::SameLine();
-				ImGui::InputText(" ", (char*)obj->oData.GOname.c_str(), 25, flags);
+				ImGui::InputText(" ", (char*)obj->data.name.c_str(), 25, flags);
 
 				ImGui::Spacing();
 
-				if (obj->oData.active)
+				if (obj->data.active)
 				{
 					for (int i = 0; i < obj->componentsList.size(); ++i)
 					{

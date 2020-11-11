@@ -145,7 +145,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 
 			Importer import;
 			std::string file;
-			const char* name = meshGO->oData.GOname.c_str();
+			const char* name = meshGO->data.name.c_str();
 			import.Import(name, file, meshGO->GetComponentMesh());
 
 			if (mesh2->HasPositions())

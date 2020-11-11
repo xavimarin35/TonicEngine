@@ -4,7 +4,8 @@
 
 GameObject::GameObject(std::string name)
 {
-	this->oData.GOname = name;
+	this->data.name = name;
+	this->data.UUID = GenerateUUID();
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 	CreateComponent(COMPONENT_TYPE::MESH);
 	CreateComponent(COMPONENT_TYPE::TEXTURE);
@@ -70,8 +71,8 @@ void GameObject::Draw()
 
 void GameObject::EnableGameObject()
 {
-	if (!this->oData.active)
-		this->oData.active = true;
+	if (!this->data.active)
+		this->data.active = true;
 
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
@@ -82,8 +83,8 @@ void GameObject::EnableGameObject()
 
 void GameObject::DisableGameObject()
 {
-	if (this->oData.active)
-		this->oData.active = false;
+	if (this->data.active)
+		this->data.active = false;
 
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
@@ -190,7 +191,7 @@ ComponentCamera* GameObject::GetComponentCamera()
 
 void GameObject::AssignNameToGO(const char* name)
 {
-	this->oData.GOname = name;
+	this->data.name = name;
 }
 
 void GameObject::AddChild(GameObject* GO)
@@ -212,6 +213,13 @@ void GameObject::RemoveChild(GameObject* GO)
 			break;
 		}
 	}
+}
+
+int GameObject::GenerateUUID()
+{
+	int uuid = GenerateRandomBetween(99999999999);
+	LOG_C("rnd number is: %i", uuid); // may remove later
+	return uuid;
 }
 
 

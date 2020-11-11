@@ -43,14 +43,14 @@ bool ModuleSceneIntro::Start()
 
 	App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx");
 
-	texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+	//texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
 
 	App->tex_imp->GenerateCheckersTexture();
 
 	/*gameobjectsList.at(0)->GetComponentTexture()->texture = texture;
 	gameobjectsList.at(1)->GetComponentTexture()->texture = texture;*/
 
-	GOroot->childrenList.at(0)->GetComponentTexture()->texture = texture;
+	//GOroot->childrenList.at(0)->GetComponentTexture()->texture = texture;
 
 	return ret;
 }
@@ -73,7 +73,7 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	/*for (std::vector<GameObject*>::iterator it = gameobjectsList.begin(); it != gameobjectsList.end(); ++it)	
 	{		
-		if ((*it)->oData.active)	
+		if ((*it)->data.active)	
 		{
 			App->renderer3D->GenerateObject((*it));		
 		}		
@@ -102,7 +102,7 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 {
 	// Not the root and GO is active
-	if (GO->oData.GOid != 0 && GO->oData.active == true)
+	if (GO->data.id != 0 && GO->data.active == true)
 	{
 		App->renderer3D->GenerateObject(GO);
 	}
@@ -121,7 +121,7 @@ GameObject* ModuleSceneIntro::CreateGO(string objName)
 	string n = AssignNameToGO(objName);
 
 	GameObject* GO = new GameObject(n);
-	GO->oData.GOid = numGO;
+	GO->data.id = numGO;
 
 	numGO++;
 

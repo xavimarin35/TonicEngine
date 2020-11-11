@@ -57,12 +57,12 @@ bool PanelHierarchy::Draw()
 
 			//	if (App->scene_intro->GOselected != nullptr)
 			//	{
-			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, select_flags, App->scene_intro->gameobjectsList[i]->oData.GOname.data()))
+			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, select_flags, App->scene_intro->gameobjectsList[i]->data.name.data()))
 			//			ImGui::TreePop();
 			//	}
 			//	else
 			//	{
-			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, ImGuiTreeNodeFlags_Leaf, App->scene_intro->gameobjectsList[i]->oData.GOname.data()))
+			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, ImGuiTreeNodeFlags_Leaf, App->scene_intro->gameobjectsList[i]->data.name.data()))
 			//			ImGui::TreePop();
 			//	}
 			//	
@@ -106,17 +106,17 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 		node_flag |= ImGuiTreeNodeFlags_Selected;
 
 	// if GOs are not active, print them grey
-	if (!GO->oData.active)
+	if (!GO->data.active)
 		c = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 	ImGui::PushStyleColor(ImGuiCol_Text, c);
 
 	bool node_open = false;
 
-	if (GO->oData.active == true)
-		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag, GO->oData.GOname.c_str());
+	if (GO->data.active == true)
+		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->data.id, node_flag, GO->data.name.c_str());
 	else 
-		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->oData.GOid, node_flag |= ImGuiTreeNodeFlags_Leaf, GO->oData.GOname.c_str());
+		node_open = ImGui::TreeNodeEx((void*)(intptr_t)GO->data.id, node_flag |= ImGuiTreeNodeFlags_Leaf, GO->data.name.c_str());
 
 	// when node is clicked
 	if (ImGui::IsItemClicked(0))
@@ -128,7 +128,7 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	if (ImGui::BeginDragDropSource())
 	{
 		ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
-		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->oData.GOname.data());
+		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->data.name.data());
 		draggedGO = GO;
 
 		ImGui::EndDragDropSource();

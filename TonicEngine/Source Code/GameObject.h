@@ -14,12 +14,13 @@ class ComponentMesh;
 class ComponentTexture;
 class ComponentCamera;
 
-struct objData;
+struct goData;
 struct meshData;
 
-struct objData {
-	uint GOid = -1;
-	string GOname;
+struct goData {
+	uint id = -1;
+	int UUID = 0;
+	string name;
 	bool active = true;
 };
 
@@ -49,8 +50,10 @@ public:
 	void AddChild(GameObject* GO);
 	void RemoveChild(GameObject* GO);
 
+	int GenerateUUID();
+
 public:
-	objData oData;
+	goData data;
 
 	std::vector<Component*> componentsList;
 
