@@ -59,11 +59,6 @@ public:
 
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
-	
-
-	uint textureWidth = 1024;
-	uint textureHeight = 1024;
-
 };
 
 #endif

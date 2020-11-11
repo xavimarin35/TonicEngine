@@ -111,9 +111,9 @@ GameObject* ModuleSceneIntro::CreateGO(string objName)
 
 string ModuleSceneIntro::AssignNameToGO(string name_go)
 {
-	string name = name_go.append(std::to_string(numGO));
+	//string name = name_go.append(std::to_string(numGO));
 
-	return name;
+	return name_go;
 }
 
 void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO, bool isParent)

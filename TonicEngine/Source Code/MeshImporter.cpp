@@ -216,6 +216,8 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 			const char* name = obj->data.name.c_str();
 
 			ex.Export(name, file, obj->GetComponentMesh());
+			obj->GetComponentMesh()->mData.path = file;
+
 			ex.Export(name, file, obj->GetComponentTransform());
 		}
 	}

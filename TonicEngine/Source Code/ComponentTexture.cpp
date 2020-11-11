@@ -47,17 +47,16 @@ void ComponentTexture::Draw()
 
 			if (App->scene_intro->GOselected != nullptr)
 			{
-				uint width, height;
+				ImGui::Text("Texture Path:"); ImGui::SameLine();
+				ImGui::TextColored(YELLOW_COLOR, "%s", texture.path.c_str());
 
-				width = App->scene_intro->GOselected->textureWidth;
-				height = App->scene_intro->GOselected->textureHeight;
+				ImGui::Separator();
 
-				// It has to be improved, but works
 				ImGui::Text("Texture Size:"); ImGui::SameLine();
-				ImGui::TextColored(YELLOW_COLOR, "%i", width);
+				ImGui::TextColored(YELLOW_COLOR, "%i", texture.width);
 
 				ImGui::SameLine(); ImGui::Text("x"); ImGui::SameLine();
-				ImGui::TextColored(YELLOW_COLOR, "%i", height);
+				ImGui::TextColored(YELLOW_COLOR, "%i", texture.height);
 			}
 
 			if (EnableHouseTexture)
