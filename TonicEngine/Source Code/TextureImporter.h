@@ -4,9 +4,11 @@
 #include "Globals.h"
 #include "Module.h"
 
-#define CHECKERS_WIDTH 128
-#define CHECKERS_HEIGHT 128
-
+struct Texture
+{
+	uint id, height, width;
+	std::string path;
+};
 
 class TextureImporter : public Module
 {
@@ -24,14 +26,14 @@ public:
 
 public:
 
-	uint CreateTexture(const void* texture, const char* path, uint width, uint height, int format, uint format2);
-	uint CreateEmptyTexture() const;
+	uint CreateTexture(const void* texture, const char* path, uint width, uint height, int format, uint format2) const;
+	Texture CreateEmptyTexture() const;
 
-	uint GenerateTexture(const char* path);
-	void GenerateCheckersTexture();
+	Texture LoadTexture(const char* path) const;
+	Texture GenerateCheckersTexture();
 
-	uint texture = 0;
-	uint checker_texture = 0;
+	Texture texture;
+	Texture checker_texture;
 
 };
 

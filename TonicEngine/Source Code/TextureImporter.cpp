@@ -14,6 +14,9 @@
 #pragma comment ( lib, "DevIL/libx86/ILU.lib" )
 #pragma comment ( lib, "DevIL/libx86/ILUT.lib" )
 
+#define CHECKERS_WIDTH 128
+#define CHECKERS_HEIGHT 128
+
 TextureImporter::TextureImporter(Application* app, bool start_enabled) : Module(app, start_enabled) { }
 TextureImporter::~TextureImporter() { }
 
@@ -88,14 +91,18 @@ bool TextureImporter::DuplicateTexture(const char* path) const
 	return ret;
 }
 
-uint TextureImporter::CreateEmptyTexture() const
+Texture TextureImporter::CreateEmptyTexture() const
 {
-	uint  texture;
+	Texture tex;
+	tex.id = 0;
+	tex.width = 0;
+	tex.height = 0;
+	tex.path = "none";
 
-	return texture;
+	return tex;
 }
 
-uint TextureImporter::CreateTexture(const void* text, const char* path, uint width, uint height, int format, uint format2)
+uint TextureImporter::CreateTexture(const void* text, const char* path, uint width, uint height, int format, uint format2) const
 {
 	uint tex = 0;
 
@@ -107,7 +114,14 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, text);
+	if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))
+	{
+		float max_anisotropy;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy);
+	}
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format2, GL_UNSIGNED_BYTE, text);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	//Unbind Texture
@@ -122,37 +136,7 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	return tex;
 }
 
-uint TextureImporter::GenerateTexture(const char* path)
-{
-	ILuint pic;
-	uint t;
-	uint info;
-	
-	if (path != nullptr)
-	{
-		ilGenImages(1, (GLuint*)&info);
-		ilBindImage(info);
-
-		if (ilLoadImage(path)) {
-
-			t = ilutGLBindTexImage();
-
-			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
-				t = CreateTexture(ilGetData(), path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
-
-			DuplicateTexture(path);
-
-			return t;
-		}
-		else
-		{
-			ilDeleteImages(1, &pic);
-			return 0;
-		}
-	}
-}
-
-void TextureImporter::GenerateCheckersTexture()
+Texture TextureImporter::GenerateCheckersTexture()
 {
 	GLubyte checkImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
 
@@ -168,14 +152,59 @@ void TextureImporter::GenerateCheckersTexture()
 		}
 	}
 
+	Texture tex;
+
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &checker_texture);
-	glBindTexture(GL_TEXTURE_2D, checker_texture);
+	glGenTextures(1, &tex.id);
+	glBindTexture(GL_TEXTURE_2D, tex.id);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+
+	tex.height = CHECKERS_HEIGHT;
+	tex.width = CHECKERS_WIDTH;
+	tex.path = "None";
+
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return tex;
+}
+
+Texture TextureImporter::LoadTexture(const char* path) const
+{
+	Texture tex;
+	uint id_img = 0;
+
+	if (path != nullptr)
+	{
+		ilGenImages(1, (ILuint*)&id_img);
+		ilBindImage(id_img);
+
+		if (ilLoadImage(path))
+		{
+			ILinfo info;
+			iluGetImageInfo(&info);
+
+			if (info.Origin == IL_ORIGIN_UPPER_LEFT) iluFlipImage();
+
+			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
+			{
+				tex.id = CreateTexture(ilGetData(), path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+				tex.height = ilGetInteger(IL_IMAGE_HEIGHT);
+				tex.width = ilGetInteger(IL_IMAGE_WIDTH);
+				tex.path = path;
+
+				DuplicateTexture(path);
+			}
+			else LOG_C("ERROR: Failed converting image: %s", iluErrorString(ilGetError()));
+		}
+		else LOG_C("ERROR: Failed loading image: %s", iluErrorString(ilGetError()));
+	}
+	else LOG_C("ERROR: Failed loading image from path: %s", path);
+
+	return tex;
 }

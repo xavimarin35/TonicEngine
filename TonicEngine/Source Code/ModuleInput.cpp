@@ -128,7 +128,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				// FBX or OBJ
 				if (strstr(dropDirection, ".fbx") != nullptr || strstr(dropDirection, ".FBX") != nullptr || strstr(dropDirection, ".obj") != nullptr || strstr(dropDirection, ".OBJ") != nullptr)
 				{
-					App->mesh_imp->GenerateMesh(dropDirection);
+					App->mesh_imp->LoadFile(dropDirection);
 					MeshFileDroped = true;
 					LOG_C("New file dropped on window with path: %s", dropDirection);
 				}
@@ -138,7 +138,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					if (App->scene_intro->GOselected != nullptr)
 					{
-						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->GenerateTexture(dropDirection);
+						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dropDirection);
 						TextureFileDropped = true;
 						LOG_C("New texture dropped on window with path: %s", dropDirection);
 					}

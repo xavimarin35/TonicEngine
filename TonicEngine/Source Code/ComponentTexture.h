@@ -29,13 +29,9 @@ public:
 	bool EnableHouseTexture = true;
 	bool noTexture = false;
 	bool openMenuTex = false;
-	
-	string texture_path;
-	uint texture_width = 0;
-	uint texture_height = 0;
 
-	uint texture = 0;
-	uint original_texture = 0;
+	Texture texture;
+	Texture original_texture;
 
 	int iterator = 0;
 	uint selectTexture = 0;

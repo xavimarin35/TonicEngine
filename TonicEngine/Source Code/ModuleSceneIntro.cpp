@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx");
+	App->mesh_imp->LoadFile("Assets/BakerHouse.fbx");
 
 	//texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
 
@@ -265,71 +265,71 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 	switch (object)
 	{
 	case OBJECTS3D::B_SPHERE:
-		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bSphere.fbx");
+		App->mesh_imp->LoadFile("Assets/BasicShapes/bSphere.fbx");
 		break;
 
 	case OBJECTS3D::B_CUBE:
-		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCube.fbx");
+		App->mesh_imp->LoadFile("Assets/BasicShapes/bCube.fbx");
 		break;
 
 	case OBJECTS3D::B_CYLINDER:
-		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCylinder.fbx");
+		App->mesh_imp->LoadFile("Assets/BasicShapes/bCylinder.fbx");
 		break;
 
 	case OBJECTS3D::B_CONE:
-		App->mesh_imp->GenerateMesh("Assets/BasicShapes/bCone.fbx");
+		App->mesh_imp->LoadFile("Assets/BasicShapes/bCone.fbx");
 		break;
 
 	case OBJECTS3D::B_TREE:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Tree/Tree_Mesh.fbx");
+		App->mesh_imp->LoadFile("Assets/OtherMeshes/Tree/Tree_Mesh.fbx");
 		break;
 
 	case OBJECTS3D::GERALT:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Geralt/Geralt.obj", 1);
+		App->mesh_imp->LoadFile("Assets/OtherMeshes/Geralt/Geralt.obj");
 		break;
 
 	case OBJECTS3D::LIGHTPOST:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/LightPost/LightPost.obj", 2);
+		App->mesh_imp->LoadFile("Assets/OtherMeshes/LightPost/LightPost.obj");
 		break;
 
 	case OBJECTS3D::CARRIAGE:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Carriage/Carriage.obj", 3);
+		App->mesh_imp->LoadFile("Assets/OtherMeshes/Carriage/Carriage.obj");
 		break;
 
 	case OBJECTS3D::ROCK:
-		App->mesh_imp->GenerateMesh("Assets/OtherMeshes/Rock/Rock.obj", 4);
+		App->mesh_imp->LoadFile("Assets/OtherMeshes/Rock/Rock.obj");
 		break;
 
 	case OBJECTS3D::BAKER_HOUSE:
-		App->mesh_imp->GenerateMesh("Assets/BakerHouse.fbx", 5);
+		App->mesh_imp->LoadFile("Assets/BakerHouse.fbx");
 		break;
 	}
 }
 
-uint ModuleSceneIntro::LoadNewTexture(uint id)
+Texture ModuleSceneIntro::LoadNewTexture(uint id)
 {
-	uint texture = -1;
+	Texture texture;
 
 	switch (id)
 	{
 	case 1:
-		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Geralt/Geralt.png");
+		texture = App->tex_imp->LoadTexture("Assets/OtherMeshes/Geralt/Geralt.png");
 		break;
 
 	case 2:
-		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/LightPost/LightPost.png");
+		texture = App->tex_imp->LoadTexture("Assets/OtherMeshes/LightPost/LightPost.png");
 		break;
 
 	case 3:
-		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Carriage/Carriage.png");
+		texture = App->tex_imp->LoadTexture("Assets/OtherMeshes/Carriage/Carriage.png");
 		break;
 
 	case 4:
-		texture = App->tex_imp->GenerateTexture("Assets/OtherMeshes/Rock/Rock.png");
+		texture = App->tex_imp->LoadTexture("Assets/OtherMeshes/Rock/Rock.png");
 		break;
 
 	case 5:
-		texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+		texture = App->tex_imp->LoadTexture("Assets/Baker_house.png");
 		break;
 	}
 

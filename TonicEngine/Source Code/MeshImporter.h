@@ -4,6 +4,11 @@
 #include "Application.h"
 #include "Module.h"
 
+class aiNode;
+class aiScene;
+class Importer;
+class GameObject;
+
 class MeshImporter : public Module
 {
 
@@ -15,15 +20,11 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void GenerateMesh(const char* path, uint tex = 0);
+	void LoadFile(const char* path);
+	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file);
 
 public:
-
-	bool active = true;
-
-	uint texture = 0;
-	uint checker_texture = 0;
-
+	bool active;
 };
 
 #endif

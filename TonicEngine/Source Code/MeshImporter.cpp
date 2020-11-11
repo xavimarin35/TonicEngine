@@ -56,116 +56,174 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-void MeshImporter::GenerateMesh(const char* Filename, uint tex)
+void MeshImporter::LoadFile(const char* path)
 {
-	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
-	GameObject* rootChild = App->scene_intro->CreateGO(App->GetPathName(Filename));
-	App->scene_intro->GOroot->AddChild(rootChild);
-
-	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
+	if (scene != nullptr && scene->HasMeshes())
 	{
-		// mNumMeshes iterates on mMeshes[]
-		for (int i = 0; i < scene->mNumMeshes; i++)
+		aiNode* root_node = scene->mRootNode;
+
+		GameObject* Empty = App->scene_intro->CreateGO(App->GetPathName(path));
+
+		aiVector3D translation, scaling;
+		aiQuaternion rotation;
+
+		root_node->mTransformation.Decompose(scaling, rotation, translation);
+
+		float3 position(translation.x, translation.y, translation.z);
+		float3 sc(1, 1, 1);
+		Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
+
+		Empty->GetComponentTransform()->position = position;
+		Empty->GetComponentTransform()->scale = sc;
+		Empty->GetComponentTransform()->rotation_quaternion = rot;
+
+		Empty->GetComponentTransform()->UpdateLocalTransform();
+
+		Importer ex; std::string file;
+		ex.Export(Empty->data.name.c_str(), file, Empty->GetComponentTransform());
+
+		App->scene_intro->GOroot->AddChild(Empty);
+
+		if (root_node->mNumChildren > 0)
+			for (int i = 0; i < root_node->mNumChildren; ++i)
+				LoadNode(scene, root_node->mChildren[i], Empty, path, ex, file);
+
+		aiReleaseImport(scene);
+
+		LOG_C("Succesfully loaded mesh with path: %s", path);
+	}
+	else LOG_C("ERROR: Could not load scene with path: %s", path);
+}
+
+void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file)
+{
+	if (node != nullptr && node->mNumMeshes > 0)
+	{
+		for (int i = 0; i < node->mNumMeshes; ++i)
 		{
-			GameObject* meshGO = App->scene_intro->CreateGO(App->GetPathName(Filename));
-			rootChild->AddChild(meshGO);
+			GameObject* obj = App->scene_intro->CreateGO(node->mName.C_Str());
 
-			aiMesh* mesh2 = scene->mMeshes[i];
+			obj->CreateComponent(COMPONENT_TYPE::MESH);
+			obj->CreateComponent(COMPONENT_TYPE::TEXTURE);
 
-			// Gets texture
-			aiMaterial* material = scene->mMaterials[mesh2->mMaterialIndex];
-			uint numTextures = material->GetTextureCount(aiTextureType_DIFFUSE);
+			ComponentMesh* mesh = obj->GetComponentMesh();
+			ComponentTransform* transform = obj->GetComponentTransform();
 
-			aiString path;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+			parent->AddChild(obj);
 
-			if (path.C_Str() != nullptr)
+			aiNode* new_node = node;
+
+			aiVector3D translation, scaling;
+			aiQuaternion rotation;
+
+			new_node->mTransformation.Decompose(scaling, rotation, translation);
+
+			float3 pos(translation.x, translation.y, translation.z);
+			float3 sc(1, 1, 1);
+			Quat rot(0, rotation.y, rotation.z, rotation.w);
+
+			obj->GetComponentTransform()->position = pos;
+			obj->GetComponentTransform()->scale = sc;
+			obj->GetComponentTransform()->rotation_quaternion = rot;
+
+			obj->GetComponentTransform()->UpdateLocalTransform();
+
+			aiMesh* mesh2 = scene->mMeshes[new_node->mMeshes[i]];
+
+			aiMaterial* material1 = scene->mMaterials[mesh2->mMaterialIndex];
+			uint numTextures = material1->GetTextureCount(aiTextureType_DIFFUSE);
+
+			aiString pathStr;
+			material1->GetTexture(aiTextureType_DIFFUSE, 0, &pathStr);
+
+			if (pathStr.C_Str() != nullptr)
 			{
-				meshGO->GetComponentTexture()->texture = App->tex_imp->GenerateTexture("Assets/Baker_house.png");
+				std::string dir = App->GetPathDir(path);
+				dir.append("/"); dir.append(pathStr.C_Str());
+
+				obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dir.c_str());
 			}
-			else
-				meshGO->GetComponentTexture()->texture = App->scene_intro->LoadNewTexture(tex); // not working, now it must return the path not the uint id of the texture
+			else obj->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 
-			// Gets mesh path
-			meshGO->GetComponentMesh()->mData.path = Filename;
 
-			// Vertices
-			meshGO->GetComponentMesh()->mData.num_vertex = mesh2->mNumVertices;
-			meshGO->GetComponentMesh()->mData.vertex = new float3[meshGO->GetComponentMesh()->mData.num_vertex];
+			// Copy vertices
+			mesh->mData.num_vertex = mesh2->mNumVertices;
+			mesh->mData.vertex = new float3[mesh->mData.num_vertex];
 
 			for (uint i = 0; i < mesh2->mNumVertices; ++i)
 			{
-				meshGO->GetComponentMesh()->mData.vertex[i].x = mesh2->mVertices[i].x;
-				meshGO->GetComponentMesh()->mData.vertex[i].y = mesh2->mVertices[i].y;
-				meshGO->GetComponentMesh()->mData.vertex[i].z = mesh2->mVertices[i].z;
+				mesh->mData.vertex[i].x = mesh2->mVertices[i].x;
+				mesh->mData.vertex[i].y = mesh2->mVertices[i].y;
+				mesh->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
 
-			// Faces
+			// Copy faces
 			if (mesh2->HasFaces())
 			{
-				meshGO->GetComponentMesh()->mData.num_index = mesh2->mNumFaces * 3;
-				meshGO->GetComponentMesh()->mData.index = new uint[meshGO->GetComponentMesh()->mData.num_index];
-
+				mesh->mData.num_index = mesh2->mNumFaces * 3;
+				mesh->mData.index = new uint[mesh->mData.num_index]; // assume each face is a triangle
 				for (uint i = 0; i < mesh2->mNumFaces; ++i)
 				{
 					if (mesh2->mFaces[i].mNumIndices != 3)
 					{
-						LOG_C("ERROR: Geometry face with != 3 indices");
+						LOG_C("WARNING: Geometry face with != 3 indices!");
 					}
 					else
-						memcpy(&meshGO->GetComponentMesh()->mData.index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
+						memcpy(&mesh->mData.index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
+				}
+
+				// Normals
+				mesh->mData.face_center = new float3[mesh->mData.num_index];
+				mesh->mData.normals = new float3[mesh->mData.num_index];
+				mesh->mData.num_normals = mesh->mData.num_index / 3;
+				for (uint j = 0; j < mesh->mData.num_index / 3; ++j)
+				{
+					float3 face_A, face_B, face_C;
+
+					face_A = mesh->mData.vertex[mesh->mData.index[j * 3]];
+					face_B = mesh->mData.vertex[mesh->mData.index[(j * 3) + 1]];
+					face_C = mesh->mData.vertex[mesh->mData.index[(j * 3) + 2]];
+
+
+					mesh->mData.face_center[j] = (face_A + face_B + face_C) / 3;
+
+
+					float3 edge1 = face_B - face_A;
+					float3 edge2 = face_C - face_A;
+
+					mesh->mData.normals[j] = Cross(edge1, edge2);
+					mesh->mData.normals[j].Normalize();
+					mesh->mData.normals[j] *= 0.15f;
+
 				}
 			}
 
-			// Normals
-			if (mesh2->HasNormals())
-			{
-				meshGO->GetComponentMesh()->mData.normals = new float3[meshGO->GetComponentMesh()->mData.num_vertex];
-				memcpy(meshGO->GetComponentMesh()->mData.normals, mesh2->mNormals, sizeof(float3) * meshGO->GetComponentMesh()->mData.num_vertex);
-			}
-
-			// UVs
 			if (mesh2->HasTextureCoords(0))
 			{
-				meshGO->GetComponentMesh()->mData.num_tex_coords = meshGO->GetComponentMesh()->mData.num_vertex;
-				meshGO->GetComponentMesh()->mData.tex_coords = new float[meshGO->GetComponentMesh()->mData.num_tex_coords * 2];
+				mesh->mData.num_tex_coords = mesh->mData.num_vertex;
+				mesh->mData.tex_coords = new float[mesh->mData.num_tex_coords * 2];
 
-				for (int i = 0; i < meshGO->GetComponentMesh()->mData.num_tex_coords; ++i)
+				for (int i = 0; i < mesh->mData.num_tex_coords; ++i)
 				{
-					meshGO->GetComponentMesh()->mData.tex_coords[i * 2] = mesh2->mTextureCoords[0][i].x;
-					meshGO->GetComponentMesh()->mData.tex_coords[(i * 2) + 1] = mesh2->mTextureCoords[0][i].y;
+					mesh->mData.tex_coords[i * 2] = mesh2->mTextureCoords[0][i].x;
+					mesh->mData.tex_coords[(i * 2) + 1] = mesh2->mTextureCoords[0][i].y;
 				}
 			}
 
-			// Import data to buffers
-			App->renderer3D->VertexBuffer(meshGO->GetComponentMesh()->mData.vertex, meshGO->GetComponentMesh()->mData.num_vertex, meshGO->GetComponentMesh()->mData.id_vertex);
-			App->renderer3D->IndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
-			App->renderer3D->TextureBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
+			App->renderer3D->VertexBuffer(mesh->mData.vertex, mesh->mData.num_vertex, mesh->mData.id_vertex);
+			App->renderer3D->IndexBuffer(mesh->mData.index, mesh->mData.num_index, mesh->mData.id_index);
+			App->renderer3D->TextureBuffer(mesh->mData.tex_coords, mesh->mData.num_tex_coords, mesh->mData.id_tex_coords);
 
-			Importer ex;
-			std::string file;
-			ex.Export(meshGO->data.name.c_str(), file, meshGO->GetComponentTransform());
+			const char* name = obj->data.name.c_str();
 
-			Importer ex2;
-			std::string outfile;
-			const char* name = meshGO->data.name.c_str();
-			ex2.Export(name, outfile, meshGO->GetComponentMesh());
-
-			if (mesh2->HasPositions())
-			{
-				meshGO->GetComponentTransform()->position.x = mesh2->mVertices->x;
-				meshGO->GetComponentTransform()->position.y = mesh2->mVertices->y;
-				meshGO->GetComponentTransform()->position.z = mesh2->mVertices->z;
-			}
-
-			
+			ex.Export(name, file, obj->GetComponentMesh());
+			ex.Export(name, file, obj->GetComponentTransform());
 		}
-
-		aiReleaseImport(scene);
-		LOG_C("Succesfully loaded mesh with path: %s", Filename);
 	}
 
-	else
-		LOG_C("ERROR: Cannot load scene %s", Filename);
+	if (node->mNumChildren > 0)
+		for (int i = 0; i < node->mNumChildren; ++i)
+			LoadNode(scene, node->mChildren[i], parent, path, ex, file);
 }

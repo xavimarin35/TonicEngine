@@ -26,7 +26,7 @@ void ComponentTexture::Draw()
 	ImGui::Spacing();
 
 	GameObject* go = App->scene_intro->GOselected;
-	uint tex = 0;
+	Texture tex;
 
 	if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTexture() != nullptr)
 	{
@@ -65,7 +65,7 @@ void ComponentTexture::Draw()
 			else if (EnableCheckersTexture)
 				tex = App->tex_imp->checker_texture;
 
-			ImGui::Image((void*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+			ImGui::Image((void*)tex.id, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
 		else
 		{
@@ -85,7 +85,7 @@ void ComponentTexture::OpenTexturesMenu()
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
 
-		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
+		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture.id, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = true;
@@ -95,7 +95,7 @@ void ComponentTexture::OpenTexturesMenu()
 
 		ImGui::SameLine();
 
-		if (ImGui::ImageButton((void*)App->tex_imp->checker_texture, ImVec2(200, 200)))
+		if (ImGui::ImageButton((void*)App->tex_imp->checker_texture.id, ImVec2(200, 200)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = true;
@@ -123,7 +123,7 @@ void ComponentTexture::IsTextureComponentActive(GameObject* go)
 
 void ComponentTexture::GetTexturePath()
 {
-	LOG_C("Texture path is: %s", texture_path.c_str());
+	LOG_C("Texture path is: %s", texture.path.c_str());
 }
 
 

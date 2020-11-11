@@ -210,9 +210,9 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 	if (GO->GetComponentTexture()->active)
 	{
 		if (GO->GetComponentTexture()->EnableHouseTexture)
-			glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture);
+			glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture.id);
 		else if (GO->GetComponentTexture()->EnableCheckersTexture)
-			glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture);
+			glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture.id);
 	}
 	else
 		glBindTexture(GL_TEXTURE_2D, NULL);
