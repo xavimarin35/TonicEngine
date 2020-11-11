@@ -70,6 +70,11 @@ bool PanelConsole::Draw()
 					color = WARNING_CONSOLE_COLOR;
 					has_color = true;
 				}
+				if (strstr((*item), "NICE:"))
+				{
+					color = CORRECT_CONSOLE_COLOR;
+					has_color = true;
+				}
 				if (has_color)
 				{
 					ImGui::PushStyleColor(ImGuiCol_Text, color);

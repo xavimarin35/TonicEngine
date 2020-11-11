@@ -56,6 +56,10 @@ enum update_status
 		 }\
     }
 
+// JSON assert 
+#include <cassert> // assert
+#define JSON_ASSERT(x) assert(x)
+
 // Configuration -----------
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
@@ -72,3 +76,4 @@ enum update_status
 #define LIBRARY_FOLDER "/Library/"
 #define LIBRARY_TEXTURES_FOLDER "/Library/Textures/"
 #define LIBRARY_MESH_FOLDER "/Library/Meshes/"
+#define LIBRARY_TRANSF_FOLDER "/Library/Transforms/"

@@ -65,7 +65,7 @@ bool TextureImporter::DuplicateTexture(const char* path) const
 	bool ret = false;
 	
 	std::string name = App->GetPathName(path);
-	std::string output_file = "Testing the file system";
+	std::string output_file;
 
 	ILuint size;
 	ILubyte* data;
@@ -78,7 +78,9 @@ bool TextureImporter::DuplicateTexture(const char* path) const
 		data = new ILubyte[size];
 
 		if (ilSaveL(IL_DDS, data, size) > 0)
-			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "dds");
+			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "Ttext");
+
+		LOG_C("NICE: Correctly exported %s.Ttext into Textures folder", path);
 
 		RELEASE_ARRAY(data);
 	}

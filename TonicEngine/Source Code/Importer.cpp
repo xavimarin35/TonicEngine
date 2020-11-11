@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Importer.h"
 #include "ModuleFileSystem.h"
+#include "ModuleGUI.h"
 
 #include "mmgr/mmgr.h"
 
@@ -12,7 +13,7 @@ Importer::~Importer()
 {
 }
 
-bool Importer::Import(const char* path, std::string& file, ComponentMesh* mesh)
+bool Importer::Export(const char* path, std::string& file, ComponentMesh* mesh)
 {
 	bool ret = false;
 
@@ -64,7 +65,68 @@ bool Importer::Import(const char* path, std::string& file, ComponentMesh* mesh)
 	bytes = sizeof(float) * mesh->mData.num_tex_coords * 2;
 	memcpy(iterator, mesh->mData.tex_coords, bytes);
 
-	ret = App->file_system->SaveUnique(file, data, size, LIBRARY_MESH_FOLDER, path, "fbx");
+	ret = App->file_system->SaveUnique(file, data, size, LIBRARY_MESH_FOLDER, path, "Tmesh");
+
+	if (ret) 
+	{ 
+		LOG_C("NICE: Correctly exported %s.Tmesh into Meshes folder", path); 
+	}
+	else 
+	{ 
+		LOG_C("ERROR: Failed to export %s.Tmesh into Meshes folder", path); 
+	}
+
+	return ret;
+}
+
+bool Importer::Export(const char* path, std::string& file, ComponentTransform* transform)
+{
+	bool ret = false;
+
+	uint size = sizeof(float3) * 3 + sizeof(float) * 32;
+
+	char* data = new char[size];
+	char* iterator = data;
+
+	float3 transf[3] = { transform->position, transform->rotation, transform->scale };
+
+	float matrix1[16], matrix2[16];
+
+	int c = 0;
+
+	for(int i = 0; i < 4; ++i)
+		for (int j = 0; j < 4; ++j)
+		{
+			matrix1[c] = transform->localMatrix.At(i, j);
+			matrix2[c] = transform->globalMatrix.At(i, j);
+
+			c++;
+		}
+
+	// Storing position, rotation and scale
+	uint bytes = sizeof(float3) * 3;
+	memcpy(iterator, transf, bytes);
+
+	// Storing Local Transformation
+	iterator += bytes;
+	bytes = sizeof(float) * 16;
+	memcpy(iterator, matrix1, bytes);
+
+	// Storing Global Transformation
+	iterator += bytes;
+	bytes = sizeof(float) * 16;
+	memcpy(iterator, matrix2, bytes);
+
+	ret = App->file_system->SaveUnique(file, data, size, LIBRARY_TRANSF_FOLDER, path, "Ttransf");
+
+	if (ret)
+	{
+		LOG_C("NICE: Correctly exported %s.Ttransf into Transforms folder", path);
+	}
+	else
+	{
+		LOG_C("ERROR: Failed to export %s.Ttransf into Transforms folder", path);
+	}
 
 	return ret;
 }

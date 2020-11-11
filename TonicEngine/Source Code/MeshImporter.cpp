@@ -143,10 +143,14 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 			App->renderer3D->IndexBuffer(meshGO->GetComponentMesh()->mData.index, meshGO->GetComponentMesh()->mData.num_index, meshGO->GetComponentMesh()->mData.id_index);
 			App->renderer3D->TextureBuffer(meshGO->GetComponentMesh()->mData.tex_coords, meshGO->GetComponentMesh()->mData.num_tex_coords, meshGO->GetComponentMesh()->mData.id_tex_coords);
 
-			Importer import;
+			Importer ex;
 			std::string file;
+			ex.Export(meshGO->data.name.c_str(), file, meshGO->GetComponentTransform());
+
+			Importer ex2;
+			std::string outfile;
 			const char* name = meshGO->data.name.c_str();
-			import.Import(name, file, meshGO->GetComponentMesh());
+			ex2.Export(name, outfile, meshGO->GetComponentMesh());
 
 			if (mesh2->HasPositions())
 			{

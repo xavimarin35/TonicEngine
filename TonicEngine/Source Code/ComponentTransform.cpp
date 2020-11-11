@@ -11,6 +11,75 @@ ComponentTransform::~ComponentTransform()
 {
 }
 
+float4x4 ComponentTransform::GetTransform() const { return localMatrix; }
+
+float3 ComponentTransform::GetPosition() const { return position; }
+
+Quat ComponentTransform::GetQuatRotation() const { return rotation_quaternion; }
+
+float3 ComponentTransform::GetEulerRotation() const { return rotation; }
+
+float3 ComponentTransform::GetScale() const { return scale; }
+
+float4x4 ComponentTransform::GetGlobalTransform() const { return globalMatrix; }
+
+void ComponentTransform::SetPosition(float3& position)
+{
+	this->position = position;
+
+	UpdateLocalTransform();
+}
+
+void ComponentTransform::SetRotation(float3& rotation)
+{
+	float3 rot = (rotation - this->rotation) * DEGTORAD;
+
+	Quat quaternion_rot = Quat::FromEulerXYZ(rot.x, rot.y, rot.z);
+
+	rotation_quaternion = rotation_quaternion * quaternion_rot;
+	this->rotation = rotation;
+
+	UpdateLocalTransform();
+}
+
+void ComponentTransform::SetScale(float3& scale)
+{
+	if (scale.x > 0.0f && scale.y > 0.0f && scale.z > 0.0f) this->scale = scale;
+
+	UpdateLocalTransform();
+}
+
+void ComponentTransform::SetGlobalTransform(float4x4 transform)
+{
+	localMatrix = transform.Inverted() * globalMatrix;
+	globalMatrix = transform;
+
+	TransformGlobalMat(globalMatrix);
+}
+
+void ComponentTransform::TransformGlobalMat(const float4x4& global)
+{
+	globalMatrix = global * localMatrix;
+
+	UpdateTransform();
+
+	moved = false;
+}
+
+void ComponentTransform::UpdateLocalTransform()
+{
+	localMatrix = math::float4x4::FromTRS(position, rotation_quaternion, scale);
+
+	moved = true;
+}
+
+void ComponentTransform::UpdateTransform()
+{
+	localMatrix.Decompose(position, rotation_quaternion, scale);
+
+	rotation = rotation_quaternion.ToEulerXYZ() * RADTODEG;
+}
+
 void ComponentTransform::Draw()
 {
 	GameObject* go = App->scene_intro->GOselected;
