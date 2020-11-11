@@ -110,6 +110,10 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 		component = new ComponentTexture(this);
 		LOG_C("Component texture added to the list");
 		break;
+	case COMPONENT_TYPE::CAMERA:
+		component = new ComponentCamera(this);
+		LOG_C("Component Camera added to the list");
+		break;
 	}
 
 	if (component != nullptr) 
@@ -171,12 +175,25 @@ ComponentTexture* GameObject::GetComponentTexture()
 	return (ComponentTexture*)texture;
 }
 
+ComponentCamera* GameObject::GetComponentCamera()
+{
+	Component* camera = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::CAMERA)
+		{
+			return (ComponentCamera*)*i;
+		}
+	}
+	return (ComponentCamera*)camera;
+}
+
 void GameObject::AssignNameToGO(const char* name)
 {
 	this->oData.GOname = name;
 }
 
-void GameObject::SetChild(GameObject* GO)
+void GameObject::AddChild(GameObject* GO)
 {
 	if (GO->GOparent != nullptr)
 		RemoveChild(GO);

@@ -61,7 +61,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 	const aiScene* scene = aiImportFile(Filename, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	GameObject* rootChild = App->scene_intro->CreateGO(App->GetPathName(Filename));
-	App->scene_intro->GOroot->SetChild(rootChild);
+	App->scene_intro->GOroot->AddChild(rootChild);
 
 	if (scene != nullptr && scene->HasMeshes()) // Loaded correctly
 	{
@@ -69,7 +69,7 @@ void MeshImporter::GenerateMesh(const char* Filename, uint tex)
 		for (int i = 0; i < scene->mNumMeshes; i++)
 		{
 			GameObject* meshGO = App->scene_intro->CreateGO(App->GetPathName(Filename));
-			rootChild->SetChild(meshGO);
+			rootChild->AddChild(meshGO);
 
 			aiMesh* mesh2 = scene->mMeshes[i];
 

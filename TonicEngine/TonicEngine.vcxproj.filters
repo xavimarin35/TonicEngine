@@ -376,6 +376,9 @@
     <ClInclude Include="Source Code\Importer.h">
       <Filter>Sources\Importers</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ComponentCamera.h">
+      <Filter>Sources\GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -581,6 +584,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\Importer.cpp">
       <Filter>Sources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentCamera.cpp">
+      <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

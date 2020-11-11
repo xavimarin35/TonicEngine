@@ -6,11 +6,13 @@
 #include "ComponentTransform.h"
 #include "ComponentMesh.h"
 #include "ComponentTexture.h"
+#include "ComponentCamera.h"
 #include "ModuleInput.h"
 
 class ComponentTransform;
 class ComponentMesh;
 class ComponentTexture;
+class ComponentCamera;
 
 struct objData;
 struct meshData;
@@ -40,9 +42,11 @@ public:
 	ComponentTransform* GetComponentTransform();
 	ComponentMesh* GetComponentMesh();
 	ComponentTexture* GetComponentTexture();
+	ComponentCamera* GetComponentCamera();
+
 
 	void AssignNameToGO(const char* name);
-	void SetChild(GameObject* GO);
+	void AddChild(GameObject* GO);
 	void RemoveChild(GameObject* GO);
 
 public:
@@ -50,7 +54,6 @@ public:
 
 	std::vector<Component*> componentsList;
 
-	//uint id = -1;
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
 	

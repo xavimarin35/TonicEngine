@@ -138,7 +138,7 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	{
 		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Node Dragged"))
 		{
-			GO->SetChild(draggedGO); 
+			GO->AddChild(draggedGO); 
 			draggedGO = nullptr;
 		}
 
