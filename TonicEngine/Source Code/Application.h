@@ -6,11 +6,6 @@
 #include "Module.h"
 #include "Math.h" // Include MathGeoLib
 
-
-
-
-
-
 #include <vector>
 #include <list>
 #include <string>
@@ -38,8 +33,6 @@ public:
 	MeshImporter* mesh_imp = nullptr;
 	ModuleFileSystem* file_system = nullptr;
 	TextureImporter* tex_imp = nullptr;
-
-private: 
 
 	list<Module*> list_modules;
 
@@ -77,11 +70,15 @@ public:
 	int						capped_ms = -1;
 	int						framerateCap = 60; // Max amount of FPS
 	int						totalBars = 100; // Number of bars that appear in the histogram
-	std::vector<float> fpsVec;
-	std::vector<float> msVec;
+	std::vector<float>		fpsVec;
+	std::vector<float>		msVec;
 
 	float GetDT() const;
 	float	dt;
+
+	//JSON
+	JsonImporter jsonImp;
+	const char* jsonPath;
 
 private:
 

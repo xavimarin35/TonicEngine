@@ -66,6 +66,8 @@ bool PanelConfiguration::Draw()
 			{
 				ImGui::Spacing();
 
+				ImGui::Text("Engine Name: %s", App->appName.c_str());
+
 				// App Name
 				static char appName[60];
 				if (App->GetAppName() != nullptr)

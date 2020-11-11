@@ -2,10 +2,13 @@
 #define __ModuleH__
 
 #include "Globals.h"
+#include "JsonImporter.h"
+#include "Application.h"
 
 #include <string>
 
 class Application;
+class JsonImporter;
 
 class Module
 {
@@ -56,7 +59,11 @@ public:
 		return true; 
 	}
 
-	virtual void OnCollision()
+	// Call them in every module we want to save JSON data
+	virtual void Load(const nlohmann::json& config) 
+	{}
+
+	virtual void Save(nlohmann::json& config)
 	{}
 };
 

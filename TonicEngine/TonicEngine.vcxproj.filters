@@ -61,6 +61,9 @@
     <Filter Include="Sources\Libraries\mmgr">
       <UniqueIdentifier>{424182d2-2cfc-48c9-b11d-607288196698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Libraries\JSON">
+      <UniqueIdentifier>{490384ac-0eb0-4461-abf3-d5fc072dc45a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -379,6 +382,12 @@
     <ClInclude Include="Source Code\ComponentCamera.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\Libraries\JSON\json.hpp">
+      <Filter>Sources\Libraries\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\JsonImporter.h">
+      <Filter>Sources\Importers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -587,6 +596,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\ComponentCamera.cpp">
       <Filter>Sources\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\JsonImporter.cpp">
+      <Filter>Sources\Importers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

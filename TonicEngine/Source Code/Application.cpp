@@ -10,6 +10,7 @@
 #include "MeshImporter.h"
 #include "ModuleFileSystem.h"
 #include "TextureImporter.h"
+#include "JsonImporter.h"
 
 Application::Application()
 {
@@ -59,6 +60,11 @@ bool Application::Init()
 {
 	bool ret = true;
 	LOG_C("Init Application");
+
+	// Locate .json path 
+	jsonPath = "Configuration/config.json";
+	// Load JSON data
+	jsonImp.LoadJSON();
 
 	// Needed to initialize PCG (Random Number Generator Library)
 	InitSeed();
@@ -149,6 +155,8 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
+
+	jsonImp.SaveJSON();
 
 	for (list<Module*>::reverse_iterator item = list_modules.rbegin(); item != list_modules.rend() && ret; ++item)
 	{
