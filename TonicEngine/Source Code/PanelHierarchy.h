@@ -22,7 +22,6 @@ public:
 
 	uint clickedGO = -1;
 	void ManageNodesOnHierarchy(GameObject* GO);
-	void ReparentGO(GameObject* Go, GameObject* draggedGO);
 	GameObject* draggedGO = nullptr;
 
 private:

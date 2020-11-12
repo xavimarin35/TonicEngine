@@ -120,9 +120,15 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 
 	// when node is clicked
 	if (ImGui::IsItemClicked(0))
-	{
 		App->scene_intro->GOselected = GO;
-	}
+
+	// Deselect GO when right-clicking in the hierarchy window 
+	if (ImGui::IsMouseClicked(0) && ImGui::IsWindowHovered())
+		App->scene_intro->GOselected = nullptr;
+
+	// Delete with SUPR
+	if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN)
+		App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
 
 	// Create menu when item is selected
 	if (ImGui::IsItemClicked(1) && ImGui::IsWindowHovered())
@@ -131,11 +137,15 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 		App->scene_intro->GOselected = GO;
 	}
 
+	// Create menu when item is not selected (Right Click)
+	if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered())
+		openMenuNotHovering = true;
+
 	// not working payload yet
 	if (ImGui::BeginDragDropSource())
 	{
 		ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
-		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->data.name.data());
+		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->data.name.c_str());
 		draggedGO = GO;
 
 		ImGui::EndDragDropSource();
@@ -184,7 +194,9 @@ void PanelHierarchy::DrawMenuNotHovering()
 
 		if (ImGui::MenuItem("Create Empty GameObject"))
 		{
-			App->scene_intro->CreateGO("GameObject_");
+			GameObject* go = App->scene_intro->CreateGO("Empty");
+			App->scene_intro->GOroot->AddChild(go);
+
 			openMenuHovering = false;
 		}
 
@@ -281,6 +293,11 @@ void PanelHierarchy::DrawMenuHovering()
 	{
 		if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
 		else App->camera->isOnHierarchy = false;
+
+		if (ImGui::MenuItem("Create Empty Child"))
+		{
+			App->scene_intro->CreateGO("Empty Child", App->scene_intro->GOselected);
+		}
 
 		if (ImGui::MenuItem("Remove GameObject"))
 		{

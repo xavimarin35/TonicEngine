@@ -347,3 +347,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Ignore Tonic file format objects (.Tmesh, .Ttext, .Ttransf)
+TonicEngine/Tonic Engine/Game/Library/**/*.Tmesh
+TonicEngine/Tonic Engine/Game/Library/**/*.Ttext
+TonicEngine/Tonic Engine/Game/Library/**/*.Ttransf

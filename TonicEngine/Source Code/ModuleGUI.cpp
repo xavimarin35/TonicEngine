@@ -209,8 +209,39 @@ bool ModuleGUI::Draw()
 				App->scene_intro->RemoveSelectedGO(GO);
 			}
 
-			if (ImGui::MenuItem("Number of GameObjects"))
-				App->scene_intro->NumberOfGO();
+			ImGui::Separator();
+
+			if (GO == nullptr)
+			{
+				HelpMarker("You must select a GO to use this tool");
+				ImGui::SameLine();
+			}
+
+			if (ImGui::BeginMenu("Get GO Information"))
+			{
+				if (GO != nullptr)
+				{
+					if (ImGui::MenuItem("Name"))
+					{
+						const char* name = App->scene_intro->GOselected->GetGameObjectName();
+						LOG_C("The Name of the selected GO is: %s", name);
+					}
+
+					if (ImGui::MenuItem("ID"))
+					{
+						uint id = App->scene_intro->GOselected->GetGameObjectId();
+						LOG_C("The ID of the selected GO is: %i", id);
+					}
+
+					if (ImGui::MenuItem("UUID"))
+					{
+						int uuid = App->scene_intro->GOselected->GetGameObjectUUID();
+						LOG_C("The UUID of the selected GO is: %i", uuid);
+					}
+				}
+
+				ImGui::EndMenu();
+			}
 
 			// --------------------------
 			if (GO == nullptr)
@@ -236,6 +267,11 @@ bool ModuleGUI::Draw()
 				ImGui::EndMenu();
 			}
 
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Number of GameObjects"))
+				App->scene_intro->NumberOfGO();
+
 			if (ImGui::MenuItem("Get active GO index"))
 			{
 				if (GO != nullptr)
@@ -243,9 +279,6 @@ bool ModuleGUI::Draw()
 				else
 					LOG_C("WARNING: You must select a GO to get the index");
 			}
-
-			if (ImGui::MenuItem("Get size of the list"))
-				App->scene_intro->GetSizeOfList();
 				
 			ImGui::EndMenu();
 		}

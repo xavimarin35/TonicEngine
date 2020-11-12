@@ -38,7 +38,7 @@ public:
 	void DisableGameObject();
 
 	bool IsGameObjectActive();
-	string GetGameObjectName();
+	const char* GetGameObjectName();
 	uint GetGameObjectId();
 	int GetGameObjectUUID();
 
@@ -51,8 +51,8 @@ public:
 	ComponentCamera* GetComponentCamera();
 
 	GameObject* GetRootGameObject();
-	void AddChild(GameObject* GO);
-	void RemoveChild(GameObject* GO);
+	void AddChild(GameObject* child);
+	void RemoveChild(GameObject* child);
 
 	int GenerateUUID();
 

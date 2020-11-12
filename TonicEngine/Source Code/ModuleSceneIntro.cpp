@@ -123,23 +123,7 @@ string ModuleSceneIntro::AssignNameToGO(string name_go)
 
 void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 {
-	/*if (GO->GOparent != nullptr && isParent == true)
-		GO->GOparent->RemoveChild(GO);
-
-	if (GO->childrenList.size() > 0)
-	{
-		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
-		{
-			RemoveSelectedGO(*it, false);
-		}
-
-		GO->childrenList.clear();
-	}
-
-	GO->CleanUp();
-	delete GO;*/
-
-	if (!gameobjectsList.empty() && GO != nullptr)
+	if (GO != GOroot && !gameobjectsList.empty() && GO != nullptr)
 	{
 		for (int i = 0; i < gameobjectsList.size(); ++i)
 		{
@@ -149,10 +133,6 @@ void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 				GO->CleanUp();
 			}
 		}		
-	}
-	else
-	{
-		LOG_C("ERROR: GameObject named '%s' wasn't found in the list, so was impossible to delete it", GO->data.name.c_str());
 	}
 }
 
@@ -186,6 +166,7 @@ void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 	}
 }
 
+// old
 void ModuleSceneIntro::GetSizeOfList()
 {
 	int size = 0;

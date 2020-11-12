@@ -19,7 +19,7 @@ Application* App = NULL;
 
 int main(int argc, char ** argv)
 {
-	LOG("Welcome to Tonic Engine");
+	LOG("Welcome to Tonic Engine :) ");
 
 	int main_return = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
@@ -85,6 +85,6 @@ int main(int argc, char ** argv)
 	}
 
 	delete App;
-	LOG("Quitting from Tonic Engine");
+	LOG("Quitting from Tonic Engine... ");
 	return main_return;
 }

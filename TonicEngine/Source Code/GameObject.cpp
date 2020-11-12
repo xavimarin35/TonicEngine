@@ -10,6 +10,8 @@ GameObject::GameObject(std::string name)
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 	CreateComponent(COMPONENT_TYPE::MESH);
 	CreateComponent(COMPONENT_TYPE::TEXTURE);
+	
+	LOG_C("A new GameObject called '%s' has been created!", name.c_str());
 }
 
 GameObject::~GameObject()
@@ -18,16 +20,12 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	/*for (int i = 0; i < componentsList.size(); ++i)
+	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i]->active)
 			componentsList[i]->Update();
-	}*/
+	}
 
-	/*for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
-	{
-		(*it)->Update();
-	}*/
 }
 
 void GameObject::CleanUp()
@@ -61,14 +59,6 @@ void GameObject::CleanUp()
 	childrenList.clear();
 }
 
-//void GameObject::Draw()
-//{
-//	for (int i = 0; i < componentsList.size(); ++i)
-//	{
-//		componentsList[i]->Draw();
-//	}
-//}
-
 void GameObject::EnableGameObject()
 {
 	if (!this->data.active)
@@ -101,19 +91,15 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 	{
 	case COMPONENT_TYPE::TRANSFORM:
 		component = new ComponentTransform(this);
-		LOG_C("Component Transform added to the list");
 		break;
 	case COMPONENT_TYPE::MESH:
 		component = new ComponentMesh(this);
-		LOG_C("Component Mesh added to the list");
 		break;
 	case COMPONENT_TYPE::TEXTURE:
 		component = new ComponentTexture(this);
-		LOG_C("Component Texture added to the list");
 		break;
 	case COMPONENT_TYPE::CAMERA:
 		component = new ComponentCamera(this);
-		LOG_C("Component Camera added to the list");
 		break;
 	}
 
@@ -194,7 +180,7 @@ bool GameObject::IsGameObjectActive()
 	return data.active;
 }
 
-string GameObject::GetGameObjectName()
+const char* GameObject::GetGameObjectName()
 {
 	return data.name.c_str();
 }
@@ -214,29 +200,20 @@ GameObject* GameObject::GetRootGameObject()
 	return App->scene_intro->GOroot;
 }
 
-void GameObject::AddChild(GameObject* GO)
+void GameObject::AddChild(GameObject* child)
 {
-	if (GO->GOparent != nullptr)
-		RemoveChild(GO);
+	if (child->GOparent != nullptr)
+		child->GOparent->RemoveChild(child);
 
-	GO->GOparent = this;
-	childrenList.push_back(GO);
+	child->GOparent = this;
+	childrenList.push_back(child);
 }
 
-void GameObject::RemoveChild(GameObject* GO)
+void GameObject::RemoveChild(GameObject* child)
 {
-	/*for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); it++)
-	{
-		if ((*it) == GO)
-		{
-			childrenList.erase(it);
-			break;
-		}
-	}*/
-
 	for (int i = 0; i < childrenList.size(); i++)
 	{
-		if (childrenList[i] == GO)
+		if (childrenList[i] == child)
 		{
 			childrenList.erase(childrenList.begin() + i);
 		}
@@ -246,7 +223,6 @@ void GameObject::RemoveChild(GameObject* GO)
 int GameObject::GenerateUUID()
 {
 	int uuid = GenerateRandomBetween(99999999999);
-	//LOG_C("rnd number is: %i", uuid); 
 	return uuid;
 }
 
