@@ -84,7 +84,7 @@ bool TextureImporter::DuplicateTexture(const char* path) const
 		if (ilSaveL(IL_DDS, data, size) > 0)
 			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "Ttext");
 
-		LOG_C("NICE: Correctly exported %s.Ttext into Textures folder", path);
+		LOG_C("NICE: Correctly exported %s.Ttext into Textures folder", name.data());
 
 		RELEASE_ARRAY(data);
 	}

@@ -605,7 +605,7 @@
     <ResourceCompile Include="TonicEngine.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Tonic Engine\Game\Assets\iconEngine.ico" />
+    <Image Include="Tonic Engine\Game\Assets\Others\iconEngine.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source Code\Libraries\MathGeoLib\include\Geometry\KDTree.inl">

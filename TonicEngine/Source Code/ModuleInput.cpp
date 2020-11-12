@@ -134,7 +134,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				}
 
 				// PNG or DDS
-				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr)
+				else if (strstr(dropDirection, ".png") != nullptr || strstr(dropDirection, ".dds") != nullptr || strstr(dropDirection, ".tga") != nullptr)
 				{
 					if (App->scene_intro->GOselected != nullptr)
 					{

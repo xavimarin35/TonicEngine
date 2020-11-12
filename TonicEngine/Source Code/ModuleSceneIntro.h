@@ -17,7 +17,8 @@ enum class OBJECTS3D
 	CARRIAGE, 
 	GERALT,
 	ROCK,
-	BAKER_HOUSE
+	BAKER_HOUSE,
+	STREET
 };
 
 class ModuleSceneIntro : public Module

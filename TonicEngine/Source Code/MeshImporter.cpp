@@ -73,7 +73,7 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 
 		float3 position(translation.x, translation.y, translation.z);
 		float3 sc(1, 1, 1);
-		Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
+		Quat rot(-0.7071068, rotation.y, rotation.z, 0.7071068);
 
 		Empty->GetComponentTransform()->position = position;
 		Empty->GetComponentTransform()->scale = sc;
@@ -122,7 +122,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			float3 pos(translation.x, translation.y, translation.z);
 			float3 sc(1, 1, 1);
-			Quat rot(0, rotation.y, rotation.z, rotation.w);
+			Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
 
 			obj->GetComponentTransform()->position = pos;
 			obj->GetComponentTransform()->scale = sc;
@@ -156,22 +156,28 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				mesh->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
 
+			bool indices_work = true;
+
 			// Copy faces
 			if (mesh2->HasFaces())
 			{
 				mesh->mData.num_index = mesh2->mNumFaces * 3;
-				mesh->mData.index = new uint[mesh->mData.num_index]; // assume each face is a triangle
+				mesh->mData.index = new uint[mesh->mData.num_index]; // Each face has a triangle
 				for (uint i = 0; i < mesh2->mNumFaces; ++i)
 				{
 					if (mesh2->mFaces[i].mNumIndices != 3)
 					{
+						indices_work = false;
 						LOG_C("WARNING: Geometry face with != 3 indices!");
 					}
 					else
 						memcpy(&mesh->mData.index[i * 3], mesh2->mFaces[i].mIndices, 3 * sizeof(uint));
 				}
-
-				// Normals
+			}
+			
+			// Normals
+			if (mesh2->HasNormals() && indices_work)
+			{
 				mesh->mData.face_center = new float3[mesh->mData.num_index];
 				mesh->mData.normals = new float3[mesh->mData.num_index];
 				mesh->mData.num_normals = mesh->mData.num_index / 3;
@@ -183,9 +189,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 					face_B = mesh->mData.vertex[mesh->mData.index[(j * 3) + 1]];
 					face_C = mesh->mData.vertex[mesh->mData.index[(j * 3) + 2]];
 
-
 					mesh->mData.face_center[j] = (face_A + face_B + face_C) / 3;
-
 
 					float3 edge1 = face_B - face_A;
 					float3 edge2 = face_C - face_A;
@@ -193,7 +197,6 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 					mesh->mData.normals[j] = Cross(edge1, edge2);
 					mesh->mData.normals[j].Normalize();
 					mesh->mData.normals[j] *= 0.15f;
-
 				}
 			}
 

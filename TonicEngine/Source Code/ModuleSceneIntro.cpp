@@ -282,7 +282,12 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::BAKER_HOUSE:
-		App->mesh_imp->LoadFile("Assets/BakerHouse.fbx", "Assets/Baker_house.png");
+		App->mesh_imp->LoadFile("Assets/BakerHouse/BakerHouse.fbx", "Assets/BakerHouse/Baker_house.png");
+		break;
+
+	case OBJECTS3D::STREET:
+		App->mesh_imp->LoadFile("Assets/Street/street2.fbx");
+		//App->mesh_imp->LoadFile("Assets/Street/street2.FBX");
 		break;
 	}
 }
