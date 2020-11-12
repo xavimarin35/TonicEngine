@@ -15,13 +15,9 @@ public:
 
 public:
 
-	// Export Mesh and Transform
+	// Export Mesh
 	bool Export(const char* path, std::string& file, ComponentMesh* mesh);
-	bool Export(const char* path, std::string& file, ComponentTransform* transform);
 
-	// Load Mesh and Transform
-	bool Load(const char* path, ComponentMesh* mesh);
-	bool Load(const char* path, ComponentTransform* transform);
 
 };
 

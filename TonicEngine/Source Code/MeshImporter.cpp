@@ -82,7 +82,6 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 		Empty->GetComponentTransform()->UpdateLocalTransform();
 
 		Importer ex; std::string file;
-		ex.Export(Empty->data.name.c_str(), file, Empty->GetComponentTransform());
 
 		App->scene_intro->GOroot->AddChild(Empty);
 
@@ -156,6 +155,10 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				mesh->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
 
+			parent->GetComponentTransform()->position.x = mesh->mData.vertex->x;
+			parent->GetComponentTransform()->position.y = mesh->mData.vertex->y;
+			parent->GetComponentTransform()->position.z = mesh->mData.vertex->z;
+
 			bool indices_work = true;
 
 			// Copy faces
@@ -220,8 +223,6 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			ex.Export(name, file, obj->GetComponentMesh());
 			obj->GetComponentMesh()->mData.path = file;
-
-			ex.Export(name, file, obj->GetComponentTransform());
 		}
 	}
 
