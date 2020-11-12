@@ -32,10 +32,15 @@ public:
 
 	void Update();
 	void CleanUp();
-	void Draw();
+	//void Draw();
 
 	void EnableGameObject();
 	void DisableGameObject();
+
+	bool IsGameObjectActive();
+	string GetGameObjectName();
+	uint GetGameObjectId();
+	int GetGameObjectUUID();
 
 	Component* CreateComponent(COMPONENT_TYPE type, bool active = true);
 	Component* GetComponent(const COMPONENT_TYPE& type);
@@ -45,8 +50,7 @@ public:
 	ComponentTexture* GetComponentTexture();
 	ComponentCamera* GetComponentCamera();
 
-
-	void AssignNameToGO(const char* name);
+	GameObject* GetRootGameObject();
 	void AddChild(GameObject* GO);
 	void RemoveChild(GameObject* GO);
 

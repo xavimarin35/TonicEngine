@@ -110,6 +110,7 @@ bool ModuleGUI::Draw()
 
 	GameObject* GO = App->scene_intro->GOselected;
 
+	// Drawing all panels
 	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
 	{
 		ret = (*it)->Draw();
@@ -128,7 +129,10 @@ bool ModuleGUI::Draw()
 		if (ImGui::BeginMenu("GameObjects"))
 		{
 			if (ImGui::MenuItem("Create Empty GameObject"))
-				App->scene_intro->CreateGO("GameObject_");
+			{
+				GameObject* go = App->scene_intro->CreateGO("Empty");
+				App->scene_intro->GOroot->AddChild(go);
+			}
 
 			if (ImGui::MenuItem("Remove GameObjects"))
 				App->scene_intro->RemoveAllGO();
@@ -191,6 +195,20 @@ bool ModuleGUI::Draw()
 
 		if (ImGui::BeginMenu("Debug"))
 		{
+			if (ImGui::MenuItem("Create Empty x5"))
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					GameObject* go = App->scene_intro->CreateGO("Empty");
+					App->scene_intro->GOroot->AddChild(go);
+				}
+			}
+
+			if (ImGui::MenuItem("Delete Selected GO"))
+			{
+				App->scene_intro->RemoveSelectedGO(GO);
+			}
+
 			if (ImGui::MenuItem("Number of GameObjects"))
 				App->scene_intro->NumberOfGO();
 

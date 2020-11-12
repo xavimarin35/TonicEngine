@@ -124,6 +124,13 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 		App->scene_intro->GOselected = GO;
 	}
 
+	// Create menu when item is selected
+	if (ImGui::IsItemClicked(1) && ImGui::IsWindowHovered())
+	{
+		openMenuHovering = true;
+		App->scene_intro->GOselected = GO;
+	}
+
 	// not working payload yet
 	if (ImGui::BeginDragDropSource())
 	{
@@ -277,9 +284,8 @@ void PanelHierarchy::DrawMenuHovering()
 
 		if (ImGui::MenuItem("Remove GameObject"))
 		{
-			// old
-			/*if (App->scene_intro->GOselected != nullptr)
-				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);*/
+			if (App->scene_intro->GOselected != nullptr)
+				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);
 			openMenuHovering = false;
 		}
 

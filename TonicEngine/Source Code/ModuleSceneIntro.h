@@ -41,9 +41,9 @@ public:
 	uint id_no_dup_vertices = 1;
 	uint id_indices = 2;
 
-	GameObject* CreateGO(string objName);
+	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
 	string AssignNameToGO(string name_go);
-	void RemoveSelectedGO(GameObject* GO, bool isParent);
+	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
 	void NumberOfGO();
 	void GetGameObjectSelectedIndex(GameObject* GO);

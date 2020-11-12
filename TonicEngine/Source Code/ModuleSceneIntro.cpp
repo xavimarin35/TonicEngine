@@ -82,8 +82,8 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 
 void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 {
-	// Not the root and GO is active
-	if (GO->data.id != 0 && GO->data.active == true)
+	// GO is active and GO is not Root
+	if (GO->data.active == true && GO->data.id != 0)
 	{
 		App->renderer3D->GenerateObject(GO);
 	}
@@ -97,17 +97,22 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 	}
 }
 
-GameObject* ModuleSceneIntro::CreateGO(string objName)
+GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
 	string n = AssignNameToGO(objName);
 
 	GameObject* GO = new GameObject(n);
+
 	GO->data.id = numGO;
-
 	numGO++;
+	gameobjectsList.push_back(GO);
 
+	if (parent != nullptr)
+		parent->AddChild(GO);
+	
 	return GO;
 }
+
 
 string ModuleSceneIntro::AssignNameToGO(string name_go)
 {
@@ -116,9 +121,9 @@ string ModuleSceneIntro::AssignNameToGO(string name_go)
 	return name_go;
 }
 
-void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO, bool isParent)
+void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 {
-	if (GO->GOparent != nullptr && isParent == true)
+	/*if (GO->GOparent != nullptr && isParent == true)
 		GO->GOparent->RemoveChild(GO);
 
 	if (GO->childrenList.size() > 0)
@@ -132,7 +137,23 @@ void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO, bool isParent)
 	}
 
 	GO->CleanUp();
-	delete GO;
+	delete GO;*/
+
+	if (!gameobjectsList.empty() && GO != nullptr)
+	{
+		for (int i = 0; i < gameobjectsList.size(); ++i)
+		{
+			if (gameobjectsList[i] == GO)
+			{
+				gameobjectsList.erase(gameobjectsList.begin() + i);
+				GO->CleanUp();
+			}
+		}		
+	}
+	else
+	{
+		LOG_C("ERROR: GameObject named '%s' wasn't found in the list, so was impossible to delete it", GO->data.name.c_str());
+	}
 }
 
 // old
@@ -147,13 +168,11 @@ void ModuleSceneIntro::RemoveAllGO()
 	gameobjectsList.clear();
 }
 
-// old
 void ModuleSceneIntro::NumberOfGO()
 {
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
-// old
 void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 {
 	GO = App->scene_intro->GOselected;
@@ -167,7 +186,6 @@ void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 	}
 }
 
-// old
 void ModuleSceneIntro::GetSizeOfList()
 {
 	int size = 0;
@@ -177,9 +195,8 @@ void ModuleSceneIntro::GetSizeOfList()
 		size = gameobjectsList.size();
 	}
 
-	LOG_C("There are %i GO in the list", size);
+	LOG_C("The size of the GOs list is %i", size);
 }
-
 
 
 bool ModuleSceneIntro::DrawGridAndAxis(bool active)
