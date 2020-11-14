@@ -64,7 +64,7 @@ bool Application::Init()
 	// Locate .json path 
 	jsonPath = "Configuration/config.json";
 	// Load JSON data
-	jsonImp.LoadJSON();
+	LoadJSON();
 
 	// Needed to initialize PCG (Random Number Generator Library)
 	InitSeed();
@@ -156,7 +156,7 @@ bool Application::CleanUp()
 {
 	bool ret = true;
 
-	jsonImp.SaveJSON();
+	SaveJSON();
 
 	for (list<Module*>::reverse_iterator item = list_modules.rbegin(); item != list_modules.rend() && ret; ++item)
 	{
@@ -191,6 +191,53 @@ void Application::ApplyAppName(const char* name)
 void Application::ApplyOrgName(const char* name)
 {
 	orgName = name;
+}
+
+void Application::LoadJSON()
+{
+	json configData;
+
+	assert(App->jsonPath != nullptr);
+
+	std::ifstream stream;
+	stream.open(App->jsonPath);
+
+	std::list<Module*>::iterator it = App->list_modules.begin();
+
+	configData = json::parse(stream);
+
+	stream.close();
+
+	std::string name = configData["Application"]["Name"];
+	App->appName = name;
+
+	// Load JSON data to all modules
+	while (it != App->list_modules.end())
+	{
+		(*it)->Load(configData);
+		it++;
+	}
+}
+
+void Application::SaveJSON()
+{
+	json configData;
+
+	configData["Application"]["Name"] = App->appName;
+
+	std::list<Module*>::iterator it = App->list_modules.begin();
+
+	// Save JSON data to all modules
+	while (it != App->list_modules.end())
+	{
+		(*it)->Save(configData);
+		it++;
+	}
+
+	std::ofstream stream;
+	stream.open(App->jsonPath);
+	stream << std::setw(4) << configData << std::endl;
+	stream.close();
 }
 
 void Application::AddModule(Module* mod)

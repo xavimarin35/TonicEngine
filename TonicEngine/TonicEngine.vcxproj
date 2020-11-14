@@ -205,7 +205,6 @@
     <ClCompile Include="Source Code\ComponentTexture.cpp" />
     <ClCompile Include="Source Code\ComponentTransform.cpp" />
     <ClCompile Include="Source Code\GameObject.cpp" />
-    <ClCompile Include="Source Code\JsonImporter.cpp" />
     <ClCompile Include="Source Code\Libraries\glew\src\glew.c" />
     <ClCompile Include="Source Code\glmath.cpp" />
     <ClCompile Include="Source Code\Importer.cpp" />

@@ -4,14 +4,15 @@
 #include "Libraries/JSON/json.hpp"
 using json = nlohmann::json;
 
+#include <assert.h>
+#include <fstream>
+#include <iomanip>
+
 class JsonImporter
 {
 public: 
-	JsonImporter();
-	~JsonImporter();
+	JsonImporter() {};
 
-	void SaveJSON();
-	void LoadJSON();
 };
 
 

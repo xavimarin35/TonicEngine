@@ -77,8 +77,10 @@ public:
 	float	dt;
 
 	//JSON
-	JsonImporter jsonImp;
+	json jsonImp;
 	const char* jsonPath;
+	void LoadJSON();
+	void SaveJSON();
 
 private:
 

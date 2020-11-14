@@ -597,15 +597,12 @@
     <ClCompile Include="Source Code\ComponentCamera.cpp">
       <Filter>Sources\GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source Code\JsonImporter.cpp">
-      <Filter>Sources\Importers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TonicEngine.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Tonic Engine\Game\Assets\Others\iconEngine.ico" />
+    <Image Include="Tonic Engine\Game\Assets\iconEngine.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source Code\Libraries\MathGeoLib\include\Geometry\KDTree.inl">
