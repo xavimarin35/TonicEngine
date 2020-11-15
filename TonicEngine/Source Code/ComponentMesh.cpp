@@ -168,6 +168,6 @@ void ComponentMesh::IsMeshComponentActive(GameObject* go)
 		
 }
 
-void ComponentMesh::Save(uint obj_num, nlohmann::json& scene_file)
+void ComponentMesh::Save(uint obj_num, nlohmann::json& scene)
 {
 }

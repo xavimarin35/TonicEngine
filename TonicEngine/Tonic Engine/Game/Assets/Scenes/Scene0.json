@@ -1,0 +1,46 @@
+{
+    "Game Objects": [
+        {
+            "Active": true,
+            "Id": 0,
+            "Name": "Root",
+            "UUID": 1122089466
+        },
+        {
+            "Active": true,
+            "Id": 1,
+            "Name": "Main Camera",
+            "UUID": 198614333
+        },
+        {
+            "Active": true,
+            "Id": 2,
+            "Name": "BakerHouse",
+            "UUID": 668756376
+        },
+        {
+            "Active": true,
+            "Components": {
+                "Texture": {
+                    "Active": true,
+                    "Checkers Texture": true
+                }
+            },
+            "Id": 3,
+            "Name": "Chimney",
+            "UUID": 490830380
+        },
+        {
+            "Active": true,
+            "Components": {
+                "Texture": {
+                    "Active": true,
+                    "Checkers Texture": false
+                }
+            },
+            "Id": 4,
+            "Name": "Baker_house",
+            "UUID": 433631661
+        }
+    ]
+}
