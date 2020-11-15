@@ -1,16 +1,28 @@
 {
     "Game Objects": [
         {
-            "UUID": 396431288
+            "Active": true,
+            "Id": 0,
+            "Name": "Root",
+            "UUID": 615661162
         },
         {
-            "UUID": 69413166
+            "Active": true,
+            "Id": 1,
+            "Name": "BakerHouse",
+            "UUID": 216683145
         },
         {
-            "UUID": 921402104
+            "Active": true,
+            "Id": 2,
+            "Name": "Chimney",
+            "UUID": 800157196
         },
         {
-            "UUID": 434633941
+            "Active": true,
+            "Id": 3,
+            "Name": "Baker_house",
+            "UUID": 1001749189
         }
     ]
 }

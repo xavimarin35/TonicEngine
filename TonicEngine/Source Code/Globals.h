@@ -57,7 +57,7 @@ enum update_status
     }
 
 // JSON assert 
-#include <cassert> // assert
+#include <cassert>
 #define JSON_ASSERT(x) assert(x)
 
 // Configuration -----------
@@ -69,11 +69,10 @@ enum update_status
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-//#define TITLE "TonicEngine"
 
 //Common Directories
 #define ASSETS_FOLDER "/Assets/"
-#define SCENES_FOLDER "Assets/Scenes/"
+#define SCENES_FOLDER "Assets/Scenes/" // It must not have a / before Assets, even though it won't create any .json file
 #define LIBRARY_FOLDER "/Library/"
 #define LIBRARY_TEXTURES_FOLDER "/Library/Textures/"
 #define LIBRARY_MESH_FOLDER "/Library/Meshes/"

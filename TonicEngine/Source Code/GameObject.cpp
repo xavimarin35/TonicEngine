@@ -228,7 +228,11 @@ int GameObject::GenerateUUID()
 
 void GameObject::Save(uint obj_num, nlohmann::json& scene_file)
 {
+	scene_file["Game Objects"][obj_num]["Name"] = data.name;
+	scene_file["Game Objects"][obj_num]["Id"] = data.id;
 	scene_file["Game Objects"][obj_num]["UUID"] = data.UUID;
+	scene_file["Game Objects"][obj_num]["Active"] = data.active;
+	
 }
 
 
