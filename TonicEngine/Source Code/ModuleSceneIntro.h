@@ -46,9 +46,9 @@ public:
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
 	void NumberOfGO();
+	void NumberOfComponents();
 	void GetGameObjectSelectedIndex(GameObject* GO);
 	void GetSizeOfList();
-	void DebugCList();
 	std::vector<GameObject*> gameobjectsList;
 
 	void DrawGameObjectNodes(GameObject* GO);

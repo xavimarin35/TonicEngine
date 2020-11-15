@@ -46,6 +46,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	bool quitApp = false;
+
 	void RequestBrowser(const char* link) const;
 
 	const char* GetAppName() const;

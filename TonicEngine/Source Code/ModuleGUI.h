@@ -60,10 +60,9 @@ public:
 	int rand = 0;
 	bool getRand = false;
 
-	bool quitApp = false;
-
-	bool saveMenu = false;
-	bool loadMenu = false;
+	bool saveSceneMenu = false;
+	bool loadSceneMenu = false;
+	bool exitMenu = false;
 
 	static void HelpMarker(const char* desc);
 

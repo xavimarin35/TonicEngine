@@ -86,9 +86,6 @@ update_status ModuleGUI::Update(float dt)
 
 	ApplyDocking(windowDocking);
 
-	if (quitApp)
-		ret = UPDATE_STOP;
-
 	return ret;
 }
 
@@ -120,14 +117,14 @@ bool ModuleGUI::Draw()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			ImGui::MenuItem("Save Scene", "CTRL+S", &saveMenu);
+			ImGui::MenuItem("Save Scene", "CTRL+S", &saveSceneMenu);
 
-			ImGui::MenuItem("Load Scene", "F3", &loadMenu);
+			ImGui::MenuItem("Load Scene", "CTRL+A", &loadSceneMenu);
 
 			ImGui::Separator();
 
 			if (ImGui::MenuItem("Quit", "Alt + F4"))
-				quitApp = true;
+				exitMenu = true;
 
 			ImGui::EndMenu();
 		}
@@ -273,10 +270,17 @@ bool ModuleGUI::Draw()
 				ImGui::EndMenu();
 			}
 
-			ImGui::Separator();
+			
+			if (GO == nullptr)
+			{
+				HelpMarker("You must select a GO to use this tool");
+				ImGui::SameLine();
+			}
 
 			if (ImGui::MenuItem("Number of Components"))
-				App->scene_intro->DebugCList();
+				App->scene_intro->NumberOfComponents();
+
+			ImGui::Separator();
 
 			if (ImGui::MenuItem("Number of GameObjects"))
 				App->scene_intro->NumberOfGO();
@@ -327,10 +331,10 @@ bool ModuleGUI::Draw()
 
 	}
 
-	if (saveMenu)
+	if (saveSceneMenu)
 	{
 		ImGui::OpenPopup("Save Scene");
-		if (ImGui::BeginPopupModal("Save Scene", &saveMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
+		if (ImGui::BeginPopupModal("Save Scene", &saveSceneMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
 
 			ImGui::Spacing();
@@ -343,7 +347,7 @@ bool ModuleGUI::Draw()
 				break;
 			}
 
-			string name = "Scene";
+			string name = "Scene_";
 			string finalName = name.append(std::to_string(App->scene_intro->numScene));
 
 			ImGui::InputText("", (char*)finalName.c_str(), 35);
@@ -352,14 +356,14 @@ bool ModuleGUI::Draw()
 			{
 				App->scene_intro->SaveScene(finalName);
 				App->scene_intro->numScene++;
-				saveMenu = false;
+				saveSceneMenu = false;
 			}
 
 			ImGui::SameLine();
 
 			if (ImGui::Button("Cancel"))
 			{
-				saveMenu = false;
+				saveSceneMenu = false;
 			}
 
 			ImGui::Spacing();
@@ -376,6 +380,20 @@ bool ModuleGUI::Draw()
 		}
 	}
 
+	if (loadSceneMenu)
+	{
+		ImGui::OpenPopup("Load Scene");
+		if (ImGui::BeginPopupModal("Load Scene", &loadSceneMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
+		{
+			ImGui::Spacing();
+			
+			if (ImGui::Button("Cancel"))
+			{
+				loadSceneMenu = false;
+			}
+			ImGui::EndPopup();
+		}
+	}
 
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
@@ -385,6 +403,28 @@ bool ModuleGUI::Draw()
 		ImGui::Begin("Style Editor Window", &show_style_editor);
 		ImGui::ShowStyleEditor();
 		ImGui::End();
+	}
+
+	if (exitMenu)
+	{
+		ImGui::OpenPopup("Quit");
+		if (ImGui::BeginPopupModal("Quit", &exitMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
+		{
+
+			ImGui::Text("Exit from Tonic Engine?");
+			ImGui::Spacing();
+
+			if (ImGui::Button("Yes", ImVec2(77.0f, 25.0f)))
+				App->quitApp = true;
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("No", ImVec2(77.0f, 25.0f)))
+				exitMenu = false;
+
+			ImGui::Spacing();
+			ImGui::EndPopup();
+		}
 	}
 
 	Render();
@@ -452,7 +492,7 @@ void ModuleGUI::HelpMarker(const char* desc)
 	{
 		ImGui::BeginTooltip();
 		ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-		ImGui::TextUnformatted(desc);
+		ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.8f, 1.0f), desc);
 		ImGui::PopTextWrapPos();
 		ImGui::EndTooltip();
 	}

@@ -149,6 +149,10 @@ update_status Application::Update()
 	}
 	
 	FinishUpdate();
+
+	if (quitApp)
+		return UPDATE_STOP;
+
 	return ret;
 }
 

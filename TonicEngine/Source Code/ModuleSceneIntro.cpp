@@ -65,7 +65,10 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->gui->saveMenu = true;
+		App->gui->saveSceneMenu = true;
+
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		App->gui->loadSceneMenu = true;
 
 	return UPDATE_CONTINUE;
 }
@@ -176,9 +179,9 @@ void ModuleSceneIntro::NumberOfGO()
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
-void ModuleSceneIntro::DebugCList()
+void ModuleSceneIntro::NumberOfComponents()
 {
-	LOG_C("There are %i components", App->scene_intro->GOselected->componentsList.size());
+	LOG_C("This GO has %i components", App->scene_intro->GOselected->componentsList.size());
 }
 
 void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
