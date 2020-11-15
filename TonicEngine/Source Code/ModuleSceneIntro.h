@@ -48,6 +48,7 @@ public:
 	void NumberOfGO();
 	void GetGameObjectSelectedIndex(GameObject* GO);
 	void GetSizeOfList();
+	void DebugCList();
 	std::vector<GameObject*> gameobjectsList;
 
 	void DrawGameObjectNodes(GameObject* GO);

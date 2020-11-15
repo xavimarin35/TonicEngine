@@ -54,7 +54,7 @@ bool PanelInspector::Draw()
 					(*it)->Save(go->data.id, App->jsonImp);
 				}*/
 
-				if (go->data.active)
+				if (go->data.active && go->GOparent != nullptr)
 				{
 					for (int i = 0; i < go->componentsList.size(); ++i)
 					{

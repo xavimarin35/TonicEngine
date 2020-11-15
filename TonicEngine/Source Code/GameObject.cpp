@@ -10,7 +10,7 @@ GameObject::GameObject(std::string name)
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 	CreateComponent(COMPONENT_TYPE::MESH);
 	CreateComponent(COMPONENT_TYPE::TEXTURE);
-	
+
 	LOG_C("A new GameObject called '%s' has been created!", name.c_str());
 }
 

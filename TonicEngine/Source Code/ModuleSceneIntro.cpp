@@ -176,6 +176,11 @@ void ModuleSceneIntro::NumberOfGO()
 	LOG_C("There are %i GameObjects", gameobjectsList.size());
 }
 
+void ModuleSceneIntro::DebugCList()
+{
+	LOG_C("There are %i components", App->scene_intro->GOselected->componentsList.size());
+}
+
 void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 {
 	GO = App->scene_intro->GOselected;

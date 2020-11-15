@@ -275,6 +275,9 @@ bool ModuleGUI::Draw()
 
 			ImGui::Separator();
 
+			if (ImGui::MenuItem("Number of Components"))
+				App->scene_intro->DebugCList();
+
 			if (ImGui::MenuItem("Number of GameObjects"))
 				App->scene_intro->NumberOfGO();
 
@@ -327,10 +330,10 @@ bool ModuleGUI::Draw()
 	if (saveMenu)
 	{
 		ImGui::OpenPopup("Save Scene");
-		if (ImGui::BeginPopupModal("Save Scene"))
+		if (ImGui::BeginPopupModal("Save Scene", &saveMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
-			ImGui::Text("File Name");
-			ImGui::Separator();
+
+			ImGui::Spacing();
 			
 			// Saving scene name with a new index every time
 			for (int i = 0; i < App->scene_intro->maxScenes; i++)
@@ -358,6 +361,17 @@ bool ModuleGUI::Draw()
 			{
 				saveMenu = false;
 			}
+
+			ImGui::Spacing();
+
+			ImGui::Text("The scene will be stored in"); ImGui::SameLine(); ImGui::TextColored(YELLOW_COLOR,"Assets/Scenes/%s.json", finalName.c_str());
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f),"Tonic Engine/Game/Assets/Scenes/%s.json", finalName.c_str());
+				ImGui::EndTooltip();
+			}
+
 			ImGui::EndPopup();
 		}
 	}
