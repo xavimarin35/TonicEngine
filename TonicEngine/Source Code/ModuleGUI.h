@@ -62,6 +62,9 @@ public:
 
 	bool quitApp = false;
 
+	bool saveMenu = false;
+	bool loadMenu = false;
+
 	static void HelpMarker(const char* desc);
 
 private:

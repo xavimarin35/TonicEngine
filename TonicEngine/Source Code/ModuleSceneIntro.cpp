@@ -64,8 +64,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		SaveScene("Test");
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		App->gui->saveMenu = true;
 
 	return UPDATE_CONTINUE;
 }

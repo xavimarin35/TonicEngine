@@ -58,6 +58,8 @@ public:
 	//JSON
 	void SaveScene(std::string scene_name);
 	void SaveGameObjects(nlohmann::json& scene, GameObject* Root);
+	int numScene = 0;
+	int maxScenes = 25;
 
 	uint texture = -1;
 

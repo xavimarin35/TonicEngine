@@ -120,14 +120,9 @@ bool ModuleGUI::Draw()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("Save Scene", "F2"))
-			{
-				App->scene_intro->SaveScene("Test");
-			}
-			if (ImGui::MenuItem("Load Scene", "F3"))
-			{
+			ImGui::MenuItem("Save Scene", "CTRL+S", &saveMenu);
 
-			}
+			ImGui::MenuItem("Load Scene", "F3", &loadMenu);
 
 			ImGui::Separator();
 
@@ -329,10 +324,47 @@ bool ModuleGUI::Draw()
 
 	}
 
-	// Demo Window
+	if (saveMenu)
+	{
+		ImGui::OpenPopup("Save Scene");
+		if (ImGui::BeginPopupModal("Save Scene"))
+		{
+			ImGui::Text("File Name");
+			ImGui::Separator();
+			
+			// Saving scene name with a new index every time
+			for (int i = 0; i < App->scene_intro->maxScenes; i++)
+			{
+				int aux = i;
+				i = App->scene_intro->numScene;
+				break;
+			}
+
+			string name = "Scene";
+			string finalName = name.append(std::to_string(App->scene_intro->numScene));
+
+			ImGui::InputText("", (char*)finalName.c_str(), 35);
+			ImGui::SameLine();
+			if (ImGui::Button("Save"))
+			{
+				App->scene_intro->SaveScene(finalName);
+				App->scene_intro->numScene++;
+				saveMenu = false;
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Cancel"))
+			{
+				saveMenu = false;
+			}
+			ImGui::EndPopup();
+		}
+	}
+
+
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
-
 
 	if (show_style_editor)
 	{
