@@ -73,7 +73,7 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 
 		float3 position(translation.x, translation.y, translation.z);
 		float3 sc(1, 1, 1);
-		Quat rot(-0.7071068, rotation.y, rotation.z, 0.7071068);
+		Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
 
 		Empty->GetComponentTransform()->position = position;
 		Empty->GetComponentTransform()->scale = sc;
@@ -154,10 +154,6 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				mesh->mData.vertex[i].y = mesh2->mVertices[i].y;
 				mesh->mData.vertex[i].z = mesh2->mVertices[i].z;
 			}
-
-			parent->GetComponentTransform()->position.x = mesh->mData.vertex->x;
-			parent->GetComponentTransform()->position.y = mesh->mData.vertex->y;
-			parent->GetComponentTransform()->position.z = mesh->mData.vertex->z;
 
 			bool indices_work = true;
 
