@@ -26,6 +26,12 @@ void GameObject::Update()
 			componentsList[i]->Update();
 	}
 
+	for (int i = 0; i < childrenList.size(); ++i)
+	{
+		if (childrenList[i]->data.active)
+			childrenList[i]->Update();
+	}
+
 }
 
 void GameObject::CleanUp()

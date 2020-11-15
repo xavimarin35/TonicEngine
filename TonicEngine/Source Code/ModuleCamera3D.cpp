@@ -23,11 +23,11 @@ ModuleCamera3D::~ModuleCamera3D()
 bool ModuleCamera3D::Start()
 {
 	LOG_C("Loading Camera 3D");
-	//App->appLogs.push_back("error: NO MAMES TE LA CRESITE");
-	LOG("Setting up the camera");
-	bool ret = true;
 
-	return ret;
+	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
+	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
+
+	return true;
 }
 
 bool ModuleCamera3D::CleanUp()
@@ -39,9 +39,6 @@ bool ModuleCamera3D::CleanUp()
 
 update_status ModuleCamera3D::Update(float dt)
 {
-	// Implement a debug camera with keys and mouse
-	// Now we can make this movememnt frame rate independant!
-
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
 	{
 		// Trying to focus while hovering a menu

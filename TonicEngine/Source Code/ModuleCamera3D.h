@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "glmath.h"
+#include "GameObject.h"
 
 class ModuleCamera3D : public Module
 {
@@ -24,6 +25,8 @@ public:
 	bool isOnHierarchy = false;
 	bool isOnInspector = false;
 	bool isOnConfiguration = false;
+
+	GameObject* cameraGO = nullptr;
 
 private:
 
