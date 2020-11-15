@@ -226,13 +226,15 @@ int GameObject::GenerateUUID()
 	return uuid;
 }
 
-void GameObject::Save(uint obj_num, nlohmann::json& scene_file)
+void GameObject::Save(uint obj_num, nlohmann::json& scene)
 {
-	scene_file["Game Objects"][obj_num]["Name"] = data.name;
-	scene_file["Game Objects"][obj_num]["Id"] = data.id;
-	scene_file["Game Objects"][obj_num]["UUID"] = data.UUID;
-	scene_file["Game Objects"][obj_num]["Active"] = data.active;
+	scene["Game Objects"][obj_num]["Name"] = data.name;
+	scene["Game Objects"][obj_num]["Id"] = data.id;
+	scene["Game Objects"][obj_num]["UUID"] = data.UUID;
+	scene["Game Objects"][obj_num]["Active"] = data.active;
 	
+	for (int i = 0; i < componentsList.size(); i++)
+		componentsList[i]->Save(obj_num, scene);
 }
 
 

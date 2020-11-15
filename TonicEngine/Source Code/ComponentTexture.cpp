@@ -125,4 +125,8 @@ void ComponentTexture::GetTexturePath()
 	LOG_C("Texture path is: %s", texture.path.c_str());
 }
 
+void ComponentTexture::Save(uint obj_num, nlohmann::json& scene_file)
+{
+}
+
 

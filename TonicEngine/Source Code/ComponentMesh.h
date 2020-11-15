@@ -43,6 +43,8 @@ public:
 
 	void IsMeshComponentActive(GameObject* go);
 
+	void Save(uint obj_num, nlohmann::json& scene_file);
+
 public:
 
 	bool showFaceNormals = false;

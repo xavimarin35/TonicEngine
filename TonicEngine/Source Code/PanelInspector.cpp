@@ -34,37 +34,43 @@ bool PanelInspector::Draw()
 			if (ImGui::IsWindowHovered()) App->camera->isOnInspector = true;
 			else App->camera->isOnInspector = false;
 
-			GameObject* obj = App->scene_intro->GOselected;
+			GameObject* go = App->scene_intro->GOselected;
 
-			if (obj != nullptr)
+			if (go != nullptr)
 			{
 				ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
-				activeGO = obj->data.active;
+				activeGO = go->data.active;
 
 				ImGui::Spacing();
 
 				ImGui::Checkbox("Active", &activeGO);
 				ImGui::SameLine();
-				ImGui::InputText(" ", (char*)obj->data.name.c_str(), 25, flags);
+				ImGui::InputText(" ", (char*)go->data.name.c_str(), 25, flags);
 
 				ImGui::Spacing();
 
-				if (obj->data.active)
+				/*for (std::vector<Component*>::iterator it = App->scene_intro->GOroot->componentsList.begin(); it != App->scene_intro->GOroot->componentsList.end(); it++)
 				{
-					for (int i = 0; i < obj->componentsList.size(); ++i)
+					(*it)->Save(go->data.id, App->jsonImp);
+				}*/
+
+				if (go->data.active)
+				{
+					for (int i = 0; i < go->componentsList.size(); ++i)
 					{
-						if (obj->componentsList[i] != nullptr)
+						if (go->componentsList[i] != nullptr)
 						{
-							obj->componentsList[i]->Draw();
-							obj->componentsList[i]->Update();
+							go->componentsList[i]->Draw();
+							go->componentsList[i]->Update();
+							//go->componentsList[i]->Save(go->data.id, App->jsonImp); // Not working
 						}
 					}
 				}
 
 				if (activeGO)
-					obj->EnableGameObject();
+					go->EnableGameObject();
 				else
-					obj->DisableGameObject();
+					go->DisableGameObject();
 			}
 
 		}

@@ -23,6 +23,8 @@ public:
 	void IsTextureComponentActive(GameObject* go);
 	void GetTexturePath();
 
+	void Save(uint obj_num, nlohmann::json& scene_file);
+
 public:
 	
 	bool EnableCheckersTexture = false;

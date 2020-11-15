@@ -101,16 +101,14 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 
 void ModuleSceneIntro::SaveScene(std::string scene_name)
 {
-	// Create auxiliar file
-	json scene;
 	std::string full_path = SCENES_FOLDER + scene_name + ".json";
 
-	SaveGameObjects(scene, GOroot);
+	SaveGameObjects(App->jsonImp, GOroot);
 
 	// Create the stream and open the file
 	std::ofstream stream;
 	stream.open(full_path);
-	stream << std::setw(4) << scene << std::endl;
+	stream << std::setw(4) << App->jsonImp << std::endl;
 	stream.close();
 }
 
