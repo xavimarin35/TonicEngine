@@ -8,7 +8,7 @@ using json = nlohmann::json;
 #include <fstream>
 #include <iomanip>
 
-class JsonImporter
+class JsonImporter // actually it's not necessary to create this class
 {
 public: 
 	JsonImporter() {};

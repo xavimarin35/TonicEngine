@@ -20,6 +20,7 @@ class ModuleGUI;
 class MeshImporter;
 class ModuleFileSystem;
 class TextureImporter;
+class JsonImporter;
 
 class Application
 {

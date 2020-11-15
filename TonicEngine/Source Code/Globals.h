@@ -69,10 +69,11 @@ enum update_status
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "TonicEngine"
+//#define TITLE "TonicEngine"
 
 //Common Directories
 #define ASSETS_FOLDER "/Assets/"
+#define SCENES_FOLDER "Assets/Scenes/"
 #define LIBRARY_FOLDER "/Library/"
 #define LIBRARY_TEXTURES_FOLDER "/Library/Textures/"
 #define LIBRARY_MESH_FOLDER "/Library/Meshes/"

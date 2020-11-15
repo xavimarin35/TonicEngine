@@ -56,6 +56,10 @@ public:
 
 	int GenerateUUID();
 
+	// JSON
+	//void Load(const nlohmann::json& scene_file);
+	void Save(uint obj_num, nlohmann::json& scene_file);
+
 public:
 	goData data;
 

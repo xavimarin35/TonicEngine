@@ -120,6 +120,17 @@ bool ModuleGUI::Draw()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
+			if (ImGui::MenuItem("Save Scene", "F2"))
+			{
+				App->scene_intro->SaveScene("Test");
+			}
+			if (ImGui::MenuItem("Load Scene", "F3"))
+			{
+
+			}
+
+			ImGui::Separator();
+
 			if (ImGui::MenuItem("Quit", "Alt + F4"))
 				quitApp = true;
 

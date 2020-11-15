@@ -64,7 +64,9 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		SaveScene("Test");
+
 	return UPDATE_CONTINUE;
 }
 
@@ -95,6 +97,29 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 			DrawGameObjectNodes(*it);
 		}
 	}
+}
+
+void ModuleSceneIntro::SaveScene(std::string scene_name)
+{
+	// Create auxiliar file
+	json scene;
+	std::string full_path = SCENES_FOLDER + scene_name + ".json";
+
+	SaveGameObjects(scene, GOroot);
+
+	// Create the stream and open the file
+	std::ofstream stream;
+	stream.open(full_path);
+	stream << std::setw(4) << scene << std::endl;
+	stream.close();
+}
+
+void ModuleSceneIntro::SaveGameObjects(nlohmann::json& scene, GameObject* GO)
+{
+	GO->Save(GO->data.id, scene);
+
+	for (int i = 0; i < GO->childrenList.size(); ++i)
+		SaveGameObjects(scene, GO->childrenList[i]);
 }
 
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)

@@ -55,6 +55,10 @@ public:
 	GameObject* GOroot = nullptr;
 	uint numGO = 0;
 
+	//JSON
+	void SaveScene(std::string scene_name);
+	void SaveGameObjects(nlohmann::json& scene, GameObject* Root);
+
 	uint texture = -1;
 
 	bool drawGrid = true;
