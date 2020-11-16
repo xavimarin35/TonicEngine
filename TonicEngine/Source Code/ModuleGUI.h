@@ -16,12 +16,14 @@
 #include "PanelConsole.h"
 #include "PanelHierarchy.h"
 #include "PanelInspector.h"
+#include "PanelState.h"
 
 class PanelConfiguration;
 class PanelAbout;
 class PanelConsole;
 class PanelHierarchy;
 class PanelInspector;
+class PanelState;
 
 class ModuleGUI : public Module
 {
@@ -55,6 +57,7 @@ public:
 	PanelConsole* Pconsole = nullptr;
 	PanelHierarchy* Phierarchy = nullptr;
 	PanelInspector* Pinspector = nullptr;
+	PanelState* Pstate = nullptr;
 
 	// Random Number Generator 
 	int rand = 0;

@@ -39,7 +39,7 @@ bool ModuleCamera3D::CleanUp()
 
 update_status ModuleCamera3D::Update(float dt)
 {
-	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector)
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState)
 	{
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)

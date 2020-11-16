@@ -11,6 +11,7 @@
 #include "ModuleFileSystem.h"
 #include "TextureImporter.h"
 #include "JsonImporter.h"
+#include "ModuleTime.h"
 
 Application::Application()
 {
@@ -23,6 +24,7 @@ Application::Application()
 	mesh_imp = new MeshImporter(this);
 	file_system = new ModuleFileSystem(this);
 	tex_imp = new TextureImporter(this);
+	time = new ModuleTime(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -35,6 +37,7 @@ Application::Application()
 	AddModule(mesh_imp);
 	AddModule(tex_imp);
 	AddModule(file_system);
+	AddModule(time);
 
 	// Scenes
 	AddModule(scene_intro);
@@ -168,6 +171,57 @@ bool Application::CleanUp()
 	}
 
 	return ret;
+}
+
+void Application::ChangeEngineState(ENGINE_STATE new_state)
+{
+	this->current_state = new_state;
+}
+
+bool Application::PlayScene()
+{
+	if (current_state == ENGINE_STATE::NONE)
+	{
+		//if camera != nullptr
+			//change camera to the cameraGO
+			//and play
+	}
+
+	return false;
+}
+
+void Application::PauseScene()
+{
+	switch (current_state)
+	{
+	case ENGINE_STATE::PLAY:
+		ChangeEngineState(ENGINE_STATE::PAUSE);
+		break;
+	
+	case ENGINE_STATE::PAUSE:
+		ChangeEngineState(ENGINE_STATE::PLAY);
+		break;
+	}
+}
+
+void Application::StopScene()
+{
+	switch (current_state) {
+	case ENGINE_STATE::PLAY:
+	case ENGINE_STATE::PAUSE:
+		//Change camera view
+		
+
+		ChangeEngineState(ENGINE_STATE::NONE);
+		time->ResetGameTimer();
+
+		break;
+	}
+}
+
+ENGINE_STATE Application::GetEngineState()
+{
+	return current_state;
 }
 
 void Application::RequestBrowser(const char* link) const

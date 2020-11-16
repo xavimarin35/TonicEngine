@@ -21,6 +21,14 @@ class MeshImporter;
 class ModuleFileSystem;
 class TextureImporter;
 class JsonImporter;
+class ModuleTime;
+
+enum class ENGINE_STATE
+{
+	NONE = 0,
+	PLAY, 
+	PAUSE
+};
 
 class Application
 {
@@ -34,6 +42,7 @@ public:
 	MeshImporter* mesh_imp = nullptr;
 	ModuleFileSystem* file_system = nullptr;
 	TextureImporter* tex_imp = nullptr;
+	ModuleTime* time = nullptr;
 
 	list<Module*> list_modules;
 
@@ -45,6 +54,14 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+
+	bool PlayScene();
+	void PauseScene();
+	void StopScene();
+	void ChangeEngineState(ENGINE_STATE new_state);
+	ENGINE_STATE GetEngineState();
+
+	ENGINE_STATE current_state = ENGINE_STATE::NONE;
 
 	bool quitApp = false;
 

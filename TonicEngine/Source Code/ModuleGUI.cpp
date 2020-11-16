@@ -23,6 +23,7 @@ bool ModuleGUI::Init()
 	Phierarchy = new PanelHierarchy();
 	Pconsole = new PanelConsole();
 	Pinspector = new PanelInspector();
+	Pstate = new PanelState();
 	
 	PushBackPanels();
 
@@ -467,6 +468,7 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Phierarchy);
 	panels.push_back(Pconsole);
 	panels.push_back(Pinspector);
+	panels.push_back(Pstate);
 }
 
 

@@ -25,6 +25,7 @@ public:
 	bool isOnHierarchy = false;
 	bool isOnInspector = false;
 	bool isOnConfiguration = false;
+	bool isOnState = false;
 
 	GameObject* cameraGO = nullptr;
 
