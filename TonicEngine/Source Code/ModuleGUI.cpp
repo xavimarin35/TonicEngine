@@ -309,7 +309,7 @@ bool ModuleGUI::Draw()
 
 		if (ImGui::BeginMenu("Help"))
 		{
-			ImGui::MenuItem("About us...", NULL, &Pabout->active);
+			ImGui::MenuItem("About Tonic Engine", NULL, &Pabout->active);
 
 			ImGui::Separator();
 

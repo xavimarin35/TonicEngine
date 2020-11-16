@@ -16,7 +16,7 @@ bool PanelAbout::Start()
 {
 	this->active = false;
 	
-	//texIcon = App->tex_imp->GenerateTexture("Assets/Others/iconEngine.ico");
+	texIcon = App->tex_imp->LoadTexture("Assets/Others/iconEngine.ico");
 
 	return true;
 }
@@ -30,7 +30,7 @@ bool PanelAbout::Draw()
 	{
 		if (ImGui::Begin("About", &active, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
-			//ImGui::Image((void*)texIcon, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
+			ImGui::Image((ImTextureID*)texIcon.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)); ImGui::SameLine();
 			
 			ImGui::Text("%s by Pol Casau and Xavi Marin", SDL_GetWindowTitle(App->window->window));
 			ImGui::Separator();
@@ -71,7 +71,9 @@ bool PanelAbout::Draw()
 				if (ImGui::Button("DeviIL"))
 					App->RequestBrowser("http://openil.sourceforge.net/"); ImGui::SameLine();
 				if (ImGui::Button("PhysFS"))
-					App->RequestBrowser("https://icculus.org/physfs/");
+					App->RequestBrowser("https://icculus.org/physfs/"); ImGui::SameLine();
+				if (ImGui::Button("JSON"))
+					App->RequestBrowser("https://github.com/nlohmann/json");
 
 				ImGui::TreePop();
 			}

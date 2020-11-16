@@ -3,7 +3,7 @@
 
 #include "Application.h"
 #include "PanelManager.h"
-
+#include "TextureImporter.h"
 
 class PanelAbout : public PanelManager
 {
@@ -14,7 +14,7 @@ public:
 	bool Start();
 	bool Draw();
 
-	uint texIcon = 0;
+	Texture texIcon;
 };
 
 #endif
