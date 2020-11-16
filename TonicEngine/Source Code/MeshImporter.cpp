@@ -215,9 +215,9 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 			App->renderer3D->IndexBuffer(mesh->mData.index, mesh->mData.num_index, mesh->mData.id_index);
 			App->renderer3D->TextureBuffer(mesh->mData.tex_coords, mesh->mData.num_tex_coords, mesh->mData.id_tex_coords);
 
-			const char* name = obj->data.name.c_str();
+			std::string name = GetMeshName(obj->data.name.c_str());
 
-			ex.Export(name, file, obj->GetComponentMesh());
+			ex.Export(name.c_str(), file, obj->GetComponentMesh());
 			obj->GetComponentMesh()->mData.path = file;
 		}
 	}
@@ -282,4 +282,13 @@ std::string MeshImporter::GetOwnTexture(std::string objName, std::string texture
 		int id = std::stoi(newPath);
 		return TextureBuilding(id).c_str();
 	}
+}
+
+std::string MeshImporter::GetMeshName(std::string name)
+{
+	size_t num = name.find_last_of("_");
+
+	std::string path = name.substr(0, num);
+
+	return path;
 }

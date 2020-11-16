@@ -30,6 +30,7 @@ private:
 
 	std::string TextureBuilding(int id);
 	std::string GetOwnTexture(std::string objName, std::string texture_path);
+	std::string GetMeshName(std::string name);
 };
 
 #endif
