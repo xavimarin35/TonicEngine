@@ -4,6 +4,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleSceneIntro.h"
 #include "MeshImporter.h"
+#include "ModuleFileSystem.h"
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -120,6 +121,8 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Save Scene", "CTRL+S", &saveSceneMenu);
 
 			ImGui::MenuItem("Load Scene", "CTRL+A", &loadSceneMenu);
+
+			ImGui::MenuItem("Delete Scene", NULL, &deleteScene);
 
 			ImGui::Separator();
 
@@ -387,6 +390,20 @@ bool ModuleGUI::Draw()
 		{
 			ImGui::Spacing();
 			
+			// Search in the specified folder and show the current files
+			vector<string> file_list, dir_list;
+			App->file_system->DiscoverFiles("Assets/Scenes/", file_list, dir_list);
+
+			// Create buttons with the files saved
+			for (vector<string>::iterator iterator = file_list.begin(); iterator != file_list.end(); iterator++)
+			{
+				if (ImGui::Button((*iterator).c_str(), ImVec2(300, 20)))
+				{
+					App->scene_intro->LoadScene((*iterator).c_str());
+					loadSceneMenu = false;
+				}
+			}
+
 			if (ImGui::Button("Cancel"))
 			{
 				loadSceneMenu = false;
@@ -420,12 +437,18 @@ bool ModuleGUI::Draw()
 			ImGui::SameLine();
 
 			if (ImGui::Button("No", ImVec2(77.0f, 25.0f)))
+			{
+				App->quitApp = false;
 				exitMenu = false;
+			}	
 
 			ImGui::Spacing();
 			ImGui::EndPopup();
 		}
 	}
+
+	if (deleteScene)
+		App->scene_intro->DeleteScene();
 
 	Render();
 

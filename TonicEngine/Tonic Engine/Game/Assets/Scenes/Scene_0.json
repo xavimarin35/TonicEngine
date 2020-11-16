@@ -4,31 +4,31 @@
             "Active": true,
             "Id": 0,
             "Name": "Root",
-            "UUID": 1122089466
+            "UUID": 285982596
         },
         {
             "Active": true,
             "Id": 1,
             "Name": "Main Camera",
-            "UUID": 198614333
+            "UUID": 301775338
         },
         {
             "Active": true,
             "Id": 2,
             "Name": "BakerHouse",
-            "UUID": 668756376
+            "UUID": 987670219
         },
         {
             "Active": true,
             "Components": {
                 "Texture": {
-                    "Active": true,
-                    "Checkers Texture": true
+                    "Active": false,
+                    "Checkers Texture": false
                 }
             },
             "Id": 3,
             "Name": "Chimney",
-            "UUID": 490830380
+            "UUID": 830088382
         },
         {
             "Active": true,
@@ -40,7 +40,7 @@
             },
             "Id": 4,
             "Name": "Baker_house",
-            "UUID": 433631661
+            "UUID": 215104240
         }
     ]
 }

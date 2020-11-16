@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	Create3DObject(OBJECTS3D::ROCK);
+	Create3DObject(OBJECTS3D::BAKER_HOUSE);
 
 	App->tex_imp->GenerateCheckersTexture();
 
@@ -123,6 +123,25 @@ void ModuleSceneIntro::SaveGameObjects(nlohmann::json& scene, GameObject* GO)
 		SaveGameObjects(scene, GO->childrenList[i]);
 }
 
+void ModuleSceneIntro::DeleteScene()
+{
+	for (int i = 0; i < GOroot->childrenList.size(); i++)
+	{
+		GOroot->childrenList[i]->RemoveChild(GOroot->childrenList[i]);
+		GOselected = nullptr;
+	}
+
+	GOroot->childrenList.clear();
+	numGO = 0;
+}
+
+void ModuleSceneIntro::LoadScene(std::string scene_name)
+{
+	DeleteScene();
+
+	// Loading scene code
+}
+
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
 	string n = AssignNameToGO(objName);
@@ -138,7 +157,6 @@ GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 	
 	return GO;
 }
-
 
 string ModuleSceneIntro::AssignNameToGO(string name_go)
 {

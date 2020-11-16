@@ -37,6 +37,7 @@ public:
 	bool active = false;
 	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
 	GameObject* object = nullptr;
+	uint UUID = 0;
 
 };
 

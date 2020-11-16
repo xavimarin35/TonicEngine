@@ -63,6 +63,7 @@ public:
 	bool saveSceneMenu = false;
 	bool loadSceneMenu = false;
 	bool exitMenu = false;
+	bool deleteScene = false;
 
 	static void HelpMarker(const char* desc);
 

@@ -56,11 +56,15 @@ public:
 	GameObject* GOroot = nullptr;
 	uint numGO = 0;
 
-	//JSON
+	// Serialization
 	void SaveScene(std::string scene_name);
 	void SaveGameObjects(nlohmann::json& scene, GameObject* Root);
+	void DeleteScene();
+	void LoadScene(std::string scene_name);
 	int numScene = 0;
 	int maxScenes = 25;
+	
+
 
 	uint texture = -1;
 

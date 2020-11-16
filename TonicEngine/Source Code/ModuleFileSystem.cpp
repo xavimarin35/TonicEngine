@@ -69,7 +69,7 @@ bool ModuleFileSystem::Init(/*Config* config*/)
 	bool ret = true;
 
 	// Ask SDL for a write dir
-	char* write_path = SDL_GetPrefPath("Tonic Engine 3D", "UPC");
+	char* write_path = SDL_GetPrefPath("Xavi and Pol", "Tonic Engine");
 
 	// Trun this on while in game mode
 	//if(PHYSFS_setWriteDir(write_path) == 0)
@@ -121,7 +121,7 @@ void ModuleFileSystem::CreateDirectory(const char* directory)
 	PHYSFS_mkdir(directory);
 }
 
-void ModuleFileSystem::DiscoverFiles(const char* directory, vector<string>& file_list, vector<string>& dir_list) const
+void ModuleFileSystem::DiscoverFiles(const char* directory, std::vector<std::string>& file_list, std::vector<std::string>& dir_list) const
 {
 	char** rc = PHYSFS_enumerateFiles(directory);
 	char** i;
