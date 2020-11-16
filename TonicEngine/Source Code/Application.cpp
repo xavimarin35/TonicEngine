@@ -330,28 +330,33 @@ std::string Application::GetPathDir(std::string path)
 	return dir;
 }
 
-std::string Application::GetBuildingID(std::string path)
+std::string Application::GetBuildingID(std::string path, std::string search)
 {
 	std::string newPath = path;
 
-	if (!isInCharStr(newPath.c_str(), "Building"))
-		return path;
+	if (search == "Plane") return "10";
+
 	else
 	{
-		size_t i = 0;
-
-		for (; i < newPath.length(); i++)
+		if (!isInCharStr(newPath.c_str(), search))
+			return path;
+		else
 		{
-			if (isdigit(newPath[i]))
-				break;
+			size_t i = 0;
+
+			for (; i < newPath.length(); i++)
+			{
+				if (isdigit(newPath[i]))
+					break;
+			}
+
+			newPath = newPath.substr(i, newPath.length() - i);
+
+			uint _bar = newPath.find_last_of("_");
+			newPath = newPath.substr(0, _bar);
+
+			return newPath;
 		}
-
-		newPath = newPath.substr(i, newPath.length() - i);
-
-		uint _bar = newPath.find_last_of("_");
-		newPath = newPath.substr(0, _bar);
-
-		return newPath;
 	}
 }
 

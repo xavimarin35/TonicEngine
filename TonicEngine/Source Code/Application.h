@@ -75,7 +75,7 @@ public:
 	string orgName;
 
 	bool isInCharStr(std::string path, std::string search);
-	std::string GetBuildingID(std::string path);
+	std::string GetBuildingID(std::string path, std::string search = "Building");
 	std::string GetPathName(std::string path);
 	std::string GetPathDir(std::string path);
 

@@ -139,14 +139,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			if (pathStr.C_Str() != nullptr)
 			{
-				std::string newPath = App->GetBuildingID(obj->data.name);
-				if (newPath == obj->data.name)
-					obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(texture_path);
-				else
-				{
-					int id = std::stoi(newPath);
-					obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(TextureBuilding(id).c_str());
-				}
+				obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(GetOwnTexture(obj->data.name, texture_path).c_str());
 			}
 			else obj->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 
@@ -264,7 +257,29 @@ std::string MeshImporter::TextureBuilding(int id)
 	case 8:
 		path = "Assets/Street/building08.png";
 		break;
+	case 10:
+		path = "Assets/Others/plane_tex.png";
+		break;
 	}
 
 	return path;
+}
+
+std::string MeshImporter::GetOwnTexture(std::string objName, std::string texture_path)
+{
+	std::string newPath;
+
+	if (objName != "g Plane001")
+		newPath = App->GetBuildingID(objName);
+	else
+		newPath = App->GetBuildingID(objName, "Plane");
+	
+
+	if (newPath == objName)
+		return texture_path;
+	else
+	{
+		int id = std::stoi(newPath);
+		return TextureBuilding(id).c_str();
+	}
 }
