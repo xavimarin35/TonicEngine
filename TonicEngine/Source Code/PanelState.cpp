@@ -25,7 +25,7 @@ bool PanelState::Draw()
 
 	if (App->gui->Pstate->active)
 	{
-		if (ImGui::Begin("Engine State", &active))
+		if (ImGui::Begin("Engine State", &active, ImGuiWindowFlags_NoScrollbar))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnState = true;
 			else App->camera->isOnState = false;
@@ -34,12 +34,12 @@ bool PanelState::Draw()
 			static char* button2 = "Pause";
 			ENGINE_STATE engine_state = App->GetEngineState();
 
-			if (ImGui::Button(button1))
+			if (ImGui::Button(button1, ImVec2(70.0f, 20.0f)))
 			{
 				button1 = "Stop";
 			}
 			ImGui::SameLine();
-			if (ImGui::Button(button2))
+			if (ImGui::Button(button2, ImVec2(70.0f, 20.0f)))
 			{
 
 			}

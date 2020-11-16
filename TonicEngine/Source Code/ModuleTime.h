@@ -26,15 +26,13 @@ public:
 public:
 
 	float time_scale = 1.0f;
-
-private:
-
-	//Time in Engine, Real Time Clock
 	uint frame_count = 0;
 	float real_time = 0.0f;
 	float real_dt = 0.0f;
+	float started_play_time = 0.0f;
+	float time_in_pause = 0.0f;
+	bool game_paused = false;
 
-	//Game clock
 	float time = 0.0f;
 	float dt = 0.0f;
 
