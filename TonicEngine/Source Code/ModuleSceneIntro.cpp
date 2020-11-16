@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));	
 
-	Create3DObject(OBJECTS3D::BAKER_HOUSE);
+	Create3DObject(OBJECTS3D::STREET);
 
 	App->tex_imp->GenerateCheckersTexture();
 
@@ -333,8 +333,7 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::STREET:
-		App->mesh_imp->LoadFile("Assets/Street/street2.fbx");
-		//App->mesh_imp->LoadFile("Assets/Street/street2.FBX");
+		App->mesh_imp->LoadFile("Assets/Street/Street.obj");
 		break;
 	}
 }

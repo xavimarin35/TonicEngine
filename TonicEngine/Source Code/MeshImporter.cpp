@@ -139,7 +139,14 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			if (pathStr.C_Str() != nullptr)
 			{
-				obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(texture_path);
+				std::string newPath = App->GetBuildingID(obj->data.name);
+				if (newPath == obj->data.name)
+					obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(texture_path);
+				else
+				{
+					int id = std::stoi(newPath);
+					obj->GetComponentTexture()->texture = App->tex_imp->LoadTexture(TextureBuilding(id).c_str());
+				}
 			}
 			else obj->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 
@@ -225,4 +232,39 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 	if (node->mNumChildren > 0)
 		for (int i = 0; i < node->mNumChildren; ++i)
 			LoadNode(scene, node->mChildren[i], parent, path, ex, file, texture_path);
+}
+
+std::string MeshImporter::TextureBuilding(int id)
+{
+	std::string path;
+
+	switch (id)
+	{
+	case 1:
+		path = "Assets/Street/building01.png";
+		break;
+	case 2:
+		path = "Assets/Street/building02.png";
+		break;
+	case 3:
+		path = "Assets/Street/building03.png";
+		break;
+	case 4:
+		path = "Assets/Street/building04.png";
+		break;
+	case 5:
+		path = "Assets/Street/building05.png";
+		break;
+	case 6:
+		path = "Assets/Street/building06.png";
+		break;
+	case 7:
+		path = "Assets/Street/building07.png";
+		break;
+	case 8:
+		path = "Assets/Street/building08.png";
+		break;
+	}
+
+	return path;
 }

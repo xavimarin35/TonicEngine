@@ -63,8 +63,6 @@ public:
 	void LoadScene(std::string scene_name);
 	int numScene = 0;
 	int maxScenes = 25;
-	
-
 
 	uint texture = -1;
 
