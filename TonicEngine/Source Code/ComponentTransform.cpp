@@ -114,7 +114,7 @@ void ComponentTransform::Draw()
 
 		if (pos.x != position.x || pos.y != position.y || pos.z != pos.z
 			|| rot.x != rotation.x || rot.y != rotation.y || rot.z != rotation.z
-			|| sc.x != scale.x || sc.y != scale.y || sc.z != scale.z) UpdateTransform();
+			|| sc.x != scale.x || sc.y != scale.y || sc.z != scale.z) UpdateLocalTransform();
 	}
 }
 
