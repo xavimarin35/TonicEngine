@@ -54,7 +54,7 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
  - Our repository: https://github.com/xavimarin35/TonicEngine 
  
  Or contact us:
- - Pol Casau: pccpolcasau@gmail.com
+ - Pol Casaú: pccpolcasau@gmail.com
  - Xavi Marín: xmarin98@gmail.com
  
   
@@ -68,6 +68,8 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 * [DevIL](http://openil.sourceforge.net/)
 * [MathGeoLib](https://github.com/juj/MathGeoLib)
 * [PCG](https://www.pcg-random.org/index.html)
+* [PhysFS](https://icculus.org/physfs/)
+* [JSON](https://github.com/nlohmann/json)
 
 ## License
 
