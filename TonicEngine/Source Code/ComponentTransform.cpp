@@ -87,33 +87,37 @@ void ComponentTransform::Draw()
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTransform() != nullptr)
 	{
 		float3 pos = GetPosition();
-		float3 rot = GetEulerRotation();
+		Quat rot = GetQuatRotation();
 		float3 sc = GetScale();
 
 		ImGui::Spacing();
 
+		if (ImGui::Button("Reset Transform")) Reset();
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip(" Position: (0, 0, 0) \n Rotation: (0, 0, 0) \n Scale:    (1, 1, 1)");
+
 		ImGui::Text("Position"); ImGui::SameLine(); 
 		
-		ImGui::PushItemWidth(65); ImGui::PushID("pos"); ImGui::DragFloat("X", &position.x, 0.5F); ImGui::PopID(); ImGui::SameLine(); 
-		ImGui::PushItemWidth(65); ImGui::PushID("pos"); ImGui::DragFloat("Y", &position.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("pos"); ImGui::DragFloat("Z", &position.z, 0.5F);ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("posX"); ImGui::DragFloat("X", &position.x, 0.5F); ImGui::PopID(); ImGui::SameLine(); 
+		ImGui::PushItemWidth(65); ImGui::PushID("posY"); ImGui::DragFloat("Y", &position.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("posZ"); ImGui::DragFloat("Z", &position.z, 0.5F);ImGui::PopID();
 
 		ImGui::Spacing();
 
 		ImGui::Text("Rotation"); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rot"); ImGui::DragFloat("X", &rotation.x, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rot"); ImGui::DragFloat("Y", &rotation.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rot"); ImGui::DragFloat("Z", &rotation.z, 0.5F); ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("rotX"); ImGui::DragFloat("X", &rotation_quaternion.x, 0.001F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("rotY"); ImGui::DragFloat("Y", &rotation_quaternion.y, 0.001F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("rotZ"); ImGui::DragFloat("Z", &rotation_quaternion.z, 0.001F); ImGui::PopID();
 
 		ImGui::Spacing();
 
 		ImGui::Text("Scale   "); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("X", &scale.x, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("Y", &scale.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scale"); ImGui::DragFloat("Z", &scale.z, 0.5F); ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleX"); ImGui::DragFloat("X", &scale.x, 0.5F, 0.2F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleY"); ImGui::DragFloat("Y", &scale.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &scale.z, 0.5F); ImGui::PopID();
 
-		if (pos.x != position.x || pos.y != position.y || pos.z != pos.z
-			|| rot.x != rotation.x || rot.y != rotation.y || rot.z != rotation.z
+		if (pos.x != position.x || pos.y != position.y || pos.z != position.z
+			|| rot.x != rotation_quaternion.x || rot.y != rotation_quaternion.y || rot.z != rotation_quaternion.z
 			|| sc.x != scale.x || sc.y != scale.y || sc.z != scale.z) UpdateLocalTransform();
 	}
 }
@@ -129,5 +133,18 @@ void ComponentTransform::IsTransformComponentActive(GameObject* go)
 	else
 	{
 		LOG_C("ERROR: Transform Component is NOT active");
+	}
+}
+
+void ComponentTransform::Reset(bool new_default)
+{
+	// Just Reset position to initial position
+	if (!new_default)
+	{
+		this->position = float3::zero;
+		this->scale = float3::one;
+		this->rotation_quaternion = Quat::identity;
+
+		UpdateLocalTransform();
 	}
 }

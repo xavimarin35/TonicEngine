@@ -61,11 +61,28 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 		if (App->scene_intro->GOselected != nullptr)
 		{
+			GameObject* GOselected = App->scene_intro->GOselected;
+
+			vec3 globalPos;
+
+			if (GOselected->GOparent != nullptr)
+			{
+				globalPos.x = GOselected->GetComponentTransform()->position.x * GOselected->GOparent->GetComponentTransform()->position.x;
+				globalPos.y = GOselected->GetComponentTransform()->position.y * GOselected->GOparent->GetComponentTransform()->position.y;
+				globalPos.z = GOselected->GetComponentTransform()->position.z * GOselected->GOparent->GetComponentTransform()->position.z;
+			}
+			else
+			{
+				globalPos.x = GOselected->GetComponentTransform()->position.x;
+				globalPos.y = GOselected->GetComponentTransform()->position.y;
+				globalPos.z = GOselected->GetComponentTransform()->position.z;
+			}
+
 			vec3 distance =
 			{
-				App->scene_intro->GOselected->GetComponentTransform()->position.x - Reference.x,
-				App->scene_intro->GOselected->GetComponentTransform()->position.y - Reference.y,
-				App->scene_intro->GOselected->GetComponentTransform()->position.z - Reference.z
+				globalPos.x - Reference.x,
+				globalPos.y - Reference.y,
+				globalPos.z - Reference.z
 			};
 
 			Reference += distance;

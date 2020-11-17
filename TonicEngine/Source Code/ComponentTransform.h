@@ -33,6 +33,7 @@ public:
 	void UpdateTransform();
 	void UpdateLocalTransform();
 	
+	void Reset(bool new_default = false);
 
 	void Draw();
 
