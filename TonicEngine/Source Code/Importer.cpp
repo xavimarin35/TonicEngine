@@ -69,7 +69,7 @@ bool Importer::Export(const char* path, std::string& file, ComponentMesh* mesh)
 
 	if (ret) 
 	{ 
-		LOG_C("NICE: Correctly exported %s.Tmesh into Meshes folder", path); 
+		LOG_C("SUCCESS: Correctly exported %s.Tmesh into Meshes folder", path); 
 	}
 	else 
 	{ 

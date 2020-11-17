@@ -18,16 +18,21 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
+	if (this->data.active)
+	{
+		if (this->GetComponentTransform()->moved)
+			TransformGlobal(this);
+	}
+
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i]->active)
 			componentsList[i]->Update();
 	}
 
-	for (int i = 0; i < childrenList.size(); ++i)
+	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
-		if (childrenList[i]->data.active)
-			childrenList[i]->Update();
+		(*it)->Update();
 	}
 
 }
@@ -221,6 +226,17 @@ void GameObject::RemoveChild(GameObject* child)
 		{
 			childrenList.erase(childrenList.begin() + i);
 		}
+	}
+}
+
+void GameObject::TransformGlobal(GameObject* GO)
+{
+	ComponentTransform* transform = GO->GetComponentTransform();
+	transform->TransformGlobalMat(GO->GOparent->GetComponentTransform()->GetGlobalTransform());
+
+	for (std::vector<GameObject*>::iterator tmp = GO->childrenList.begin(); tmp != GO->childrenList.end(); ++tmp)
+	{
+		TransformGlobal(*tmp);
 	}
 }
 

@@ -54,6 +54,8 @@ public:
 	void AddChild(GameObject* child);
 	void RemoveChild(GameObject* child);
 
+	void TransformGlobal(GameObject* GO);
+
 	int GenerateUUID();
 
 	// JSON

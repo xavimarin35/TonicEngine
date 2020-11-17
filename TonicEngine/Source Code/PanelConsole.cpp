@@ -70,7 +70,7 @@ bool PanelConsole::Draw()
 					color = WARNING_CONSOLE_COLOR;
 					has_color = true;
 				}
-				if (strstr((*item), "NICE:"))
+				if (strstr((*item), "SUCCESS:"))
 				{
 					color = CORRECT_CONSOLE_COLOR;
 					has_color = true;

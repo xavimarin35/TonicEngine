@@ -64,6 +64,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	GOroot->Update();
+
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->gui->saveSceneMenu = true;
 
@@ -90,7 +92,10 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 	// GO is active and GO is not Root
 	if (GO->data.active == true && GO->data.id != 0)
 	{
+		glPushMatrix();
+		glMultMatrixf((GLfloat*)&GO->GetComponentTransform()->GetGlobalTransform().Transposed());
 		App->renderer3D->GenerateObject(GO);
+		glPopMatrix();
 	}
 
 	if (GO->childrenList.size() > 0)

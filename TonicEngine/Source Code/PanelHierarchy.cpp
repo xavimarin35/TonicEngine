@@ -30,10 +30,6 @@ bool PanelHierarchy::Draw()
 	{
 		if (ImGui::Begin("Hierarchy", &active))
 		{
-			// old
-			/*if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN)
-				App->scene_intro->RemoveSelectedGO(App->scene_intro->GOselected);*/
-
 			if (ImGui::IsWindowHovered()) App->camera->isOnHierarchy = true;
 			else App->camera->isOnHierarchy = false;
 
@@ -43,50 +39,6 @@ bool PanelHierarchy::Draw()
 				DrawMenuNotHovering();
 
 			ManageNodesOnHierarchy(App->scene_intro->GOroot);
-
-			//for (uint i = 0; i < App->scene_intro->gameobjectsList.size(); ++i)
-			//{
-			//	ImGuiTreeNodeFlags select_flags = ImGuiTreeNodeFlags_Leaf;
-
-			//	if (clickedGO == i)
-			//		select_flags |= ImGuiTreeNodeFlags_Selected;
-
-			//	// Deselect GO when right-clicking in the hierarchy window (except another GO) 
-			//	if (ImGui::IsMouseClicked(0) && ImGui::IsWindowHovered())
-			//		App->scene_intro->GOselected = nullptr;
-
-			//	if (App->scene_intro->GOselected != nullptr)
-			//	{
-			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, select_flags, App->scene_intro->gameobjectsList[i]->data.name.data()))
-			//			ImGui::TreePop();
-			//	}
-			//	else
-			//	{
-			//		if (ImGui::TreeNodeEx((void*)(intptr_t)i, ImGuiTreeNodeFlags_Leaf, App->scene_intro->gameobjectsList[i]->data.name.data()))
-			//			ImGui::TreePop();
-			//	}
-			//	
-			//	// Select active GO (Left Click)
-			//	if (ImGui::IsItemClicked(0))
-			//	{
-			//		clickedGO = i;
-			//		App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
-			//	}
-
-			//	// Create menu when item is selected
-			//	if (ImGui::IsItemClicked(1) && ImGui::IsWindowHovered())
-			//	{
-			//		openMenuHovering = true;
-			//		clickedGO = i;
-			//		App->scene_intro->GOselected = App->scene_intro->gameobjectsList[i];
-			//	}
-			//}
-
-			// Create menu when item is not selected (Right Click)
-			if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered())
-			{
-				openMenuNotHovering = true;
-			}
 		}
 
 		ImGui::End();

@@ -22,3 +22,5 @@
 #include "Math/MathAll.h"
 #include "Algorithm/Random/LCG.h"
 #include "Time/Clock.h"
+
+#define MATH_AUTOMATIC_SSE

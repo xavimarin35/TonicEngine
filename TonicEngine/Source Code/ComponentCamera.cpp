@@ -5,6 +5,8 @@
 
 ComponentCamera::ComponentCamera(GameObject* GO) : Component(COMPONENT_TYPE::CAMERA, GO)
 {
+	type = COMPONENT_TYPE::CAMERA;
+
 	X = vec3(1.0f, 0.0f, 0.0f);
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
