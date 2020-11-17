@@ -24,12 +24,6 @@ void GameObject::Update()
 			TransformGlobal(this);
 	}
 
-	for (int i = 0; i < componentsList.size(); ++i)
-	{
-		if (componentsList[i]->active)
-			componentsList[i]->Update();
-	}
-
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
 		(*it)->Update();
