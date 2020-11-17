@@ -65,10 +65,16 @@ void ComponentMesh::Draw()
 
 		ImGui::Text("File:"); ImGui::SameLine();
 		ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->mData.path.c_str());
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::BeginTooltip();
+			ImGui::TextColored(GREY_COLOR, "%s", go->GetComponentMesh()->mData.path.c_str());
+			ImGui::EndTooltip();
+		}
 
 		ImGui::Separator();
 
-		if (ImGui::TreeNodeEx("Face Normals:", ImGuiTreeNodeFlags_DefaultOpen)) {
+		if (ImGui::TreeNodeEx("Face Normals:", ImGuiTreeNodeFlags_None)) {
 			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawF"); ImGui::Checkbox(" ", &showFaceNormals); ImGui::PopID();
 			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtF"); ImGui::InputFloat(" ", &go->GetComponentMesh()->faceLenght, 0.1f, 4.0f); ImGui::PopID();
@@ -76,7 +82,7 @@ void ComponentMesh::Draw()
 			ImGui::TreePop();
 		}
 
-		if (ImGui::TreeNodeEx("Vertex Normals:", ImGuiTreeNodeFlags_DefaultOpen)) {
+		if (ImGui::TreeNodeEx("Vertex Normals:", ImGuiTreeNodeFlags_None)) {
 			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 			ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawV"); ImGui::Checkbox(" ", &showVertexNormals); ImGui::PopID();
 			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtV"); ImGui::InputFloat(" ", &go->GetComponentMesh()->vertexLenght, 0.1f, 4.0f); ImGui::PopID();
@@ -151,6 +157,11 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 		return false;
 	}
 	
+}
+
+void ComponentMesh::DrawOutline()
+{
+
 }
 
 void ComponentMesh::IsMeshComponentActive(GameObject* go)

@@ -47,8 +47,14 @@ void ComponentTexture::Draw()
 
 			if (App->scene_intro->GOselected != nullptr)
 			{
-				ImGui::Text("Texture Path:"); ImGui::SameLine();
+				ImGui::Text("File:"); ImGui::SameLine();
 				ImGui::TextColored(YELLOW_COLOR, "%s", texture.path.c_str());
+				if (ImGui::IsItemHovered())
+				{
+					ImGui::BeginTooltip();
+					ImGui::TextColored(GREY_COLOR, "%s", texture.path.c_str());
+					ImGui::EndTooltip();
+				}
 
 				ImGui::Separator();
 
@@ -59,7 +65,7 @@ void ComponentTexture::Draw()
 				ImGui::TextColored(YELLOW_COLOR, "%i", texture.height);
 			}
 
-			if (EnableHouseTexture)
+			if (EnableAssignedTexture)
 				tex = texture;
 			else if (EnableCheckersTexture)
 				tex = App->tex_imp->checker_texture;
@@ -87,7 +93,7 @@ void ComponentTexture::OpenTexturesMenu()
 		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture.id, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
-			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = true;
+			App->scene_intro->GOselected->GetComponentTexture()->EnableAssignedTexture = true;
 			//texture = App->tex_imp->texture;
 			openMenuTex = false;
 		}
@@ -96,7 +102,7 @@ void ComponentTexture::OpenTexturesMenu()
 
 		if (ImGui::ImageButton((void*)App->tex_imp->checker_texture.id, ImVec2(200, 200)))
 		{
-			App->scene_intro->GOselected->GetComponentTexture()->EnableHouseTexture = false;
+			App->scene_intro->GOselected->GetComponentTexture()->EnableAssignedTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = true;
 			//texture = App->tex_imp->checker_texture;
 			openMenuTex = false;

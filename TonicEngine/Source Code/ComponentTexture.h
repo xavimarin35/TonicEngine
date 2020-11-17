@@ -28,7 +28,7 @@ public:
 public:
 	
 	bool EnableCheckersTexture = false;
-	bool EnableHouseTexture = true;
+	bool EnableAssignedTexture = true;
 	bool noTexture = false;
 	bool openMenuTex = false;
 

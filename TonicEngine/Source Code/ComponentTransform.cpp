@@ -93,6 +93,9 @@ void ComponentTransform::Draw()
 		ImGui::Spacing();
 
 		if (ImGui::Button("Reset Transform")) Reset();
+		
+		ImGui::Spacing();
+
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip(" Position: (0, 0, 0) \n Rotation: (0, 0, 0) \n Scale:    (1, 1, 1)");
 

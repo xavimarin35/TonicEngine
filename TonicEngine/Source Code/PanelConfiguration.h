@@ -10,6 +10,7 @@
 
 // Yellow Color to call in ImGui::TextColored
 #define YELLOW_COLOR ImVec4(1.0f, 1.0f, 0.0f, 1.0f)
+#define GREY_COLOR ImVec4(0.7f, 0.7f, 0.7f, 1.0f)
 
 class Application;
 

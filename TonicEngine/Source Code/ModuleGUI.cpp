@@ -376,7 +376,7 @@ bool ModuleGUI::Draw()
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f),"Tonic Engine/Game/Assets/Scenes/%s.json", finalName.c_str());
+				ImGui::TextColored(GREY_COLOR,"Tonic Engine/Game/Assets/Scenes/%s.json", finalName.c_str());
 				ImGui::EndTooltip();
 			}
 
