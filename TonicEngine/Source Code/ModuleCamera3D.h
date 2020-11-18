@@ -37,8 +37,8 @@ public:
 	
 	vec3 X, Y, Z, Position, Reference;
 	float zoomValue = 0.5f; // Increases or decreases the sensitivity of zoom
-	float wheelSpeedValue = 0.5f; // Increases or decreases the sensitivity of clicking wheel movement
-	float WASDValue = 1.0f; // Increases or decreases the sensitivity of moving with WASD
+	float wheelSpeedValue = 1.5f; // Increases or decreases the sensitivity of clicking wheel movement
+	float WASDValue = 4.0f; // Increases or decreases the sensitivity of moving with WASD
 	float distanceFocus = 8.0f; // Increases or decreases the distance from the game object when pressing F
 
 	bool focusError = false;

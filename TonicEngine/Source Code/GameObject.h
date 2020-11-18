@@ -8,6 +8,7 @@
 #include "ComponentTexture.h"
 #include "ComponentCamera.h"
 #include "ModuleInput.h"
+#include "imgui-1.78/ImGuizmo.h"
 
 class ComponentTransform;
 class ComponentMesh;
@@ -56,9 +57,11 @@ public:
 
 	void TransformGlobal(GameObject* GO);
 
+	void UpdateGuizmo();
+	void ChangeOperationGuizmo(ImGuizmo::OPERATION op);
+
 	int GenerateUUID();
 
-	// JSON
 	//void Load(const nlohmann::json& scene_file);
 	void Save(uint obj_num, nlohmann::json& scene_file);
 
@@ -69,6 +72,10 @@ public:
 
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
+
+	ImGuizmo::OPERATION   op = ImGuizmo::OPERATION::TRANSLATE;
+	ImGuizmo::MODE        mode = ImGuizmo::MODE::WORLD;
+	//math::float4x4		  transform_changed = float4x4::identity;
 };
 
 #endif

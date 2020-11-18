@@ -2,6 +2,8 @@
 #include "ModuleGUI.h"
 #include "Component.h"
 #include "ModuleSceneIntro.h"
+#include "imgui-1.78/ImGuizmo.h"
+#include "ModuleCamera3D.h"
 
 GameObject::GameObject(std::string name)
 {
@@ -228,9 +230,28 @@ void GameObject::TransformGlobal(GameObject* GO)
 	ComponentTransform* transform = GO->GetComponentTransform();
 	transform->TransformGlobalMat(GO->GOparent->GetComponentTransform()->GetGlobalTransform());
 
-	for (std::vector<GameObject*>::iterator tmp = GO->childrenList.begin(); tmp != GO->childrenList.end(); ++tmp)
+	for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
 	{
-		TransformGlobal(*tmp);
+		TransformGlobal(*it);
+	}
+}
+
+void GameObject::UpdateGuizmo()
+{
+	ChangeOperationGuizmo(op);
+
+}
+
+void GameObject::ChangeOperationGuizmo(ImGuizmo::OPERATION op)
+{
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::TRANSLATE;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::ROTATE;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::SCALE;
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "ModuleSceneIntro.h"
 #include "MeshImporter.h"
 #include "ModuleFileSystem.h"
+#include "imgui-1.78/ImGuizmo.h"
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -26,6 +27,8 @@ bool ModuleGUI::Init()
 	Pstate = new PanelState();
 	
 	PushBackPanels();
+
+	ImGuizmo::Enable(true);
 
 	return true;
 }
@@ -73,6 +76,7 @@ update_status ModuleGUI::PreUpdate(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(App->window->window);
 	ImGui::NewFrame();
+	ImGuizmo::BeginFrame();
 
 	for (list<PanelManager*>::const_iterator it = panels.begin(); it != panels.end(); ++it)
 	{
