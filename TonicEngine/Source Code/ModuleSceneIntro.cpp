@@ -85,13 +85,14 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGridAndAxis(false);
 
-	if (GOselected != nullptr)
+	// this part is bugged, used for show selected GO purposes
+	/*if (GOselected != nullptr)
 	{
 		glEnable(GL_STENCIL_TEST);
 		glStencilFunc(GL_ALWAYS, 1, -1);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 		App->renderer3D->OutlineGO();
-	}
+	}*/
 
 	DrawGameObjectNodes(GOroot);
 	
@@ -115,15 +116,6 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
 		{
 			DrawGameObjectNodes(*it);
-			
-			/*if ((*it) == GOselected && GOselected != nullptr && (*it)->GetComponentMesh() != nullptr)
-			{
-				glEnable(GL_STENCIL_TEST);
-				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-				glStencilFunc(GL_ALWAYS, 1, -1);
-				GO->GetComponentMesh()->DrawOutline(*it);
-			}*/
-
 		}
 	}
 }
