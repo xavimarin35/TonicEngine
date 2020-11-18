@@ -26,6 +26,7 @@ public:
 	bool isOnInspector = false;
 	bool isOnConfiguration = false;
 	bool isOnState = false;
+	bool isOnResources = false;
 
 	GameObject* cameraGO = nullptr;
 
@@ -39,7 +40,7 @@ public:
 	float zoomValue = 0.5f; // Increases or decreases the sensitivity of zoom
 	float wheelSpeedValue = 1.5f; // Increases or decreases the sensitivity of clicking wheel movement
 	float WASDValue = 4.0f; // Increases or decreases the sensitivity of moving with WASD
-	float distanceFocus = 8.0f; // Increases or decreases the distance from the game object when pressing F
+	float distanceFocus = 15.0f; // Increases or decreases the distance from the game object when pressing F
 
 	bool focusError = false;
 

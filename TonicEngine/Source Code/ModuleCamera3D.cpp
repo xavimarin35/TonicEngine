@@ -39,7 +39,7 @@ bool ModuleCamera3D::CleanUp()
 
 update_status ModuleCamera3D::Update(float dt)
 {
-	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState)
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources)
 	{
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
@@ -67,9 +67,9 @@ update_status ModuleCamera3D::Update(float dt)
 
 			if (GOselected->GOparent != nullptr)
 			{
-				globalPos.x = GOselected->GetComponentTransform()->position.x * GOselected->GOparent->GetComponentTransform()->position.x;
-				globalPos.y = GOselected->GetComponentTransform()->position.y * GOselected->GOparent->GetComponentTransform()->position.y;
-				globalPos.z = GOselected->GetComponentTransform()->position.z * GOselected->GOparent->GetComponentTransform()->position.z;
+				globalPos.x = GOselected->GetComponentTransform()->position.x + GOselected->GOparent->GetComponentTransform()->position.x;
+				globalPos.y = GOselected->GetComponentTransform()->position.y + GOselected->GOparent->GetComponentTransform()->position.y;
+				globalPos.z = GOselected->GetComponentTransform()->position.z + GOselected->GOparent->GetComponentTransform()->position.z;
 			}
 			else
 			{
