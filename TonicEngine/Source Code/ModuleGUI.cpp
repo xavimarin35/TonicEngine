@@ -25,6 +25,7 @@ bool ModuleGUI::Init()
 	Pconsole = new PanelConsole();
 	Pinspector = new PanelInspector();
 	Pstate = new PanelState();
+	Presources = new PanelResources();
 	
 	PushBackPanels();
 
@@ -313,6 +314,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
 			ImGui::MenuItem("Inspector Window", NULL, &Pinspector->active);
 			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
+			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 
 			ImGui::EndMenu();
 		}
@@ -475,6 +477,7 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Pconsole);
 	panels.push_back(Pinspector);
 	panels.push_back(Pstate);
+	panels.push_back(Presources);
 }
 
 
