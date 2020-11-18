@@ -53,8 +53,11 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG_C("Unloading Intro scene");
 
-	for (int i = 0; i < gameobjectsList.size(); ++i)
-		delete gameobjectsList[i];
+	if (GOroot->childrenList.size() > 0)
+	{
+		for (int i = 0; i < gameobjectsList.size(); ++i)
+			delete gameobjectsList[i];
+	}
 
 	gameobjectsList.clear();
 
@@ -207,13 +210,15 @@ void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 // old
 void ModuleSceneIntro::RemoveAllGO()
 {
-	for (int i = 0; i < gameobjectsList.size(); ++i)
+	for (std::vector<GameObject*>::iterator i = GOroot->childrenList.begin(); i != GOroot->childrenList.end(); ++i)
 	{
-		if(GOselected != nullptr)
-		gameobjectsList.erase(gameobjectsList.begin() + i);
+		if ((*i) != nullptr)
+		{
+			delete (*i);
+			(*i) = nullptr;
+		}
 	}
-
-	gameobjectsList.clear();
+	GOroot->childrenList.clear();
 }
 
 void ModuleSceneIntro::NumberOfGO()

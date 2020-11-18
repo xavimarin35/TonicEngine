@@ -311,6 +311,8 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Style Editor Window", NULL, &show_style_editor);
 			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
 			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
+			ImGui::MenuItem("Inspector Window", NULL, &Pinspector->active);
+			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
 
 			ImGui::EndMenu();
 		}
