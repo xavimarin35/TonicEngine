@@ -394,6 +394,9 @@
     <ClInclude Include="Source Code\PanelState.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\Libraries\imgui-1.78\ImGuizmo.h">
+      <Filter>Sources\Libraries\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -608,6 +611,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\PanelState.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Libraries\imgui-1.78\ImGuizmo.cpp">
+      <Filter>Sources\Libraries\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

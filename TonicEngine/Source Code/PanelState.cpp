@@ -25,7 +25,7 @@ bool PanelState::Draw()
 
 	if (App->gui->Pstate->active)
 	{
-		if (ImGui::Begin("Engine State", &active, ImGuiWindowFlags_NoScrollbar))
+		if (ImGui::Begin("Engine State", &active, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnState = true;
 			else App->camera->isOnState = false;
