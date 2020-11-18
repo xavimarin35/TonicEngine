@@ -12,7 +12,6 @@ class GameObject;
 class ComponentTransform : public Component
 {
 public:
-
 	ComponentTransform(GameObject* gameObject);
 	virtual ~ComponentTransform();
 
@@ -34,6 +33,7 @@ public:
 	void UpdateLocalTransform();
 	
 	void Reset(bool new_default = false);
+	void SetNewDefault(float3 pos, float3 rot, float3 sc);
 	void ResetTransform();
 
 	void Draw();
@@ -44,12 +44,21 @@ public:
 	float4x4 localMatrix = float4x4::identity;
 	float4x4 globalMatrix = float4x4::identity;
 
+	float3 default_position;
+	Quat default_rotation_q;
+	float3 default_rotation_e;
+	float3 default_scale;
+
 	float3 position = float3::zero;
 	Quat rotation_quaternion = Quat::identity;
 	float3 rotation_euler = float3::zero;
 	float3 scale = float3::one;
 
 	bool moved = false;
+
+private:
+
+	bool new_default = false;
 };
 
 #endif

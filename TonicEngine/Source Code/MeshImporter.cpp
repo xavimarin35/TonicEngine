@@ -122,6 +122,11 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 	transf->UpdateLocalTransform();
 
+	obj->GetComponentTransform()->default_position = transf->position;
+	obj->GetComponentTransform()->default_rotation_e = transf->rotation_euler;
+	obj->GetComponentTransform()->default_rotation_q= transf->rotation_quaternion;
+	obj->GetComponentTransform()->default_scale = transf->scale;
+
 	parent->AddChild(obj);
 
 	for (int i = 0; i < node->mNumMeshes; ++i)

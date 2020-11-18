@@ -90,9 +90,25 @@ void ComponentTransform::Draw()
 
 		if (ImGui::Button(" Reset Transform ")) 
 			Reset();
-		
+
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip(" Position: (0, 0, 0) \n Rotation: (0, 0, 0) \n Scale:    (1, 1, 1)");
+		{
+			std::string toolTip;
+			std::string position, rotation, scale;
+			position = ("(" + std::to_string(default_position.x) + ", " + std::to_string(default_position.y) + ", " + std::to_string(default_position.z) + ")");
+			rotation = ("(" + std::to_string(default_rotation_e.x) + ", " + std::to_string(default_rotation_e.y) + ", " + std::to_string(default_rotation_e.z) + ")");
+			scale = ("(" + std::to_string(default_scale.x) + ", " + std::to_string(default_scale.y) + ", " + std::to_string(default_scale.z) + ")");
+
+			toolTip = position + "\n" + rotation + "\n" + scale;
+
+			ImGui::SetTooltip(toolTip.c_str());
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button(" Set New Default "))
+			new_default = true;
+		
 
 		ImGui::SameLine();
 		App->gui->HelpMarker("You can double-click in any box to write a value");
@@ -128,6 +144,12 @@ void ComponentTransform::Draw()
 		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &sc.z, 0.5F); ImGui::PopID();
 
 		if (!GetScale().Equals(sc)) SetScale(sc);
+
+		if (new_default)
+		{
+			SetNewDefault(pos, rot, sc);
+			new_default = false;
+		}
 	}
 }
 
@@ -150,9 +172,10 @@ void ComponentTransform::Reset(bool new_default)
 	// Just Reset position to initial position
 	if (!new_default)
 	{
-		this->position = float3::zero;
-		this->scale = float3::one;
-		this->rotation_quaternion = Quat::identity;
+		this->position = default_position;
+		this->scale = default_scale;
+		this->rotation_quaternion = default_rotation_q;
+		this->rotation_euler = default_rotation_e;
 
 		ResetTransform();
 	}
@@ -164,4 +187,13 @@ void ComponentTransform::ResetTransform()
 	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
 
 	moved = true;
+}
+
+void ComponentTransform::SetNewDefault(float3 pos, float3 rot, float3 sc)
+{
+	default_position = pos;
+	default_rotation_e = rot;
+	default_scale = sc;
+
+	Reset();
 }
