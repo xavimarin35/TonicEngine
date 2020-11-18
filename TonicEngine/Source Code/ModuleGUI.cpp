@@ -93,9 +93,6 @@ update_status ModuleGUI::Update(float dt)
 
 	ApplyDocking(windowDocking);
 
-	if (App->scene_intro->GOselected != nullptr)
-		DrawGuizmo();
-
 	return ret;
 }
 
@@ -107,6 +104,9 @@ update_status ModuleGUI::PostUpdate(float dt)
 	{
 		ret = (*it)->PostUpdate(dt);
 	}
+
+	if (App->scene_intro->GOselected != nullptr)
+		DrawGuizmo();
 
 	return ret;
 }
@@ -524,13 +524,13 @@ void ModuleGUI::Render()
 
 void ModuleGUI::ChangeOperationGuizmo(ImGuizmo::OPERATION& op)
 {
-	if (currentOp == 1 ||App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+	if (currentOp == 1) {
 		op = ImGuizmo::OPERATION::TRANSLATE;
 	}
-	if (currentOp == 2 || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+	if (currentOp == 2) {
 		op = ImGuizmo::OPERATION::ROTATE;
 	}
-	if (currentOp == 3 || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+	if (currentOp == 3) {
 		op = ImGuizmo::OPERATION::SCALE;
 	}
 }

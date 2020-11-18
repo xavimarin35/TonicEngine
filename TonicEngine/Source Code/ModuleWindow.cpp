@@ -40,6 +40,11 @@ bool ModuleWindow::Init()
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
+		if (WIN_MAXIMIZED == true)
+		{
+			flags |= SDL_WINDOW_MAXIMIZED;
+		}
+
 		if(WIN_FULLSCREEN == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;

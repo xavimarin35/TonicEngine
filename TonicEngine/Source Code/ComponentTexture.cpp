@@ -90,21 +90,19 @@ void ComponentTexture::OpenTexturesMenu()
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
 
-		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture.id, ImVec2(200, 200), ImVec2(0, 1), ImVec2(1, 0)))
+		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture.id, ImVec2(140, 140), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableAssignedTexture = true;
-			//texture = App->tex_imp->texture;
 			openMenuTex = false;
 		}
 
 		ImGui::SameLine();
 
-		if (ImGui::ImageButton((void*)App->tex_imp->checker_texture.id, ImVec2(200, 200)))
+		if (ImGui::ImageButton((void*)App->tex_imp->checker_texture.id, ImVec2(140, 140)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableAssignedTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = true;
-			//texture = App->tex_imp->checker_texture;
 			openMenuTex = false;
 		}
 

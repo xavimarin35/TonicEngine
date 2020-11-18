@@ -65,6 +65,7 @@ enum update_status
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
 #define SCREEN_SIZE 1
+#define WIN_MAXIMIZED true
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE true
 #define WIN_BORDERLESS false
