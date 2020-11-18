@@ -68,9 +68,9 @@ public:
 
 	bool drawGrid = true;
 	Color gridColor = White;
-	float gridSize = 1.0f;
-	float gridWidth = 1.0f;
-	float axisLength = 1.0f;
+	float gridSize = 3.0f;
+	float gridWidth = 2.0f;
+	float axisLength = 3.0f;
 };
 
 #endif __ModuleSceneIntro__

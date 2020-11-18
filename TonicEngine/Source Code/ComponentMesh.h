@@ -40,7 +40,6 @@ public:
 	void Draw();
 	bool DrawFaceNormals(GameObject* m, bool active = false);
 	bool DrawVertexNormals(GameObject* m, bool active = false);
-	void DrawOutline();
 	void IsMeshComponentActive(GameObject* go);
 
 	void Save(uint obj_num, nlohmann::json& scene_file);

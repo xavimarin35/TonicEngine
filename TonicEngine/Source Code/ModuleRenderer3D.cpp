@@ -117,7 +117,9 @@ bool ModuleRenderer3D::Init()
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClearStencil(0);
+
 	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
@@ -145,6 +147,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	SDL_GL_SwapWindow(App->window->window);
 
+	
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	return UPDATE_CONTINUE;
 }
@@ -235,8 +239,44 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
+
 	}
 
+}
+
+void ModuleRenderer3D::OutlineGO()
+{
+	if (glIsEnabled(GL_STENCIL_TEST))
+	{
+
+		/*glClearStencil(0);
+		glClear(GL_STENCIL_BUFFER_BIT);*/
+
+		// Render the mesh into the stencil buffer.
+
+		/*glEnable(GL_STENCIL_TEST);
+
+		glStencilFunc(GL_ALWAYS, 1, -1);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);*/
+
+		App->renderer3D->GenerateObject(App->scene_intro->GOselected);
+
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+
+		if (App->scene_intro->GOselected != nullptr)
+		{
+			// grey
+			glColor4ub(120, 120, 120, 100);
+			glLineWidth(3);
+		}
+
+		glDisable(GL_STENCIL_TEST);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glLineWidth(1);
+
+	}
 }
 
 // View Modes

@@ -22,6 +22,8 @@ ComponentMesh::~ComponentMesh()
 
 bool ComponentMesh::Update()
 {
+	glEnableClientState(GL_VERTEX_ARRAY);
+
 	if (App->scene_intro->GOselected != nullptr)
 	{
 		if (showFaceNormals)
@@ -35,6 +37,8 @@ bool ComponentMesh::Update()
 		else
 			DrawVertexNormals(App->scene_intro->GOselected, false);
 	}
+
+	glDisableClientState(GL_VERTEX_ARRAY);
 
 	return true;
 }
@@ -157,11 +161,6 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 		return false;
 	}
 	
-}
-
-void ComponentMesh::DrawOutline()
-{
-
 }
 
 void ComponentMesh::IsMeshComponentActive(GameObject* go)

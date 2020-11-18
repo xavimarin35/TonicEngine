@@ -82,7 +82,16 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGridAndAxis(false);
 
+	if (GOselected != nullptr)
+	{
+		glEnable(GL_STENCIL_TEST);
+		glStencilFunc(GL_ALWAYS, 1, -1);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		App->renderer3D->OutlineGO();
+	}
+
 	DrawGameObjectNodes(GOroot);
+	
 
 	return UPDATE_CONTINUE;
 }
@@ -103,9 +112,19 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
 		{
 			DrawGameObjectNodes(*it);
+			
+			/*if ((*it) == GOselected && GOselected != nullptr && (*it)->GetComponentMesh() != nullptr)
+			{
+				glEnable(GL_STENCIL_TEST);
+				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+				glStencilFunc(GL_ALWAYS, 1, -1);
+				GO->GetComponentMesh()->DrawOutline(*it);
+			}*/
+
 		}
 	}
 }
+
 
 void ModuleSceneIntro::SaveScene(std::string scene_name)
 {
@@ -242,7 +261,7 @@ bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 		glLineWidth(gridWidth);
 
 		glBegin(GL_LINES);
-		glColor3f(gridColor.r, gridColor.g, gridColor.g);
+		glColor4ub(gridColor.r, gridColor.g, gridColor.b, gridColor.a);
 		for (float i = -10; i <= 10; ++i)
 		{
 			glVertex3f(i * gridSize, 0.f, 0.f);

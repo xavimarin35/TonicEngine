@@ -26,6 +26,9 @@ void GameObject::Update()
 			TransformGlobal(this);
 	}
 
+
+
+
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
 		(*it)->Update();
@@ -239,7 +242,6 @@ void GameObject::TransformGlobal(GameObject* GO)
 void GameObject::UpdateGuizmo()
 {
 	ChangeOperationGuizmo(op);
-
 }
 
 void GameObject::ChangeOperationGuizmo(ImGuizmo::OPERATION op)

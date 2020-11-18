@@ -224,7 +224,7 @@ bool PanelConfiguration::Draw()
 				ImGui::Separator();
 				ImGui::Spacing();
 
-				if (ImGui::TreeNodeEx("Meshes:", ImGuiTreeNodeFlags_DefaultOpen)) 
+				if (ImGui::TreeNodeEx("View Modes:", ImGuiTreeNodeFlags_DefaultOpen)) 
 				{
 					ImGui::Spacing(); 
 
