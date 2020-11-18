@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "Primitive.h"
 #include "GameObject.h"
+#include "imgui-1.78/ImGuizmo.h"
 
 enum class OBJECTS3D
 {
@@ -71,6 +72,7 @@ public:
 	float gridSize = 3.0f;
 	float gridWidth = 2.0f;
 	float axisLength = 3.0f;
+
 };
 
 #endif __ModuleSceneIntro__

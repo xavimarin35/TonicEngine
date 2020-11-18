@@ -239,24 +239,6 @@ void GameObject::TransformGlobal(GameObject* GO)
 	}
 }
 
-void GameObject::UpdateGuizmo()
-{
-	ChangeOperationGuizmo(op);
-}
-
-void GameObject::ChangeOperationGuizmo(ImGuizmo::OPERATION op)
-{
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-		op = ImGuizmo::OPERATION::TRANSLATE;
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-		op = ImGuizmo::OPERATION::ROTATE;
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
-		op = ImGuizmo::OPERATION::SCALE;
-	}
-}
-
 int GameObject::GenerateUUID()
 {
 	int uuid = GenerateRandomBetween(99999999999);

@@ -93,6 +93,9 @@ update_status ModuleGUI::Update(float dt)
 
 	ApplyDocking(windowDocking);
 
+	if (App->scene_intro->GOselected != nullptr)
+		DrawGuizmo();
+
 	return ret;
 }
 
@@ -517,6 +520,44 @@ void ModuleGUI::Render()
 {
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ModuleGUI::ChangeOperationGuizmo(ImGuizmo::OPERATION& op)
+{
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::TRANSLATE;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::ROTATE;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		op = ImGuizmo::OPERATION::SCALE;
+	}
+}
+
+void ModuleGUI::DrawGuizmo()
+{
+	// Draw guizmos axis
+	ImGuiIO& io = ImGui::GetIO();
+	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+
+	// Change guizmos operations
+	ChangeOperationGuizmo(op);
+
+	ComponentTransform* transf = (ComponentTransform*)App->scene_intro->GOselected->GetComponent(COMPONENT_TYPE::TRANSFORM);
+
+	float4x4 projection;
+	float4x4 view;
+	float4x4 mat = transf->globalMatrix.Transposed();
+
+	glGetFloatv(GL_MODELVIEW_MATRIX, (float*)view.v);
+	glGetFloatv(GL_PROJECTION_MATRIX, (float*)projection.v);
+
+	ImGuizmo::Manipulate((float*)view.v, (float*)projection.v, op, ImGuizmo::MODE::WORLD, (float*)mat.v);
+
+	transf->globalMatrix = mat.Transposed();
+
+	// needs an update of tranf when guizmos is enabled
 }
 
 void ModuleGUI::HelpMarker(const char* desc)

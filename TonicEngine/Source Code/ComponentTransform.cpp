@@ -88,13 +88,16 @@ void ComponentTransform::Draw()
 	{
 		ImGui::Spacing();
 
-		if (ImGui::Button("Reset Transform"))
+		if (ImGui::Button(" Reset Transform ")) 
 			Reset();
 		
-		ImGui::Spacing();
-
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip(" Position: (0, 0, 0) \n Rotation: (0, 0, 0) \n Scale:    (1, 1, 1)");
+
+		ImGui::SameLine();
+		App->gui->HelpMarker("You can double-click in any box to write a value");
+
+		ImGui::Spacing();
 
 		float3 pos = GetPosition();
 		ImGui::Text("Position"); ImGui::SameLine(); 

@@ -11,6 +11,8 @@
 
 #include "glew/include/GL/glew.h"
 
+#include "imgui-1.78/ImGuizmo.h"
+
 #include "PanelConfiguration.h"
 #include "PanelAbout.h"
 #include "PanelConsole.h"
@@ -70,6 +72,11 @@ public:
 	bool loadSceneMenu = false;
 	bool exitMenu = false;
 	bool deleteScene = false;
+
+	void DrawGuizmo();
+	void ChangeOperationGuizmo(ImGuizmo::OPERATION& op);
+	ImGuizmo::OPERATION   op = ImGuizmo::OPERATION::TRANSLATE;
+	ImGuizmo::MODE        mode = ImGuizmo::MODE::WORLD;
 
 	static void HelpMarker(const char* desc);
 

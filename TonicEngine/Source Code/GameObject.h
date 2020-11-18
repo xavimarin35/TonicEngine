@@ -57,9 +57,6 @@ public:
 
 	void TransformGlobal(GameObject* GO);
 
-	void UpdateGuizmo();
-	void ChangeOperationGuizmo(ImGuizmo::OPERATION op);
-
 	int GenerateUUID();
 
 	//void Load(const nlohmann::json& scene_file);
@@ -73,9 +70,6 @@ public:
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
 
-	ImGuizmo::OPERATION   op = ImGuizmo::OPERATION::TRANSLATE;
-	ImGuizmo::MODE        mode = ImGuizmo::MODE::WORLD;
-	//math::float4x4		  transform_changed = float4x4::identity;
 };
 
 #endif
