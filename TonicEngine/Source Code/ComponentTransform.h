@@ -24,7 +24,7 @@ public:
 	float4x4 GetGlobalTransform() const;
 
 	void SetPosition(float3& position);
-	void SetRotation(float3& rotation);
+	void SetEulerRotation(float3 rotation);
 	void SetScale(float3& scale);
 
 	void SetGlobalTransform(float4x4 transform);
@@ -34,6 +34,7 @@ public:
 	void UpdateLocalTransform();
 	
 	void Reset(bool new_default = false);
+	void ResetTransform();
 
 	void Draw();
 
@@ -45,7 +46,7 @@ public:
 
 	float3 position = float3::zero;
 	Quat rotation_quaternion = Quat::identity;
-	float3 rotation = float3::zero;
+	float3 rotation_euler = float3::zero;
 	float3 scale = float3::one;
 
 	bool moved = false;

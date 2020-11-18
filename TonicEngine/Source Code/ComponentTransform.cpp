@@ -17,7 +17,7 @@ float3 ComponentTransform::GetPosition() const { return position; }
 
 Quat ComponentTransform::GetQuatRotation() const { return rotation_quaternion; }
 
-float3 ComponentTransform::GetEulerRotation() const { return rotation; }
+float3 ComponentTransform::GetEulerRotation() const { return rotation_euler; }
 
 float3 ComponentTransform::GetScale() const { return scale; }
 
@@ -30,14 +30,14 @@ void ComponentTransform::SetPosition(float3& position)
 	UpdateLocalTransform();
 }
 
-void ComponentTransform::SetRotation(float3& rotation)
+void ComponentTransform::SetEulerRotation(float3 rotation)
 {
-	float3 rot = (rotation - this->rotation) * DEGTORAD;
+	float3 rot = (rotation - rotation_euler) * DEGTORAD;
 
 	Quat quaternion_rot = Quat::FromEulerXYZ(rot.x, rot.y, rot.z);
 
 	rotation_quaternion = rotation_quaternion * quaternion_rot;
-	this->rotation = rotation;
+	rotation_euler = rotation;
 
 	UpdateLocalTransform();
 }
@@ -77,7 +77,7 @@ void ComponentTransform::UpdateTransform()
 {
 	localMatrix.Decompose(position, rotation_quaternion, scale);
 
-	rotation = rotation_quaternion.ToEulerXYZ() * RADTODEG;
+	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
 }
 
 void ComponentTransform::Draw()
@@ -86,42 +86,45 @@ void ComponentTransform::Draw()
 
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTransform() != nullptr)
 	{
-		float3 pos = GetPosition();
-		Quat rot = GetQuatRotation();
-		float3 sc = GetScale();
-
 		ImGui::Spacing();
 
-		if (ImGui::Button("Reset Transform")) Reset();
+		if (ImGui::Button("Reset Transform"))
+			Reset();
 		
 		ImGui::Spacing();
 
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip(" Position: (0, 0, 0) \n Rotation: (0, 0, 0) \n Scale:    (1, 1, 1)");
 
+		float3 pos = GetPosition();
 		ImGui::Text("Position"); ImGui::SameLine(); 
 		
-		ImGui::PushItemWidth(65); ImGui::PushID("posX"); ImGui::DragFloat("X", &position.x, 0.5F); ImGui::PopID(); ImGui::SameLine(); 
-		ImGui::PushItemWidth(65); ImGui::PushID("posY"); ImGui::DragFloat("Y", &position.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("posZ"); ImGui::DragFloat("Z", &position.z, 0.5F);ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("posX"); ImGui::DragFloat("X", &pos.x, 0.5F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("posY"); ImGui::DragFloat("Y", &pos.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("posZ"); ImGui::DragFloat("Z", &pos.z, 0.5F);ImGui::PopID();
+
+		if (!GetPosition().Equals(pos)) SetPosition(pos);
 
 		ImGui::Spacing();
 
+		float3 rot = GetEulerRotation();
 		ImGui::Text("Rotation"); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rotX"); ImGui::DragFloat("X", &rotation_quaternion.x, 0.001F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rotY"); ImGui::DragFloat("Y", &rotation_quaternion.y, 0.001F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("rotZ"); ImGui::DragFloat("Z", &rotation_quaternion.z, 0.001F); ImGui::PopID();
+
+		ImGui::PushItemWidth(65); ImGui::PushID("rotX"); ImGui::DragFloat("X", &rot.x, 0.1F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("rotY"); ImGui::DragFloat("Y", &rot.y, 0.1F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("rotZ"); ImGui::DragFloat("Z", &rot.z, 0.1F); ImGui::PopID();
+
+		if (!GetEulerRotation().Equals(rot)) SetEulerRotation(rot);
 
 		ImGui::Spacing();
 
+		float3 sc = GetScale();
 		ImGui::Text("Scale   "); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleX"); ImGui::DragFloat("X", &scale.x, 0.5F, 0.2F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleY"); ImGui::DragFloat("Y", &scale.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &scale.z, 0.5F); ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleX"); ImGui::DragFloat("X", &sc.x, 0.5F, 0.2F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleY"); ImGui::DragFloat("Y", &sc.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &sc.z, 0.5F); ImGui::PopID();
 
-		if (pos.x != position.x || pos.y != position.y || pos.z != position.z
-			|| rot.x != rotation_quaternion.x || rot.y != rotation_quaternion.y || rot.z != rotation_quaternion.z
-			|| sc.x != scale.x || sc.y != scale.y || sc.z != scale.z) UpdateLocalTransform();
+		if (!GetScale().Equals(sc)) SetScale(sc);
 	}
 }
 
@@ -148,6 +151,14 @@ void ComponentTransform::Reset(bool new_default)
 		this->scale = float3::one;
 		this->rotation_quaternion = Quat::identity;
 
-		UpdateLocalTransform();
+		ResetTransform();
 	}
+}
+
+void ComponentTransform::ResetTransform()
+{
+	localMatrix = math::float4x4::FromTRS(position, rotation_quaternion, scale);
+	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
+
+	moved = true;
 }
