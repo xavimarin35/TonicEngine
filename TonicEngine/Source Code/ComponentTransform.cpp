@@ -93,13 +93,17 @@ void ComponentTransform::Draw()
 
 		if (ImGui::IsItemHovered())
 		{
-			std::string toolTip;
-			std::string position, rotation, scale;
-			position = ("(" + std::to_string(default_position.x) + ", " + std::to_string(default_position.y) + ", " + std::to_string(default_position.z) + ")");
-			rotation = ("(" + std::to_string(default_rotation_e.x) + ", " + std::to_string(default_rotation_e.y) + ", " + std::to_string(default_rotation_e.z) + ")");
-			scale = ("(" + std::to_string(default_scale.x) + ", " + std::to_string(default_scale.y) + ", " + std::to_string(default_scale.z) + ")");
+			char posX = ("%.2f", default_position.x); char posY = ("%.2f", default_position.y); char posZ = ("%.2f", default_position.z);
+			char rotX = ("%.2f", default_rotation_e.x); char rotY = ("%.2f", default_rotation_e.y); char rotZ = ("%.2f", default_rotation_e.z);
+			char scX = ("%.2f", default_scale.x); char scY = ("%.2f", default_scale.y); char scZ = ("%.2f", default_scale.z);
 
-			toolTip = position + "\n" + rotation + "\n" + scale;
+			std::string position, rotation, scale;
+
+			position = ("( " + std::to_string(posX) + ", " + std::to_string(posY) + ", " + std::to_string(posZ) + (" )"));
+			rotation = ("( " + std::to_string(rotX) + ", " + std::to_string(rotY) + ", " + std::to_string(rotZ) + (" )"));
+			scale = ("( " + std::to_string(scX) + ", " + std::to_string(scY) + ", " + std::to_string(scZ) + (" )"));
+
+			std::string toolTip = position + "\n" + rotation + "\n" + scale;
 
 			ImGui::SetTooltip(toolTip.c_str());
 		}
@@ -107,8 +111,12 @@ void ComponentTransform::Draw()
 		ImGui::SameLine();
 
 		if (ImGui::Button(" Set New Default "))
-			new_default = true;
-		
+			new_default = true;		
+
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip("Save the actual transform to be the new default");
+		}
 
 		ImGui::SameLine();
 		App->gui->HelpMarker("You can double-click in any box to write a value");
