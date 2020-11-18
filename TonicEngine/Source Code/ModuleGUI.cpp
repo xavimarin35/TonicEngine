@@ -524,13 +524,13 @@ void ModuleGUI::Render()
 
 void ModuleGUI::ChangeOperationGuizmo(ImGuizmo::OPERATION& op)
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+	if (currentOp == 1 ||App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 		op = ImGuizmo::OPERATION::TRANSLATE;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+	if (currentOp == 2 || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 		op = ImGuizmo::OPERATION::ROTATE;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+	if (currentOp == 3 || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 		op = ImGuizmo::OPERATION::SCALE;
 	}
 }
@@ -548,6 +548,8 @@ void ModuleGUI::DrawGuizmo()
 
 	float4x4 projection;
 	float4x4 view;
+
+	// if we remove a GO, this line makes the engine crash
 	float4x4 mat = transf->globalMatrix.Transposed();
 
 	glGetFloatv(GL_MODELVIEW_MATRIX, (float*)view.v);
@@ -555,9 +557,9 @@ void ModuleGUI::DrawGuizmo()
 
 	ImGuizmo::Manipulate((float*)view.v, (float*)projection.v, op, ImGuizmo::MODE::WORLD, (float*)mat.v);
 
+	// if we remove a GO, this lines makes the engine crash
 	transf->globalMatrix = mat.Transposed();
 
-	// needs an update of tranf when guizmos is enabled
 }
 
 void ModuleGUI::HelpMarker(const char* desc)

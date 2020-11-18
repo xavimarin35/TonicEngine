@@ -15,6 +15,10 @@ bool PanelState::Start()
 {
 	this->active = true;
 
+	move = App->tex_imp->LoadTexture("Assets/Others/move.png");
+	rot = App->tex_imp->LoadTexture("Assets/Others/rotate.png");
+	scale = App->tex_imp->LoadTexture("Assets/Others/scale.png");
+
 	return true;
 }
 
@@ -25,7 +29,7 @@ bool PanelState::Draw()
 
 	if (App->gui->Pstate->active)
 	{
-		if (ImGui::Begin("Engine State", &active, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
+		if (ImGui::Begin("Management", &active, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnState = true;
 			else App->camera->isOnState = false;
@@ -34,6 +38,20 @@ bool PanelState::Draw()
 			static char* button2 = "Pause";
 			ENGINE_STATE engine_state = App->GetEngineState();
 
+			if (ImGui::ImageButton((ImTextureID*)move.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+				App->gui->currentOp = 1;
+
+			ImGui::SameLine();
+
+			if (ImGui::ImageButton((ImTextureID*)rot.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+				App->gui->currentOp = 2;
+
+			ImGui::SameLine();
+
+			if (ImGui::ImageButton((ImTextureID*)scale.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+				App->gui->currentOp = 3;
+
+			ImGui::SameLine(250);
 
 			ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(7.0f, 0.6f, 0.6f));
 			if (ImGui::Button(button1, ImVec2(70.0f, 20.0f)))
