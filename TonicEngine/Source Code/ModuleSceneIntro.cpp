@@ -354,7 +354,7 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::STREET:
-		App->mesh_imp->LoadFile("Assets/Street/Street.obj");
+		App->mesh_imp->LoadFile("Assets/Street/Street.fbx");
 		break;
 	}
 }
