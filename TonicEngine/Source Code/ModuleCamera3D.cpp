@@ -15,6 +15,9 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
+
+	mainCam = new ComponentCamera();
+	activeCam = new ComponentCamera();
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -24,7 +27,7 @@ bool ModuleCamera3D::Start()
 {
 	LOG_C("Loading Camera 3D");
 
-	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
+	cameraGO = App->scene_intro->CreateGO("Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
 
 	return true;
@@ -278,6 +281,11 @@ void ModuleCamera3D::GoInitialPos()
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	CalculateViewMatrix();
+}
+
+ComponentCamera* ModuleCamera3D::GetActiveCamera()
+{
+	return activeCam;
 }
 
 void ModuleCamera3D::CalculateViewMatrix()

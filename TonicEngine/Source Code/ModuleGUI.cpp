@@ -24,7 +24,7 @@ bool ModuleGUI::Init()
 	Phierarchy = new PanelHierarchy();
 	Pconsole = new PanelConsole();
 	Pinspector = new PanelInspector();
-	Pstate = new PanelState();
+	Pmanagement = new PanelManagement();
 	Presources = new PanelResources();
 	
 	PushBackPanels();
@@ -316,7 +316,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Hierarchy Window", NULL, &Phierarchy->active);
 			ImGui::MenuItem("Console Window", NULL, &Pconsole->active);
 			ImGui::MenuItem("Inspector Window", NULL, &Pinspector->active);
-			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
+			ImGui::MenuItem("Engine State Window", NULL, &Pmanagement->active);
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 
 			ImGui::EndMenu();
@@ -479,7 +479,7 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Phierarchy);
 	panels.push_back(Pconsole);
 	panels.push_back(Pinspector);
-	panels.push_back(Pstate);
+	panels.push_back(Pmanagement);
 	panels.push_back(Presources);
 }
 

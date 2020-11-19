@@ -9,7 +9,7 @@ class GameObject;
 class ComponentCamera : public Component
 {
 public:
-	ComponentCamera(GameObject* GO);
+	ComponentCamera(GameObject* GO = nullptr);
 	~ComponentCamera();
 
 	bool Start();

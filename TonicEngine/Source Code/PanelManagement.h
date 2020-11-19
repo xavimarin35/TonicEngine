@@ -5,17 +5,21 @@
 #include "PanelManager.h"
 #include "TextureImporter.h"
 
-class PanelState : public PanelManager
+class PanelManagement : public PanelManager
 {
 public:
-	PanelState();
-	~PanelState();
+	PanelManagement();
+	~PanelManagement();
 
 	bool Start();
 	bool Draw();
 	bool CleanUp();
 
 	bool editing = true;
+	float play_time = 0.0f;
+	ENGINE_STATE state = ENGINE_STATE::NONE;
+	Texture current_tex1;
+	Texture current_tex2;
 
 	Texture move;
 	Texture rot;

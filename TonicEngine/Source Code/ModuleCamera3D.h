@@ -20,6 +20,7 @@ public:
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
 	void GoInitialPos();
+	ComponentCamera* GetActiveCamera();
 
 	bool isOnConsole = false;
 	bool isOnHierarchy = false;
@@ -29,6 +30,8 @@ public:
 	bool isOnResources = false;
 
 	GameObject* cameraGO = nullptr;
+	ComponentCamera* mainCam = nullptr;
+	ComponentCamera* activeCam = nullptr;
 
 private:
 

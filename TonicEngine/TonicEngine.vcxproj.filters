@@ -391,13 +391,13 @@
     <ClInclude Include="Source Code\ModuleTime.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source Code\PanelState.h">
-      <Filter>Sources\Modules\GUI\Panels</Filter>
-    </ClInclude>
     <ClInclude Include="Source Code\Libraries\imgui-1.78\ImGuizmo.h">
       <Filter>Sources\Libraries\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Source Code\PanelResources.h">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\PanelManagement.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
@@ -612,13 +612,13 @@
     <ClCompile Include="Source Code\ModuleTime.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source Code\PanelState.cpp">
-      <Filter>Sources\Modules\GUI\Panels</Filter>
-    </ClCompile>
     <ClCompile Include="Source Code\Libraries\imgui-1.78\ImGuizmo.cpp">
       <Filter>Sources\Libraries\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\PanelResources.cpp">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\PanelManagement.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
