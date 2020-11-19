@@ -1,17 +1,17 @@
-#include "PanelManagement.h"
+#include "PanelState.h"
 #include "ModuleGUI.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
-PanelManagement::PanelManagement()
+PanelState::PanelState()
 {
 }
 
-PanelManagement::~PanelManagement()
+PanelState::~PanelState()
 {
 }
 
-bool PanelManagement::Start()
+bool PanelState::Start()
 {
 	this->active = true;
 
@@ -26,7 +26,7 @@ bool PanelManagement::Start()
 	return true;
 }
 
-bool PanelManagement::CleanUp()
+bool PanelState::CleanUp()
 {
 	glDeleteTextures(1, (GLuint*)&move);
 	glDeleteTextures(1, (GLuint*)&rot);
@@ -40,12 +40,12 @@ bool PanelManagement::CleanUp()
 	return true;
 }
 
-bool PanelManagement::Draw()
+bool PanelState::Draw()
 {
-	if (!App->gui->Pmanagement->active)
+	if (!App->gui->Pstate->active)
 		return false;
 
-	if (App->gui->Pmanagement->active)
+	if (App->gui->Pstate->active)
 	{
 		if (ImGui::Begin("Management", &active, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
 		{

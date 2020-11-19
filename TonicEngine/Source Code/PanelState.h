@@ -5,11 +5,11 @@
 #include "PanelManager.h"
 #include "TextureImporter.h"
 
-class PanelManagement : public PanelManager
+class PanelState : public PanelManager
 {
 public:
-	PanelManagement();
-	~PanelManagement();
+	PanelState();
+	~PanelState();
 
 	bool Start();
 	bool Draw();

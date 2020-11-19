@@ -190,7 +190,7 @@
     <ClInclude Include="Source Code\PanelInspector.h" />
     <ClInclude Include="Source Code\PanelManager.h" />
     <ClInclude Include="Source Code\PanelResources.h" />
-    <ClInclude Include="Source Code\PanelManagement.h" />
+    <ClInclude Include="Source Code\PanelState.h" />
     <ClInclude Include="Source Code\PathNode.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\entropy.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\pcg_spinlock.h" />
@@ -269,7 +269,7 @@
     <ClCompile Include="Source Code\PanelHierarchy.cpp" />
     <ClCompile Include="Source Code\PanelInspector.cpp" />
     <ClCompile Include="Source Code\PanelResources.cpp" />
-    <ClCompile Include="Source Code\PanelManagement.cpp" />
+    <ClCompile Include="Source Code\PanelState.cpp" />
     <ClCompile Include="Source Code\Primitive.cpp" />
     <ClCompile Include="Source Code\RandomNumGenerator.cpp" />
     <ClCompile Include="Source Code\TextureImporter.cpp" />

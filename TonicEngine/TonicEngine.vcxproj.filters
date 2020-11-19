@@ -397,7 +397,7 @@
     <ClInclude Include="Source Code\PanelResources.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Source Code\PanelManagement.h">
+    <ClInclude Include="Source Code\PanelState.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
@@ -618,7 +618,7 @@
     <ClCompile Include="Source Code\PanelResources.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Source Code\PanelManagement.cpp">
+    <ClCompile Include="Source Code\PanelState.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
