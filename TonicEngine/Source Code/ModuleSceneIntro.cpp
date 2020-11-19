@@ -193,19 +193,20 @@ void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 			if (gameobjectsList[i] == GO)
 			{
 				gameobjectsList.erase(gameobjectsList.begin() + i);
+				GO->data.active = false;
 				GO->CleanUp();
 			}
 		}		
 	}
 }
 
-// old
 void ModuleSceneIntro::RemoveAllGO()
 {
 	for (std::vector<GameObject*>::iterator i = GOroot->childrenList.begin(); i != GOroot->childrenList.end(); ++i)
 	{
 		if ((*i) != nullptr)
 		{
+			(*i)->data.active = false;
 			delete (*i);
 			(*i) = nullptr;
 		}

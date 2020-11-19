@@ -105,7 +105,7 @@ update_status ModuleGUI::PostUpdate(float dt)
 		ret = (*it)->PostUpdate(dt);
 	}
 
-	if (App->scene_intro->GOselected != nullptr)
+	if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
 		DrawGuizmo();
 
 	return ret;
@@ -550,16 +550,14 @@ void ModuleGUI::DrawGuizmo()
 	float4x4 view;
 	float4x4 mat;
 
-	// if we remove a GO, this line makes the engine crash
-	//mat = transf->globalMatrix.Transposed();
+	mat = transf->globalMatrix.Transposed();
 
 	glGetFloatv(GL_MODELVIEW_MATRIX, (float*)view.v);
 	glGetFloatv(GL_PROJECTION_MATRIX, (float*)projection.v);
 
 	ImGuizmo::Manipulate((float*)view.v, (float*)projection.v, op, ImGuizmo::MODE::WORLD, (float*)mat.v);
 
-	// if we remove a GO, this lines makes the engine crash
-	//transf->globalMatrix = mat.Transposed();
+	transf->globalMatrix = mat.Transposed();
 
 }
 

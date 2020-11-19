@@ -20,12 +20,6 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	if (this->data.active)
-	{
-		if (this->GetComponentTransform()->moved)
-			TransformGlobal(this);
-	}
-
 
 
 
@@ -34,10 +28,17 @@ void GameObject::Update()
 		(*it)->Update();
 	}
 
+	if (this->data.active)
+	{
+		if (this->GetComponentTransform()->moved)
+			TransformGlobal(this);
+	}
+
 }
 
 void GameObject::CleanUp()
 {
+
 	// Deleting Components
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
