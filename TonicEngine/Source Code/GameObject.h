@@ -59,6 +59,9 @@ public:
 
 	int GenerateUUID();
 
+	void UpdateBoundingBox();
+	void DrawBoundingBox();
+
 	//void Load(const nlohmann::json& scene_file);
 	void Save(uint obj_num, nlohmann::json& scene_file);
 
@@ -69,6 +72,9 @@ public:
 
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
+
+	AABB aabb;
+	OBB obb;
 
 };
 

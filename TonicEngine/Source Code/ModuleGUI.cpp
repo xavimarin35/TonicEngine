@@ -173,6 +173,9 @@ bool ModuleGUI::Draw()
 				if (ImGui::MenuItem("Baker House"))
 					App->scene_intro->Create3DObject(OBJECTS3D::BAKER_HOUSE);
 
+				if (ImGui::MenuItem("Street"))
+					App->scene_intro->Create3DObject(OBJECTS3D::STREET);
+
 				ImGui::EndMenu();
 			}
 

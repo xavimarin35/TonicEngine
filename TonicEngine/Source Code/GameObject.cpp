@@ -4,6 +4,7 @@
 #include "ModuleSceneIntro.h"
 #include "imgui-1.78/ImGuizmo.h"
 #include "ModuleCamera3D.h"
+#include "Color.h"
 
 GameObject::GameObject(std::string name)
 {
@@ -20,9 +21,6 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-
-
-
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
 	{
 		(*it)->Update();
@@ -32,6 +30,11 @@ void GameObject::Update()
 	{
 		if (this->GetComponentTransform()->moved)
 			TransformGlobal(this);
+
+		UpdateBoundingBox();
+
+		if (App->gui->Pconfig->drawBB)
+			DrawBoundingBox();
 	}
 
 }
@@ -257,5 +260,34 @@ void GameObject::Save(uint obj_num, nlohmann::json& scene)
 		componentsList[i]->Save(obj_num, scene);
 }
 
+void GameObject::UpdateBoundingBox()
+{
+	ComponentMesh* mesh = this->GetComponentMesh();
 
+	if (mesh)
+	{
+		obb = mesh->BoundingBox();
+		obb.Transform(this->GetComponentTransform()->GetGlobalTransform());
 
+		aabb.SetNegativeInfinity();
+		aabb.Enclose(obb);
+	}
+}
+
+void GameObject::DrawBoundingBox()
+{
+	glBegin(GL_LINES);
+	glLineWidth(0.5f);
+
+	glColor4f(Yellow.r, Yellow.g, Yellow.b, Yellow.a);
+
+	for (uint i = 0; i < 12; i++)
+	{
+		glVertex3f(aabb.Edge(i).a.x, aabb.Edge(i).a.y, aabb.Edge(i).a.z);
+		glVertex3f(aabb.Edge(i).b.x, aabb.Edge(i).b.y, aabb.Edge(i).b.z);
+	}
+
+	glColor3ub(255, 255, 255);
+
+	glEnd();
+}

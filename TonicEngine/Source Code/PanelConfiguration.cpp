@@ -224,6 +224,16 @@ bool PanelConfiguration::Draw()
 				ImGui::Separator();
 				ImGui::Spacing();
 
+				if (ImGui::TreeNodeEx("Bounding Boxes:", ImGuiTreeNodeFlags_None))
+				{
+					ImGui::Spacing();
+					ImGui::Checkbox("Draw", &drawBB);
+					ImGui::TreePop();
+				}
+
+				ImGui::Separator();
+				ImGui::Spacing();
+
 				if (ImGui::TreeNodeEx("View Modes:", ImGuiTreeNodeFlags_DefaultOpen)) 
 				{
 					ImGui::Spacing(); 

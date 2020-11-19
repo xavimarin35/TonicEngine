@@ -147,9 +147,9 @@ void ComponentTransform::Draw()
 
 		float3 sc = GetScale();
 		ImGui::Text("Scale   "); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleX"); ImGui::DragFloat("X", &sc.x, 0.5F, 0.2F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleY"); ImGui::DragFloat("Y", &sc.y, 0.5F); ImGui::PopID(); ImGui::SameLine();
-		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &sc.z, 0.5F); ImGui::PopID();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleX"); ImGui::DragFloat("X", &sc.x, 0.1F, 0.2F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleY"); ImGui::DragFloat("Y", &sc.y, 0.1F, 0.2F); ImGui::PopID(); ImGui::SameLine();
+		ImGui::PushItemWidth(65); ImGui::PushID("scaleZ"); ImGui::DragFloat("Z", &sc.z, 0.1F, 0.2F); ImGui::PopID();
 
 		if (!GetScale().Equals(sc)) SetScale(sc);
 

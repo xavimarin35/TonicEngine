@@ -238,6 +238,9 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 			}
 		}
 
+		mesh->aabb.SetNegativeInfinity();
+		mesh->aabb = mesh->aabb.MinimalEnclosingAABB(mesh->mData.vertex, mesh->mData.num_vertex);
+
 		//Generate the buffers 
 		App->renderer3D->VertexBuffer(mesh->mData.vertex, mesh->mData.num_vertex, mesh->mData.id_vertex);
 		App->renderer3D->IndexBuffer(mesh->mData.index, mesh->mData.num_index, mesh->mData.id_index);

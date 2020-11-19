@@ -42,6 +42,8 @@ public:
 	bool DrawVertexNormals(GameObject* m, bool active = false);
 	void IsMeshComponentActive(GameObject* go);
 
+	const AABB& BoundingBox();
+
 	void Save(uint obj_num, nlohmann::json& scene_file);
 
 public:
@@ -56,6 +58,8 @@ public:
 	Color vertexColor = Blue;
 	
 	meshData mData;
+
+	AABB aabb;
 
 };
 

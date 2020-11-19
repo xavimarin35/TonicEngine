@@ -56,6 +56,7 @@ public:
 	bool	lighting = true;
 	bool	texture2D = true;
 	bool	alpha = true;
+	bool	drawBB = false;
 };
 
 #endif

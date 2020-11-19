@@ -188,6 +188,12 @@ void PanelHierarchy::DrawMenuNotHovering()
 				openMenuHovering = false;
 			}
 
+			if (ImGui::MenuItem("Street"))
+			{
+				App->scene_intro->Create3DObject(OBJECTS3D::STREET);
+				openMenuHovering = false;
+			}
+
 			ImGui::EndMenu();
 		}
 

@@ -181,3 +181,8 @@ void ComponentMesh::IsMeshComponentActive(GameObject* go)
 void ComponentMesh::Save(uint obj_num, nlohmann::json& scene)
 {
 }
+
+const AABB& ComponentMesh::BoundingBox() 
+{ 
+	return aabb; 
+}
