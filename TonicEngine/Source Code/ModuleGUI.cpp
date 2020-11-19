@@ -548,9 +548,10 @@ void ModuleGUI::DrawGuizmo()
 
 	float4x4 projection;
 	float4x4 view;
+	float4x4 mat;
 
 	// if we remove a GO, this line makes the engine crash
-	float4x4 mat = transf->globalMatrix.Transposed();
+	//mat = transf->globalMatrix.Transposed();
 
 	glGetFloatv(GL_MODELVIEW_MATRIX, (float*)view.v);
 	glGetFloatv(GL_PROJECTION_MATRIX, (float*)projection.v);
@@ -558,7 +559,7 @@ void ModuleGUI::DrawGuizmo()
 	ImGuizmo::Manipulate((float*)view.v, (float*)projection.v, op, ImGuizmo::MODE::WORLD, (float*)mat.v);
 
 	// if we remove a GO, this lines makes the engine crash
-	transf->globalMatrix = mat.Transposed();
+	//transf->globalMatrix = mat.Transposed();
 
 }
 

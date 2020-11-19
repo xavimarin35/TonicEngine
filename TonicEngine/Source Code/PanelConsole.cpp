@@ -110,8 +110,10 @@ void PanelConsole::CreateLog(char* info)
 void PanelConsole::PrintLogs()
 {
 	for (list<char*>::const_iterator it = App->appLogs.begin(); it != App->appLogs.end(); ++it)
+	{
 		CreateLog((*it));
-
+	}
+		
 	App->appLogs.clear();
 }
 

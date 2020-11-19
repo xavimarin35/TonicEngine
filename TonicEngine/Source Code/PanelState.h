@@ -13,12 +13,17 @@ public:
 
 	bool Start();
 	bool Draw();
+	bool CleanUp();
 
 	bool editing = true;
 
 	Texture move;
 	Texture rot;
 	Texture scale;
+	Texture play;
+	Texture pause;
+	Texture stop;
+	Texture resume;
 };
 
 #endif
