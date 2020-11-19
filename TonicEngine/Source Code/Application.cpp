@@ -180,11 +180,21 @@ void Application::ChangeEngineState(ENGINE_STATE new_state)
 
 bool Application::PlayScene()
 {
-	if (current_state == ENGINE_STATE::NONE)
+	switch(current_state)
 	{
-		//if camera != nullptr
-			//change camera to the cameraGO
-			//and play
+	case ENGINE_STATE::NONE:
+		if (camera->GetActiveCamera() != nullptr)
+		{
+			camera->activeCam = camera->cameraGO->GetComponentCamera();
+			ChangeEngineState(ENGINE_STATE::PLAY);
+
+			return true;
+		}
+		else
+		{
+			LOG_C("ERROR: Couldn't found any camera. Enable it or create a new one");
+		}
+		break;
 	}
 
 	return false;
@@ -209,10 +219,9 @@ void Application::StopScene()
 	switch (current_state) {
 	case ENGINE_STATE::PLAY:
 	case ENGINE_STATE::PAUSE:
-		//Change camera view
-		
-
+		camera->activeCam = camera->mainCam;
 		ChangeEngineState(ENGINE_STATE::NONE);
+
 		time->ResetGameTimer();
 
 		break;
