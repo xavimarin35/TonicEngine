@@ -61,7 +61,7 @@ public:
 
 	void UpdateBoundingBox();
 	void DrawAllBoundingBoxes();
-	void DrawOwnBoundingBox(GameObject* GO);
+	bool DrawOwnBoundingBox(GameObject* GO);
 
 	//void RayCast(const LineSegment& ray_cast, bool& intersect, float& length);
 

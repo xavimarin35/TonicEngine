@@ -2,6 +2,7 @@
 #include "ModuleGUI.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "ModuleSceneIntro.h"
 
 PanelState::PanelState()
 {
@@ -18,10 +19,14 @@ bool PanelState::Start()
 	move = App->tex_imp->LoadTexture("Assets/Others/move.png");
 	rot = App->tex_imp->LoadTexture("Assets/Others/rotate.png");
 	scale = App->tex_imp->LoadTexture("Assets/Others/scale.png");
+
 	play = App->tex_imp->LoadTexture("Assets/Others/play.png");
 	pause = App->tex_imp->LoadTexture("Assets/Others/pause.png");
 	stop = App->tex_imp->LoadTexture("Assets/Others/stop.png");
 	resume = App->tex_imp->LoadTexture("Assets/Others/resume.png");
+
+	ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
+	allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");
 
 
 	return true;
@@ -54,90 +59,14 @@ bool PanelState::Draw()
 			else App->camera->isOnState = false;
 
 			ENGINE_STATE state = App->GetEngineState();
-			
-			// Button1 manager
-			switch (currentBut1)
-			{
-			case 1: 
-				current_tex1 = play;
-				if (ImGui::IsItemHovered())
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Play");
-					ImGui::EndTooltip();
-				}
-				break;
-			case 2:
-				current_tex1 = stop;
-				if (ImGui::IsItemHovered())
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Stop");
-					ImGui::EndTooltip();
-				}
-				break;
-			}
 
-			// Button2 manager
-			switch (currentBut2)
-			{
-			case 3:
-				current_tex2 = pause;
-				if (ImGui::IsItemHovered())
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Pause");
-					ImGui::EndTooltip();
-				}
-				break;
-			case 4:
-				current_tex2 = resume;
-				if (ImGui::IsItemHovered())
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Resume");
-					ImGui::EndTooltip();
-				}
-				break;
-			}
+			ManageEngineStateButtonsLogic();
 
-
-			if (ImGui::ImageButton((ImTextureID*)move.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-				App->gui->currentOp = 1;
-
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::TextColored(GREY_COLOR, "Move");
-				ImGui::EndTooltip();
-			}
+			ManageGuizmoButtons();
 
 			ImGui::SameLine();
 
-			if (ImGui::ImageButton((ImTextureID*)rot.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-				App->gui->currentOp = 2;
-
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::TextColored(GREY_COLOR, "Rotate");
-				ImGui::EndTooltip();
-			}
-
-			ImGui::SameLine();
-
-			if (ImGui::ImageButton((ImTextureID*)scale.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-				App->gui->currentOp = 3;
-
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::TextColored(GREY_COLOR, "Scale");
-				ImGui::EndTooltip();
-			}
-
-			ImGui::SameLine(250);
-
+			// Engine State Button 1
 			if (ImGui::ImageButton((ImTextureID*)current_tex1.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
 				if (currentBut1 == 2) // button texture change play/stop
@@ -146,28 +75,20 @@ bool PanelState::Draw()
 					currentBut1 = 2;
 
 				editing = false;
-
 			}
 
 			// Tooltips Button1
 			if (ImGui::IsItemHovered())
 			{
 				if (currentBut1 == 1)
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Play");
-					ImGui::EndTooltip();
-				}
+					ToolTipShortCut("Play");
 				else if (currentBut1 == 2)
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Stop");
-					ImGui::EndTooltip();
-				}
+					ToolTipShortCut("Stop");
 			}
 
 			ImGui::SameLine();
 
+			// Engine State Button 2
 			if (ImGui::ImageButton((ImTextureID*)current_tex2.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
 				if (currentBut2 == 4) // button texture change pause/resume
@@ -188,17 +109,9 @@ bool PanelState::Draw()
 			if (ImGui::IsItemHovered())
 			{
 				if (currentBut2 == 3)
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Pause");
-					ImGui::EndTooltip();
-				}
+					ToolTipShortCut("Pause");
 				else if (currentBut2 == 4)
-				{
-					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "Resume");
-					ImGui::EndTooltip();
-				}
+					ToolTipShortCut("Resume");
 			}
 
 			if (!editing)
@@ -207,7 +120,29 @@ bool PanelState::Draw()
 				play_time =+ App->GetDT(); ImGui::SameLine();
 				ImGui::TextColored(YELLOW_COLOR, "%.2f", play_time);
 			}
-			
+
+			ImGui::SameLine();
+
+			// Own BB
+			if (ImGui::ImageButton((ImTextureID*)ownBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+			{
+				if (App->scene_intro->GOselected != nullptr)
+					drawOwnBB = !drawOwnBB;
+				else if (App->scene_intro->GOselected == nullptr || !App->scene_intro->GOselected->data.active)
+					LOG_C("WARNING: You must active or select a GameObject to use this tool");
+			}
+
+			if (ImGui::IsItemHovered())
+				ToolTipShortCut("Own BB");
+
+			ImGui::SameLine();
+
+			// All BB
+			if (ImGui::ImageButton((ImTextureID*)allBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+				App->gui->Pconfig->drawBB = !App->gui->Pconfig->drawBB;
+
+			if (ImGui::IsItemHovered())
+				ToolTipShortCut("All BBs");
 		}
 
 		ImGui::End();
@@ -215,5 +150,66 @@ bool PanelState::Draw()
 	
 	return true;
 }
+
+void PanelState::ManageGuizmoButtons()
+{
+	// Move Button
+	if (ImGui::ImageButton((ImTextureID*)move.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		App->gui->currentOp = 1;
+
+	if (ImGui::IsItemHovered())
+		ToolTipShortCut("Move");
+
+	ImGui::SameLine();
+
+	// Rot Button
+	if (ImGui::ImageButton((ImTextureID*)rot.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		App->gui->currentOp = 2;
+
+	if (ImGui::IsItemHovered())
+		ToolTipShortCut("Rotate");
+
+	ImGui::SameLine();
+
+	// Scale Button
+	if (ImGui::ImageButton((ImTextureID*)scale.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		App->gui->currentOp = 3;
+
+	if (ImGui::IsItemHovered())
+		ToolTipShortCut("Scale");
+}
+
+void PanelState::ManageEngineStateButtonsLogic()
+{
+	// Button1 manager
+	switch (currentBut1)
+	{
+	case 1:
+		current_tex1 = play;
+		break;
+	case 2:
+		current_tex1 = stop;
+		break;
+	}
+
+	// Button2 manager
+	switch (currentBut2)
+	{
+	case 3:
+		current_tex2 = pause;
+		break;
+	case 4:
+		current_tex2 = resume;
+		break;
+	}
+}
+
+void PanelState::ToolTipShortCut(const char* word)
+{
+	ImGui::BeginTooltip();
+	ImGui::TextColored(GREY_COLOR, word);
+	ImGui::EndTooltip();
+}
+
 
 

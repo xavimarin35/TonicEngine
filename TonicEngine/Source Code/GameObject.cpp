@@ -31,14 +31,14 @@ void GameObject::Update()
 		if (this->GetComponentTransform()->moved)
 			TransformGlobal(this);
 
-		DrawOwnBoundingBox(App->scene_intro->GOselected);
-
 		UpdateBoundingBox();
+
+		if (App->gui->Pstate->drawOwnBB && App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
+			DrawOwnBoundingBox(App->scene_intro->GOselected);
 
 		if (App->gui->Pconfig->drawBB)
 			DrawAllBoundingBoxes();
 	}
-
 }
 
 void GameObject::CleanUp()
@@ -294,8 +294,13 @@ void GameObject::DrawAllBoundingBoxes()
 	glEnd();
 }
 
-void GameObject::DrawOwnBoundingBox(GameObject* GO)
+bool GameObject::DrawOwnBoundingBox(GameObject* GO)
 {
+	bool ret = true;
+
+	if (GO == nullptr)
+		return false;
+	
 	if (GO != nullptr)
 	{
 		ComponentMesh* m = GO->GetComponentMesh();
@@ -313,7 +318,7 @@ void GameObject::DrawOwnBoundingBox(GameObject* GO)
 		glBegin(GL_LINES);
 		glLineWidth(0.5f);
 
-		glColor4f(1.0f, 1.0f, 1.0f, 255.0f);
+		glColor4f(App->scene_intro->bbColor.r, App->scene_intro->bbColor.g, App->scene_intro->bbColor.b, App->scene_intro->bbColor.a);
 
 		for (uint i = 0; i < 12; i++)
 		{
@@ -325,5 +330,6 @@ void GameObject::DrawOwnBoundingBox(GameObject* GO)
 
 		glEnd();
 	}
-	
+
+	return ret;
 }

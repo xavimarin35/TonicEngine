@@ -15,15 +15,14 @@ public:
 	bool Draw();
 	bool CleanUp();
 
+	void ManageGuizmoButtons();
+	void ManageEngineStateButtonsLogic();
+
+	void ToolTipShortCut(const char* word);
+
+	bool drawOwnBB = false;
 	bool editing = true;
 	float play_time = 0.0f;
-
-	bool bPlay = true;
-	bool bPause = true;
-	bool bStop = false;
-	bool bResume = false;
-
-public:
 
 	Texture current_tex1;
 	Texture current_tex2;
@@ -31,13 +30,19 @@ public:
 	uint currentBut1 = 1; // 1 play, 2 stop
 	uint currentBut2 = 3; // 1 pause, 2 resume
 
+public:
 	Texture move;
 	Texture rot;
 	Texture scale;
+
 	Texture play;
 	Texture pause;
 	Texture stop;
 	Texture resume;
+
+	Texture ownBB;
+	Texture allBB;
+
 };
 
 #endif
