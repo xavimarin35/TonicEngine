@@ -28,7 +28,7 @@ public:
 	void DeleteBuffer(uint& type);
 
 	void GenerateObject(GameObject* GO);
-	void OutlineGO();
+	float* GetProjectionMatrix();
 
 	// View Mode
 	void WireframeView(bool active);

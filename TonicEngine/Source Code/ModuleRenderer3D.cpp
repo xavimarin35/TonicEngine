@@ -244,43 +244,12 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 
 }
 
-void ModuleRenderer3D::OutlineGO()
+float* ModuleRenderer3D::GetProjectionMatrix()
 {
-	if (glIsEnabled(GL_STENCIL_TEST))
-	{
-
-		/*glClearStencil(0);
-		glClear(GL_STENCIL_BUFFER_BIT);*/
-
-		// Render the mesh into the stencil buffer.
-
-		/*glEnable(GL_STENCIL_TEST);
-
-		glStencilFunc(GL_ALWAYS, 1, -1);
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);*/
-
-		App->renderer3D->GenerateObject(App->scene_intro->GOselected);
-
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-
-
-		if (App->scene_intro->GOselected != nullptr)
-		{
-			// grey
-			glColor4ub(120, 120, 120, 100);
-			glLineWidth(3);
-		}
-
-		glDisable(GL_STENCIL_TEST);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glLineWidth(1);
-
-	}
+	return &ProjectionMatrix;
 }
 
 // View Modes
-
 void ModuleRenderer3D::WireframeView(bool active)
 {
 	if (active)

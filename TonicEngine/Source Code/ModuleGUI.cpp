@@ -5,6 +5,7 @@
 #include "ModuleSceneIntro.h"
 #include "MeshImporter.h"
 #include "ModuleFileSystem.h"
+#include "ModuleCamera3D.h"
 #include "imgui-1.78/ImGuizmo.h"
 
 
@@ -549,19 +550,13 @@ void ModuleGUI::DrawGuizmo()
 
 	ComponentTransform* transf = (ComponentTransform*)App->scene_intro->GOselected->GetComponent(COMPONENT_TYPE::TRANSFORM);
 
-	float4x4 projection;
-	float4x4 view;
-	float4x4 mat;
+	float4x4 matrix;
 
-	mat = transf->globalMatrix.Transposed();
+	matrix = transf->globalMatrix.Transposed();
 
-	glGetFloatv(GL_MODELVIEW_MATRIX, (float*)view.v);
-	glGetFloatv(GL_PROJECTION_MATRIX, (float*)projection.v);
+	ImGuizmo::Manipulate(App->camera->GetViewMatrix(), App->renderer3D->GetProjectionMatrix(), op, ImGuizmo::MODE::WORLD, (float*)matrix.v);
 
-	ImGuizmo::Manipulate((float*)view.v, (float*)projection.v, op, ImGuizmo::MODE::WORLD, (float*)mat.v);
-
-	transf->globalMatrix = mat.Transposed();
-
+	transf->globalMatrix = matrix.Transposed();
 }
 
 void ModuleGUI::HelpMarker(const char* desc)
