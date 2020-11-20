@@ -31,10 +31,12 @@ void GameObject::Update()
 		if (this->GetComponentTransform()->moved)
 			TransformGlobal(this);
 
+		DrawOwnBoundingBox(App->scene_intro->GOselected);
+
 		UpdateBoundingBox();
 
 		if (App->gui->Pconfig->drawBB)
-			DrawBoundingBox();
+			DrawAllBoundingBoxes();
 	}
 
 }
@@ -274,7 +276,7 @@ void GameObject::UpdateBoundingBox()
 	}
 }
 
-void GameObject::DrawBoundingBox()
+void GameObject::DrawAllBoundingBoxes()
 {
 	glBegin(GL_LINES);
 	glLineWidth(0.5f);
@@ -290,4 +292,38 @@ void GameObject::DrawBoundingBox()
 	glColor3ub(255, 255, 255);
 
 	glEnd();
+}
+
+void GameObject::DrawOwnBoundingBox(GameObject* GO)
+{
+	if (GO != nullptr)
+	{
+		ComponentMesh* m = GO->GetComponentMesh();
+
+		if (m)
+		{
+			obb = m->BoundingBox();
+
+			obb.Transform(GO->GetComponentTransform()->GetGlobalTransform());
+
+			aabb.SetNegativeInfinity();
+			aabb.Enclose(obb);
+		}
+
+		glBegin(GL_LINES);
+		glLineWidth(0.5f);
+
+		glColor4f(1.0f, 1.0f, 1.0f, 255.0f);
+
+		for (uint i = 0; i < 12; i++)
+		{
+			glVertex3f(aabb.Edge(i).a.x, aabb.Edge(i).a.y, aabb.Edge(i).a.z);
+			glVertex3f(aabb.Edge(i).b.x, aabb.Edge(i).b.y, aabb.Edge(i).b.z);
+		}
+
+		glColor3ub(255, 255, 255);
+
+		glEnd();
+	}
+	
 }
