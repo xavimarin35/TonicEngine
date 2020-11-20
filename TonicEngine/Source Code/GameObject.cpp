@@ -279,7 +279,7 @@ void GameObject::DrawBoundingBox()
 	glBegin(GL_LINES);
 	glLineWidth(0.5f);
 
-	glColor4f(Yellow.r, Yellow.g, Yellow.b, Yellow.a);
+	glColor4f(App->scene_intro->bbColor.r, App->scene_intro->bbColor.g, App->scene_intro->bbColor.b, App->scene_intro->bbColor.a);
 
 	for (uint i = 0; i < 12; i++)
 	{

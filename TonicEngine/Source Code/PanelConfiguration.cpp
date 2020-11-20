@@ -226,8 +226,10 @@ bool PanelConfiguration::Draw()
 
 				if (ImGui::TreeNodeEx("Bounding Boxes:", ImGuiTreeNodeFlags_None))
 				{
+					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 					ImGui::Spacing();
 					ImGui::Checkbox("Draw", &drawBB);
+					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->scene_intro->bbColor, flags);
 					ImGui::TreePop();
 				}
 

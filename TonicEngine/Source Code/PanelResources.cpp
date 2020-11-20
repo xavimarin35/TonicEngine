@@ -1,6 +1,7 @@
 #include "PanelResources.h"
 #include "ModuleGUI.h"
 #include "ModuleWindow.h"
+#include "ModuleCamera3D.h"
 
 PanelResources::PanelResources() : PanelManager()
 {
@@ -26,7 +27,8 @@ bool PanelResources::Draw()
 	{
 		if (ImGui::Begin("Resources", &active))
 		{
-
+			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
+			else App->camera->isOnResources = false;
 		}
 
 		ImGui::End();

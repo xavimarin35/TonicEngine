@@ -9,11 +9,11 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 {
 	CalculateViewMatrix();
 
-	X = vec3(1.0f, 0.0f, 0.0f);
-	Y = vec3(0.0f, 1.0f, 0.0f);
-	Z = vec3(0.0f, 0.0f, 1.0f);
+	X = vec3(0.99f, 0.0f, -0.11f);
+	Y = vec3(-0.04f, 0.92f, -0.37f);
+	Z = vec3(0.18f, 0.34f, 0.92f);
 
-	Position = vec3(0.0f, 0.0f, 5.0f);
+	Position = vec3(17.92f, 59.18f, 93.58f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	mainCam = new ComponentCamera();
