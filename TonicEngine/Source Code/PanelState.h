@@ -15,14 +15,17 @@ public:
 	bool Draw();
 	bool CleanUp();
 
-	void ManageGuizmoButtons();
+	void DrawGuizmoButtons();
 	void ManageEngineStateButtonsLogic();
+	void DrawBBButtons();
+	void TimeInfoMenu();
 
 	void ToolTipShortCut(const char* word);
 
 	bool drawOwnBB = false;
 	bool editing = true;
 	float play_time = 0.0f;
+	bool openTimeMenu = false;
 
 	Texture current_tex1;
 	Texture current_tex2;

@@ -16,9 +16,9 @@ bool PanelState::Start()
 {
 	this->active = true;
 
-	move = App->tex_imp->LoadTexture("Assets/Others/move.png");
-	rot = App->tex_imp->LoadTexture("Assets/Others/rotate.png");
-	scale = App->tex_imp->LoadTexture("Assets/Others/scale.png");
+	move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
+	rot = App->tex_imp->LoadTexture("Assets/Others/rotate2.png");
+	scale = App->tex_imp->LoadTexture("Assets/Others/scale2.png");
 
 	play = App->tex_imp->LoadTexture("Assets/Others/play.png");
 	pause = App->tex_imp->LoadTexture("Assets/Others/pause.png");
@@ -58,20 +58,27 @@ bool PanelState::Draw()
 			if (ImGui::IsWindowHovered()) App->camera->isOnState = true;
 			else App->camera->isOnState = false;
 
+			if (openTimeMenu)
+				TimeInfoMenu();
+
 			ENGINE_STATE state = App->GetEngineState();
 
 			ManageEngineStateButtonsLogic();
 
-			ManageGuizmoButtons();
+			DrawGuizmoButtons();
 
-			ImGui::SameLine();
+			ImGui::SameLine(180);
+
+			DrawBBButtons();
+
+			ImGui::SameLine(300);
 
 			// Engine State Button 1
 			if (ImGui::ImageButton((ImTextureID*)current_tex1.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
 				if (currentBut1 == 2) // button texture change play/stop
 					currentBut1 = 1;
-				else 
+				else
 					currentBut1 = 2;
 
 				editing = false;
@@ -115,34 +122,8 @@ bool PanelState::Draw()
 			}
 
 			if (!editing)
-			{
-				// show the current time in playmode
-				play_time =+ App->GetDT(); ImGui::SameLine();
-				ImGui::TextColored(YELLOW_COLOR, "%.2f", play_time);
-			}
+				openTimeMenu = true;
 
-			ImGui::SameLine();
-
-			// Own BB
-			if (ImGui::ImageButton((ImTextureID*)ownBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
-			{
-				if (App->scene_intro->GOselected != nullptr)
-					drawOwnBB = !drawOwnBB;
-				else if (App->scene_intro->GOselected == nullptr || !App->scene_intro->GOselected->data.active)
-					LOG_C("WARNING: You must active or select a GameObject to use this tool");
-			}
-
-			if (ImGui::IsItemHovered())
-				ToolTipShortCut("Own BB");
-
-			ImGui::SameLine();
-
-			// All BB
-			if (ImGui::ImageButton((ImTextureID*)allBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
-				App->gui->Pconfig->drawBB = !App->gui->Pconfig->drawBB;
-
-			if (ImGui::IsItemHovered())
-				ToolTipShortCut("All BBs");
 		}
 
 		ImGui::End();
@@ -151,7 +132,7 @@ bool PanelState::Draw()
 	return true;
 }
 
-void PanelState::ManageGuizmoButtons()
+void PanelState::DrawGuizmoButtons()
 {
 	// Move Button
 	if (ImGui::ImageButton((ImTextureID*)move.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -202,6 +183,48 @@ void PanelState::ManageEngineStateButtonsLogic()
 		current_tex2 = resume;
 		break;
 	}
+}
+
+void PanelState::DrawBBButtons()
+{
+	// Own BB
+	if (ImGui::ImageButton((ImTextureID*)ownBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+	{
+		if (App->scene_intro->GOselected != nullptr)
+			drawOwnBB = !drawOwnBB;
+		else if (App->scene_intro->GOselected == nullptr || !App->scene_intro->GOselected->data.active)
+			LOG_C("WARNING: You must active or select a GameObject to use this tool");
+	}
+
+	if (ImGui::IsItemHovered())
+		ToolTipShortCut("Draw own BB");
+
+	ImGui::SameLine();
+
+	// All BB
+	if (ImGui::ImageButton((ImTextureID*)allBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+		App->gui->Pconfig->drawBB = !App->gui->Pconfig->drawBB;
+
+	if (ImGui::IsItemHovered())
+		ToolTipShortCut("Draw all BBs");
+}
+
+void PanelState::TimeInfoMenu()
+{
+	if (ImGui::Begin("Time Information", &openTimeMenu, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
+	{
+		play_time += App->GetDT();
+
+		ImGui::Text("Time Playing: ");	ImGui::SameLine();
+		ImGui::TextColored(YELLOW_COLOR, "%.3f", play_time);
+
+		/*ImGui::Text("Delta Time: ");	ImGui::SameLine();
+		ImGui::TextColored(YELLOW_COLOR, "%.3f", );*/
+
+	}
+
+	ImGui::End();
+
 }
 
 void PanelState::ToolTipShortCut(const char* word)
