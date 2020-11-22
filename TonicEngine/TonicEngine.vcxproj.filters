@@ -400,6 +400,9 @@
     <ClInclude Include="Source Code\PanelState.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\PanelViewport.h">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -619,6 +622,9 @@
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\PanelState.cpp">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\PanelViewport.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
