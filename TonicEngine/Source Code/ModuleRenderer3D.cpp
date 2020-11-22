@@ -148,6 +148,18 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		cam = App->camera->GetActiveCamera();
 	else cam->Draw2();
 
+	std::vector<const GameObject*> objs;
+
+	GO::FillChildren(objs, App->scene_intro->GOroot);
+
+	for (int i = 0; i < objs.size(); i++)
+	{
+		if (objs[i]->data.active && cam->Intersect(objs[i]->aabb))
+		{
+			objs[i]->Draw();
+		}
+	}
+
 
 	// Drawing Panels
 	App->gui->Draw();

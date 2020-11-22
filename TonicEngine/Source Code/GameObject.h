@@ -33,7 +33,7 @@ public:
 
 	void Update();
 	void CleanUp();
-	//void Draw();
+	void Draw() const;
 
 	void EnableGameObject();
 	void DisableGameObject();
@@ -60,7 +60,7 @@ public:
 	int GenerateUUID();
 
 	void UpdateBoundingBox();
-	void DrawAllBoundingBoxes();
+	static void DrawAllBoundingBoxes(const AABB& aabb);
 	bool DrawOwnBoundingBox(GameObject* GO);
 
 	//void RayCast(const LineSegment& ray_cast, bool& intersect, float& length);

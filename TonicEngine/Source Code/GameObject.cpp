@@ -36,11 +36,11 @@ void GameObject::Update()
 		if (App->gui->Pstate->drawOwnBB && App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
 			DrawOwnBoundingBox(App->scene_intro->GOselected);
 
-		if (App->gui->Pconfig->drawBB)
+		/*if (App->gui->Pconfig->drawBB)
 		{
 			App->gui->Pstate->drawOwnBB = false;
-			DrawAllBoundingBoxes();
-		}
+			DrawAllBoundingBoxes(aabb);
+		}*/
 	}
 }
 
@@ -74,6 +74,14 @@ void GameObject::CleanUp()
 	}
 
 	childrenList.clear();
+}
+
+void GameObject::Draw() const
+{
+	if (App->gui->Pconfig->drawBB)
+	{
+		DrawAllBoundingBoxes(aabb);
+	}
 }
 
 void GameObject::EnableGameObject()
@@ -279,7 +287,7 @@ void GameObject::UpdateBoundingBox()
 	}
 }
 
-void GameObject::DrawAllBoundingBoxes()
+void GameObject::DrawAllBoundingBoxes(const AABB& aabb)
 {
 	glBegin(GL_LINES);
 	glLineWidth(App->scene_intro->bbSize);
