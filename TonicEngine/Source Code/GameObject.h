@@ -81,4 +81,9 @@ public:
 
 };
 
+namespace GO 
+{
+	void FillChildren(std::vector<const GameObject*>& array, const GameObject* GO, bool parent = false, uint c = 0);
+}
+
 #endif

@@ -40,6 +40,8 @@ public:
 
 public:
 
+	ComponentCamera* culling = nullptr;
+
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;

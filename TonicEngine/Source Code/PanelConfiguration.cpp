@@ -229,6 +229,7 @@ bool PanelConfiguration::Draw()
 					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
 					ImGui::Spacing();
 					ImGui::Checkbox("Draw", &drawBB);
+					ImGui::SliderFloat("Size", &App->scene_intro->bbSize, 0.1f, 5.0f);
 					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->scene_intro->bbColor, flags);
 					ImGui::TreePop();
 				}

@@ -37,7 +37,10 @@ void GameObject::Update()
 			DrawOwnBoundingBox(App->scene_intro->GOselected);
 
 		if (App->gui->Pconfig->drawBB)
+		{
+			App->gui->Pstate->drawOwnBB = false;
 			DrawAllBoundingBoxes();
+		}
 	}
 }
 
@@ -279,7 +282,7 @@ void GameObject::UpdateBoundingBox()
 void GameObject::DrawAllBoundingBoxes()
 {
 	glBegin(GL_LINES);
-	glLineWidth(0.5f);
+	glLineWidth(App->scene_intro->bbSize);
 
 	glColor4f(App->scene_intro->bbColor.r, App->scene_intro->bbColor.g, App->scene_intro->bbColor.b, App->scene_intro->bbColor.a);
 
@@ -332,4 +335,20 @@ bool GameObject::DrawOwnBoundingBox(GameObject* GO)
 	}
 
 	return ret;
+}
+
+void GO::FillChildren(std::vector<const GameObject*>& array_, const GameObject* GO, bool parent, uint c)
+{
+	if (c != 0) array_.push_back(GO);
+	else if (parent) array_.push_back(GO);
+
+	c++;
+
+	if (GO->childrenList.size() > 0)
+	{
+		for (int i = 0; i < GO->childrenList.size(); ++i)
+		{
+			FillChildren(array_, GO->childrenList[i], parent, c);
+		}
+	}
 }

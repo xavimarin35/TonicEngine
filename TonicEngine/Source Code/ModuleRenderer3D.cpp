@@ -142,6 +142,13 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	App->scene_intro->Draw();
 
+	ComponentCamera* cam = culling;
+
+	if (culling == nullptr)
+		cam = App->camera->GetActiveCamera();
+	else cam->Draw2();
+
+
 	// Drawing Panels
 	App->gui->Draw();
 

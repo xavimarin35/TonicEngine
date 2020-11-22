@@ -289,8 +289,38 @@ ComponentCamera* ModuleCamera3D::GetActiveCamera()
 	return activeCam;
 }
 
+const Frustum& ModuleCamera3D::GetActiveFrustum() const
+{
+	return activeCam->frustum;
+}
+
 void ModuleCamera3D::CalculateViewMatrix()
 {
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
+}
+
+bool ModuleCamera3D::Intersects(const AABB& box) const
+{
+	return activeCam->Intersect(box);
+}
+
+float3 ModuleCamera3D::GetPosition() const
+{
+	return activeCam->frustum.pos;
+}
+
+float* ModuleCamera3D::GetView() const
+{
+	return activeCam->GetView().ptr();
+}
+
+float* ModuleCamera3D::GetProjection() const
+{
+	return activeCam->GetProjection().ptr();
+}
+
+bool* ModuleCamera3D::GetProjectionBool() const
+{
+	return &activeCam->update_frustum;
 }

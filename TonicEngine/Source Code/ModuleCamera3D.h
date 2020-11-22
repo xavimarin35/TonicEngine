@@ -21,7 +21,16 @@ public:
 	float* GetViewMatrix();
 	void GoInitialPos();
 	ComponentCamera* GetActiveCamera();
+	const Frustum& GetActiveFrustum() const;
 
+public:
+	float3 GetPosition() const;
+	float* GetView() const;
+	float* GetProjection() const;
+	bool* GetProjectionBool() const;
+	bool Intersects(const AABB& refBox) const;
+
+public:
 	bool isOnConsole = false;
 	bool isOnHierarchy = false;
 	bool isOnInspector = false;
