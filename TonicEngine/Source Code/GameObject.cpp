@@ -31,16 +31,40 @@ void GameObject::Update()
 		if (this->GetComponentTransform()->moved)
 			TransformGlobal(this);
 
+		GameObject* GO = App->scene_intro->GOselected;
+
 		UpdateBoundingBox();
 
-		if (App->gui->Pstate->drawOwnBB && App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
-			DrawOwnBoundingBox(App->scene_intro->GOselected);
+		// Selected Game Object
+		if (GO != nullptr)
+		{	
+			// Game Object is not a camera
+			if (GO->GetComponentCamera() == nullptr)
+			{
+				if (App->gui->Pstate->drawBB == 1 && GO->data.active)
+					DrawOwnBoundingBox(GO);
 
-		/*if (App->gui->Pconfig->drawBB)
+				if (App->gui->Pstate->drawBB == 2)
+					DrawAllBoundingBoxes(aabb);
+
+			}
+			// Game Object is a camera
+			else
+			{
+				if (App->gui->Pstate->drawBB == 1 && GO->data.active && !GO->GetComponentCamera()->showFrustrum)
+					DrawOwnBoundingBox(GO);
+
+				if (App->gui->Pstate->drawBB == 2 && !GO->GetComponentCamera()->showFrustrum)
+					DrawAllBoundingBoxes(aabb);
+			}
+
+		}
+		// No Selected Game Object
+		else
 		{
-			App->gui->Pstate->drawOwnBB = false;
-			DrawAllBoundingBoxes(aabb);
-		}*/
+			if (App->gui->Pstate->drawBB == 2)
+				DrawAllBoundingBoxes(aabb);
+		}
 	}
 }
 
@@ -78,7 +102,7 @@ void GameObject::CleanUp()
 
 void GameObject::Draw() const
 {
-	if (App->gui->Pconfig->drawBB)
+	if (App->gui->Pstate->drawBB == 2)
 	{
 		DrawAllBoundingBoxes(aabb);
 	}
@@ -93,7 +117,6 @@ void GameObject::EnableGameObject()
 	{
 		(*it)->EnableGameObject();
 	}
-
 }
 
 void GameObject::DisableGameObject()
@@ -105,7 +128,6 @@ void GameObject::DisableGameObject()
 	{
 		(*it)->DisableGameObject();
 	}
-
 }
 
 Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)

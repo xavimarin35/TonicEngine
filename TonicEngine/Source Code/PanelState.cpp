@@ -191,7 +191,11 @@ void PanelState::DrawBBButtons()
 	if (ImGui::ImageButton((ImTextureID*)ownBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 	{
 		if (App->scene_intro->GOselected != nullptr)
-			drawOwnBB = !drawOwnBB;
+		{
+			if (drawBB == 1) drawBB = 0;
+			else drawBB = 1;
+		}
+
 		else if (App->scene_intro->GOselected == nullptr || !App->scene_intro->GOselected->data.active)
 			LOG_C("WARNING: You must active or select a GameObject to use this tool");
 	}
@@ -203,7 +207,10 @@ void PanelState::DrawBBButtons()
 
 	// All BB
 	if (ImGui::ImageButton((ImTextureID*)allBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
-		App->gui->Pconfig->drawBB = !App->gui->Pconfig->drawBB;
+	{
+		if (drawBB == 2) drawBB = 0;
+		else drawBB = 2;
+	}
 
 	if (ImGui::IsItemHovered())
 		ToolTipShortCut("Draw all BBs");

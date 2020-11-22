@@ -22,7 +22,7 @@ public:
 
 	void ToolTipShortCut(const char* word);
 
-	bool drawOwnBB = false;
+	int drawBB = 0;
 	bool editing = true;
 	float play_time = 0.0f;
 	bool openTimeMenu = false;
