@@ -28,7 +28,6 @@ bool PanelState::Start()
 	ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
 	allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");
 
-
 	return true;
 }
 
@@ -43,6 +42,9 @@ bool PanelState::CleanUp()
 	glDeleteTextures(1, (GLuint*)&stop);
 	glDeleteTextures(1, (GLuint*)&resume);
 
+	glDeleteTextures(1, (GLuint*)&ownBB);
+	glDeleteTextures(1, (GLuint*)&allBB);
+
 	return true;
 }
 
@@ -53,7 +55,7 @@ bool PanelState::Draw()
 
 	if (App->gui->Pstate->active)
 	{
-		if (ImGui::Begin("Management", &active, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
+		if (ImGui::Begin("Options Bar", &active, ImGuiWindowFlags_NoDecoration))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnState = true;
 			else App->camera->isOnState = false;
@@ -123,6 +125,8 @@ bool PanelState::Draw()
 
 			if (!editing)
 				openTimeMenu = true;
+			else
+				openTimeMenu = false;
 
 		}
 
@@ -218,16 +222,16 @@ void PanelState::DrawBBButtons()
 
 void PanelState::TimeInfoMenu()
 {
-	if (ImGui::Begin("Time Information", &openTimeMenu, ImGuiWindowFlags_NoTitleBar && ImGuiWindowFlags_NoScrollbar && ImGuiWindowFlags_AlwaysAutoResize))
+	if (ImGui::Begin("Time Information", &openTimeMenu, ImGuiWindowFlags_NoScrollbar))
 	{
 		play_time += App->GetDT();
+		current_dt = App->GetDT();
 
 		ImGui::Text("Time Playing: ");	ImGui::SameLine();
 		ImGui::TextColored(YELLOW_COLOR, "%.3f", play_time);
 
-		/*ImGui::Text("Delta Time: ");	ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, "%.3f", );*/
-
+		ImGui::Text("Delta Time: ");	ImGui::SameLine();
+		ImGui::TextColored(YELLOW_COLOR, "%.3f", current_dt);
 	}
 
 	ImGui::End();

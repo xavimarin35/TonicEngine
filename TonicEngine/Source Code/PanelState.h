@@ -25,6 +25,7 @@ public:
 	int drawBB = 0;
 	bool editing = true;
 	float play_time = 0.0f;
+	float current_dt = 0.0f;
 	bool openTimeMenu = false;
 
 	Texture current_tex1;
