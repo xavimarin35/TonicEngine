@@ -1,16 +1,16 @@
-#ifndef __PANELVIEWPORT_H__
-#define __PANELVIEWPORT_H__
+#ifndef __VIEWPORT_H__
+#define __VIEWPORT_H__
 
 #include "Application.h"
 #include "PanelManager.h"
 #include "TextureImporter.h"
 #include "ComponentCamera.h"
 
-class PanelViewport
+class Viewport
 {
 public:
-	PanelViewport();
-	~PanelViewport();
+	Viewport();
+	~Viewport();
 
 	bool Start();
 	bool PreUpdate();
@@ -19,6 +19,9 @@ public:
 
 	void ChooseCamera(ComponentCamera* camera);
 	void PrintTexture(uint tex);
+
+public:
+
 };
 
 

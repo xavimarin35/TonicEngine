@@ -20,6 +20,8 @@
 #include "PanelInspector.h"
 #include "PanelState.h"
 #include "PanelResources.h"
+#include "PanelScene.h"
+#include "PanelGame.h"
 
 class PanelConfiguration;
 class PanelAbout;
@@ -28,6 +30,8 @@ class PanelHierarchy;
 class PanelInspector;
 class PanelState;
 class PanelResources;
+class PanelScene;
+class PanelGame;
 
 class ModuleGUI : public Module
 {
@@ -63,6 +67,8 @@ public:
 	PanelInspector* Pinspector = nullptr;
 	PanelState* Pstate = nullptr;
 	PanelResources* Presources = nullptr;
+	PanelScene* Pscene = nullptr;
+	PanelGame* Pgame = nullptr;
 
 	// Random Number Generator 
 	int rand = 0;

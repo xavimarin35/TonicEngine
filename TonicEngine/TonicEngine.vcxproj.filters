@@ -400,7 +400,13 @@
     <ClInclude Include="Source Code\PanelState.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Source Code\PanelViewport.h">
+    <ClInclude Include="Source Code\Viewport.h">
+      <Filter>Sources\Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\PanelGame.h">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\PanelScene.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
@@ -624,7 +630,13 @@
     <ClCompile Include="Source Code\PanelState.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Source Code\PanelViewport.cpp">
+    <ClCompile Include="Source Code\Viewport.cpp">
+      <Filter>Sources\Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\PanelGame.cpp">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\PanelScene.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>

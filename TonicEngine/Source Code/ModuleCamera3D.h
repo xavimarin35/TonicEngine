@@ -41,6 +41,8 @@ public:
 	bool isOnConfiguration = false;
 	bool isOnState = false;
 	bool isOnResources = false;
+	bool isOnScene = false;
+	bool isOnGame = false;
 
 	GameObject* cameraGO = nullptr;
 	ComponentCamera* mainCam = nullptr;
