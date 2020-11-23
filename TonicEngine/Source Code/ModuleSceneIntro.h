@@ -43,6 +43,7 @@ public:
 	uint id_indices = 2;
 
 	bool IsCamera(GameObject* go);
+	GameObject* MousePicking(const LineSegment& segment, float& distance, bool close = true) const;
 
 	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
 	string AssignNameToGO(string name_go);

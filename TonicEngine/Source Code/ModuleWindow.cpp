@@ -118,6 +118,22 @@ void ModuleWindow::GetWindowSize(int& width, int& height)
 	SDL_GetWindowSize(window, &width, &height);
 }
 
+int ModuleWindow::GetWidth()
+{
+	int width, height;
+	SDL_GetWindowSize(window, &width, &height);
+
+	return width;
+}
+
+int ModuleWindow::GetHeight()
+{
+	int width, height;
+	SDL_GetWindowSize(window, &width, &height);
+
+	return height;
+}
+
 void ModuleWindow::SetFullScreen(bool active)
 {
 	if (active)

@@ -22,6 +22,8 @@ public:
 
 	// Window SDL functions
 	void GetWindowSize(int& width, int& height);
+	int GetWidth();
+	int GetHeight();
 	void SetFullScreen(bool active);
 	void SetResizable(bool active);
 	void SetBorderless(bool active);

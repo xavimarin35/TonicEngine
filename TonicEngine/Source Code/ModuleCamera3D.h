@@ -26,6 +26,7 @@ public:
 
 	ComponentCamera* GetActiveCamera();
 	const Frustum& GetActiveFrustum() const;
+	GameObject* MousePicking(float3* position = nullptr) const;
 
 public:
 	float3 GetPosition() const;

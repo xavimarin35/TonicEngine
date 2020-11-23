@@ -44,7 +44,7 @@ public:
 	int GetGameObjectUUID();
 
 	Component* CreateComponent(COMPONENT_TYPE type, bool active = true);
-	Component* GetComponent(const COMPONENT_TYPE& type);
+	Component* GetComponent(COMPONENT_TYPE type) const;
 
 	ComponentTransform* GetComponentTransform();
 	ComponentMesh* GetComponentMesh();

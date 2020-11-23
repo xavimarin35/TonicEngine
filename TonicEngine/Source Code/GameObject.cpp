@@ -164,15 +164,14 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 	return component;
 }
 
-Component* GameObject::GetComponent(const COMPONENT_TYPE& type)
+Component* GameObject::GetComponent(COMPONENT_TYPE type) const
 {
-	for (std::vector<Component*>::iterator it = componentsList.begin(); it != componentsList.end(); ++it)
+	for (int i = 0; i < componentsList.size(); ++i)
 	{
-		if (*it != nullptr && (*it)->GetComponentType() == type)
-		{
-			return *it;
-		}	
+		if (componentsList[i]->type == type)
+			return componentsList[i];
 	}
+
 	return nullptr;
 }
 

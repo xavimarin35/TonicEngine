@@ -11,7 +11,7 @@ PanelGame::~PanelGame()
 
 bool PanelGame::Start()
 {
-	this->active = true;
+	this->active = false;
 
 	return true;
 }

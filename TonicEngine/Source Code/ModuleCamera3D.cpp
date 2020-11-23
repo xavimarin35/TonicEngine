@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleWindow.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -76,6 +77,17 @@ update_status ModuleCamera3D::Update(float dt)
 		speed = speed * 2;
 
 	// Mouse motion
+
+	// Mouse Picking
+	/*if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		GameObject* pick = MousePicking();
+
+		if (pick != nullptr)
+			App->scene_intro->GOselected = pick;
+		else
+			App->scene_intro->GOselected = nullptr;
+	}*/
 
 	// Camera Orbit
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
@@ -314,4 +326,23 @@ float* ModuleCamera3D::GetProjection() const
 bool* ModuleCamera3D::GetProjectionBool() const
 {
 	return &activeCam->update_frustum;
+}
+
+GameObject* ModuleCamera3D::MousePicking(float3* position) const
+{
+	float posX = (float)App->input->GetMouseX() / (float)App->window->GetWidth() * 2.f - 1.f;
+	float posY = -((float)App->input->GetMouseY() / (float)App->window->GetHeight() * 2.f - 1.f);
+
+	LineSegment projection = activeCam->NearSegment(posX, posY);
+
+	float distance;
+
+	GameObject* hitGO = App->scene_intro->MousePicking(projection, distance, true);
+
+	if (hitGO != nullptr && position != nullptr)
+	{
+		*position = projection.GetPoint(distance);
+	}
+
+	return hitGO;
 }

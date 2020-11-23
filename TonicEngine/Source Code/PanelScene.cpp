@@ -11,7 +11,7 @@ PanelScene::~PanelScene()
 
 bool PanelScene::Start()
 {
-	this->active = true;
+	this->active = false;
 
 	return true;
 }
