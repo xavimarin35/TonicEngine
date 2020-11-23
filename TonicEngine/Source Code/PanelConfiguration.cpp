@@ -224,6 +224,18 @@ bool PanelConfiguration::Draw()
 				ImGui::Separator();
 				ImGui::Spacing();
 
+				if (ImGui::TreeNodeEx("Bounding Boxes:", ImGuiTreeNodeFlags_None))
+				{
+					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+					ImGui::Spacing();
+					ImGui::Text("Size: "); ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("Size"); ImGui::InputFloat(" ", &App->scene_intro->bbSize, 1.f, 10.0f); ImGui::PopID();
+					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->scene_intro->bbColor, flags);
+					ImGui::TreePop();
+				}
+
+				ImGui::Separator();
+				ImGui::Spacing();
+
 				if (ImGui::TreeNodeEx("View Modes:", ImGuiTreeNodeFlags_DefaultOpen)) 
 				{
 					ImGui::Spacing(); 
