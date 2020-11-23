@@ -67,30 +67,7 @@ update_status ModuleCamera3D::Update(float dt)
 		{
 			GameObject* GOselected = App->scene_intro->GOselected;
 
-			vec3 globalPos;
-
-			if (GOselected->GOparent != nullptr)
-			{
-				globalPos.x = GOselected->GetComponentTransform()->position.x + GOselected->GOparent->GetComponentTransform()->position.x;
-				globalPos.y = GOselected->GetComponentTransform()->position.y + GOselected->GOparent->GetComponentTransform()->position.y;
-				globalPos.z = GOselected->GetComponentTransform()->position.z + GOselected->GOparent->GetComponentTransform()->position.z;
-			}
-			else
-			{
-				globalPos.x = GOselected->GetComponentTransform()->position.x;
-				globalPos.y = GOselected->GetComponentTransform()->position.y;
-				globalPos.z = GOselected->GetComponentTransform()->position.z;
-			}
-
-			vec3 distance =
-			{
-				globalPos.x - Reference.x,
-				globalPos.y - Reference.y,
-				globalPos.z - Reference.z
-			};
-
-			Reference += distance;
-			Position = Reference + Z * (distanceFocus + 3);
+			Focus(GOselected);
 		}
 	}
 
@@ -282,6 +259,20 @@ void ModuleCamera3D::GoInitialPos()
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	CalculateViewMatrix();
+}
+
+void ModuleCamera3D::Focus(GameObject* go)
+{
+	if (go != nullptr)
+	{
+		float3 pos = go->aabb.CenterPoint();
+
+		Reference.x = pos.x;
+		Reference.y = pos.y;
+		Reference.z = pos.z;
+
+		LookAt(Reference);
+	}
 }
 
 ComponentCamera* ModuleCamera3D::GetActiveCamera()
