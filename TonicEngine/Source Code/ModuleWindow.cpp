@@ -113,7 +113,7 @@ const char* ModuleWindow::GetTitle()
 	return name;
 }
 
-void ModuleWindow::GetWindowSize(int& width, int& height)
+void ModuleWindow::GetWindowSize(int width, int height)
 {
 	SDL_GetWindowSize(window, &width, &height);
 }

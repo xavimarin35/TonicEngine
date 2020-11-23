@@ -7,6 +7,8 @@
 #include "ModuleGUI.h"
 #include "ModuleCamera3D.h"
 #include "GameObject.h"
+#include "Viewport.h"
+#include "ModuleWindow.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -109,7 +111,7 @@ bool ModuleRenderer3D::Init()
 	}
 
 	// Projection matrix for
-	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	OnResize(1024, 720);
 
 	return ret;
 }
@@ -140,7 +142,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	App->scene_intro->Draw();
+	App->scene_intro->Draw(); // not using this
 
 	ComponentCamera* cam = culling;
 

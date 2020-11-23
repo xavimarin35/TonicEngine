@@ -2,9 +2,10 @@
 #define __VIEWPORT_H__
 
 #include "Application.h"
-#include "PanelManager.h"
-#include "TextureImporter.h"
-#include "ComponentCamera.h"
+#include "Globals.h"
+#include "glew/include/GL/glew.h"
+#include "imgui-1.78/imgui.h"
+
 
 class Viewport
 {
@@ -12,16 +13,19 @@ public:
 	Viewport();
 	~Viewport();
 
-	bool Start();
-	bool PreUpdate();
-	bool PostUpdate();
+	bool StartBuffers(ImVec2 size);
+	void BindViewport();
+	void UnbindViewport();
 	bool CleanUp();
 
-	void ChooseCamera(ComponentCamera* camera);
-	void PrintTexture(uint tex);
+	void DeleteBuffers();
+	GLuint GetTexture();
 
 public:
 
+	GLuint fbo;
+	GLuint rbo;
+	GLuint texture;
 };
 
 
