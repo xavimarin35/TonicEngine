@@ -55,7 +55,7 @@ bool ComponentCamera::CleanUp()
 	return true;
 }
 
-void ComponentCamera::Draw()
+void ComponentCamera::DrawInspector()
 {
 	ImGui::Spacing();
 

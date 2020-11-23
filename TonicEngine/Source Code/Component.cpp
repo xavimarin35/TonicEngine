@@ -25,6 +25,10 @@ void Component::Draw()
 {
 }
 
+void Component::DrawInspector()
+{
+}
+
 COMPONENT_TYPE Component::GetComponentType() const
 {
 	return type;

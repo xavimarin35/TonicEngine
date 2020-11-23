@@ -106,6 +106,12 @@ void GameObject::Draw() const
 	{
 		DrawAllBoundingBoxes(aabb);
 	}
+
+	for (int i = 0; i < componentsList.size(); ++i)
+	{
+		if (componentsList[i]->active)
+			componentsList[i]->Draw();
+	}
 }
 
 void GameObject::EnableGameObject()
@@ -311,8 +317,8 @@ void GameObject::UpdateBoundingBox()
 
 void GameObject::DrawAllBoundingBoxes(const AABB& aabb)
 {
-	glBegin(GL_LINES);
 	glLineWidth(App->scene_intro->bbSize);
+	glBegin(GL_LINES);
 
 	glColor4f(App->scene_intro->bbColor.r, App->scene_intro->bbColor.g, App->scene_intro->bbColor.b, App->scene_intro->bbColor.a);
 
@@ -348,8 +354,8 @@ bool GameObject::DrawOwnBoundingBox(GameObject* GO)
 			aabb.Enclose(obb);
 		}
 
+		glLineWidth(App->scene_intro->bbSize);
 		glBegin(GL_LINES);
-		glLineWidth(0.5f);
 
 		glColor4f(App->scene_intro->bbColor.r, App->scene_intro->bbColor.g, App->scene_intro->bbColor.b, App->scene_intro->bbColor.a);
 

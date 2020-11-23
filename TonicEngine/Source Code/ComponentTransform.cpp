@@ -80,7 +80,7 @@ void ComponentTransform::UpdateTransform()
 	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
 }
 
-void ComponentTransform::Draw()
+void ComponentTransform::DrawInspector()
 {
 	GameObject* go = App->scene_intro->GOselected;
 

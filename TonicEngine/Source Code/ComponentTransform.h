@@ -36,7 +36,7 @@ public:
 	void SetNewDefault(float3 pos, float3 rot, float3 sc);
 	void ResetTransform();
 
-	void Draw();
+	void DrawInspector();
 
 	void IsTransformComponentActive(GameObject* go);
 

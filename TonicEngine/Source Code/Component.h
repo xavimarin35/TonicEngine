@@ -26,6 +26,7 @@ public:
 	virtual bool CleanUp();
 
 	virtual void Draw();
+	virtual void DrawInspector();
 	COMPONENT_TYPE GetComponentType() const;
 	virtual void EnableComponent();
 	virtual void DisableComponent();

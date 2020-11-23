@@ -21,7 +21,7 @@ bool ComponentTexture::Update()
 	return true;
 }
 
-void ComponentTexture::Draw()
+void ComponentTexture::DrawInspector()
 {
 	ImGui::Spacing();
 

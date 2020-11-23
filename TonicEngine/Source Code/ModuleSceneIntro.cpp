@@ -85,16 +85,15 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGridAndAxis(false);
 
-	// this part is bugged, used for show selected GO purposes
-	/*if (GOselected != nullptr)
-	{
-		glEnable(GL_STENCIL_TEST);
-		glStencilFunc(GL_ALWAYS, 1, -1);
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-		App->renderer3D->OutlineGO();
-	}*/
 
-	DrawGameObjectNodes(GOroot);
+	// Drawing GameObjects (IF CULLING DEACTIVATED)
+	if (GOselected != nullptr)
+	{
+		if (IsCamera(GOselected))
+			DrawGameObjectNodes(GOroot);
+	}
+	else
+		DrawGameObjectNodes(GOroot);
 	
 
 	return UPDATE_CONTINUE;
@@ -361,4 +360,38 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		App->mesh_imp->LoadFile("Assets/Street/Street.fbx");
 		break;
 	}
+}
+
+bool ModuleSceneIntro::IsCamera(GameObject* go)
+{
+	bool ret;
+
+	// Selected GO
+	if (go != nullptr)
+	{
+		// GO is a camera
+		if (go->GetComponentCamera() != nullptr)
+		{
+			// Frustum activated
+			if (go->GetComponentCamera()->showFrustrum)
+			{
+				ret = false;
+			}
+			// Frustum deactivated
+			else
+			{
+				ret = true;
+			}
+		}
+		else // GO is not a camera
+		{
+			ret = true;
+		}
+	}
+	else // if not Selected GO
+	{
+		ret = true;
+	}
+
+	return ret;
 }

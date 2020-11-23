@@ -60,7 +60,7 @@ bool PanelInspector::Draw()
 					{
 						if (go->componentsList[i] != nullptr)
 						{
-							go->componentsList[i]->Draw();
+							go->componentsList[i]->DrawInspector();
 							go->componentsList[i]->Update();
 							//go->componentsList[i]->Save(go->data.id, App->jsonImp); // Not working
 						}

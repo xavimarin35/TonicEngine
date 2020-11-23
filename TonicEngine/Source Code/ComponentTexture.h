@@ -15,7 +15,7 @@ public:
 	ComponentTexture(GameObject* gameObject);
 	virtual ~ComponentTexture();
 
-	void Draw();
+	void DrawInspector();
 	bool Update();
 
 	void OpenTexturesMenu();

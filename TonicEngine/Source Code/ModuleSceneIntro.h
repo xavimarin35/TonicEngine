@@ -42,6 +42,8 @@ public:
 	uint id_no_dup_vertices = 1;
 	uint id_indices = 2;
 
+	bool IsCamera(GameObject* go);
+
 	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
 	string AssignNameToGO(string name_go);
 	void RemoveSelectedGO(GameObject* GO);

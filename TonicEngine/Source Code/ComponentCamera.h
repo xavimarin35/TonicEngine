@@ -19,7 +19,7 @@ public:
 	bool Start();
 	bool Update();
 	bool CleanUp();
-	void Draw();
+	void DrawInspector();
 	void Draw2();
 	void LookAt(const float3& position);
 	
