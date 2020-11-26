@@ -79,15 +79,15 @@ update_status ModuleCamera3D::Update(float dt)
 	// Mouse motion
 
 	// Mouse Picking
-	//if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
-	//{
-	//	GameObject* pick = MousePicking();
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		GameObject* pick = MousePicking();
 
-	//	if (pick != nullptr)
-	//		App->scene_intro->GOselected = pick;
-	//	else
-	//		App->scene_intro->GOselected = nullptr;
-	//}
+		if (pick != nullptr)
+			App->scene_intro->GOselected = pick;
+		/*else
+			App->scene_intro->GOselected = nullptr;*/
+	}
 
 	// Camera Orbit
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
@@ -328,9 +328,17 @@ bool* ModuleCamera3D::GetProjectionBool() const
 	return &activeCam->update_frustum;
 }
 
-GameObject* ModuleCamera3D::MousePicking(float3* position) const
+GameObject* ModuleCamera3D::MousePicking() const
 {
 	GameObject* GO = nullptr;
+
+	ImVec2 mousePos = { (float)App->input->GetMouseX() / (float)App->window->GetWidth() * 2.f - 1.f, -((float)App->input->GetMouseY() / (float)App->window->GetHeight() * 2.f - 1.f) };
+
+	LineSegment ray = activeCam->NearSegment((float)mousePos.x, (float)mousePos.y);
+
+	float distance = 99999999999.f;
+
+	GO = App->scene_intro->MousePicking(ray, distance);
 
 	return GO;
 }

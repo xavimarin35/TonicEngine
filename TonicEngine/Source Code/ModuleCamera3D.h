@@ -26,7 +26,7 @@ public:
 
 	ComponentCamera* GetActiveCamera();
 	const Frustum& GetActiveFrustum() const;
-	GameObject* MousePicking(float3* position = nullptr) const;
+	GameObject* MousePicking() const;
 
 public:
 	float3 GetPosition() const;
@@ -66,6 +66,7 @@ public:
 private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
+	LineSegment rayHit;
 };
 
 #endif __ModuleCamera3D__

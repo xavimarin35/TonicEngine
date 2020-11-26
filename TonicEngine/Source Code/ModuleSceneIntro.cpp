@@ -395,3 +395,53 @@ bool ModuleSceneIntro::IsCamera(GameObject* go)
 
 	return ret;
 }
+
+GameObject* ModuleSceneIntro::MousePicking(const LineSegment& segment, float& distance, bool closest) const
+{
+	distance = 99999999999.f;
+
+	GameObject* pick = nullptr;
+
+	for (auto it : gameobjectsList)
+	{
+		if (it->aabb.IsFinite())
+		{
+			if (segment.Intersects(it->aabb))
+			{
+				ComponentTransform* transf = (ComponentTransform*)it->GetComponent(COMPONENT_TYPE::TRANSFORM);
+				ComponentMesh* mesh = (ComponentMesh*)it->GetComponent(COMPONENT_TYPE::MESH);
+
+				if (mesh != nullptr)
+				{
+					if (mesh->mData.vertex != nullptr && mesh->mData.index != nullptr)
+					{
+						LineSegment ray(segment);
+						ray.Transform(transf->GetGlobalTransform().Inverted());
+
+						Triangle triangle;
+
+						for (uint i = 0; i < mesh->mData.num_index;)
+						{
+							triangle.a = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
+							triangle.b = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
+							triangle.c = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
+
+							float length; float3 hitPos;
+
+							if (ray.Intersects(triangle, &length, &hitPos))
+							{
+								if (closest && length < distance)
+								{
+									distance = length;
+									pick = (GameObject*)it;
+								}
+							}
+						}
+					}
+				}
+			}
+		}		
+	}
+
+	return pick;
+}

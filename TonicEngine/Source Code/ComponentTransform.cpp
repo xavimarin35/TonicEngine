@@ -88,40 +88,43 @@ void ComponentTransform::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		if (ImGui::Button(" Reset Transform ")) 
-			Reset();
-
-		if (ImGui::IsItemHovered())
+		if (go->GetComponentCamera() == nullptr)
 		{
-			char posX = ("%.2f", default_position.x); char posY = ("%.2f", default_position.y); char posZ = ("%.2f", default_position.z);
-			char rotX = ("%.2f", default_rotation_e.x); char rotY = ("%.2f", default_rotation_e.y); char rotZ = ("%.2f", default_rotation_e.z);
-			char scX = ("%.2f", default_scale.x); char scY = ("%.2f", default_scale.y); char scZ = ("%.2f", default_scale.z);
+			if (ImGui::Button(" Reset Transform "))
+				Reset();
 
-			std::string position, rotation, scale;
+			if (ImGui::IsItemHovered())
+			{
+				char posX = ("%.2f", default_position.x); char posY = ("%.2f", default_position.y); char posZ = ("%.2f", default_position.z);
+				char rotX = ("%.2f", default_rotation_e.x); char rotY = ("%.2f", default_rotation_e.y); char rotZ = ("%.2f", default_rotation_e.z);
+				char scX = ("%.2f", default_scale.x); char scY = ("%.2f", default_scale.y); char scZ = ("%.2f", default_scale.z);
 
-			position = ("( " + std::to_string(posX) + ", " + std::to_string(posY) + ", " + std::to_string(posZ) + (" )"));
-			rotation = ("( " + std::to_string(rotX) + ", " + std::to_string(rotY) + ", " + std::to_string(rotZ) + (" )"));
-			scale = ("( " + std::to_string(scX) + ", " + std::to_string(scY) + ", " + std::to_string(scZ) + (" )"));
+				std::string position, rotation, scale;
 
-			std::string toolTip = position + "\n" + rotation + "\n" + scale;
+				position = ("( " + std::to_string(posX) + ", " + std::to_string(posY) + ", " + std::to_string(posZ) + (" )"));
+				rotation = ("( " + std::to_string(rotX) + ", " + std::to_string(rotY) + ", " + std::to_string(rotZ) + (" )"));
+				scale = ("( " + std::to_string(scX) + ", " + std::to_string(scY) + ", " + std::to_string(scZ) + (" )"));
 
-			ImGui::SetTooltip(toolTip.c_str());
+				std::string toolTip = position + "\n" + rotation + "\n" + scale;
+
+				ImGui::SetTooltip(toolTip.c_str());
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button(" Set New Default "))
+				new_default = true;
+
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::SetTooltip("Save the actual transform to be the new default");
+			}
+
+			ImGui::SameLine();
+			App->gui->HelpMarker("You can double-click in any box to write a value");
+
+			ImGui::Spacing();
 		}
-
-		ImGui::SameLine();
-
-		if (ImGui::Button(" Set New Default "))
-			new_default = true;		
-
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip("Save the actual transform to be the new default");
-		}
-
-		ImGui::SameLine();
-		App->gui->HelpMarker("You can double-click in any box to write a value");
-
-		ImGui::Spacing();
 
 		float3 pos = GetPosition();
 		ImGui::Text("Position"); ImGui::SameLine(); 
