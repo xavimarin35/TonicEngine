@@ -22,6 +22,7 @@ class ModuleFileSystem;
 class TextureImporter;
 class JsonImporter;
 class ModuleTime;
+class ModuleResources;
 
 enum class ENGINE_STATE
 {
@@ -43,6 +44,7 @@ public:
 	ModuleFileSystem* file_system = nullptr;
 	TextureImporter* tex_imp = nullptr;
 	ModuleTime* time = nullptr;
+	ModuleResources* resources = nullptr;
 
 	list<Module*> list_modules;
 

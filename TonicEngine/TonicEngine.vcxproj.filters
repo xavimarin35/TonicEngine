@@ -64,6 +64,9 @@
     <Filter Include="Sources\Libraries\JSON">
       <UniqueIdentifier>{490384ac-0eb0-4461-abf3-d5fc072dc45a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\Resources">
+      <UniqueIdentifier>{f6c7500b-446c-406a-99b3-90fdcbd7baed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -409,6 +412,12 @@
     <ClInclude Include="Source Code\PanelScene.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\Resource.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleResources.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -638,6 +647,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\PanelScene.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleResources.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
