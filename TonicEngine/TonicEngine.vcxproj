@@ -195,6 +195,9 @@
     <ClInclude Include="Source Code\PanelScene.h" />
     <ClInclude Include="Source Code\PanelState.h" />
     <ClInclude Include="Source Code\Resource.h" />
+    <ClInclude Include="Source Code\ResourceMesh.h" />
+    <ClInclude Include="Source Code\ResourceModel.h" />
+    <ClInclude Include="Source Code\ResourceTexture.h" />
     <ClInclude Include="Source Code\Viewport.h" />
     <ClInclude Include="Source Code\PathNode.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\entropy.h" />
@@ -278,6 +281,10 @@
     <ClCompile Include="Source Code\PanelResources.cpp" />
     <ClCompile Include="Source Code\PanelScene.cpp" />
     <ClCompile Include="Source Code\PanelState.cpp" />
+    <ClCompile Include="Source Code\Resource.cpp" />
+    <ClCompile Include="Source Code\ResourceMesh.cpp" />
+    <ClCompile Include="Source Code\ResourceModel.cpp" />
+    <ClCompile Include="Source Code\ResourceTexture.cpp" />
     <ClCompile Include="Source Code\Viewport.cpp" />
     <ClCompile Include="Source Code\Primitive.cpp" />
     <ClCompile Include="Source Code\RandomNumGenerator.cpp" />

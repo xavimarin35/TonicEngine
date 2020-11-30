@@ -418,6 +418,15 @@
     <ClInclude Include="Source Code\ModuleResources.h">
       <Filter>Sources\Modules\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ResourceMesh.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ResourceModel.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ResourceTexture.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -649,6 +658,18 @@
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\ModuleResources.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ResourceMesh.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ResourceModel.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ResourceTexture.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Resource.cpp">
       <Filter>Sources\Modules\Resources</Filter>
     </ClCompile>
   </ItemGroup>

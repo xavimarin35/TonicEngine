@@ -4,40 +4,42 @@
 #include "Globals.h"
 #include "Application.h"
 
+
+enum class RESOURCE_TYPE
+{
+	NONE = -1,
+	MESH,
+	TEXTURE,
+	MODEL
+};
+
 class Resource
 {
 
 public:
-	enum RESOURCE_TYPE {
-		TEXTURE,
-		MESH,
-		SCENE,
-		UNKNOWN
-	};
-
-	Resource(uint UUID, RESOURCE_TYPE type) : res_UUID(UUID), type(type) {}
-	virtual ~Resource() {}
+	Resource(uint UUID, RESOURCE_TYPE type);
+	virtual ~Resource();
 	RESOURCE_TYPE GetType() const;
 
 	bool IsLoadedToMemory() const;
 	bool LoadToMemory();
-	uint CountReferences() const;
 
-	// Getters ----
-	uint GetUUID() const { return res_UUID; }
+	uint GetUUID() const;
 	const char* GetFile() const;
 	const char* GetImportedFile() const;
+	void UpdateNumRef();
 
 
 	virtual void Load(const nlohmann::json& config);
 	virtual void Save(nlohmann::json& config) const;
-	virtual bool LoadInMemory() = 0;
 
-protected:
+	virtual bool LoadInMemory() = 0;
+	virtual void ReleaseMemory() = 0;
+public:
 	uint res_UUID = 0;
 	std::string file;
 	std::string imported_file;
-	RESOURCE_TYPE type = RESOURCE_TYPE::UNKNOWN;
+	RESOURCE_TYPE type = RESOURCE_TYPE::NONE;
 	uint loaded = 0;
 };
 

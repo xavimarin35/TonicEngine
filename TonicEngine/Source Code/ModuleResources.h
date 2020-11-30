@@ -5,6 +5,10 @@
 #include "Module.h"
 #include "Resource.h"
 
+class Resource;
+class ResourceMesh;
+class ResourceTexture;
+
 class ModuleResources : public Module
 {
 public:
@@ -12,21 +16,20 @@ public:
 	ModuleResources(Application* app, bool start_enabled = true);
 
 	virtual ~ModuleResources();
-	bool Init();
+
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 
 
-	Resource* NewResource(Resource::RESOURCE_TYPE type);
-	uint ImportFile(const char* new_file_in_assets, Resource::RESOURCE_TYPE type, bool force = false);
+	Resource* CreateResource(RESOURCE_TYPE type);
+	uint GetNewFile(const char* new_file);
+	uint ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type);
 
 	uint Find(const char* file_in_assets) const;
 
 	uint GenerateNewUID(); 
 
-
-	const Resource* Get(uint uid) const;
 	Resource* Get(uint uid);
 
 

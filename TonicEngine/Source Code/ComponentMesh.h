@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "glmath.h"
 #include "Color.h"
+#include "ResourceMesh.h"
 
 class GameObject;
 
@@ -63,6 +64,8 @@ public:
 	meshData mData;
 
 	AABB aabb;
+
+	ResourceMesh* rMesh = nullptr;
 
 };
 
