@@ -60,6 +60,11 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 	return ret;
 }
 
+uint ModuleResources::GetNewFile(const char* new_file)
+{
+	return uint();
+}
+
 uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type)
 {
 	return uint();
@@ -73,4 +78,8 @@ Resource* ModuleResources::Get(uint uid)
 		return it->second;
 
 	return nullptr;
+}
+
+void ModuleResources::DrawResources()
+{
 }

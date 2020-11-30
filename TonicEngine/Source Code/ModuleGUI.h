@@ -22,6 +22,7 @@
 #include "PanelResources.h"
 #include "PanelScene.h"
 #include "PanelGame.h"
+#include "PanelCameraPreview.h"
 
 class PanelConfiguration;
 class PanelAbout;
@@ -32,6 +33,7 @@ class PanelState;
 class PanelResources;
 class PanelScene;
 class PanelGame;
+class PanelCameraPreview;
 
 class ModuleGUI : public Module
 {
@@ -69,6 +71,7 @@ public:
 	PanelResources* Presources = nullptr;
 	PanelScene* Pscene = nullptr;
 	PanelGame* Pgame = nullptr;
+	PanelCameraPreview* Pcam = nullptr;
 
 	// Random Number Generator 
 	int rand = 0;

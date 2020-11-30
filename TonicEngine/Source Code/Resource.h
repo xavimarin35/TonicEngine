@@ -19,6 +19,10 @@ class Resource
 public:
 	Resource(uint UUID, RESOURCE_TYPE type);
 	virtual ~Resource();
+
+	virtual bool LoadInMemory() = 0;
+	virtual void ReleaseMemory() = 0;
+
 	RESOURCE_TYPE GetType() const;
 
 	bool IsLoadedToMemory() const;
@@ -27,14 +31,12 @@ public:
 	uint GetUUID() const;
 	const char* GetFile() const;
 	const char* GetImportedFile() const;
-	void UpdateNumRef();
+	void UpdateReferences();
 
 
 	virtual void Load(const nlohmann::json& config);
 	virtual void Save(nlohmann::json& config) const;
 
-	virtual bool LoadInMemory() = 0;
-	virtual void ReleaseMemory() = 0;
 public:
 	uint res_UUID = 0;
 	std::string file;

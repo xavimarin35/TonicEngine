@@ -2,9 +2,8 @@
 #define __C_TEXTURE_H__
 
 #include "Component.h"
-#include "glmath.h"
 #include "TextureImporter.h"
-#include "ModuleInput.h"
+#include "ResourceTexture.h"
 
 class GameObject;
 
@@ -37,6 +36,8 @@ public:
 
 	int iterator = 0;
 	uint selectTexture = 0;
+
+	ResourceTexture* rTexture = nullptr;
 };
 
 #endif

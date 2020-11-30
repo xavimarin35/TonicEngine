@@ -2,6 +2,7 @@
 #define __ResourceTexture_H__
 
 #include "Resource.h"
+#include "TextureImporter.h"
 
 class ResourceTexture : public Resource
 {
@@ -17,6 +18,8 @@ public:
 	void ReleaseMemory();
 
 public:
+
+	Texture tex; // We will get texture id, width and height from here
 
 };
 

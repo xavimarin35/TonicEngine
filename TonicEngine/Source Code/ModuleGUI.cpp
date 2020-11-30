@@ -29,6 +29,7 @@ bool ModuleGUI::Init()
 	Presources = new PanelResources();
 	Pscene = new PanelScene();
 	Pgame = new PanelGame();
+	Pcam = new PanelCameraPreview();
 	
 	PushBackPanels();
 
@@ -326,6 +327,8 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 			ImGui::MenuItem("Scene Window", NULL, &Pscene->active);
 			ImGui::MenuItem("Game Window", NULL, &Pgame->active);
+			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active);
+
 
 			ImGui::EndMenu();
 		}
@@ -491,6 +494,7 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Presources);
 	panels.push_back(Pscene);
 	panels.push_back(Pgame);
+	panels.push_back(Pcam);
 }
 
 

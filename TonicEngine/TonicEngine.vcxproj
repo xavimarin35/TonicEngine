@@ -185,6 +185,7 @@
     <ClInclude Include="Source Code\ModuleTime.h" />
     <ClInclude Include="Source Code\ModuleWindow.h" />
     <ClInclude Include="Source Code\PanelAbout.h" />
+    <ClInclude Include="Source Code\PanelCameraPreview.h" />
     <ClInclude Include="Source Code\PanelConfiguration.h" />
     <ClInclude Include="Source Code\PanelConsole.h" />
     <ClInclude Include="Source Code\PanelGame.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="Source Code\ModuleTime.cpp" />
     <ClCompile Include="Source Code\ModuleWindow.cpp" />
     <ClCompile Include="Source Code\PanelAbout.cpp" />
+    <ClCompile Include="Source Code\PanelCameraPreview.cpp" />
     <ClCompile Include="Source Code\PanelConfiguration.cpp" />
     <ClCompile Include="Source Code\PanelConsole.cpp" />
     <ClCompile Include="Source Code\PanelGame.cpp" />

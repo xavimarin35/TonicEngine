@@ -427,6 +427,9 @@
     <ClInclude Include="Source Code\ResourceTexture.h">
       <Filter>Sources\Modules\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\PanelCameraPreview.h">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -671,6 +674,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\Resource.cpp">
       <Filter>Sources\Modules\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\PanelCameraPreview.cpp">
+      <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

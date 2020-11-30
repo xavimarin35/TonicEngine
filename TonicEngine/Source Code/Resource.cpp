@@ -39,7 +39,7 @@ const char* Resource::GetImportedFile() const
 	return nullptr;
 }
 
-void Resource::UpdateNumRef()
+void Resource::UpdateReferences()
 {
 	if (loaded > 0)
 		loaded++;

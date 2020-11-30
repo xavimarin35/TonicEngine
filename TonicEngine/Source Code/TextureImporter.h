@@ -32,6 +32,7 @@ public:
 	Texture LoadTexture(const char* path) const;
 	Texture GenerateCheckersTexture();
 
+	// Textures used for opengl purposes
 	Texture texture;
 	Texture checker_texture;
 
