@@ -83,7 +83,22 @@ bool PanelState::Draw()
 				else
 					currentBut1 = 2;
 
-				editing = false;
+				if (state == ENGINE_STATE::NONE)
+				{
+					if (App->PlayScene())
+					{
+						current_tex1 = pause;
+						editing = false;
+						LOG_C("Running scene");
+					}
+				}
+				else
+				{
+					App->StopScene();
+					current_tex1 = play;
+					editing = true;
+					LOG_C("Stopped scene");
+				}
 			}
 
 			// Tooltips Button1

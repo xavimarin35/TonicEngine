@@ -153,6 +153,8 @@ void ComponentCamera::SetFOV(float fov)
 
 	frustum.verticalFov = DegToRad(fov);
 	SetRatio(aspect_ratio);
+
+	update_frustum = true;
 }
 
 void ComponentCamera::SetRatio(float aspect_ratio)

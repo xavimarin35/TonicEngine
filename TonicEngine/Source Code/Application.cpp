@@ -189,6 +189,7 @@ bool Application::PlayScene()
 		if (camera->GetActiveCamera() != nullptr)
 		{
 			camera->activeCam = camera->cameraGO->GetComponentCamera();
+			camera->activeCam->update_frustum = true;
 			ChangeEngineState(ENGINE_STATE::PLAY);
 
 			return true;
@@ -223,6 +224,7 @@ void Application::StopScene()
 	case ENGINE_STATE::PLAY:
 	case ENGINE_STATE::PAUSE:
 		camera->activeCam = camera->mainCam;
+		camera->mainCam->update_frustum = true;
 		ChangeEngineState(ENGINE_STATE::NONE);
 
 		time->ResetGameTimer();
