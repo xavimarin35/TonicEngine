@@ -62,7 +62,31 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 
 uint ModuleResources::GetNewFile(const char* new_file)
 {
-	return uint();
+	uint ret = 0;
+
+	std::string path, extension;
+	App->file_system->SplitFilePath(new_file, nullptr, &path, &extension);
+
+	if (CompareExtensionForTextures(extension))
+	{
+		path = ASSETS_TEXTURES_FOLDER + path;
+
+		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
+		{
+			ret = ImportFile(path.c_str(), RESOURCE_TYPE::TEXTURE);
+		}
+	}
+	else if (CompareExtensionForModels(extension))
+	{
+		path = ASSETS_MODELS_FOLDER + path;
+
+		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
+		{
+			ret = ImportFile(path.c_str(), RESOURCE_TYPE::MODEL);
+		}
+	}
+
+	return ret;
 }
 
 uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type)
@@ -78,6 +102,22 @@ Resource* ModuleResources::Get(uint uid)
 		return it->second;
 
 	return nullptr;
+}
+
+bool ModuleResources::CompareExtensionForModels(std::string var)
+{
+	if (var == "FBX" || var == "fbx" || var == "OBJ" || var == "obj")
+		return true;
+	else
+		return false;
+}
+
+bool ModuleResources::CompareExtensionForTextures(std::string var)
+{
+	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga")
+		return true;
+	else
+		return false;
 }
 
 void ModuleResources::DrawResources()

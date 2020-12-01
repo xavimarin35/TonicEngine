@@ -38,6 +38,9 @@ ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Modul
 	// Make sure standard paths exist
 	const char* dirs[] = {
 		ASSETS_FOLDER, 
+		ASSETS_SCENES_FOLDER,
+		ASSETS_TEXTURES_FOLDER,
+		ASSETS_MODELS_FOLDER,
 		LIBRARY_FOLDER,
 		LIBRARY_MESH_FOLDER,
 		LIBRARY_TEXTURES_FOLDER,

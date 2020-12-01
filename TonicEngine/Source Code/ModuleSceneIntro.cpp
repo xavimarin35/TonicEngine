@@ -122,7 +122,7 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 
 void ModuleSceneIntro::SaveScene(std::string scene_name)
 {
-	std::string full_path = SCENES_FOLDER + scene_name + ".json";
+	std::string full_path = ASSETS_SCENES_FOLDER + scene_name + ".json";
 
 	SaveGameObjects(App->jsonImp, GOroot);
 

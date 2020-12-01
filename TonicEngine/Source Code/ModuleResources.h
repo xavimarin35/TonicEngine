@@ -28,6 +28,9 @@ public:
 
 	Resource* Get(uint uid);
 
+	bool CompareExtensionForTextures(std::string var);
+	bool CompareExtensionForModels(std::string var);
+
 private:
 	std::map<uint, Resource*> resources;
 };
