@@ -81,6 +81,8 @@ public:
 	std::string GetPathName(std::string path);
 	std::string GetPathDir(std::string path);
 
+	int GenerateUUID();
+
 	list<char*> appLogs;
 
 	//Frame rate

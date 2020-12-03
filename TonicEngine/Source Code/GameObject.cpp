@@ -9,7 +9,7 @@
 GameObject::GameObject(std::string name)
 {
 	this->data.name = name;
-	this->data.UUID = GenerateUUID();
+	this->data.UUID = GO::GenerateUUID();
 	CreateComponent(COMPONENT_TYPE::TRANSFORM);
 
 	LOG_C("A new GameObject called '%s' has been created!", name.c_str());
@@ -283,12 +283,6 @@ void GameObject::TransformGlobal(GameObject* GO)
 	}
 }
 
-int GameObject::GenerateUUID()
-{
-	int uuid = GenerateRandomBetween(99999999999);
-	return uuid;
-}
-
 void GameObject::Save(uint obj_num, nlohmann::json& scene)
 {
 	scene["Game Objects"][obj_num]["Name"] = data.name;
@@ -372,7 +366,7 @@ bool GameObject::DrawOwnBoundingBox(GameObject* GO)
 	return ret;
 }
 
-void GO::FillChildren(std::vector<const GameObject*>& array_, const GameObject* GO, bool parent, uint c)
+void GO::Culling(std::vector<const GameObject*>& array_, const GameObject* GO, bool parent, uint c)
 {
 	if (c != 0) array_.push_back(GO);
 	else if (parent) array_.push_back(GO);
@@ -383,7 +377,13 @@ void GO::FillChildren(std::vector<const GameObject*>& array_, const GameObject* 
 	{
 		for (int i = 0; i < GO->childrenList.size(); ++i)
 		{
-			FillChildren(array_, GO->childrenList[i], parent, c);
+			Culling(array_, GO->childrenList[i], parent, c);
 		}
 	}
+}
+
+int GO::GenerateUUID()
+{
+	int uuid = GenerateRandomBetween(99999999999);
+	return uuid;
 }

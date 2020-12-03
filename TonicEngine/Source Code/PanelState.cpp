@@ -16,7 +16,7 @@ bool PanelState::Start()
 {
 	this->active = true;
 
-	move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
+	/*move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
 	rot = App->tex_imp->LoadTexture("Assets/Others/rotate2.png");
 	scale = App->tex_imp->LoadTexture("Assets/Others/scale2.png");
 
@@ -26,7 +26,7 @@ bool PanelState::Start()
 	resume = App->tex_imp->LoadTexture("Assets/Others/resume.png");
 
 	ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
-	allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");
+	allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");*/
 
 	return true;
 }

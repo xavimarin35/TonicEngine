@@ -48,7 +48,7 @@ public:
 
 	// IO interfaces for other libs to handle files via PHYSfs
 	aiFileIO* GetAssimpIO();
-	BASS_FILEPROCS* GetBassIO();
+	//BASS_FILEPROCS* GetBassIO();
 
 	unsigned int Save(const char* file, const void* buffer, unsigned int size, bool append = false) const;
 	bool SaveUnique(std::string& output, const void* buffer, uint size, const char* path, const char* prefix, const char* extension);
@@ -61,7 +61,7 @@ public:
 private:
 
 	void CreateAssimpIO();
-	void CreateBassIO();
+	//void CreateBassIO();
 
 private:
 

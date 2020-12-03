@@ -16,7 +16,7 @@ bool PanelAbout::Start()
 {
 	this->active = false;
 	
-	texIcon = App->tex_imp->LoadTexture("Assets/Others/iconEngine.ico");
+	//texIcon = App->tex_imp->LoadTexture("Assets/Others/iconEngine.ico");
 
 	return true;
 }

@@ -152,7 +152,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	std::vector<const GameObject*> objs;
 
-	GO::FillChildren(objs, App->scene_intro->GOroot);
+	GO::Culling(objs, App->scene_intro->GOroot);
 
 	for (int i = 0; i < objs.size(); i++)
 	{
@@ -233,8 +233,8 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 	{
 		if (GO->GetComponentTexture()->active && GO->GetComponentTexture() != nullptr)
 		{
-			if (GO->GetComponentTexture()->EnableAssignedTexture)
-				glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->texture.id);
+			if (GO->GetComponentTexture()->EnableAssignedTexture && GO->GetComponentTexture()->rTexture)
+				glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->rTexture->tex.id);
 			else if (GO->GetComponentTexture()->EnableCheckersTexture)
 				glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture.id);
 		}

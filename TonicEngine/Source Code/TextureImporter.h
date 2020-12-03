@@ -4,6 +4,8 @@
 #include "Globals.h"
 #include "Module.h"
 
+class ResourceTexture;
+
 struct Texture
 {
 	uint id, height, width;
@@ -22,15 +24,16 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	bool DuplicateTexture(const char* path) const;
-
 public:
 
-	uint CreateTexture(const void* texture, const char* path, uint width, uint height, int format, uint format2) const;
+	uint CreateTexture(const void* texture, uint width, uint height, int format, uint format2, const char* path = nullptr) const;
 	Texture CreateEmptyTexture() const;
 
-	Texture LoadTexture(const char* path) const;
+	bool LoadTextureFromPath(const char* path, std::string& output_file);
 	Texture GenerateCheckersTexture();
+	bool LoadTextureFromLibrary(ResourceTexture* tex);
+
+	bool DuplicateTexture(const char* path, std::string& output_file) const;
 
 	// Textures used for opengl purposes
 	Texture texture;

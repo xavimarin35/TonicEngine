@@ -344,6 +344,12 @@ std::string Application::GetPathDir(std::string path)
 	return dir;
 }
 
+int Application::GenerateUUID()
+{
+	int uuid = GenerateRandomBetween(99999999999);
+	return uuid;
+}
+
 std::string Application::GetBuildingID(std::string path, std::string search)
 {
 	std::string newPath = path;

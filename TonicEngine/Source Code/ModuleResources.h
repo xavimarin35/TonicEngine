@@ -23,10 +23,13 @@ public:
 	void DrawResources();
 
 	Resource* CreateResource(RESOURCE_TYPE type);
+	Resource* BuildResource(Resource* res, const char* file, std::string written);
 	uint GetNewFile(const char* new_file);
 	uint ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type);
 
 	Resource* Get(uint uid);
+	uint GetResourceInAssets(const char* path)const;
+	uint IsResourceInLibrary(const char* name) const;
 
 	bool CompareExtensionForTextures(std::string var);
 	bool CompareExtensionForModels(std::string var);

@@ -59,8 +59,6 @@ public:
 		return mouse_y_motion;
 	}
 
-	const std::string GetFileExtension(const std::string FileName);
-
 private:
 	KEY_STATE* keyboard;
 	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];

@@ -6,13 +6,16 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleFileSystem.h"
 #include "Importer.h"
+#include "ResourceMesh.h"
+#include "ResourceTexture.h"
+#include "ModuleResources.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 #include "Assimp/include/cfileio.h"
 
-#pragma comment ( lib, "Assimp/libx86/assimp.lib" )
+#pragma coment (lib, "Assimp/libx86/assimp.lib")
 
 MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, start_enabled) 
 { 
@@ -66,13 +69,13 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 
 		GameObject* Empty = App->scene_intro->CreateGO(App->GetPathName(path));
 
-		Importer ex; std::string file;
+		/*Importer ex;*/ std::string file;
 
 		App->scene_intro->GOroot->AddChild(Empty);
 
 		if (root_node->mNumChildren > 0)
 			for (int i = 0; i < root_node->mNumChildren; ++i)
-				LoadNode(scene, root_node->mChildren[i], Empty, path, ex, file, texture_path);
+				LoadNode(scene, root_node->mChildren[i], Empty, path, file);
 
 		aiReleaseImport(scene);
 
@@ -81,7 +84,7 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
 }
 
-void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file, const char* texture_path)
+void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* node_path, std::string output_file)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion rotation;
@@ -138,7 +141,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 		{
 			node_name = new_mesh->mName.C_Str();
 			if (node_name == "")
-				node_name = obj->data.name + "_submesh";
+				node_name = obj->data.name + "";
 
 			if (i > 0)
 				node_name.append("(" + std::to_string(i) + ")");
@@ -152,18 +155,25 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 		}
 
 		child->CreateComponent(COMPONENT_TYPE::MESH);
-		child->CreateComponent(COMPONENT_TYPE::TEXTURE);
+		//child->CreateComponent(COMPONENT_TYPE::TEXTURE);
 		ComponentMesh* mesh = child->GetComponentMesh();
-
+		
 		aiMaterial* material = scene->mMaterials[new_mesh->mMaterialIndex];
 		uint numTextures = material->GetTextureCount(aiTextureType_DIFFUSE);
 
-		aiString path;
+		aiString path; // = "D:\GitHub\TonicEngine\TonicEngine\Tonic Engine\Game\Assets\Street";
 		material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 
-		if (path.C_Str() != nullptr)
+		if (path.C_Str() != nullptr && path.length > 0)
 		{
-			child->GetComponentTexture()->texture = App->tex_imp->LoadTexture(GetOwnTexture(child->data.name, texture_path).c_str());
+			child->CreateComponent(COMPONENT_TYPE::TEXTURE);
+			std::string dir = App->GetPathDir(node_path);
+			dir.append("/");
+			dir.append(path.C_Str());
+
+			child->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(dir.c_str()));
+			//App->tex_imp->LoadTexture(GetOwnTexture(child->data.name, texture_path).c_str());
+			child->GetComponentTexture()->rTexture->LoadInMemory();
 		}
 		else child->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 
@@ -189,12 +199,11 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				if (new_mesh->mFaces[i].mNumIndices != 3)
 				{
 					indices3 = false;
-					LOG_C("WARNING: A face with != 3 indices");
+					LOG_C("WARNING: A face with != 3 indices of this mesh %s", obj->data.name.c_str());
 				}
 				else
 					memcpy(&mesh->mData.index[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(uint));
 			}
-
 		}
 
 		// Normals
@@ -203,18 +212,16 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 			mesh->mData.face_center = new float3[mesh->mData.num_index];
 			mesh->mData.normals = new float3[mesh->mData.num_index];
 			mesh->mData.num_normals = mesh->mData.num_index / 3;
+
 			for (uint j = 0; j < mesh->mData.num_index / 3; ++j)
 			{
 				float3 face_A, face_B, face_C;
-
 
 				face_A = mesh->mData.vertex[mesh->mData.index[j * 3]];
 				face_B = mesh->mData.vertex[mesh->mData.index[(j * 3) + 1]];
 				face_C = mesh->mData.vertex[mesh->mData.index[(j * 3) + 2]];
 
-
 				mesh->mData.face_center[j] = (face_A + face_B + face_C) / 3;
-
 
 				float3 edge1 = face_B - face_A;
 				float3 edge2 = face_C - face_A;
@@ -222,7 +229,6 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				mesh->mData.normals[j] = Cross(edge1, edge2);
 				mesh->mData.normals[j].Normalize();
 				mesh->mData.normals[j] *= 0.15f;
-
 			}
 		}
 
@@ -249,7 +255,117 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 	if (node->mNumChildren > 0)
 		for (int i = 0; i < node->mNumChildren; ++i)
-			LoadNode(scene, node->mChildren[i], obj, path, ex, file, texture_path);
+			LoadNode(scene, node->mChildren[i], obj, node_path, output_file);
+}
+
+bool MeshImporter::Export(const char* name, std::string& output_file, uint num_index, uint* index, uint num_vertex, float3* vertex, uint num_normals, float3* face_center, float3* face_normal, uint num_tex_coords, float* tex_coords)
+{
+	bool ret = false;
+
+	// amount of indices / vertices / normals / texture_coords / AABB
+	uint ranges[4] = { num_index, num_vertex,  num_normals, num_tex_coords };
+
+	uint size = sizeof(ranges) + sizeof(uint) * num_index + sizeof(float) * num_vertex * 3 + sizeof(float) * num_normals * 3 * 2 + sizeof(float) * num_tex_coords * 2;
+
+	char* data = new char[size]; // Allocate
+	char* cursor = data;
+
+	uint bytes = sizeof(ranges); // First store ranges
+	memcpy(cursor, ranges, bytes);
+
+	cursor += bytes; // Store indices
+	bytes = sizeof(uint) * num_index;
+	memcpy(cursor, index, bytes);
+
+	cursor += bytes; // Store Vertices
+	bytes = sizeof(float) * num_vertex * 3;
+	memcpy(cursor, vertex, bytes);
+
+	cursor += bytes; // Store Normals Starting Point
+	bytes = sizeof(float) * num_normals * 3;
+	memcpy(cursor, face_center, bytes);
+
+	cursor += bytes; // Store Normals Vector
+	bytes = sizeof(float) * num_normals * 3;
+	memcpy(cursor, face_normal, bytes);
+
+	cursor += bytes; // Store Texture Coordinates
+	bytes = sizeof(float) * num_tex_coords * 2;
+	memcpy(cursor, tex_coords, bytes);
+
+
+	ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_MESH_FOLDER, name, "mesh");
+
+	if (!ret)
+		LOG_C("Failed exporting %s.tmesh into Library/Meshes floder", name);
+
+	if (data)
+	{
+		delete[] data;
+		data = nullptr;
+		cursor = nullptr;
+	}
+
+	return ret;
+}
+
+bool MeshImporter::Load(ResourceMesh* mesh)
+{
+	bool ret = true;
+
+	char* buffer = nullptr;
+	App->file_system->Load(mesh->exported_file.c_str(), &buffer); //put data file in buffer
+
+	if (buffer)
+	{
+		char* cursor = buffer;
+
+		// amount of indices / vertices / normals / texture_coords
+		uint ranges[4];
+		uint bytes = sizeof(ranges);
+		memcpy(ranges, cursor, bytes);
+
+		mesh->data.num_index = ranges[0];
+		mesh->data.num_vertex = ranges[1];
+		mesh->data.num_normals = ranges[2];
+		mesh->data.num_tex_coords = ranges[3];
+
+		cursor += bytes; // Load indices
+		bytes = sizeof(uint) * mesh->data.num_index;
+		mesh->data.index = new uint[mesh->data.num_index];
+		memcpy(mesh->data.index, cursor, bytes);
+
+		cursor += bytes; // Load vertex
+		bytes = sizeof(float) * mesh->data.num_vertex * 3;
+		mesh->data.vertex = new float3[mesh->data.num_vertex];
+		memcpy(mesh->data.vertex, cursor, bytes);
+
+		cursor += bytes; // Load Normals Starting Point
+		bytes = sizeof(float) * mesh->data.num_normals * 3;
+		mesh->data.face_center = new float3[mesh->data.num_normals];
+		memcpy(mesh->data.face_center, cursor, bytes);
+
+		cursor += bytes; // Load Normals Vector
+		bytes = sizeof(float) * mesh->data.num_normals * 3;
+		mesh->data.face_normal = new float3[mesh->data.num_normals];
+		memcpy(mesh->data.face_normal, cursor, bytes);
+
+		cursor += bytes; // Load Texture Coordinates
+		bytes = sizeof(float) * mesh->data.num_tex_coords * 2;
+		mesh->data.tex_coords = new float[mesh->data.num_tex_coords * 2];
+		memcpy(mesh->data.tex_coords, cursor, bytes);
+
+		//Generate the buffers 
+		App->renderer3D->VertexBuffer(mesh->data.vertex, mesh->data.num_vertex, mesh->data.id_vertex);
+		App->renderer3D->IndexBuffer(mesh->data.index, mesh->data.num_index, mesh->data.id_index);
+		App->renderer3D->TextureBuffer(mesh->data.tex_coords, mesh->data.num_tex_coords, mesh->data.id_tex_coords);
+
+		RELEASE_ARRAY(buffer);
+		cursor = nullptr;
+
+		ret = true;
+	}
+	return ret;
 }
 
 std::string MeshImporter::TextureBuilding(int id)

@@ -22,6 +22,7 @@ struct mesh_data
 
 	uint num_normals = 0;
 	float3* face_center = nullptr;
+	float3* face_normal = nullptr;
 	float3* normals = nullptr;
 
 	string path;

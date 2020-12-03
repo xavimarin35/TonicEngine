@@ -57,8 +57,6 @@ public:
 
 	void TransformGlobal(GameObject* GO);
 
-	int GenerateUUID();
-
 	void UpdateBoundingBox();
 	static void DrawAllBoundingBoxes(const AABB& aabb);
 	bool DrawOwnBoundingBox(GameObject* GO);
@@ -83,7 +81,8 @@ public:
 
 namespace GO 
 {
-	void FillChildren(std::vector<const GameObject*>& array, const GameObject* GO, bool parent = false, uint c = 0);
+	void Culling(std::vector<const GameObject*>& array, const GameObject* GO, bool parent = false, uint c = 0);
+	int GenerateUUID();
 }
 
 #endif

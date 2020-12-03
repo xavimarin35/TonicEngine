@@ -64,12 +64,12 @@ bool TextureImporter::CleanUp()
 	return true;
 }
 
-bool TextureImporter::DuplicateTexture(const char* path) const
+bool TextureImporter::DuplicateTexture(const char* path, std::string& output_file) const
 {
 	bool ret = false;
 	
 	std::string name = App->GetPathName(path);
-	std::string output_file;
+	//std::string output_file;
 
 	ILuint size;
 	ILubyte* data;
@@ -82,9 +82,9 @@ bool TextureImporter::DuplicateTexture(const char* path) const
 		data = new ILubyte[size];
 
 		if (ilSaveL(IL_DDS, data, size) > 0)
-			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "Ttext");
+			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "Ttex");
 
-		LOG_C("SUCCESS: Correctly exported %s.Ttext into Textures folder", name.data());
+		LOG_C("SUCCESS: Correctly exported %s.Ttex into Textures folder", name.data());
 
 		RELEASE_ARRAY(data);
 	}
@@ -103,7 +103,7 @@ Texture TextureImporter::CreateEmptyTexture() const
 	return tex;
 }
 
-uint TextureImporter::CreateTexture(const void* text, const char* path, uint width, uint height, int format, uint format2) const
+uint TextureImporter::CreateTexture(const void* text, uint width, uint height, int format, uint format2, const char* path) const
 {
 	uint tex = 0;
 
@@ -115,22 +115,10 @@ uint TextureImporter::CreateTexture(const void* text, const char* path, uint wid
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-	if (glewIsSupported("GL_EXT_texture_filter_anisotropic"))
-	{
-		float max_anisotropy;
-		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy);
-	}
-
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format2, GL_UNSIGNED_BYTE, text);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	//Unbind Texture
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//int actualGO = App->scene_intro->gameobjectsList.size() - 1;
-	//App->scene_intro->gameobjectsList[actualGO]->textureWidth = width;
-	//App->scene_intro->gameobjectsList[actualGO]->textureHeight = height;
 
 	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 
@@ -175,9 +163,39 @@ Texture TextureImporter::GenerateCheckersTexture()
 	return tex;
 }
 
-Texture TextureImporter::LoadTexture(const char* path) const
+bool TextureImporter::LoadTextureFromLibrary(ResourceTexture* tex)
 {
-	Texture tex;
+	bool ret = false;
+
+	uint id_img;
+	ilGenImages(1, &id_img);
+	ilBindImage(id_img);
+	const char* path = strstr(tex->exported_file.c_str(), "library");
+
+	if (ilLoadImage(path))
+	{
+		ILinfo ImgInfo;
+		iluGetImageInfo(&ImgInfo);
+
+		if (ImgInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+			iluFlipImage();
+
+		tex->tex.id = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
+		tex->tex.height = ilGetInteger(IL_IMAGE_HEIGHT);
+		tex->tex.width = ilGetInteger(IL_IMAGE_WIDTH);
+		ret = true;
+	}
+	else
+	{
+		LOG_C("Failed loading image: %s, %s", iluErrorString(ilGetError()), tex->exported_file.c_str());
+	}
+
+	return ret;
+}
+
+bool TextureImporter::LoadTextureFromPath(const char* path, std::string& output_file)
+{
+	uint tex = 0;
 	uint id_img = 0;
 
 	if (path != nullptr)
@@ -187,19 +205,10 @@ Texture TextureImporter::LoadTexture(const char* path) const
 
 		if (ilLoadImage(path))
 		{
-			ILinfo info;
-			iluGetImageInfo(&info);
-
-			if (info.Origin == IL_ORIGIN_UPPER_LEFT) iluFlipImage();
-
 			if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 			{
-				tex.id = CreateTexture(ilGetData(), path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
-				tex.height = ilGetInteger(IL_IMAGE_HEIGHT);
-				tex.width = ilGetInteger(IL_IMAGE_WIDTH);
-				tex.path = path;
-
-				DuplicateTexture(path);
+				tex = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT), path);
+				return DuplicateTexture(path, output_file);
 			}
 			else LOG_C("ERROR: Failed converting image: %s", iluErrorString(ilGetError()));
 		}

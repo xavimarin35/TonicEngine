@@ -3,6 +3,7 @@
 
 #include "Application.h"
 #include "Module.h"
+#include "ResourceMesh.h"
 
 class aiNode;
 class aiScene;
@@ -21,7 +22,10 @@ public:
 	bool CleanUp();
 
 	void LoadFile(const char* path, const char* texture_path = "Assets/Others/Lenna.png");
-	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* path, Importer ex, std::string file, const char* texture_path);
+	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* node_path, std::string output_file);
+
+	bool Export(const char* name, std::string& output_file, uint num_index, uint* index, uint num_vertex, float3* vertex, uint num_normals, float3* face_center, float3* face_normal, uint num_tex_coords, float* tex_coords);
+	bool Load(ResourceMesh* mesh);
 
 public:
 	bool active;

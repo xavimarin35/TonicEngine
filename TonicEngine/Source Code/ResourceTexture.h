@@ -4,6 +4,8 @@
 #include "Resource.h"
 #include "TextureImporter.h"
 
+struct Texture;
+
 class ResourceTexture : public Resource
 {
 public:

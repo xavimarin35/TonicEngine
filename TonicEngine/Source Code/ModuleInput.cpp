@@ -5,6 +5,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 #include "MeshImporter.h"
+#include "ModuleResources.h"
 
 #define MAX_KEYS 300
 
@@ -139,7 +140,9 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					if (App->scene_intro->GOselected != nullptr)
 					{
-						App->scene_intro->GOselected->GetComponentTexture()->texture = App->tex_imp->LoadTexture(dropDirection);
+						App->scene_intro->GOselected->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(dropDirection));
+						App->scene_intro->GOselected->GetComponentTexture()->rTexture->LoadInMemory();
+						//App->tex_imp->LoadTexture(dropDirection);
 						TextureFileDropped = true;
 						LOG_C("New texture dropped on window with path: %s", dropDirection);
 					}
@@ -170,12 +173,4 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
-}
-
-const std::string ModuleInput::GetFileExtension(const std::string FileName)
-{
-	if (FileName.find_last_of(".") != std::string::npos)
-		return (FileName.substr(FileName.find_last_of(".") + 1));
-	else
-		return "";
 }

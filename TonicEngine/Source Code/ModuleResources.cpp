@@ -37,7 +37,7 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 {
 	Resource* ret = nullptr;
 
-	uint uid = 0; // only for compile purposes, we must call function to create the uid
+	uint uid = App->GenerateUUID();
 
 	switch (type)
 	{
@@ -58,6 +58,14 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 		resources[uid] = ret;
 
 	return ret;
+}
+
+Resource* ModuleResources::BuildResource(Resource* res, const char* file, std::string written)
+{
+	res->file = file;
+	res->exported_file = written;
+
+	return res;
 }
 
 uint ModuleResources::GetNewFile(const char* new_file)
@@ -91,7 +99,34 @@ uint ModuleResources::GetNewFile(const char* new_file)
 
 uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type)
 {
-	return uint();
+	uint ret = 0; 
+	bool create_resource = false; 
+	std::string written_file;
+
+	ret = GetResourceInAssets(new_file_in_assets);
+
+	if (ret == 0)
+	{
+		switch (type)
+		{
+		case RESOURCE_TYPE::TEXTURE: 
+			create_resource = App->tex_imp->LoadTextureFromPath(new_file_in_assets, written_file);
+			break;
+		}
+
+		if (create_resource)
+		{ 
+
+			Resource* res = CreateResource(type);
+			res->file = new_file_in_assets;
+			res->exported_file = written_file;
+			//BuildResource(res, new_file_in_assets, written_file);
+
+			ret = res->res_UUID;
+		}
+	}
+
+	return ret;
 }
 
 Resource* ModuleResources::Get(uint uid)
@@ -102,6 +137,35 @@ Resource* ModuleResources::Get(uint uid)
 		return it->second;
 
 	return nullptr;
+}
+
+uint ModuleResources::GetResourceInAssets(const char* path) const
+{
+	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	{
+		std::string s = it->second->file;
+		if (s.compare(path) == 0)
+			return it->first;
+	}
+
+	return 0;
+}
+
+uint ModuleResources::IsResourceInLibrary(const char* name) const
+{
+	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	{
+		char n[250];
+		sprintf_s(n, 250, "%s", name);
+		App->file_system->NormalizePath(n);
+
+		std::string s = App->GetPathName(it->second->exported_file);
+
+		if (s.compare(n) == 0)
+			return it->first;
+	}
+
+	return 0;
 }
 
 bool ModuleResources::CompareExtensionForModels(std::string var)
