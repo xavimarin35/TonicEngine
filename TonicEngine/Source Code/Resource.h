@@ -17,8 +17,8 @@ class Resource
 {
 
 public:
-	Resource(uint UUID, RESOURCE_TYPE type);
-	virtual ~Resource();
+	Resource(uint UUID, RESOURCE_TYPE type) : res_UUID(UUID), type(type) {}
+	virtual ~Resource() {}
 
 	virtual bool LoadInMemory() = 0;
 	virtual void ReleaseMemory() = 0;

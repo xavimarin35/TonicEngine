@@ -1,14 +1,6 @@
 #include "Resource.h"
 #include "Application.h"
 
-Resource::Resource(uint UUID, RESOURCE_TYPE type)
-{
-}
-
-Resource::~Resource()
-{
-}
-
 RESOURCE_TYPE Resource::GetType() const
 {
 	return type;
