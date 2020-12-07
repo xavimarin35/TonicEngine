@@ -88,8 +88,7 @@ public:
 	ImGuizmo::MODE mode = ImGuizmo::MODE::WORLD;
 	
 	int currentOp = 1; // 1 is move, 2 is rotate, 3 is scale
-
-
+	bool updateMat = false;
 
 	static void HelpMarker(const char* desc);
 

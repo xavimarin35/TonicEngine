@@ -173,7 +173,8 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 			child->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(dir.c_str()));
 			//App->tex_imp->LoadTexture(GetOwnTexture(child->data.name, texture_path).c_str());
-			child->GetComponentTexture()->rTexture->LoadInMemory();
+			if (child->GetComponentTexture()->rTexture != nullptr)
+				child->GetComponentTexture()->rTexture->LoadInMemory();
 		}
 		else child->GetComponentTexture()->texture = App->tex_imp->checker_texture;
 

@@ -70,8 +70,12 @@ void GameObject::Update()
 
 void GameObject::CleanUp()
 {
+	if (this->GetComponentMesh() != nullptr)
+		GetComponentMesh()->CleanUp();
 
-	// Deleting Components
+	if (this->GetComponentTexture() != nullptr)
+		GetComponentTexture()->CleanUp();
+
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i] != nullptr && componentsList[i]->active)
@@ -83,7 +87,6 @@ void GameObject::CleanUp()
 
 	componentsList.clear();
 
-	// Deleting GOs
 	if (GOparent != nullptr)
 	{
 		GOparent->RemoveChild(this);

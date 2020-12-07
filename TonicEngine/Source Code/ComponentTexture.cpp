@@ -21,6 +21,16 @@ bool ComponentTexture::Update()
 	return true;
 }
 
+bool ComponentTexture::CleanUp()
+{
+	rTexture->loaded -= 1;
+
+	if (rTexture->loaded == 0)
+		rTexture->ReleaseMemory();
+
+	return true;
+}
+
 void ComponentTexture::DrawInspector()
 {
 	ImGui::Spacing();
@@ -48,11 +58,11 @@ void ComponentTexture::DrawInspector()
 			if (App->scene_intro->GOselected != nullptr)
 			{
 				ImGui::Text("File:"); ImGui::SameLine();
-				ImGui::TextColored(YELLOW_COLOR, "%s", rTexture->tex.path.c_str());
+				ImGui::TextColored(YELLOW_COLOR, "%s", rTexture->file.c_str());
 				if (ImGui::IsItemHovered())
 				{
 					ImGui::BeginTooltip();
-					ImGui::TextColored(GREY_COLOR, "%s", rTexture->tex.path.c_str());
+					ImGui::TextColored(GREY_COLOR, "%s", rTexture->file.c_str());
 					ImGui::EndTooltip();
 				}
 
@@ -70,7 +80,7 @@ void ComponentTexture::DrawInspector()
 			else if (EnableCheckersTexture)
 				tex = App->tex_imp->checker_texture.id;
 
-			ImGui::Image((void*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+			ImGui::Image((ImTextureID*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
 		else
 		{
@@ -90,7 +100,7 @@ void ComponentTexture::OpenTexturesMenu()
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
 
-		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->texture.id, ImVec2(140, 140), ImVec2(0, 1), ImVec2(1, 0)))
+		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->rTexture->tex.id, ImVec2(140, 140), ImVec2(0, 1), ImVec2(1, 0)))
 		{
 			App->scene_intro->GOselected->GetComponentTexture()->EnableCheckersTexture = false;
 			App->scene_intro->GOselected->GetComponentTexture()->EnableAssignedTexture = true;

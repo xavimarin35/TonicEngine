@@ -28,14 +28,17 @@ public:
 	uint ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type);
 
 	Resource* Get(uint uid);
-	uint GetResourceInAssets(const char* path)const;
+	uint GetResourceInAssets(const char* path) const;
 	uint IsResourceInLibrary(const char* name) const;
 
 	bool CompareExtensionForTextures(std::string var);
 	bool CompareExtensionForModels(std::string var);
 
-private:
 	std::map<uint, Resource*> resources;
+	std::map<uint, ResourceTexture*> tex_resources;
+
+private:
+	
 };
 
 #endif

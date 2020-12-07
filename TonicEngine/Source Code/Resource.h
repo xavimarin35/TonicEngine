@@ -32,6 +32,7 @@ public:
 	const char* GetFile() const;
 	const char* GetImportedFile() const;
 	void UpdateReferences();
+	uint GetCurrentReference();
 
 
 	virtual void Load(const nlohmann::json& config);

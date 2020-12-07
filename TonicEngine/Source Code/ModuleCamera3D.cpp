@@ -79,15 +79,15 @@ update_status ModuleCamera3D::Update(float dt)
 	// Mouse motion
 
 	// Mouse Picking
-	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		GameObject* pick = MousePicking();
+	//if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	//{
+	//	GameObject* pick = MousePicking();
 
-		if (pick != nullptr)
-			App->scene_intro->GOselected = pick;
-		/*else
-			App->scene_intro->GOselected = nullptr;*/
-	}
+	//	if (pick != nullptr)
+	//		App->scene_intro->GOselected = pick;
+	//	/*else
+	//		App->scene_intro->GOselected = nullptr;*/
+	//}
 
 	// Camera Orbit
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)

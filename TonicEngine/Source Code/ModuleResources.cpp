@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "ModuleResources.h"
 #include "ModuleFileSystem.h"
+#include "ModuleGUI.h"
+#include "TextureImporter.h"
 
 // resources includes
 #include "Resource.h"
@@ -43,6 +45,8 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 	{
 	case RESOURCE_TYPE::MESH:
 		ret = (Resource*) new ResourceMesh(uid);
+		if (ret != nullptr)
+			tex_resources[uid] = (ResourceTexture*)ret;
 		break;
 
 	case RESOURCE_TYPE::TEXTURE:
@@ -186,4 +190,19 @@ bool ModuleResources::CompareExtensionForTextures(std::string var)
 
 void ModuleResources::DrawResources()
 {
+	int i = 0;
+
+	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	{
+		if (it->second != nullptr)
+		{
+			i++;
+			if (it->second->type == RESOURCE_TYPE::TEXTURE)
+			{
+					std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
+					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+
+			}
+		}
+	}
 }

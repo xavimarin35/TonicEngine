@@ -183,6 +183,7 @@ bool TextureImporter::LoadTextureFromLibrary(ResourceTexture* tex)
 		tex->tex.id = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_FORMAT));
 		tex->tex.height = ilGetInteger(IL_IMAGE_HEIGHT);
 		tex->tex.width = ilGetInteger(IL_IMAGE_WIDTH);
+
 		ret = true;
 	}
 	else

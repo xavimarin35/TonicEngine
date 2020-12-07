@@ -44,6 +44,11 @@ void Resource::UpdateReferences()
 	}
 }
 
+uint Resource::GetCurrentReference()
+{
+	return loaded;
+}
+
 void Resource::Load(const nlohmann::json& config)
 {
 }

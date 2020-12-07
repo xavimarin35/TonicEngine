@@ -16,6 +16,7 @@ public:
 
 	void DrawInspector();
 	bool Update();
+	bool CleanUp();
 
 	void OpenTexturesMenu();
 
@@ -32,10 +33,6 @@ public:
 	bool openMenuTex = false;
 
 	Texture texture;
-	Texture original_texture;
-
-	int iterator = 0;
-	uint selectTexture = 0;
 
 	ResourceTexture* rTexture = nullptr;
 };
