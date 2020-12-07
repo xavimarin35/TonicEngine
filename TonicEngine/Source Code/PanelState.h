@@ -5,6 +5,8 @@
 #include "PanelManager.h"
 #include "TextureImporter.h"
 
+class ResourceTexture;
+
 class PanelState : public PanelManager
 {
 public:
@@ -19,6 +21,7 @@ public:
 	void ManageEngineStateButtonsLogic();
 	void DrawBBButtons();
 	void TimeInfoMenu();
+	void LoadButtonsTextures();
 
 	void ToolTipShortCut(const char* word);
 
@@ -28,24 +31,24 @@ public:
 	float current_dt = 0.0f;
 	bool openTimeMenu = false;
 
-	Texture current_tex1;
-	Texture current_tex2;
+	ResourceTexture* current_tex1;
+	ResourceTexture* current_tex2;
 
 	uint currentBut1 = 1; // 1 play, 2 stop
 	uint currentBut2 = 3; // 1 pause, 2 resume
 
 public:
-	Texture move;
-	Texture rot;
-	Texture scale;
+	ResourceTexture* move;
+	ResourceTexture* rot;
+	ResourceTexture* scale;
 
-	Texture play;
-	Texture pause;
-	Texture stop;
-	Texture resume;
+	ResourceTexture* play;
+	ResourceTexture* pause;
+	ResourceTexture* stop;
+	ResourceTexture* resume;
 
-	Texture ownBB;
-	Texture allBB;
+	ResourceTexture* ownBB;
+	ResourceTexture* allBB;
 
 };
 

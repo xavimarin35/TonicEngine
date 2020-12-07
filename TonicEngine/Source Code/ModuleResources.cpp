@@ -178,7 +178,7 @@ bool ModuleResources::CompareExtensionForModels(std::string var)
 
 bool ModuleResources::CompareExtensionForTextures(std::string var)
 {
-	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga")
+	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga" || var == "ico")
 		return true;
 	else
 		return false;

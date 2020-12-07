@@ -5,6 +5,8 @@
 #include "PanelManager.h"
 #include "TextureImporter.h"
 
+class ResourceTexture;
+
 class PanelAbout : public PanelManager
 {
 public:
@@ -14,7 +16,7 @@ public:
 	bool Start();
 	bool Draw();
 
-	Texture texIcon;
+	ResourceTexture* icon;
 };
 
 #endif

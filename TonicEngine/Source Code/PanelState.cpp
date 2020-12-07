@@ -3,6 +3,10 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleResources.h"
+#include "Resource.h"
+#include "ResourceTexture.h"
+#include "ResourceMesh.h"
 
 PanelState::PanelState()
 {
@@ -16,17 +20,7 @@ bool PanelState::Start()
 {
 	this->active = true;
 
-	/*move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
-	rot = App->tex_imp->LoadTexture("Assets/Others/rotate2.png");
-	scale = App->tex_imp->LoadTexture("Assets/Others/scale2.png");
-
-	play = App->tex_imp->LoadTexture("Assets/Others/play.png");
-	pause = App->tex_imp->LoadTexture("Assets/Others/pause.png");
-	stop = App->tex_imp->LoadTexture("Assets/Others/stop.png");
-	resume = App->tex_imp->LoadTexture("Assets/Others/resume.png");
-
-	ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
-	allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");*/
+	LoadButtonsTextures();
 
 	return true;
 }
@@ -76,7 +70,7 @@ bool PanelState::Draw()
 			ImGui::SameLine(300);
 
 			// Engine State Button 1
-			if (ImGui::ImageButton((ImTextureID*)current_tex1.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+			if (ImGui::ImageButton((ImTextureID*)current_tex1->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
 				if (currentBut1 == 2) // button texture change play/stop
 					currentBut1 = 1;
@@ -113,7 +107,7 @@ bool PanelState::Draw()
 			ImGui::SameLine();
 
 			// Engine State Button 2
-			if (ImGui::ImageButton((ImTextureID*)current_tex2.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+			if (ImGui::ImageButton((ImTextureID*)current_tex2->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
 				if (currentBut2 == 4) // button texture change pause/resume
 					currentBut2 = 3;
@@ -154,7 +148,7 @@ bool PanelState::Draw()
 void PanelState::DrawGuizmoButtons()
 {
 	// Move Button
-	if (ImGui::ImageButton((ImTextureID*)move.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)move->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 		App->gui->currentOp = 1;
 
 	if (ImGui::IsItemHovered())
@@ -163,7 +157,7 @@ void PanelState::DrawGuizmoButtons()
 	ImGui::SameLine();
 
 	// Rot Button
-	if (ImGui::ImageButton((ImTextureID*)rot.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)rot->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		App->gui->currentOp = 2;
 
 	if (ImGui::IsItemHovered())
@@ -172,7 +166,7 @@ void PanelState::DrawGuizmoButtons()
 	ImGui::SameLine();
 
 	// Scale Button
-	if (ImGui::ImageButton((ImTextureID*)scale.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)scale->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		App->gui->currentOp = 3;
 
 	if (ImGui::IsItemHovered())
@@ -207,7 +201,7 @@ void PanelState::ManageEngineStateButtonsLogic()
 void PanelState::DrawBBButtons()
 {
 	// Own BB
-	if (ImGui::ImageButton((ImTextureID*)ownBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+	if (ImGui::ImageButton((ImTextureID*)ownBB->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 	{
 		if (App->scene_intro->GOselected != nullptr)
 		{
@@ -225,7 +219,7 @@ void PanelState::DrawBBButtons()
 	ImGui::SameLine();
 
 	// All BB
-	if (ImGui::ImageButton((ImTextureID*)allBB.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
+	if (ImGui::ImageButton((ImTextureID*)allBB->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 	{
 		if (drawBB == 2) drawBB = 0;
 		else drawBB = 2;
@@ -251,6 +245,42 @@ void PanelState::TimeInfoMenu()
 
 	ImGui::End();
 
+}
+
+void PanelState::LoadButtonsTextures()
+{
+	move = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/move2.png"));
+	move->LoadInMemory();
+	rot = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/rotate2.png"));
+	rot->LoadInMemory();
+	scale = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/scale2.png"));
+	scale->LoadInMemory();
+
+	play = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/play.png"));
+	play->LoadInMemory();
+	pause = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/pause.png"));
+	pause->LoadInMemory();
+	stop = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/stop.png"));
+	stop->LoadInMemory();
+	resume = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resume.png"));
+	resume->LoadInMemory();
+
+	ownBB = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/ownBB.png"));
+	ownBB->LoadInMemory();
+	allBB = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/allBB.png"));
+	allBB->LoadInMemory();
+
+	//move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
+	//rot = App->tex_imp->LoadTexture("Assets/Others/rotate2.png");
+	//scale = App->tex_imp->LoadTexture("Assets/Others/scale2.png");
+
+	//play = App->tex_imp->LoadTexture("Assets/Others/play.png");
+	//pause = App->tex_imp->LoadTexture("Assets/Others/pause.png");
+	//stop = App->tex_imp->LoadTexture("Assets/Others/stop.png");
+	//resume = App->tex_imp->LoadTexture("Assets/Others/resume.png");
+
+	//ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
+	//allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");
 }
 
 void PanelState::ToolTipShortCut(const char* word)
