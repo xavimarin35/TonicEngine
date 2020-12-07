@@ -43,6 +43,19 @@ bool ComponentMesh::Update()
 	return true;
 }
 
+bool ComponentMesh::CleanUp()
+{
+	if (rMesh != nullptr)
+	{
+		rMesh->loaded -= 1;
+
+		if (rMesh->loaded == 0)
+			rMesh->ReleaseMemory();
+	}
+
+	return true;
+}
+
 void ComponentMesh::Draw()
 {
 	App->scene_intro->DrawGameObjectNodes(object);

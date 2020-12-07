@@ -120,7 +120,7 @@ uint TextureImporter::CreateTexture(const void* text, uint width, uint height, i
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
+	//LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 
 	return tex;
 }

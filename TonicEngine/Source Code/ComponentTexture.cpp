@@ -23,10 +23,13 @@ bool ComponentTexture::Update()
 
 bool ComponentTexture::CleanUp()
 {
-	rTexture->loaded -= 1;
+	if (rTexture != nullptr)
+	{
+		rTexture->loaded -= 1;
 
-	if (rTexture->loaded == 0)
-		rTexture->ReleaseMemory();
+		if (rTexture->loaded == 0)
+			rTexture->ReleaseMemory();
+	}
 
 	return true;
 }
@@ -141,8 +144,11 @@ void ComponentTexture::GetTexturePath()
 
 void ComponentTexture::Save(uint obj_num, nlohmann::json& scene)
 {
-	scene["Game Objects"][obj_num]["Components"]["Texture"]["Active"] = active;
-	scene["Game Objects"][obj_num]["Components"]["Texture"]["Checkers Texture"] = EnableCheckersTexture;
+	scene[object->data.name]["Components"]["Texture"]["Active"] = active;
+	scene[object->data.name]["Components"]["Texture"]["Checkers Texture"] = EnableCheckersTexture;
+
+	if (rTexture != nullptr)
+		scene[object->data.name]["Components"]["Texture"]["Name"] = rTexture->exported_file;
 }
 
 

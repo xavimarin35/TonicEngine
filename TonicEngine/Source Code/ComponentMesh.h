@@ -38,6 +38,7 @@ public:
 	virtual ~ComponentMesh();
 
 	bool Update();
+	bool CleanUp();
 
 	void Draw() override;
 

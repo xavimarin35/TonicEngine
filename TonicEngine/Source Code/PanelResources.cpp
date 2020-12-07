@@ -31,7 +31,7 @@ bool PanelResources::Draw()
 			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
 			else App->camera->isOnResources = false;
 
-			//App->resources->DrawResources();
+			App->resources->DrawResources();
 		}
 
 		ImGui::End();

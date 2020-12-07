@@ -3,6 +3,7 @@
 #include "ModuleFileSystem.h"
 #include "ModuleGUI.h"
 #include "TextureImporter.h"
+#include "MeshImporter.h"
 
 // resources includes
 #include "Resource.h"
@@ -45,12 +46,12 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 	{
 	case RESOURCE_TYPE::MESH:
 		ret = (Resource*) new ResourceMesh(uid);
-		if (ret != nullptr)
-			tex_resources[uid] = (ResourceTexture*)ret;
 		break;
 
 	case RESOURCE_TYPE::TEXTURE:
 		ret = (Resource*) new ResourceTexture(uid);
+		if (ret != nullptr)
+			tex_resources[uid] = (ResourceTexture*)ret;
 		break;
 
 	case RESOURCE_TYPE::MODEL:
@@ -202,6 +203,21 @@ void ModuleResources::DrawResources()
 					std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
 					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
 
+					if (ImGui::IsItemHovered())
+						ImGui::SetTooltip("Name: %s\nUUID: %u", App->GetPathName(it->second->file).c_str(), it->second->res_UUID);
+			}
+
+			if (i < 8)
+			{
+				ImGui::SameLine();
+				ImGui::Dummy(ImVec2(5.0f, 5.0f));
+				ImGui::SameLine();
+
+			}
+			else
+			{
+				i = 0;
+				ImGui::Dummy(ImVec2(875.0f, 10.0f));
 			}
 		}
 	}

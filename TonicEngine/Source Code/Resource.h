@@ -40,8 +40,8 @@ public:
 
 public:
 	uint res_UUID = 0;
-	std::string file;
-	std::string exported_file;
+	std::string file = "";
+	std::string exported_file = "";
 	RESOURCE_TYPE type = RESOURCE_TYPE::NONE;
 	uint loaded = 0;
 };
