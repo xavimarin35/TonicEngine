@@ -5,6 +5,8 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 
+class ResourceMesh;
+
 struct meshData;
 
 class Importer 
@@ -15,9 +17,7 @@ public:
 
 public:
 
-	// Export Mesh
 	bool Export(const char* path, std::string& file, ComponentMesh* mesh);
-
 
 };
 

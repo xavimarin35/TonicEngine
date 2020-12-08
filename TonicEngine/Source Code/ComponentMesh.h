@@ -8,29 +8,6 @@
 
 class GameObject;
 
-struct meshData 
-{
-	uint id_index = 0;
-	uint num_index = 0;
-	uint* index = nullptr;
-
-	uint id_vertex = 0;
-	uint num_vertex = 0;
-	float3* vertex = nullptr;
-
-	uint id_tex_coords = 0;
-	uint num_tex_coords = 0;
-	float* tex_coords = nullptr;
-
-	uint num_normals = 0;
-	float3* face_center = nullptr;
-	float3* normals = nullptr;
-
-	string path;
-
-	uint texture = 0;
-};
-
 class ComponentMesh : public Component
 {
 public:
@@ -61,8 +38,6 @@ public:
 
 	float vertexLenght = 1.0f;
 	Color vertexColor = Blue;
-	
-	meshData mData;
 
 	AABB aabb;
 

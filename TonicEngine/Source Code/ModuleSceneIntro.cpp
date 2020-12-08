@@ -413,18 +413,18 @@ GameObject* ModuleSceneIntro::MousePicking(const LineSegment& segment, float& di
 
 				if (mesh != nullptr)
 				{
-					if (mesh->mData.vertex != nullptr && mesh->mData.index != nullptr)
+					if (mesh->rMesh->data.vertex != nullptr && mesh->rMesh->data.index != nullptr)
 					{
 						LineSegment ray(segment);
 						ray.Transform(transf->GetGlobalTransform().Inverted());
 
 						Triangle triangle;
 
-						for (uint i = 0; i < mesh->mData.num_index;)
+						for (uint i = 0; i < mesh->rMesh->data.num_index;)
 						{
-							triangle.a = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
-							triangle.b = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
-							triangle.c = mesh->mData.vertex[mesh->mData.index[i]]; ++i;
+							triangle.a = mesh->rMesh->data.vertex[mesh->rMesh->data.index[i]]; ++i;
+							triangle.b = mesh->rMesh->data.vertex[mesh->rMesh->data.index[i]]; ++i;
+							triangle.c = mesh->rMesh->data.vertex[mesh->rMesh->data.index[i]]; ++i;
 
 							float length; float3 hitPos;
 

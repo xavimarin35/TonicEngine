@@ -42,7 +42,6 @@ public:
 	void ReleaseMemory();
 
 	mesh_data data;
-
 };
 
 #endif
