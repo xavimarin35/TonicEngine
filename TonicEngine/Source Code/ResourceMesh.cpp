@@ -1,11 +1,12 @@
 #include "ResourceMesh.h"
 #include "ModuleResources.h"
+#include "MeshImporter.h"
 
 #include "glew/include/GL/glew.h"
 
 bool ResourceMesh::LoadInMemory()
 {
-	return true;
+	return App->mesh_imp->Load(this);
 }
 
 void ResourceMesh::ReleaseMemory()

@@ -27,6 +27,7 @@ public:
 	bool Export(const char* name, std::string& output_file, uint num_index, uint* index, uint num_vertex, float3* vertex, uint num_normals, float3* face_center, float3* face_normal, uint num_tex_coords, float* tex_coords);
 	bool Load(ResourceMesh* mesh);
 
+
 public:
 	bool active;
 

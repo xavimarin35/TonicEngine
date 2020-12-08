@@ -25,9 +25,7 @@ struct mesh_data
 	float3* face_normal = nullptr;
 	float3* normals = nullptr;
 
-	string path;
-
-	uint texture = 0;
+	bool indices3 = true;
 };
 
 class ResourceMesh : public Resource

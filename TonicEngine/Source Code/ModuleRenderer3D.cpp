@@ -232,7 +232,7 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 	{
 		if (GO->GetComponentTexture()->active && GO->GetComponentTexture()->rTexture != nullptr)
 		{
-			if (GO->GetComponentTexture()->EnableAssignedTexture/* && GO->GetComponentTexture()->rTexture*/)
+			if (GO->GetComponentTexture()->EnableAssignedTexture)
 				glBindTexture(GL_TEXTURE_2D, GO->GetComponentTexture()->rTexture->tex.id);
 			else if (GO->GetComponentTexture()->EnableCheckersTexture)
 				glBindTexture(GL_TEXTURE_2D, App->tex_imp->checker_texture.id);
@@ -243,16 +243,16 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 
 	if (GO->GetComponentMesh() != nullptr)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_vertex);
+		glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->rMesh->data.id_vertex);
 		glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 		glActiveTexture(GL_TEXTURE0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_tex_coords);
+		glBindBuffer(GL_ARRAY_BUFFER, GO->GetComponentMesh()->rMesh->data.id_tex_coords);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GO->GetComponentMesh()->mData.id_index);
-		glDrawElements(GL_TRIANGLES, GO->GetComponentMesh()->mData.num_index, GL_UNSIGNED_INT, nullptr);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GO->GetComponentMesh()->rMesh->data.id_index);
+		glDrawElements(GL_TRIANGLES, GO->GetComponentMesh()->rMesh->data.num_index, GL_UNSIGNED_INT, nullptr);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

@@ -31,22 +31,9 @@ const char* Resource::GetImportedFile() const
 	return nullptr;
 }
 
-void Resource::UpdateReferences()
-{
-	if (loaded > 0)
-		loaded++;
-	else
-	{
-		if (LoadInMemory())
-			loaded = 1;
-		else
-			loaded = 0;
-	}
-}
-
 uint Resource::GetCurrentReference()
 {
-	return loaded;
+	return references;
 }
 
 void Resource::Load(const nlohmann::json& config)

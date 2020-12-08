@@ -6,6 +6,7 @@
 #include "MeshImporter.h"
 
 // resources includes
+#include "ModuleResources.h"
 #include "Resource.h"
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
@@ -121,11 +122,8 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 
 		if (create_resource)
 		{ 
-
 			Resource* res = CreateResource(type);
-			res->file = new_file_in_assets;
-			res->exported_file = written_file;
-			//BuildResource(res, new_file_in_assets, written_file);
+			BuildResource(res, new_file_in_assets, written_file);
 
 			ret = res->res_UUID;
 		}
@@ -200,12 +198,13 @@ void ModuleResources::DrawResources()
 			i++;
 			if (it->second->type == RESOURCE_TYPE::TEXTURE)
 			{
-					std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
-					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+				std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
+				ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
 
-					if (ImGui::IsItemHovered())
-						ImGui::SetTooltip("Name: %s\nUUID: %u", App->GetPathName(it->second->file).c_str(), it->second->res_UUID);
+				if (ImGui::IsItemHovered())
+					ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
 			}
+
 
 			if (i < 8)
 			{

@@ -4,6 +4,7 @@
 
 bool ResourceTexture::LoadInMemory()
 {
+	this->references++;
 	return App->tex_imp->LoadTextureFromLibrary(this);
 }
 

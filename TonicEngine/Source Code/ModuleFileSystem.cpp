@@ -42,8 +42,9 @@ ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Modul
 		ASSETS_TEXTURES_FOLDER,
 		ASSETS_MODELS_FOLDER,
 		LIBRARY_FOLDER,
+		LIBRARY_TEXTURES_FOLDER
 		LIBRARY_MESH_FOLDER,
-		LIBRARY_TEXTURES_FOLDER,
+		LIBRARY_TRANSF_FOLDER
 	};
 
 	for (uint i = 0; i < sizeof(dirs) / sizeof(const char*); ++i)

@@ -3,6 +3,10 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 
+#include "ModuleResources.h"
+#include "Resource.h"
+#include "ResourceMesh.h"
+
 ComponentMesh::ComponentMesh(GameObject* gameObject) : Component(COMPONENT_TYPE::MESH, gameObject)
 {
 	type = COMPONENT_TYPE::MESH;
@@ -10,14 +14,14 @@ ComponentMesh::ComponentMesh(GameObject* gameObject) : Component(COMPONENT_TYPE:
 
 ComponentMesh::~ComponentMesh()
 {
-	App->renderer3D->DeleteBuffer(mData.id_index);
-	App->renderer3D->DeleteBuffer(mData.id_vertex);
-	App->renderer3D->DeleteBuffer(mData.id_tex_coords);
+	App->renderer3D->DeleteBuffer(rMesh->data.id_index);
+	App->renderer3D->DeleteBuffer(rMesh->data.id_vertex);
+	App->renderer3D->DeleteBuffer(rMesh->data.id_tex_coords);
 
-	RELEASE_ARRAY(mData.vertex);
-	RELEASE_ARRAY(mData.index);
-	RELEASE_ARRAY(mData.tex_coords);
-	RELEASE_ARRAY(mData.normals);
+	RELEASE_ARRAY(rMesh->data.vertex);
+	RELEASE_ARRAY(rMesh->data.index);
+	RELEASE_ARRAY(rMesh->data.tex_coords);
+	RELEASE_ARRAY(rMesh->data.normals);
 }
 
 bool ComponentMesh::Update()
@@ -71,29 +75,32 @@ void ComponentMesh::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		ImGui::Text("Number of polygons:");
-		ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, "%d", mData.num_index / 3);
-
-		ImGui::Text("Number of vertices:");
-		ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, "%d", mData.num_vertex);
-
-		ImGui::Text("Number of indices:");
-		ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, "%d", mData.num_index);
-
-		ImGui::Separator();
-
-		ImGui::Text("File:"); ImGui::SameLine();
-		ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->mData.path.c_str());
-		if (ImGui::IsItemHovered())
+		if (rMesh != nullptr)
 		{
-			ImGui::BeginTooltip();
-			ImGui::TextColored(GREY_COLOR, "%s", go->GetComponentMesh()->mData.path.c_str());
-			ImGui::EndTooltip();
-		}
+			ImGui::Text("Number of polygons:");
+			ImGui::SameLine();
+			ImGui::TextColored(YELLOW_COLOR, "%d", rMesh->data.num_index / 3);
 
+			ImGui::Text("Number of vertices:");
+			ImGui::SameLine();
+			ImGui::TextColored(YELLOW_COLOR, "%d", rMesh->data.num_vertex);
+
+			ImGui::Text("Number of indices:");
+			ImGui::SameLine();
+			ImGui::TextColored(YELLOW_COLOR, "%d", rMesh->data.num_index);
+
+			ImGui::Separator();
+
+			ImGui::Text("File:"); ImGui::SameLine();
+			ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->rMesh->exported_file.c_str());
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::TextColored(GREY_COLOR, "%s", go->GetComponentMesh()->rMesh->exported_file.c_str());
+				ImGui::EndTooltip();
+			}
+		}
+		
 		ImGui::Separator();
 
 		if (ImGui::TreeNodeEx("Face Normals:", ImGuiTreeNodeFlags_None)) {
@@ -121,12 +128,12 @@ bool ComponentMesh::DrawFaceNormals(GameObject* m, bool active)
 		float3 mid;
 		float3 normal;
 
-		for (int j = 0; j < m->GetComponentMesh()->mData.num_index; j += 3)
+		for (int j = 0; j < m->GetComponentMesh()->rMesh->data.num_index; j += 3)
 		{
 			// Declaring each vertex of the triangle
-			float3 vert1 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j]];
-			float3 vert2 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j + 1]];
-			float3 vert3 = m->GetComponentMesh()->mData.vertex[m->GetComponentMesh()->mData.index[j + 2]];
+			float3 vert1 = m->GetComponentMesh()->rMesh->data.vertex[m->GetComponentMesh()->rMesh->data.index[j]];
+			float3 vert2 = m->GetComponentMesh()->rMesh->data.vertex[m->GetComponentMesh()->rMesh->data.index[j + 1]];
+			float3 vert3 = m->GetComponentMesh()->rMesh->data.vertex[m->GetComponentMesh()->rMesh->data.index[j + 2]];
 
 			mid = (vert1 + vert2 + vert3) / 3;
 
@@ -156,12 +163,12 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 {
 	if (active)
 	{
-		if (m->GetComponentMesh()->mData.normals != nullptr)
+		if (m->GetComponentMesh()->rMesh->data.normals != nullptr)
 		{
-			for (int j = 0; j < m->GetComponentMesh()->mData.num_vertex; ++j)
+			for (int j = 0; j < m->GetComponentMesh()->rMesh->data.num_vertex; ++j)
 			{
-				float3 vert = m->GetComponentMesh()->mData.vertex[j];
-				float3 norm = m->GetComponentMesh()->mData.normals[j];
+				float3 vert = m->GetComponentMesh()->rMesh->data.vertex[j];
+				float3 norm = m->GetComponentMesh()->rMesh->data.normals[j];
 
 				glLineWidth(1.5f);
 				glBegin(GL_LINES);

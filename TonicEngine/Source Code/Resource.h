@@ -4,7 +4,6 @@
 #include "Globals.h"
 #include "Application.h"
 
-
 enum class RESOURCE_TYPE
 {
 	NONE = -1,
@@ -31,7 +30,6 @@ public:
 	uint GetUUID() const;
 	const char* GetFile() const;
 	const char* GetImportedFile() const;
-	void UpdateReferences();
 	uint GetCurrentReference();
 
 
@@ -44,6 +42,8 @@ public:
 	std::string exported_file = "";
 	RESOURCE_TYPE type = RESOURCE_TYPE::NONE;
 	uint loaded = 0;
+
+	uint references = 0;
 };
 
 #endif
