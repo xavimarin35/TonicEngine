@@ -12,6 +12,9 @@ public:
 
 	bool Start();
 	bool Draw();
+
+	bool showing_textures = false;
+	bool showing_meshes = false;
 };
 
 #endif

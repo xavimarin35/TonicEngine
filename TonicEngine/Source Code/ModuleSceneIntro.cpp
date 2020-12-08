@@ -187,6 +187,7 @@ void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 {
 	if (GO != GOroot && !gameobjectsList.empty() && GO != nullptr)
 	{
+		GOselected = nullptr;
 		App->gui->Pstate->drawBB = 0;
 		GO->data.active = false;
 
@@ -213,6 +214,8 @@ void ModuleSceneIntro::RemoveAllGO()
 			(*i) = nullptr;
 		}
 	}
+
+	GOselected = nullptr;
 	GOroot->childrenList.clear();
 }
 

@@ -20,7 +20,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void DrawResources();
+	void DrawResources(RESOURCE_TYPE type);
 
 	Resource* CreateResource(RESOURCE_TYPE type);
 	Resource* BuildResource(Resource* res, const char* file, std::string written);
@@ -36,6 +36,7 @@ public:
 
 	std::map<uint, Resource*> resources;
 	std::map<uint, ResourceTexture*> tex_resources;
+	std::map<uint, ResourceMesh*> mesh_resources;
 
 private:
 	

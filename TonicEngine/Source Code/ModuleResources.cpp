@@ -187,36 +187,76 @@ bool ModuleResources::CompareExtensionForTextures(std::string var)
 		return false;
 }
 
-void ModuleResources::DrawResources()
+void ModuleResources::DrawResources(RESOURCE_TYPE type)
 {
-	int i = 0;
-
-	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	if (type == RESOURCE_TYPE::TEXTURE)
 	{
-		if (it->second != nullptr)
+		int i = 0;
+
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			i++;
-			if (it->second->type == RESOURCE_TYPE::TEXTURE)
+			if (it->second != nullptr)
 			{
-				std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
-				ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+				if (it->second->type == RESOURCE_TYPE::TEXTURE)
+				{
+					i++;
 
-				if (ImGui::IsItemHovered())
-					ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
+					std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
+					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+
+					if (ImGui::IsItemHovered())
+						ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
+
+					if (i < 8)
+					{
+						ImGui::SameLine();
+						ImGui::Dummy(ImVec2(5.0f, 5.0f));
+						ImGui::SameLine();
+
+					}
+					else
+					{
+						i = 0;
+						ImGui::Dummy(ImVec2(875.0f, 10.0f));
+					}
+				}
 			}
+		}
+	}
 
+	else if (type == RESOURCE_TYPE::MESH)
+	{
+		int i = 0;
 
-			if (i < 8)
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		{
+			if (it->second != nullptr)
 			{
-				ImGui::SameLine();
-				ImGui::Dummy(ImVec2(5.0f, 5.0f));
-				ImGui::SameLine();
+				if (it->second->type == RESOURCE_TYPE::MESH)
+				{
+					i++;
 
-			}
-			else
-			{
-				i = 0;
-				ImGui::Dummy(ImVec2(875.0f, 10.0f));
+					std::map<uint, ResourceMesh*>::const_iterator mesh = mesh_resources.find(it->first);
+					// The first item is the image shown, now it shows the pause button, to be changed by a FBX representation image
+					ImGui::ImageButton((ImTextureID*)(uint)53, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+
+					// Name now shows the street environemtn v04, not each child name
+					if (ImGui::IsItemHovered())
+						ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
+
+					if (i < 8)
+					{
+						ImGui::SameLine();
+						ImGui::Dummy(ImVec2(5.0f, 5.0f));
+						ImGui::SameLine();
+
+					}
+					else
+					{
+						i = 0;
+						ImGui::Dummy(ImVec2(875.0f, 10.0f));
+					}
+				}
 			}
 		}
 	}

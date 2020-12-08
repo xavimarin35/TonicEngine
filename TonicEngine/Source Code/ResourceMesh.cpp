@@ -6,6 +6,7 @@
 
 bool ResourceMesh::LoadInMemory()
 {
+	this->references++;
 	return App->mesh_imp->Load(this);
 }
 

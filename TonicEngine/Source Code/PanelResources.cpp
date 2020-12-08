@@ -31,7 +31,24 @@ bool PanelResources::Draw()
 			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
 			else App->camera->isOnResources = false;
 
-			App->resources->DrawResources();
+
+			if (ImGui::Button("Meshes"))
+			{
+				showing_textures = false;
+				showing_meshes = true;
+			}
+
+			if (ImGui::Button("Textures"))
+			{
+				showing_meshes = false;
+				showing_textures = true;
+			}
+
+			if (showing_meshes)
+				App->resources->DrawResources(RESOURCE_TYPE::MESH);
+
+			if (showing_textures)
+				App->resources->DrawResources(RESOURCE_TYPE::TEXTURE);
 		}
 
 		ImGui::End();
