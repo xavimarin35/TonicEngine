@@ -269,18 +269,6 @@ void PanelState::LoadButtonsTextures()
 	ownBB->LoadInMemory();
 	allBB = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/allBB.png"));
 	allBB->LoadInMemory();
-
-	//move = App->tex_imp->LoadTexture("Assets/Others/move2.png");
-	//rot = App->tex_imp->LoadTexture("Assets/Others/rotate2.png");
-	//scale = App->tex_imp->LoadTexture("Assets/Others/scale2.png");
-
-	//play = App->tex_imp->LoadTexture("Assets/Others/play.png");
-	//pause = App->tex_imp->LoadTexture("Assets/Others/pause.png");
-	//stop = App->tex_imp->LoadTexture("Assets/Others/stop.png");
-	//resume = App->tex_imp->LoadTexture("Assets/Others/resume.png");
-
-	//ownBB = App->tex_imp->LoadTexture("Assets/Others/ownBB.png");
-	//allBB = App->tex_imp->LoadTexture("Assets/Others/allBB.png");
 }
 
 void PanelState::ToolTipShortCut(const char* word)

@@ -49,11 +49,6 @@ bool PanelInspector::Draw()
 
 				ImGui::Spacing();
 
-				/*for (std::vector<Component*>::iterator it = App->scene_intro->GOroot->componentsList.begin(); it != App->scene_intro->GOroot->componentsList.end(); it++)
-				{
-					(*it)->Save(go->data.id, App->jsonImp);
-				}*/
-
 				if (go->data.active && go->GOparent != nullptr)
 				{
 					for (int i = 0; i < go->componentsList.size(); ++i)

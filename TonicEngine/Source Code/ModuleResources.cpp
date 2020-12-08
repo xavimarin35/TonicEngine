@@ -181,7 +181,7 @@ bool ModuleResources::CompareExtensionForModels(std::string var)
 
 bool ModuleResources::CompareExtensionForTextures(std::string var)
 {
-	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga" || var == "ico")
+	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga" || var == "ico" || var == "ttex")
 		return true;
 	else
 		return false;
@@ -202,7 +202,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					i++;
 
 					std::map<uint, ResourceTexture*>::const_iterator tex = tex_resources.find(it->first);
-					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(40, 40), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
 						ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
@@ -238,7 +238,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 					std::map<uint, ResourceMesh*>::const_iterator mesh = mesh_resources.find(it->first);
 					// The first item is the image shown, now it shows the pause button, to be changed by a FBX representation image
-					ImGui::ImageButton((ImTextureID*)(uint)53, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+					ImGui::ImageButton((ImTextureID*)(uint)53, ImVec2(40, 40), ImVec2(0, 1), ImVec2(1, 0));
 
 					// Name now shows the street environemtn v04, not each child name
 					if (ImGui::IsItemHovered())

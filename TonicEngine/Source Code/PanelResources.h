@@ -4,6 +4,8 @@
 #include "Application.h"
 #include "PanelManager.h"
 
+class ResourceTexture;
+
 class PanelResources : public PanelManager
 {
 public:
@@ -15,6 +17,8 @@ public:
 
 	bool showing_textures = false;
 	bool showing_meshes = false;
+
+	ResourceTexture* folder = nullptr;
 };
 
 #endif

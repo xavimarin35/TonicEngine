@@ -82,7 +82,7 @@ bool TextureImporter::DuplicateTexture(const char* path, std::string& output_fil
 		data = new ILubyte[size];
 
 		if (ilSaveL(IL_DDS, data, size) > 0)
-			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "Ttex");
+			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "dds");
 
 		LOG_C("SUCCESS: Correctly exported %s.Ttex into Textures folder", name.data());
 
