@@ -30,7 +30,7 @@ bool PanelResources::Draw()
 
 	if (App->gui->Presources->active)
 	{
-		if (ImGui::Begin("Resources", &active, ImGuiWindowFlags_NoDecoration))
+		if (ImGui::Begin("Resources", &active, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollWithMouse))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
 			else App->camera->isOnResources = false;
@@ -38,11 +38,11 @@ bool PanelResources::Draw()
 			ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize;
 
 			ImGui::BeginChild("Resources Tree", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.20f, 260), false, window_flags);
-			
 
 			// Dont zoom in/out when this child window is hovered
-			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
-			else App->camera->isOnResources = false;
+			if (ImGui::IsWindowHovered()) 
+				App->camera->isOnResourcesChild1 = true;
+			else App->camera->isOnResourcesChild1 = false;
 
 			if (ImGui::TreeNodeEx("Project", ImGuiTreeNodeFlags_DefaultOpen))
 			{
@@ -85,8 +85,8 @@ bool PanelResources::Draw()
 			ImGui::BeginChild("Resources Icons", ImVec2(0, 260), true, window_flags2);
 
 			// Dont zoom in/out when this child window is hovered
-			if (ImGui::IsWindowHovered()) App->camera->isOnResources = true;
-			else App->camera->isOnResources = false;
+			if (ImGui::IsWindowHovered()) App->camera->isOnResourcesChild2 = true;
+			else App->camera->isOnResourcesChild2 = false;
 
 			if (showing_meshes)
 				App->resources->DrawResources(RESOURCE_TYPE::MESH);

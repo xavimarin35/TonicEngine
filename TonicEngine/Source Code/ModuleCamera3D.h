@@ -42,6 +42,8 @@ public:
 	bool isOnConfiguration = false;
 	bool isOnState = false;
 	bool isOnResources = false;
+	bool isOnResourcesChild1 = false;
+	bool isOnResourcesChild2 = false;
 	bool isOnScene = false;
 	bool isOnGame = false;
 
