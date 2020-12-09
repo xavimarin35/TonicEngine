@@ -46,10 +46,10 @@ public:
 	float4x4 localMatrix = float4x4::identity;
 	float4x4 globalMatrix = float4x4::identity;
 
-	float3 default_position;
-	Quat default_rotation_q;
-	float3 default_rotation_e;
-	float3 default_scale;
+	float3 default_position = float3::zero;
+	Quat default_rotation_q = Quat::identity;
+	float3 default_rotation_e = float3::zero;
+	float3 default_scale = float3::one;
 
 	float3 position = float3::zero;
 	Quat rotation_quaternion = Quat::identity;
