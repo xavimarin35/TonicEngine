@@ -10,9 +10,12 @@ ModuleTime::ModuleTime(Application* app, bool start_enabled) : Module(app, start
 ModuleTime::~ModuleTime() {}
 
 
-update_status ModuleTime::PostUpdate(float dt)
+update_status ModuleTime::Update(float dt)
 {
-	frame_count++;
+	if (!game_is_paused)
+		time = real_time - started_timer - paused_time;
+	else
+		paused_time += real_dt;
 
 	real_dt = App->GetDT();
 	real_time += real_dt;
@@ -20,43 +23,21 @@ update_status ModuleTime::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleTime::CleanUp()
+float ModuleTime::GetCurrentTimer() const
 {
-	return true;
+	return real_time;
+}
+
+float ModuleTime::GetPlayModeCurrentTime() const
+{
+	return time;
 }
 
 void ModuleTime::ResetGameTimer()
 {
 	time = 0.0f;
-	dt = 0.0f;
+	paused_time = 0.0f;
+	started_timer = 0.0f;
 }
 
-uint ModuleTime::GetFrameCount() const
-{
-	return frame_count;
-}
 
-float ModuleTime::GetRealTimeClock() const
-{
-	return real_time;
-}
-
-float ModuleTime::GetRealDT() const
-{
-	return real_dt;
-}
-
-float ModuleTime::GetGameTime() const
-{
-	return time;
-}
-
-float ModuleTime::GetTimeScale() const
-{
-	return time_scale;
-}
-
-float ModuleTime::GetGameDT() const
-{
-	return dt;
-}

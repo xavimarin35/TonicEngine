@@ -11,31 +11,21 @@ public:
 	ModuleTime(Application* app, bool start_enabled = true);
 	~ModuleTime();
 
-	update_status PostUpdate(float dt);
-	bool CleanUp();
+	update_status Update(float dt);
 
 	void ResetGameTimer();
 
-	uint GetFrameCount() const;
-	float GetRealTimeClock() const;
-	float GetRealDT() const;
-	float GetGameTime() const;
-	float GetTimeScale() const;
-	float GetGameDT() const;
+	float GetCurrentTimer() const;
+	float GetPlayModeCurrentTime() const;
 
-public:
-
-	float time_scale = 1.0f;
-	uint frame_count = 0;
-	float real_time = 0.0f;
-	float real_dt = 0.0f;
-	float started_play_time = 0.0f;
-	float time_in_pause = 0.0f;
-	bool game_paused = false;
+	float paused_time = 0.0f;
+	float started_timer = 0.0f;
 
 	float time = 0.0f;
-	float dt = 0.0f;
-
+	float real_time = 0.0f;
+	float real_dt = 0.0f;
+	
+	bool game_is_paused = false;
 };
 
-#endif //!__TIME_MANAGER_H__
+#endif 

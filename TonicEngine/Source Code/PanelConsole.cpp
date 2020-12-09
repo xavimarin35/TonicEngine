@@ -72,7 +72,12 @@ bool PanelConsole::Draw()
 				}
 				if (strstr((*item), "SUCCESS:"))
 				{
-					color = CORRECT_CONSOLE_COLOR;
+					color = SUCCESS_CONSOLE_COLOR;
+					has_color = true;
+				}
+				if (strstr((*item), "PLAYMODE:"))
+				{
+					color = PLAYMODE_CONSOLE_COLOR;
 					has_color = true;
 				}
 				if (has_color)

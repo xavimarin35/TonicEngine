@@ -7,6 +7,7 @@
 #include "Resource.h"
 #include "ResourceTexture.h"
 #include "ResourceMesh.h"
+#include "ModuleTime.h"
 
 PanelState::PanelState()
 {
@@ -81,9 +82,8 @@ bool PanelState::Draw()
 				{
 					if (App->PlayScene())
 					{
-						current_tex1 = pause;
+						current_tex1 = stop;
 						editing = false;
-						LOG_C("Running scene");
 					}
 				}
 				else
@@ -91,7 +91,6 @@ bool PanelState::Draw()
 					App->StopScene();
 					current_tex1 = play;
 					editing = true;
-					LOG_C("Stopped scene");
 				}
 			}
 
@@ -109,10 +108,11 @@ bool PanelState::Draw()
 			// Engine State Button 2
 			if (ImGui::ImageButton((ImTextureID*)current_tex2->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
-				if (currentBut2 == 4) // button texture change pause/resume
-					currentBut2 = 3;
-				else
+				// button texture change pause/resume
+				if (currentBut2 == 3 && currentBut1 != 1)
 					currentBut2 = 4;
+				else
+					currentBut2 = 3;
 
 				if (state == ENGINE_STATE::PLAY)
 					current_tex2 = resume;
@@ -120,7 +120,6 @@ bool PanelState::Draw()
 					current_tex2 = pause;
 
 				App->PauseScene();
-				LOG_C("Paused scene");
 			}
 
 			// Tooltips Button2
@@ -135,7 +134,12 @@ bool PanelState::Draw()
 			if (!editing)
 				openTimeMenu = true;
 			else
+			{
 				openTimeMenu = false;
+				currentBut1 = 1;
+				currentBut2 = 3;
+			}
+				
 
 		}
 
@@ -233,7 +237,7 @@ void PanelState::TimeInfoMenu()
 {
 	if (ImGui::Begin("Time Information", &openTimeMenu, ImGuiWindowFlags_NoScrollbar))
 	{
-		play_time += App->GetDT();
+		play_time = App->time->GetPlayModeCurrentTime();
 		current_dt = App->GetDT();
 
 		ImGui::Text("Time Playing: ");	ImGui::SameLine();

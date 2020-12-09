@@ -191,7 +191,8 @@ bool Application::PlayScene()
 			camera->activeCam = camera->cameraGO->GetComponentCamera();
 			camera->activeCam->update_frustum = true;
 			ChangeEngineState(ENGINE_STATE::PLAY);
-
+			time->started_timer = time->GetCurrentTimer();
+			LOG_C("PLAYMODE: Running");
 			return true;
 		}
 		else
@@ -210,10 +211,14 @@ void Application::PauseScene()
 	{
 	case ENGINE_STATE::PLAY:
 		ChangeEngineState(ENGINE_STATE::PAUSE);
+		time->game_is_paused = true;
+		LOG_C("PLAYMODE: Paused");
 		break;
 	
 	case ENGINE_STATE::PAUSE:
 		ChangeEngineState(ENGINE_STATE::PLAY);
+		time->game_is_paused = false;
+		LOG_C("PLAYMODE: Running");
 		break;
 	}
 }
@@ -226,9 +231,9 @@ void Application::StopScene()
 		camera->activeCam = camera->mainCam;
 		camera->mainCam->update_frustum = true;
 		ChangeEngineState(ENGINE_STATE::NONE);
-
+		time->game_is_paused = false;
 		time->ResetGameTimer();
-
+		LOG_C("PLAYMODE: Stopped");
 		break;
 	}
 }
