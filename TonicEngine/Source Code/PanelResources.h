@@ -19,6 +19,7 @@ public:
 	bool showing_meshes = false;
 
 	ResourceTexture* folder = nullptr;
+	ResourceTexture* mesh = nullptr;
 };
 
 #endif

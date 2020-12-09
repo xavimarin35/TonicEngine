@@ -279,8 +279,8 @@ bool PanelConfiguration::Draw()
 				if (ImGui::TreeNodeEx("Sensitivity", ImGuiTreeNodeFlags_DefaultOpen))
 				{
 					ImGui::Spacing();
-					ImGui::PushItemWidth(200);
-					ImGui::SliderFloat("Input Sensitivity", &App->camera->slow, 0.0f, 100.0f); 
+					ImGui::PushItemWidth(150);
+					ImGui::SliderFloat("Input Sensitivity", &App->camera->slow, 0.1f, 100.0f); 
 					ImGui::SliderFloat("Camera Speed", &App->camera->currentSpeed, 0.0f, 100.0f);
 					ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 50.0f);
 					ImGui::TreePop();

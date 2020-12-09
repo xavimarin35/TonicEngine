@@ -39,6 +39,9 @@ public:
 	std::map<uint, ResourceMesh*> mesh_resources;
 
 private:
+
+	int tex_iterator = 0;
+	int mesh_iterator = 0;
 	
 };
 

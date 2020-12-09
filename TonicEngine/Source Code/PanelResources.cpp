@@ -20,6 +20,9 @@ bool PanelResources::Start()
 	folder = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Library/Textures/folder-icon.dds"));
 	folder->LoadInMemory();
 
+	mesh = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_fbx.png"));
+	mesh->LoadInMemory();
+
 	return true;
 }
 
@@ -46,7 +49,7 @@ bool PanelResources::Draw()
 
 			if (ImGui::TreeNodeEx("Project", ImGuiTreeNodeFlags_DefaultOpen))
 			{
-				if (ImGui::TreeNodeEx("Library", ImGuiTreeNodeFlags_DefaultOpen))
+				if (ImGui::TreeNodeEx("Assets", ImGuiTreeNodeFlags_DefaultOpen))
 				{
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
