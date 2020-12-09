@@ -68,7 +68,8 @@ public:
 public:
 	
 	float currentSpeed = 10.0f;
-	float slow = 25.0f;
+	float slow = 6.0f;
+	float mouseWheelS = 30.0f;
 	float distanceFocus = 15.0f; // Increases or decreases the distance from the game object when pressing F
 
 	bool focusError = false;

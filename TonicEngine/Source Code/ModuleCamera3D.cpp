@@ -5,6 +5,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleWindow.h"
+#include "imgui-1.78/ImGuizmo.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -22,7 +23,7 @@ bool ModuleCamera3D::Start()
 
 	mainCam->frustum.pos = float3(26.f, 86.f, -90.f);
 
-	cameraGO = App->scene_intro->CreateGO("Main Camera");
+	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
 
 	return true;
@@ -54,13 +55,13 @@ update_status ModuleCamera3D::Update(float dt)
 
 	float3 speed = 
 	{ 
-		(float)-App->input->GetMouseXMotion() * slow * dt,
-		(float)-App->input->GetMouseYMotion() * slow * dt,
-		(float)App->input->GetMouseZ() * slow * dt
+		(float)-App->input->GetMouseXMotion() * dt,
+		(float)-App->input->GetMouseYMotion() * dt,
+		(float)App->input->GetMouseZ() * dt
 	};
 
 	if (App->input->GetMouseZ() != 0)
-		Zoom(speed.z * 10.0f);
+		Zoom(speed.z * slow * mouseWheelS);
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
 	{
@@ -68,7 +69,7 @@ update_status ModuleCamera3D::Update(float dt)
 			Orbit(speed.x / slow, speed.y / slow);
 
 		else if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
-			Zoom(-speed.y * 1.5f);
+			Zoom(-speed.y * slow);
 	}
 
 	else if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
@@ -86,8 +87,10 @@ update_status ModuleCamera3D::Update(float dt)
 
 		pick = MousePicking();
 
-		if (pick != nullptr) 
+		if (pick != nullptr)
 			App->scene_intro->GOselected = pick;
+		else
+			App->scene_intro->GOselected = nullptr;
 	}
 
 	else if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
