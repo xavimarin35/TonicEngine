@@ -23,7 +23,7 @@ public:
 	void IsTextureComponentActive(GameObject* go);
 	void GetTexturePath();
 
-	void Save(uint obj_num, nlohmann::json& scene_file);
+	void Save(uint GO_id, nlohmann::json& scene_file);
 
 public:
 	

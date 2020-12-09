@@ -31,8 +31,8 @@ public:
 	virtual void EnableComponent();
 	virtual void DisableComponent();
 
-	virtual void Load(uint obj_num, const nlohmann::json& scene_file) {}
-	virtual void Save(uint obj_num, nlohmann::json& scene_file) {}
+	virtual void Load(uint GO_id, const nlohmann::json& scene_file) {}
+	virtual void Save(uint GO_id, nlohmann::json& scene_file) {}
 
 public:
 	bool active = false;

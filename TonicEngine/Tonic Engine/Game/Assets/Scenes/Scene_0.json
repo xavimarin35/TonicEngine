@@ -1,46 +1,1110 @@
 {
+    "City_building_001": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_001",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v02_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 17.70716667175293,
+                "PositionY": 20.05327606201172,
+                "PositionZ": 2.1606683731079102e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_004": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_004",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -41.475887298583984,
+                "PositionY": 21.01409912109375,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_007": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_007",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 16.010494232177734,
+                "PositionY": 37.4932861328125,
+                "PositionZ": -1.5050172805786133e-06,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_008": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_008",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_025_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 40.97998809814453,
+                "PositionY": 18.270822525024414,
+                "PositionZ": -2.0489096641540527e-06,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_010": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_010",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_010(1)": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_010(1)",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_011": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_011",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 30.13454246520996,
+                "PositionY": 37.4932861328125,
+                "PositionZ": -1.5050172805786133e-06,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_013": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_013",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -42.288063049316406,
+                "PositionY": 33.201576232910156,
+                "PositionZ": 5.066394805908203e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_014": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_014",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -19.43970489501953,
+                "PositionY": 32.061729431152344,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 180.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_016": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_016",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_016(1)": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_016(1)",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_017": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_017",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_017(1)": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_017(1)",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_022": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_022",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -20.83131980895996,
+                "PositionY": -27.42648696899414,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 179.99998474121094,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_023": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_023",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 42.13063430786133,
+                "PositionY": 37.4932861328125,
+                "PositionZ": -1.5050172805786133e-06,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_024": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_024",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_025_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -20.57276725769043,
+                "PositionY": 43.060829162597656,
+                "PositionZ": -0.06919446587562561,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -180.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_026": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_026",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 31.511892318725586,
+                "PositionY": -16.446014404296875,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -180.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_028": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_028",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 13.387989044189453,
+                "PositionY": -33.755043029785156,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_030": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_030",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -42.80724334716797,
+                "PositionY": -41.8355598449707,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_031": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_031",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -34.67948532104492,
+                "PositionY": -41.8355598449707,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_032": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_032",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -29.47840118408203,
+                "PositionY": 21.01409912109375,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_033": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_033",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -32.36149978637695,
+                "PositionY": 42.37042236328125,
+                "PositionZ": 5.066394805908203e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_034": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_034",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 16.049518585205078,
+                "PositionY": -16.696884155273438,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_035": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_035",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 13.387989044189453,
+                "PositionY": -40.802513122558594,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_036": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_036",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -31.216325759887695,
+                "PositionY": 33.201576232910156,
+                "PositionZ": 5.066394805908203e-07,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_037": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_037",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -20.317691802978516,
+                "PositionY": -16.163606643676758,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 179.99998474121094,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_038": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_038",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -41.64901351928711,
+                "PositionY": -16.495393753051758,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_039": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_039",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -42.80724334716797,
+                "PositionY": -30.643888473510742,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_040": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_040",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -34.67948532104492,
+                "PositionY": -30.643888473510742,
+                "PositionZ": -9.387731552124023e-07,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": -90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "City_building_041": {
+        "Components": {
+            "Mesh": {
+                "Name": "city_building_041",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v02_c.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 30.695280075073242,
+                "PositionY": 21.612646102905273,
+                "PositionZ": 2.1606683731079102e-07,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": 90.00000762939453,
+                "ScaleX": 0.9999999403953552,
+                "ScaleY": 0.9999999403953552,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "Dummy001": {
+        "Components": {
+            "Transform": {
+                "PositionX": 4.176085472106934,
+                "PositionY": 0.13591504096984863,
+                "PositionZ": -2.0713276863098145,
+                "RotationX": -89.99999237060547,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.2041634321212769,
+                "ScaleY": 1.2041633129119873,
+                "ScaleZ": 1.2041633129119873,
+                "UUID": 0
+            }
+        }
+    },
     "Game Objects": [
         {
             "Active": true,
             "Id": 0,
             "Name": "Root",
-            "UUID": 285982596
+            "UUID": 901893832
         },
         {
             "Active": true,
             "Id": 1,
             "Name": "Main Camera",
-            "UUID": 301775338
+            "UUID": 407087210
         },
         {
             "Active": true,
             "Id": 2,
-            "Name": "BakerHouse",
-            "UUID": 987670219
+            "Name": "Street environment_V04",
+            "UUID": 870692378
         },
         {
             "Active": true,
-            "Components": {
-                "Texture": {
-                    "Active": false,
-                    "Checkers Texture": false
-                }
-            },
             "Id": 3,
-            "Name": "Chimney",
-            "UUID": 830088382
+            "Name": "Dummy001",
+            "UUID": 332063174
         },
         {
             "Active": true,
-            "Components": {
-                "Texture": {
-                    "Active": true,
-                    "Checkers Texture": false
-                }
-            },
             "Id": 4,
-            "Name": "Baker_house",
-            "UUID": 215104240
+            "Name": "City_building_004",
+            "UUID": 1010479484
+        },
+        {
+            "Active": true,
+            "Id": 5,
+            "Name": "City_building_001",
+            "UUID": 970486719
+        },
+        {
+            "Active": true,
+            "Id": 6,
+            "Name": "City_building_007",
+            "UUID": 40834317
+        },
+        {
+            "Active": true,
+            "Id": 7,
+            "Name": "City_building_008",
+            "UUID": 470469169
+        },
+        {
+            "Active": true,
+            "Id": 8,
+            "Name": "City_building_010",
+            "UUID": 871910505
+        },
+        {
+            "Active": true,
+            "Id": 9,
+            "Name": "City_building_010",
+            "UUID": 496270620
+        },
+        {
+            "Active": true,
+            "Id": 10,
+            "Name": "City_building_010(1)",
+            "UUID": 41918265
+        },
+        {
+            "Active": true,
+            "Id": 11,
+            "Name": "City_building_011",
+            "UUID": 660417199
+        },
+        {
+            "Active": true,
+            "Id": 12,
+            "Name": "City_building_013",
+            "UUID": 385408708
+        },
+        {
+            "Active": true,
+            "Id": 13,
+            "Name": "City_building_014",
+            "UUID": 1207479665
+        },
+        {
+            "Active": true,
+            "Id": 14,
+            "Name": "City_building_016",
+            "UUID": 680784106
+        },
+        {
+            "Active": true,
+            "Id": 15,
+            "Name": "City_building_016",
+            "UUID": 440973862
+        },
+        {
+            "Active": true,
+            "Id": 16,
+            "Name": "City_building_016(1)",
+            "UUID": 161310701
+        },
+        {
+            "Active": true,
+            "Id": 17,
+            "Name": "City_building_017",
+            "UUID": 595506270
+        },
+        {
+            "Active": true,
+            "Id": 18,
+            "Name": "City_building_017",
+            "UUID": 606531180
+        },
+        {
+            "Active": true,
+            "Id": 19,
+            "Name": "City_building_017(1)",
+            "UUID": 1084161929
+        },
+        {
+            "Active": true,
+            "Id": 20,
+            "Name": "City_building_022",
+            "UUID": 1048148680
+        },
+        {
+            "Active": true,
+            "Id": 21,
+            "Name": "City_building_023",
+            "UUID": 533219729
+        },
+        {
+            "Active": true,
+            "Id": 22,
+            "Name": "City_building_024",
+            "UUID": 911438083
+        },
+        {
+            "Active": true,
+            "Id": 23,
+            "Name": "City_building_026",
+            "UUID": 718702985
+        },
+        {
+            "Active": true,
+            "Id": 24,
+            "Name": "City_building_028",
+            "UUID": 509264511
+        },
+        {
+            "Active": true,
+            "Id": 25,
+            "Name": "City_building_030",
+            "UUID": 418072750
+        },
+        {
+            "Active": true,
+            "Id": 26,
+            "Name": "City_building_031",
+            "UUID": 1090492199
+        },
+        {
+            "Active": true,
+            "Id": 27,
+            "Name": "City_building_032",
+            "UUID": 935030462
+        },
+        {
+            "Active": true,
+            "Id": 28,
+            "Name": "City_building_033",
+            "UUID": 615228470
+        },
+        {
+            "Active": true,
+            "Id": 29,
+            "Name": "City_building_034",
+            "UUID": 1174363609
+        },
+        {
+            "Active": true,
+            "Id": 30,
+            "Name": "City_building_035",
+            "UUID": 504702484
+        },
+        {
+            "Active": true,
+            "Id": 31,
+            "Name": "City_building_036",
+            "UUID": 355350119
+        },
+        {
+            "Active": true,
+            "Id": 32,
+            "Name": "City_building_037",
+            "UUID": 941127410
+        },
+        {
+            "Active": true,
+            "Id": 33,
+            "Name": "City_building_038",
+            "UUID": 714381837
+        },
+        {
+            "Active": true,
+            "Id": 34,
+            "Name": "City_building_039",
+            "UUID": 132186490
+        },
+        {
+            "Active": true,
+            "Id": 35,
+            "Name": "City_building_040",
+            "UUID": 1130106063
+        },
+        {
+            "Active": true,
+            "Id": 36,
+            "Name": "City_building_041",
+            "UUID": 66457652
+        },
+        {
+            "Active": true,
+            "Id": 37,
+            "Name": "Plane001",
+            "UUID": 631643183
         }
-    ]
+    ],
+    "Main Camera": {
+        "Components": {
+            "Camera": {
+                "DoCulling": false,
+                "FrustumFarPlane": 200.0,
+                "FrustumNearPlane": 1.0,
+                "HorizontalFOV": 1.287712812423706,
+                "ShowFrustum": false,
+                "VerticalFOV": 1.0471975803375244
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "Plane001": {
+        "Components": {
+            "Mesh": {
+                "Name": "plane001",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/plane_tex.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": -0.33154296875,
+                "PositionY": 1.113769769668579,
+                "PositionZ": -0.24395161867141724,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "Root": {
+        "Components": {
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    },
+    "Street environment_V04": {
+        "Components": {
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        }
+    }
 }

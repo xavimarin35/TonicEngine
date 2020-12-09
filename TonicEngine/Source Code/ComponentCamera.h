@@ -52,10 +52,13 @@ public:
 	bool Intersect(const AABB& box) const;
 	static bool Intersect(const Frustum& frustum, const AABB& box);
 
+	void Save(uint GO_id, nlohmann::json& scene_file);
+
+
 public:
 
 	Frustum frustum;
-	bool showFrustrum = false;
+	bool showFrustum = false;
 	bool seeFrustum = false;
 	bool update_frustum = true;
 

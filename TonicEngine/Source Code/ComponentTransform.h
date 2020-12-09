@@ -31,8 +31,6 @@ public:
 
 	void UpdateTransform();
 	void UpdateLocalTransform();
-
-	void UpdateGuizmoMatrix();
 	
 	void Reset(bool new_default = false);
 	void SetNewDefault(float3 pos, float3 rot, float3 sc);
@@ -41,6 +39,8 @@ public:
 	void DrawInspector();
 
 	void IsTransformComponentActive(GameObject* go);
+
+	void Save(uint GO_id, nlohmann::json& scene_file);
 
 public:
 	float4x4 localMatrix = float4x4::identity;

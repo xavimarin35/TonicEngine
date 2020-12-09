@@ -51,10 +51,10 @@ void GameObject::Update()
 			// Game Object is a camera
 			else
 			{
-				if (App->gui->Pstate->drawBB == 1 && GO->data.active && !GO->GetComponentCamera()->showFrustrum)
+				if (App->gui->Pstate->drawBB == 1 && GO->data.active && !GO->GetComponentCamera()->showFrustum)
 					DrawOwnBoundingBox(GO);
 
-				if (App->gui->Pstate->drawBB == 2 && !GO->GetComponentCamera()->showFrustrum)
+				if (App->gui->Pstate->drawBB == 2 && !GO->GetComponentCamera()->showFrustum)
 					DrawAllBoundingBoxes(aabb);
 			}
 
@@ -286,15 +286,15 @@ void GameObject::TransformGlobal(GameObject* GO)
 	}
 }
 
-void GameObject::Save(uint obj_num, nlohmann::json& scene)
+void GameObject::Save(uint GO_id, nlohmann::json& scene)
 {
-	scene["Game Objects"][obj_num]["Name"] = data.name;
-	scene["Game Objects"][obj_num]["Id"] = data.id;
-	scene["Game Objects"][obj_num]["UUID"] = data.UUID;
-	scene["Game Objects"][obj_num]["Active"] = data.active;
+	scene["Game Objects"][GO_id]["Name"] = data.name;
+	scene["Game Objects"][GO_id]["Id"] = data.id;
+	scene["Game Objects"][GO_id]["UUID"] = data.UUID;
+	scene["Game Objects"][GO_id]["Active"] = data.active;
 	
 	for (int i = 0; i < componentsList.size(); i++)
-		componentsList[i]->Save(obj_num, scene);
+		componentsList[i]->Save(GO_id, scene);
 }
 
 void GameObject::UpdateBoundingBox()

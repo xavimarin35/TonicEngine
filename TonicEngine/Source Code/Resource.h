@@ -9,7 +9,8 @@ enum class RESOURCE_TYPE
 	NONE = -1,
 	MESH,
 	TEXTURE,
-	MODEL
+	MODEL, 
+	SCENE
 };
 
 class Resource

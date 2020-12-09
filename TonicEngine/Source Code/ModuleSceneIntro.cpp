@@ -376,7 +376,7 @@ bool ModuleSceneIntro::IsCamera(GameObject* go)
 		if (go->GetComponentCamera() != nullptr)
 		{
 			// Frustum activated
-			if (go->GetComponentCamera()->showFrustrum)
+			if (go->GetComponentCamera()->showFrustum)
 			{
 				ret = false;
 			}

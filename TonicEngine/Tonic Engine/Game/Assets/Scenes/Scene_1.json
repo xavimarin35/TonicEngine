@@ -1,46 +1,511 @@
 {
+    "City_building_001": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v02_c.dds"
+            }
+        }
+    },
+    "City_building_004": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds"
+            }
+        }
+    },
+    "City_building_007": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds"
+            }
+        }
+    },
+    "City_building_008": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_025_c.dds"
+            }
+        }
+    },
+    "City_building_010": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_010(1)": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_011": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds"
+            }
+        }
+    },
+    "City_building_013": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds"
+            }
+        }
+    },
+    "City_building_014": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds"
+            }
+        }
+    },
+    "City_building_016": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_016(1)": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_017": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_017(1)": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 01_c.dds"
+            }
+        }
+    },
+    "City_building_022": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds"
+            }
+        }
+    },
+    "City_building_023": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_016_c.dds"
+            }
+        }
+    },
+    "City_building_024": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_025_c.dds"
+            }
+        }
+    },
+    "City_building_026": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds"
+            }
+        }
+    },
+    "City_building_028": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_030": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_031": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_032": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building03_c.dds"
+            }
+        }
+    },
+    "City_building_033": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds"
+            }
+        }
+    },
+    "City_building_034": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds"
+            }
+        }
+    },
+    "City_building_035": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_036": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building 06_ c.dds"
+            }
+        }
+    },
+    "City_building_037": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds"
+            }
+        }
+    },
+    "City_building_038": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building05 _c.dds"
+            }
+        }
+    },
+    "City_building_039": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_040": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v01_c.dds"
+            }
+        }
+    },
+    "City_building_041": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/building_v02_c.dds"
+            }
+        }
+    },
     "Game Objects": [
         {
             "Active": true,
             "Id": 0,
             "Name": "Root",
-            "UUID": 285982596
+            "UUID": 479854603
         },
         {
             "Active": true,
             "Id": 1,
             "Name": "Main Camera",
-            "UUID": 301775338
+            "UUID": 877160064
         },
         {
             "Active": true,
             "Id": 2,
-            "Name": "BakerHouse",
-            "UUID": 987670219
+            "Name": "Street environment_V04",
+            "UUID": 650024814
         },
         {
             "Active": true,
-            "Components": {
-                "Texture": {
-                    "Active": true,
-                    "Checkers Texture": false
-                }
-            },
             "Id": 3,
-            "Name": "Chimney",
-            "UUID": 830088382
+            "Name": "Dummy001",
+            "UUID": 1044846669
         },
         {
             "Active": true,
-            "Components": {
-                "Texture": {
-                    "Active": true,
-                    "Checkers Texture": true
-                }
-            },
             "Id": 4,
-            "Name": "Baker_house",
-            "UUID": 215104240
+            "Name": "City_building_004",
+            "UUID": 500480279
+        },
+        {
+            "Active": true,
+            "Id": 5,
+            "Name": "City_building_001",
+            "UUID": 835905092
+        },
+        {
+            "Active": true,
+            "Id": 6,
+            "Name": "City_building_007",
+            "UUID": 355978041
+        },
+        {
+            "Active": true,
+            "Id": 7,
+            "Name": "City_building_008",
+            "UUID": 326104609
+        },
+        {
+            "Active": true,
+            "Id": 8,
+            "Name": "City_building_010",
+            "UUID": 384185605
+        },
+        {
+            "Active": true,
+            "Id": 9,
+            "Name": "City_building_010",
+            "UUID": 1069131738
+        },
+        {
+            "Active": true,
+            "Id": 10,
+            "Name": "City_building_010(1)",
+            "UUID": 1017629579
+        },
+        {
+            "Active": true,
+            "Id": 11,
+            "Name": "City_building_011",
+            "UUID": 1111498319
+        },
+        {
+            "Active": true,
+            "Id": 12,
+            "Name": "City_building_013",
+            "UUID": 3526315
+        },
+        {
+            "Active": true,
+            "Id": 13,
+            "Name": "City_building_014",
+            "UUID": 613819413
+        },
+        {
+            "Active": true,
+            "Id": 14,
+            "Name": "City_building_016",
+            "UUID": 420495994
+        },
+        {
+            "Active": true,
+            "Id": 15,
+            "Name": "City_building_016",
+            "UUID": 322585672
+        },
+        {
+            "Active": true,
+            "Id": 16,
+            "Name": "City_building_016(1)",
+            "UUID": 1041499742
+        },
+        {
+            "Active": true,
+            "Id": 17,
+            "Name": "City_building_017",
+            "UUID": 969818767
+        },
+        {
+            "Active": true,
+            "Id": 18,
+            "Name": "City_building_017",
+            "UUID": 664695208
+        },
+        {
+            "Active": true,
+            "Id": 19,
+            "Name": "City_building_017(1)",
+            "UUID": 17377872
+        },
+        {
+            "Active": true,
+            "Id": 20,
+            "Name": "City_building_022",
+            "UUID": 456694678
+        },
+        {
+            "Active": true,
+            "Id": 21,
+            "Name": "City_building_023",
+            "UUID": 165703240
+        },
+        {
+            "Active": true,
+            "Id": 22,
+            "Name": "City_building_024",
+            "UUID": 1078835732
+        },
+        {
+            "Active": true,
+            "Id": 23,
+            "Name": "City_building_026",
+            "UUID": 819969862
+        },
+        {
+            "Active": true,
+            "Id": 24,
+            "Name": "City_building_028",
+            "UUID": 955060386
+        },
+        {
+            "Active": true,
+            "Id": 25,
+            "Name": "City_building_030",
+            "UUID": 638828996
+        },
+        {
+            "Active": true,
+            "Id": 26,
+            "Name": "City_building_031",
+            "UUID": 364100923
+        },
+        {
+            "Active": true,
+            "Id": 27,
+            "Name": "City_building_032",
+            "UUID": 179937574
+        },
+        {
+            "Active": true,
+            "Id": 28,
+            "Name": "City_building_033",
+            "UUID": 606526577
+        },
+        {
+            "Active": true,
+            "Id": 29,
+            "Name": "City_building_034",
+            "UUID": 308689972
+        },
+        {
+            "Active": true,
+            "Id": 30,
+            "Name": "City_building_035",
+            "UUID": 132403580
+        },
+        {
+            "Active": true,
+            "Id": 31,
+            "Name": "City_building_036",
+            "UUID": 977192593
+        },
+        {
+            "Active": true,
+            "Id": 32,
+            "Name": "City_building_037",
+            "UUID": 560028010
+        },
+        {
+            "Active": true,
+            "Id": 33,
+            "Name": "City_building_038",
+            "UUID": 944417906
+        },
+        {
+            "Active": true,
+            "Id": 34,
+            "Name": "City_building_039",
+            "UUID": 733174180
+        },
+        {
+            "Active": true,
+            "Id": 35,
+            "Name": "City_building_040",
+            "UUID": 455542716
+        },
+        {
+            "Active": true,
+            "Id": 36,
+            "Name": "City_building_041",
+            "UUID": 686386100
+        },
+        {
+            "Active": true,
+            "Id": 37,
+            "Name": "Plane001",
+            "UUID": 171132388
         }
-    ]
+    ],
+    "Plane001": {
+        "Components": {
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "Name": "/library/textures/plane_tex.dds"
+            }
+        }
+    }
 }

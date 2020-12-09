@@ -168,7 +168,7 @@ void ComponentTransform::IsTransformComponentActive(GameObject* go)
 {
 	go = App->scene_intro->GOselected;
 
-	if (go->GetComponentMesh()->active)
+	if (go->GetComponentTransform()->active)
 	{
 		LOG_C("Transform Component is active");
 	}
@@ -176,6 +176,20 @@ void ComponentTransform::IsTransformComponentActive(GameObject* go)
 	{
 		LOG_C("ERROR: Transform Component is NOT active");
 	}
+}
+
+void ComponentTransform::Save(uint GO_id, nlohmann::json& scene_file)
+{
+	scene_file[object->data.name]["Components"]["Transform"]["UUID"] = UUID;
+	scene_file[object->data.name]["Components"]["Transform"]["PositionX"] = position.x;
+	scene_file[object->data.name]["Components"]["Transform"]["PositionY"] = position.y;
+	scene_file[object->data.name]["Components"]["Transform"]["PositionZ"] = position.z;
+	scene_file[object->data.name]["Components"]["Transform"]["RotationX"] = rotation_euler.x;
+	scene_file[object->data.name]["Components"]["Transform"]["RotationY"] = rotation_euler.y;
+	scene_file[object->data.name]["Components"]["Transform"]["RotationZ"] = rotation_euler.z;
+	scene_file[object->data.name]["Components"]["Transform"]["ScaleX"] = scale.x;
+	scene_file[object->data.name]["Components"]["Transform"]["ScaleY"] = scale.y;
+	scene_file[object->data.name]["Components"]["Transform"]["ScaleZ"] = scale.z;
 }
 
 void ComponentTransform::Reset(bool new_default)

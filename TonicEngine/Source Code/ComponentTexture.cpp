@@ -142,8 +142,9 @@ void ComponentTexture::GetTexturePath()
 	LOG_C("Texture path is: %s", texture.path.c_str());
 }
 
-void ComponentTexture::Save(uint obj_num, nlohmann::json& scene)
+void ComponentTexture::Save(uint GO_id, nlohmann::json& scene)
 {
+	scene[object->data.name]["Components"]["Texture"]["UUID"] = UUID;
 	scene[object->data.name]["Components"]["Texture"]["Active"] = active;
 	scene[object->data.name]["Components"]["Texture"]["Checkers Texture"] = EnableCheckersTexture;
 

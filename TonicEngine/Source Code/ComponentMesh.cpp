@@ -1,4 +1,5 @@
 #include "ComponentMesh.h"
+#include "Application.h"
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
@@ -203,8 +204,11 @@ void ComponentMesh::IsMeshComponentActive(GameObject* go)
 		
 }
 
-void ComponentMesh::Save(uint obj_num, nlohmann::json& scene)
+void ComponentMesh::Save(uint GO_id, nlohmann::json& scene)
 {
+	scene[object->data.name]["Components"]["Mesh"]["UUID"] = UUID;
+	if (rMesh != nullptr)
+		scene[object->data.name]["Components"]["Mesh"]["Name"] = App->GetPathName(rMesh->exported_file);
 }
 
 const AABB& ComponentMesh::BoundingBox() 

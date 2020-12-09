@@ -64,7 +64,7 @@ public:
 	//void RayCast(const LineSegment& ray_cast, bool& intersect, float& length);
 
 	//void Load(const nlohmann::json& scene_file);
-	void Save(uint obj_num, nlohmann::json& scene_file);
+	void Save(uint GO_id, nlohmann::json& scene_file);
 
 public:
 	goData data;

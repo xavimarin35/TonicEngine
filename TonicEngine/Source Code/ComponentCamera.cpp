@@ -47,7 +47,7 @@ bool ComponentCamera::Update()
 
 void ComponentCamera::Draw2()
 {
-	if (showFrustrum || App->scene_intro->GOselected == object)
+	if (showFrustum || App->scene_intro->GOselected == object)
 		DrawFrustum();
 }
 
@@ -74,12 +74,12 @@ void ComponentCamera::DrawInspector()
 
 		ImGui::Spacing();
 
-		if (ImGui::Checkbox("Camera Culling", &this->showFrustrum))
+		if (ImGui::Checkbox("Camera Culling", &this->showFrustum))
 		{
-			if (this->showFrustrum)
+			if (this->showFrustum)
 			{
 				if (App->renderer3D->culling != nullptr)
-					App->renderer3D->culling->showFrustrum = false;
+					App->renderer3D->culling->showFrustum = false;
 
 				App->renderer3D->culling = this;
 			}
@@ -95,7 +95,7 @@ void ComponentCamera::DrawInspector()
 		float fov = GetFOV();
 		float ratio = GetRatio();
 
-		if (ImGui::TreeNodeEx("Planes", ImGuiTreeNodeFlags_None))
+		if (ImGui::TreeNodeEx("Planes", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Spacing();
 
@@ -112,7 +112,7 @@ void ComponentCamera::DrawInspector()
 
 		ImGui::Spacing();
 
-		if (ImGui::TreeNodeEx("Properties", ImGuiTreeNodeFlags_None))
+		if (ImGui::TreeNodeEx("Properties", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Spacing();
 
@@ -327,4 +327,14 @@ bool ComponentCamera::Intersect(const Frustum& frustum_, const AABB& box)
 	}
 
 	return true;
+}
+
+void ComponentCamera::Save(uint GO_id, nlohmann::json& scene_file)
+{
+	scene_file[object->data.name]["Components"]["Camera"]["ShowFrustum"] = seeFrustum;
+	scene_file[object->data.name]["Components"]["Camera"]["DoCulling"] = showFrustum;
+	scene_file[object->data.name]["Components"]["Camera"]["FrustumFarPlane"] = frustum.farPlaneDistance;
+	scene_file[object->data.name]["Components"]["Camera"]["FrustumNearPlane"] = frustum.nearPlaneDistance;
+	scene_file[object->data.name]["Components"]["Camera"]["VerticalFOV"] = frustum.verticalFov;
+	scene_file[object->data.name]["Components"]["Camera"]["HorizontalFOV"] = frustum.horizontalFov;
 }
