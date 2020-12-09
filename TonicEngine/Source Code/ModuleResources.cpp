@@ -205,7 +205,17 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					ImGui::ImageButton((ImTextureID*)tex_resources[it->first]->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
-						ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
+					{
+						ImGui::BeginTooltip();
+						ImGui::Text("Name:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->file).c_str());
+						ImGui::Text("UUID:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%u", it->second->res_UUID);
+						ImGui::Text("References:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%i", it->second->references);
+						ImGui::EndTooltip();
+					}
+						//ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
 
 					if (i < 6)
 					{
@@ -240,22 +250,18 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					ImGui::ImageButton((ImTextureID*)App->gui->Presources->mesh->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
-						ImGui::SetTooltip("Name: %s\nSource File: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->exported_file).c_str(), App->GetPathName(it->second->file).c_str(),it->second->res_UUID, it->second->references);
-
-					//ImVec2 button_sz(40, 40);
-					//ImGuiStyle& style = ImGui::GetStyle();
-					//int buttons_count = 20;
-					//float window_visible_x2 = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
-					//for (int n = 0; n < buttons_count; n++)
-					//{
-					//	ImGui::PushID(n);
-					//	ImGui::Button("Box", button_sz);
-					//	float last_button_x2 = ImGui::GetItemRectMax().x;
-					//	float next_button_x2 = last_button_x2 + style.ItemSpacing.x + button_sz.x; // Expected position if next button was on same line
-					//	if (n + 1 < buttons_count && next_button_x2 < window_visible_x2)
-					//		ImGui::SameLine();
-					//	ImGui::PopID();
-					//}
+					{
+						ImGui::BeginTooltip();
+						ImGui::Text("Name:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->exported_file).c_str());
+						ImGui::Text("Source File:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->file).c_str());
+						ImGui::Text("UUID:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%u", it->second->res_UUID);
+						ImGui::Text("References:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%i", it->second->references);
+						ImGui::EndTooltip();
+					}
 
 					if (i < 6)
 					{
@@ -267,7 +273,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					else
 					{
 						i = 0;
-						ImGui::Dummy(ImVec2(875.0f, 10.0f));
+						ImGui::Dummy(ImVec2(10.0f, 10.0f));
 					}
 				}
 			}
