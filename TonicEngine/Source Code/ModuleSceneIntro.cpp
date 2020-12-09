@@ -264,7 +264,7 @@ bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 		glLineWidth(gridWidth);
 
 		glBegin(GL_LINES);
-		glColor4ub(gridColor.r, gridColor.g, gridColor.b, gridColor.a);
+		glColor3f(gridColor.r, gridColor.g, gridColor.b);
 		for (float i = -10; i <= 10; ++i)
 		{
 			glVertex3f(i * gridSize, 0.f, 0.f);
