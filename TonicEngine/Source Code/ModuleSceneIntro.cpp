@@ -155,7 +155,9 @@ void ModuleSceneIntro::DeleteScene()
 
 void ModuleSceneIntro::LoadScene(std::string scene_name)
 {
-	DeleteScene();
+	//DeleteScene();
+	LOG_C("WARNING: Scene has saved correcty, but cannot be loaded yet.");
+	LOG_C("WARNING: It will be implemented in upcoming releases.");
 
 	// Loading scene code
 }
