@@ -46,7 +46,7 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
-	Color bg_color = { 0.f, 0.f, 0.f };
+	Color bg_color = { 0.f, 0.f, 0.05f };
 
 };
 

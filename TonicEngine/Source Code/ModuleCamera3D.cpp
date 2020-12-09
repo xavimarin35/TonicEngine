@@ -52,15 +52,15 @@ update_status ModuleCamera3D::Update(float dt)
 
 	focusError = false;
 
-	float currentSpeed = 4.0f * dt;
-	float slow = 10.0f;
-
 	float3 speed = 
 	{ 
 		(float)-App->input->GetMouseXMotion() * slow * dt,
 		(float)-App->input->GetMouseYMotion() * slow * dt,
 		(float)App->input->GetMouseZ() * slow * dt
 	};
+
+	if (App->input->GetMouseZ() != 0)
+		Zoom(speed.z * 10.0f);
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
 	{
@@ -74,7 +74,10 @@ update_status ModuleCamera3D::Update(float dt)
 	else if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		Rotate(speed.x / slow, speed.y / slow);
-		MoveCamera(currentSpeed);
+		
+		float moveSpeed = currentSpeed * dt;
+
+		MoveCamera(moveSpeed);
 	}
 	
 	else if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
@@ -85,6 +88,11 @@ update_status ModuleCamera3D::Update(float dt)
 
 		if (pick != nullptr) 
 			App->scene_intro->GOselected = pick;
+	}
+
+	else if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
+	{
+		DragCamera(speed.x / (slow * 5.f), speed.y / (slow * 5.f));
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
@@ -122,9 +130,23 @@ void ModuleCamera3D::Focus(GameObject* go)
 {
 	if (go != nullptr)
 	{
-		float3 pos = go->aabb.CenterPoint();
+		float dist = Length({ distanceFocus, distanceFocus, distanceFocus });
+		float3 pos;
 
-		LookAt(pos);
+		ComponentTransform* transf = (ComponentTransform*)go->GetComponent(COMPONENT_TYPE::TRANSFORM);
+		ComponentMesh* mesh = (ComponentMesh*)go->GetComponent(COMPONENT_TYPE::MESH);
+
+		if (mesh != nullptr)
+		{
+			pos = go->aabb.CenterPoint();
+		}
+		else
+		{
+			pos = transf->position;
+		}
+
+
+		LookAt(pos, dist);
 	}
 }
 
@@ -155,6 +177,8 @@ void ModuleCamera3D::MoveCamera(float& speed)
 
 void ModuleCamera3D::DragCamera(float delta_x, float delta_y)
 {
+	ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeAll);
+
 	float3 mov(float3::zero);
 
 	mov += activeCam->frustum.WorldRight() * delta_x;
@@ -171,8 +195,6 @@ void ModuleCamera3D::Zoom(float delta_z)
 
 void ModuleCamera3D::Orbit(float motion_x, float motion_y)
 {
-	ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeAll);
-
 	float3 focus = activeCam->frustum.pos - looking_at;
 
 	Quat qy(activeCam->frustum.up, motion_x);

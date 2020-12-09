@@ -280,10 +280,9 @@ bool PanelConfiguration::Draw()
 				{
 					ImGui::Spacing();
 					ImGui::PushItemWidth(200);
-					ImGui::SliderFloat("WASD Move", &App->camera->WASDValue, 0.0f, 10.0f); 
-					ImGui::SliderFloat("Wheel Move", &App->camera->wheelSpeedValue, 0.0f, 4.0f);
-					ImGui::SliderFloat("Wheel Zoom", &App->camera->zoomValue, 0.0f, 2.0f);
-					ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 100.0f);
+					ImGui::SliderFloat("Input Sensitivity", &App->camera->slow, 0.0f, 100.0f); 
+					ImGui::SliderFloat("Camera Speed", &App->camera->currentSpeed, 0.0f, 100.0f);
+					ImGui::SliderFloat("Focus Distance", &App->camera->distanceFocus, 0.0f, 50.0f);
 					ImGui::TreePop();
 				}
 
