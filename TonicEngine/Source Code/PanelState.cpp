@@ -148,7 +148,7 @@ bool PanelState::Draw()
 void PanelState::DrawGuizmoButtons()
 {
 	// Move Button
-	if (ImGui::ImageButton((ImTextureID*)move->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)move->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN))
 		App->gui->currentOp = 1;
 
 	if (ImGui::IsItemHovered())
@@ -157,7 +157,7 @@ void PanelState::DrawGuizmoButtons()
 	ImGui::SameLine();
 
 	// Rot Button
-	if (ImGui::ImageButton((ImTextureID*)rot->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)rot->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && !App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN))
 		App->gui->currentOp = 2;
 
 	if (ImGui::IsItemHovered())
@@ -166,7 +166,7 @@ void PanelState::DrawGuizmoButtons()
 	ImGui::SameLine();
 
 	// Scale Button
-	if (ImGui::ImageButton((ImTextureID*)scale->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (ImGui::ImageButton((ImTextureID*)scale->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN))
 		App->gui->currentOp = 3;
 
 	if (ImGui::IsItemHovered())
