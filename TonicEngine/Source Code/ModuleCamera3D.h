@@ -15,25 +15,35 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
+	// Camera Movement
+	void LookAt(const float3 &Spot, float dist = 0.0f);
+	void Move(const float3 &Movement);
+	void Focus(GameObject* GO);
 
-	void Focus(GameObject* go);
-
-	float* GetViewMatrix();
-	void GoInitialPos();
-
-	ComponentCamera* GetActiveCamera();
-	const Frustum& GetActiveFrustum() const;
+	// Mouse Picking
+	bool Intersects(const AABB& refBox) const;
 	GameObject* MousePicking() const;
 
 public:
+
+	// Getters
 	float3 GetPosition() const;
 	float* GetView() const;
 	float* GetProjection() const;
 	bool* GetProjectionBool() const;
-	bool Intersects(const AABB& refBox) const;
+	ComponentCamera* GetActiveCamera();
+	const Frustum& GetActiveFrustum() const;
+
+private:
+
+	// Other camera movements
+	void MoveCamera(float& speed);
+	void DragCamera(float x, float y);
+	void Zoom(float z);
+
+	void Orbit(float x, float y);
+	void Rotate(float x, float y);
+	void DrawRay();
 
 public:
 	bool isOnConsole = false;
@@ -51,13 +61,12 @@ public:
 	ComponentCamera* mainCam = nullptr;
 	ComponentCamera* activeCam = nullptr;
 
-private:
-
-	void CalculateViewMatrix();
+	float3 looking_at;
+	bool looking = false;
+	bool mouse_picking = false;
 
 public:
 	
-	vec3 X, Y, Z, Position, Reference;
 	float zoomValue = 0.5f; // Increases or decreases the sensitivity of zoom
 	float wheelSpeedValue = 2.0f; // Increases or decreases the sensitivity of clicking wheel movement
 	float WASDValue = 6.0f; // Increases or decreases the sensitivity of moving with WASD
@@ -67,7 +76,6 @@ public:
 
 private:
 
-	mat4x4 ViewMatrix, ViewMatrixInverse;
 	LineSegment rayHit;
 };
 

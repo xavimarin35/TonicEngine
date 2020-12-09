@@ -564,7 +564,7 @@ void ModuleGUI::DrawGuizmo()
 
 	matrix = transf->globalMatrix.Transposed();
 
-	ImGuizmo::Manipulate(App->camera->GetViewMatrix(), App->renderer3D->GetProjectionMatrix(), op, ImGuizmo::MODE::WORLD, (float*)matrix.v);
+	ImGuizmo::Manipulate(App->camera->GetView(), App->renderer3D->GetProjectionMatrix(), op, ImGuizmo::MODE::WORLD, (float*)matrix.v);
 
 	transf->globalMatrix = matrix.Transposed();
 }
