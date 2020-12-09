@@ -6,6 +6,7 @@
 #include "MathGeoLib/include/Geometry/Frustum.h"
 #include "MathGeoLib/include/Geometry/LineSegment.h"
 #include "MathGeoLib/include/Geometry/Plane.h"
+#include "Color.h"
 
 class GameObject;
 class Plane;
@@ -55,6 +56,7 @@ public:
 
 	Frustum frustum;
 	bool showFrustrum = false;
+	bool seeFrustum = false;
 	bool update_frustum = true;
 
 };

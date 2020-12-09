@@ -92,6 +92,9 @@ public:
 
 	static void HelpMarker(const char* desc);
 
+	Color frustum_color = { 1.0f, 1.0f, 1.0f };
+	Color plane_color = { 1.0f, 0.0f, 0.0f };
+
 private:
 
 	ImGuiIO* io = nullptr;

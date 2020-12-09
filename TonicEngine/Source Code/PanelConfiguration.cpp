@@ -236,6 +236,20 @@ bool PanelConfiguration::Draw()
 				ImGui::Separator();
 				ImGui::Spacing();
 
+				if (ImGui::TreeNodeEx("Frustum:", ImGuiTreeNodeFlags_None))
+				{
+					ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
+					ImGui::Spacing();
+					ImGui::Text("Frustum: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3("##Frustum", (float*)&App->gui->frustum_color, flags);
+
+					ImGui::Spacing();
+					ImGui::Text("Planes: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3("##Planes", (float*)&App->gui->plane_color, flags);
+					ImGui::TreePop();
+				}
+
+				ImGui::Separator();
+				ImGui::Spacing();
+
 				if (ImGui::TreeNodeEx("View Modes:", ImGuiTreeNodeFlags_DefaultOpen)) 
 				{
 					ImGui::Spacing(); 

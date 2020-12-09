@@ -17,7 +17,7 @@ ComponentCamera::ComponentCamera(GameObject* GO) : Component(COMPONENT_TYPE::CAM
 	frustum.up = float3::unitY;
 
 	frustum.nearPlaneDistance = 1.0f;
-	frustum.farPlaneDistance = 1000.0f;
+	frustum.farPlaneDistance = 200.0f;
 	frustum.verticalFov = DegToRad(60.0f);
 	
 	AspectRatio(1.3f);
@@ -38,6 +38,9 @@ bool ComponentCamera::Update()
 	frustum.pos = transf->GetGlobalTransform().TranslatePart();
 	frustum.front = transf->GetGlobalTransform().WorldZ();
 	frustum.up = transf->GetGlobalTransform().WorldY();
+
+	if (seeFrustum)
+		DrawFrustum();
 
 	return true;
 }
@@ -67,7 +70,11 @@ void ComponentCamera::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		if (ImGui::Checkbox("Culling", &this->showFrustrum))
+		ImGui::Checkbox("Draw Frustum", &this->seeFrustum);
+
+		ImGui::Spacing();
+
+		if (ImGui::Checkbox("Camera Culling", &this->showFrustrum))
 		{
 			if (this->showFrustrum)
 			{
@@ -80,6 +87,7 @@ void ComponentCamera::DrawInspector()
 				App->renderer3D->culling = nullptr;
 		}
 
+		ImGui::Spacing();
 		ImGui::Separator();
 
 		float nearPlane = GetNearPlane();
@@ -87,10 +95,37 @@ void ComponentCamera::DrawInspector()
 		float fov = GetFOV();
 		float ratio = GetRatio();
 
-		ImGui::Text("Near Plane"); ImGui::SameLine(130.f); ImGui::DragFloat("##NearPlane", &nearPlane, 0.05f, 0.1f, farPlane);
-		ImGui::Text("Far Plane"); ImGui::SameLine(130.f); ImGui::DragFloat("##FarPlane", &farPlane, 0.05f, nearPlane, 5000.f);
-		ImGui::Text("FOV"); ImGui::SameLine(130.f); ImGui::DragFloat("##FOV", &fov, 0.05f, 1.f, 179.f);
-		ImGui::Text("Aspect Ratio"); ImGui::SameLine(130.f); ImGui::DragFloat("##AspectRatio", &ratio, 0.05f, 0.1f, 10.f);
+		if (ImGui::TreeNodeEx("Planes", ImGuiTreeNodeFlags_None))
+		{
+			ImGui::Spacing();
+
+			ImGui::PushItemWidth(180);
+			ImGui::SliderFloat("Near Plane", &nearPlane, 0.1f, farPlane);
+
+			ImGui::Spacing();
+
+			ImGui::PushItemWidth(180);
+			ImGui::SliderFloat("Far Plane", &farPlane, nearPlane, 400.f);
+			
+			ImGui::TreePop();
+		}
+
+		ImGui::Spacing();
+
+		if (ImGui::TreeNodeEx("Properties", ImGuiTreeNodeFlags_None))
+		{
+			ImGui::Spacing();
+
+			ImGui::PushItemWidth(180);
+			ImGui::SliderFloat("Field of View", &fov, 0.1f, 179.f);
+
+			ImGui::Spacing();
+
+			ImGui::PushItemWidth(180);
+			ImGui::SliderFloat("Aspect Ratio", &ratio, 0.1f, 10.f);
+
+			ImGui::TreePop();
+		}
 
 		if (nearPlane != GetNearPlane()) SetNearPlane(nearPlane);
 		if (farPlane != GetFarPlane()) SetFarPlane(farPlane);
@@ -171,7 +206,7 @@ void ComponentCamera::DrawFrustum()
 	float3 corners[8];
 	frustum.GetCornerPoints(corners);
 
-	glColor3f(1.f, 1.f, 1.f);
+	glColor3f(App->gui->frustum_color.r, App->gui->frustum_color.g, App->gui->frustum_color.b);
 
 	// Left Face
 	glVertex3f(corners[0].x, corners[0].y, corners[0].z);
@@ -188,7 +223,7 @@ void ComponentCamera::DrawFrustum()
 	glVertex3f(corners[7].x, corners[7].y, corners[7].z);
 
 	// Near-Far
-	glColor3f(1.f, 0.f, 0.f);
+	glColor3f(App->gui->plane_color.r, App->gui->plane_color.g, App->gui->plane_color.b);
 
 	// Near Plane
 	glVertex3f(corners[0].x, corners[0].y, corners[0].z);
@@ -216,7 +251,7 @@ void ComponentCamera::DrawFrustum()
 	glVertex3f(corners[5].x, corners[5].y, corners[5].z);
 	glVertex3f(corners[7].x, corners[7].y, corners[7].z);
 
-	glColor3f(1, 1, 1);
+	glColor3f(App->gui->frustum_color.r, App->gui->frustum_color.g, App->gui->frustum_color.b);
 	glEnd();
 
 }
