@@ -551,22 +551,34 @@ void ModuleGUI::ChangeOperationGuizmo(ImGuizmo::OPERATION& op)
 
 void ModuleGUI::DrawGuizmo()
 {
+	if (App->scene_intro->GOselected == nullptr) return;
+
+	GameObject* GO = App->scene_intro->GOselected;
+	ComponentTransform* transf = (ComponentTransform*)GO->GetComponent(COMPONENT_TYPE::TRANSFORM);
+
+	// View parametres
+	float4x4 view_matrix = App->camera->GetActiveCamera()->frustum.ViewMatrix();
+	view_matrix.Transpose();
+	float4x4 proj_matrix = App->camera->GetActiveCamera()->frustum.ProjectionMatrix().Transposed();
+
 	// Draw guizmos axis
 	ImGuiIO& io = ImGui::GetIO();
 	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
 	// Change guizmos operations
-	ChangeOperationGuizmo(op);
-
-	ComponentTransform* transf = (ComponentTransform*)App->scene_intro->GOselected->GetComponent(COMPONENT_TYPE::TRANSFORM);
+	ChangeOperationGuizmo(g_operator);
 
 	float4x4 matrix;
-
 	matrix = transf->globalMatrix.Transposed();
 
-	ImGuizmo::Manipulate(App->camera->GetView(), App->renderer3D->GetProjectionMatrix(), op, ImGuizmo::MODE::WORLD, (float*)matrix.v);
+	ImGuizmo::MODE actualMode = (g_operator == ImGuizmo::OPERATION::SCALE ? ImGuizmo::MODE::LOCAL : mode);
 
-	transf->globalMatrix = matrix.Transposed();
+	ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), g_operator, actualMode, (float*)matrix.v);
+
+	if (ImGuizmo::IsUsing() == true)
+	{
+		transf->globalMatrix = matrix.Transposed();
+	}
 }
 
 void ModuleGUI::HelpMarker(const char* desc)

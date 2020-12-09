@@ -39,6 +39,9 @@ bool ModuleCamera3D::CleanUp()
 
 update_status ModuleCamera3D::Update(float dt)
 {
+	if (ImGuizmo::IsUsing() == true)
+		return UPDATE_CONTINUE;
+
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2)
 	{
 		// Trying to focus while hovering a menu
