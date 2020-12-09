@@ -22,20 +22,16 @@ public:
 	bool CleanUp();
 
 	void LoadFile(const char* path, const char* texture_path = "Assets/Others/Lenna.png");
-	void LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* node_path, std::string output_file);
+	void LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root);
 
-	bool Export(const char* name, std::string& output_file, uint num_index, uint* index, uint num_vertex, float3* vertex, uint num_normals, float3* face_center, float3* face_normal, uint num_tex_coords, float* tex_coords);
+	bool Export(const char* name, std::string& output_file, ResourceMesh* mesh);
 	bool Load(ResourceMesh* mesh);
 
 
 public:
-	bool active;
+	bool active = false;
+	GameObject* StreetGO = nullptr;
 
-private:
-
-	std::string TextureBuilding(int id);
-	std::string GetOwnTexture(std::string objName, std::string texture_path);
-	std::string GetMeshName(std::string name);
 };
 
 #endif

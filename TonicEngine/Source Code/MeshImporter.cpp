@@ -15,7 +15,7 @@
 #include "Assimp/include/postprocess.h"
 #include "Assimp/include/cfileio.h"
 
-#pragma coment (lib, "Assimp/libx86/assimp.lib")
+#pragma comment (lib, "Assimp/libx86/assimp.lib")
 
 MeshImporter::MeshImporter(Application* app, bool start_enabled) : Module(app, start_enabled) 
 { 
@@ -65,17 +65,15 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 
 	if (scene != nullptr)
 	{
-		aiNode* root_node = scene->mRootNode;
+		aiNode* node = scene->mRootNode;
+		std::string file;
 
-		GameObject* Empty = App->scene_intro->CreateGO(App->GetPathName(path));
+		StreetGO = App->scene_intro->CreateGO(App->GetPathName(path));
+		App->scene_intro->GOroot->AddChild(StreetGO);
 
-		/*Importer ex;*/ std::string file;
-
-		App->scene_intro->GOroot->AddChild(Empty);
-
-		if (root_node->mNumChildren > 0)
-			for (int i = 0; i < root_node->mNumChildren; ++i)
-				LoadNode(scene, root_node->mChildren[i], Empty, path, file);
+		if (node->mNumChildren > 0)
+			for (int i = 0; i < node->mNumChildren; ++i)
+				LoadNode(scene, node->mChildren[i], path, file, StreetGO);
 
 		aiReleaseImport(scene);
 
@@ -84,7 +82,7 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
 }
 
-void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* parent, const char* node_path, std::string output_file)
+void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion rotation;
@@ -117,8 +115,8 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 			dummyMesh = false;
 	}
 
-	GameObject* obj = App->scene_intro->CreateGO(node_name);
-	ComponentTransform* transf = obj->GetComponentTransform();
+	GameObject* go = App->scene_intro->CreateGO(node_name);
+	ComponentTransform* transf = go->GetComponentTransform();
 
 	transf->position = pos2;
 	transf->scale = s2;
@@ -126,12 +124,12 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 	transf->UpdateLocalTransform();
 
-	obj->GetComponentTransform()->default_position = transf->position;
-	obj->GetComponentTransform()->default_rotation_e = transf->rotation_euler;
-	obj->GetComponentTransform()->default_rotation_q= transf->rotation_quaternion;
-	obj->GetComponentTransform()->default_scale = transf->scale;
+	go->GetComponentTransform()->default_position = transf->position;
+	go->GetComponentTransform()->default_rotation_e = transf->rotation_euler;
+	go->GetComponentTransform()->default_rotation_q= transf->rotation_quaternion;
+	go->GetComponentTransform()->default_scale = transf->scale;
 
-	parent->AddChild(obj);
+	GO_root->AddChild(go);
 
 	for (int i = 0; i < node->mNumMeshes; ++i)
 	{
@@ -142,17 +140,17 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 		{
 			node_name = new_mesh->mName.C_Str();
 			if (node_name == "")
-				node_name = obj->data.name + "";
+				node_name = go->data.name + "";
 
 			if (i > 0)
 				node_name.append("(" + std::to_string(i) + ")");
 
 			child = App->scene_intro->CreateGO(node_name);
-			obj->AddChild(child);
+			go->AddChild(child);
 		}
 		else
 		{
-			child = obj;
+			child = go;
 		}
 
 		child->CreateComponent(COMPONENT_TYPE::MESH);
@@ -189,7 +187,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 					if (new_mesh->mFaces[i].mNumIndices != 3)
 					{
 						res_mesh->data.indices3 = false;
-						LOG_C("WARNING, mesh %s geometry face with != 3 indices!", obj->data.name.c_str());
+						LOG_C("WARNING: mesh %s geometry face with != 3 indices!", go->data.name.c_str());
 					}
 					else
 						memcpy(&res_mesh->data.index[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(uint));
@@ -238,7 +236,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 				}
 			}
 
-			Export(child->data.name.c_str(), res_mesh->exported_file, res_mesh->data.num_index, res_mesh->data.index, res_mesh->data.num_vertex, res_mesh->data.vertex, res_mesh->data.num_normals, res_mesh->data.face_center, res_mesh->data.face_normal, res_mesh->data.num_tex_coords, res_mesh->data.tex_coords);
+			Export(child->data.name.c_str(), res_mesh->exported_file, res_mesh);
 			res_mesh->file = node_path;
 
 			mesh->rMesh = res_mesh;
@@ -274,16 +272,20 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, GameObject* pare
 
 	if (node->mNumChildren > 0)
 		for (int i = 0; i < node->mNumChildren; ++i)
-			LoadNode(scene, node->mChildren[i], obj, node_path, output_file);
+			LoadNode(scene, node->mChildren[i], node_path, output_file, go);
 }
 
-bool MeshImporter::Export(const char* name, std::string& output_file, uint num_index, uint* index, uint num_vertex, float3* vertex, uint num_normals, float3* face_center, float3* face_normal, uint num_tex_coords, float* tex_coords)
+bool MeshImporter::Export(const char* name, std::string& output_file, ResourceMesh* mesh)
 {
 	bool ret = false;
 
-	uint ranges[4] = { num_index, num_vertex,  num_normals, num_tex_coords };
+	uint ranges[4] = { mesh->data.num_index, mesh->data.num_vertex,  mesh->data.num_normals, mesh->data.num_tex_coords };
 
-	uint size = sizeof(ranges) + sizeof(uint) * num_index + sizeof(float) * num_vertex * 3 + sizeof(float) * num_normals * 3 * 2 + sizeof(float) * num_tex_coords * 2;
+	uint size = sizeof(ranges) 
+		+ sizeof(uint) * mesh->data.num_index 
+		+ sizeof(float) * mesh->data.num_vertex * 3 
+		+ sizeof(float) * mesh->data.num_normals * 3 * 2 
+		+ sizeof(float) * mesh->data.num_tex_coords * 2;
 
 	char* data = new char[size]; 
 	char* cursor = data;
@@ -292,24 +294,24 @@ bool MeshImporter::Export(const char* name, std::string& output_file, uint num_i
 	memcpy(cursor, ranges, bytes);
 
 	cursor += bytes; 
-	bytes = sizeof(uint) * num_index;
-	memcpy(cursor, index, bytes);
+	bytes = sizeof(uint) * mesh->data.num_index;
+	memcpy(cursor, mesh->data.index, bytes);
 
 	cursor += bytes; 
-	bytes = sizeof(float) * num_vertex * 3;
-	memcpy(cursor, vertex, bytes);
+	bytes = sizeof(float) * mesh->data.num_vertex * 3;
+	memcpy(cursor, mesh->data.vertex, bytes);
 
 	cursor += bytes; 
-	bytes = sizeof(float) * num_normals * 3;
-	memcpy(cursor, face_center, bytes);
+	bytes = sizeof(float) * mesh->data.num_normals * 3;
+	memcpy(cursor, mesh->data.face_center, bytes);
 
 	cursor += bytes; 
-	bytes = sizeof(float) * num_normals * 3;
-	memcpy(cursor, face_normal, bytes);
+	bytes = sizeof(float) * mesh->data.num_normals * 3;
+	memcpy(cursor, mesh->data.face_normal, bytes);
 
 	cursor += bytes;
-	bytes = sizeof(float) * num_tex_coords * 2;
-	memcpy(cursor, tex_coords, bytes);
+	bytes = sizeof(float) * mesh->data.num_tex_coords * 2;
+	memcpy(cursor, mesh->data.tex_coords, bytes);
 
 
 	ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_MESH_FOLDER, name, "Tmesh");
@@ -383,13 +385,4 @@ bool MeshImporter::Load(ResourceMesh* mesh)
 		ret = true;
 	}
 	return ret;
-}
-
-std::string MeshImporter::GetMeshName(std::string name)
-{
-	size_t num = name.find_last_of("_");
-
-	std::string path = name.substr(0, num);
-
-	return path;
 }
