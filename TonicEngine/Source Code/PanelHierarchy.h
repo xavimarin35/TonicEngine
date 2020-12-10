@@ -25,6 +25,11 @@ public:
 	GameObject* draggedGO = nullptr;
 
 private:
+	GameObject* lastParent = nullptr;
+	GameObject* newParent = nullptr;
+
+	bool changingParent = false;
+
 };
 
 #endif

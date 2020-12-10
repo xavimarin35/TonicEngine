@@ -101,9 +101,20 @@ void ComponentMesh::DrawInspector()
 				ImGui::TextColored(GREY_COLOR, "%s", go->GetComponentMesh()->rMesh->exported_file.c_str());
 				ImGui::EndTooltip();
 			}
+
+			ImGui::Spacing();
+
+			ImGui::Text("Source File:"); ImGui::SameLine();
+			ImGui::TextColored(YELLOW_COLOR, go->GetComponentMesh()->rMesh->file.c_str());
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::TextColored(GREY_COLOR, "%s", go->GetComponentMesh()->rMesh->file.c_str());
+				ImGui::EndTooltip();
+			}
 		}
 		
-		ImGui::Separator();
+		/*ImGui::Separator();
 
 		if (ImGui::TreeNodeEx("Face Normals:", ImGuiTreeNodeFlags_None)) {
 			ImGuiColorEditFlags flags = ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_PickerHueBar;
@@ -119,7 +130,7 @@ void ComponentMesh::DrawInspector()
 			ImGui::Text("Length:");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtV"); ImGui::InputFloat(" ", &go->GetComponentMesh()->vertexLenght, 0.1f, 4.0f); ImGui::PopID();
 			ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(150); ImGui::ColorEdit3(" ", (float*)&go->GetComponentMesh()->vertexColor, flags);
 			ImGui::TreePop();
-		}
+		}*/
 	}
 }
 

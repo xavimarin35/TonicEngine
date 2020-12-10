@@ -93,22 +93,68 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	if (ImGui::IsMouseClicked(1) && ImGui::IsWindowHovered())
 		openMenuNotHovering = true;
 
-	// not working payload yet
+	// ReParent (WIP)
 	if (ImGui::BeginDragDropSource())
 	{
-		ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
-		ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->data.name.c_str());
-		draggedGO = GO;
+		if (GO != App->scene_intro->GOroot)
+		{
+			// Object dragging
+			ImGui::SetDragDropPayload("DRAG GO", GO, sizeof(GameObject));
+			ImGui::TextColored(YELLOW_COLOR, "Drag %s", GO->data.name.c_str());
+			draggedGO = GO;
+			lastParent = draggedGO->GOparent;
 
+		}
 		ImGui::EndDragDropSource();
 	}
 
 	if (ImGui::BeginDragDropTarget())
 	{
-		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Node Dragged"))
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DRAG GO"))
 		{
-			GO->AddChild(draggedGO); 
-			draggedGO = nullptr;
+			changingParent = true;
+
+			int posParent = -1;
+			int posDragged = -1;
+
+			newParent = GO;
+
+			for (int i = 0; i < lastParent->childrenList.size(); i++)
+			{
+				if (lastParent->childrenList[i] == newParent)
+				{
+					posParent = i;
+				}
+
+				if (lastParent->childrenList[i] == draggedGO)
+				{
+					posDragged = i;
+				}
+			}
+
+			for (int i = 0; i < draggedGO->childrenList.size(); i++)
+			{
+				// Trying to drop a parent to be the child of his child (WTF bro, everything alright?)
+				if (draggedGO->childrenList[i] == newParent)
+				{
+					changingParent = false;
+
+					LOG_C("ERROR: Cannot be child of his own child");
+					LOG_C("WARNING: Don't try it with the child of the child, it will crash");
+				}
+			}
+
+			if (posParent < posDragged && changingParent)
+			{
+				newParent->AddChild(draggedGO);
+				draggedGO = nullptr;
+
+			}
+			else if (posDragged < posParent && changingParent)
+			{
+				// When the new parent has a higher position in the list than the child, an error occurs
+				LOG_C("ERROR: Cannot be parent of a previous list element");
+			}
 		}
 
 		ImGui::EndDragDropTarget();
