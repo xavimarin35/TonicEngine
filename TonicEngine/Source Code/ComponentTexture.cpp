@@ -26,6 +26,7 @@ bool ComponentTexture::CleanUp()
 {
 	if (rTexture != nullptr)
 	{
+		rTexture->references -= 1;
 		rTexture->loaded -= 1;
 
 		if (rTexture->loaded == 0)

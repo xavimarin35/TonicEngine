@@ -52,6 +52,7 @@ bool ComponentMesh::CleanUp()
 {
 	if (rMesh != nullptr)
 	{
+		rMesh->references -= 1;
 		rMesh->loaded -= 1;
 
 		if (rMesh->loaded == 0)

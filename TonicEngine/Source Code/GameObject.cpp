@@ -70,11 +70,11 @@ void GameObject::Update()
 
 void GameObject::CleanUp()
 {
-	if (this->GetComponentMesh() != nullptr)
+	/*if (this->GetComponentMesh() != nullptr)
 		GetComponentMesh()->CleanUp();
 
 	if (this->GetComponentTexture() != nullptr)
-		GetComponentTexture()->CleanUp();
+		GetComponentTexture()->CleanUp();*/
 
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
