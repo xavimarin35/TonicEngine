@@ -68,12 +68,12 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 		aiNode* node = scene->mRootNode;
 		std::string file;
 
-		StreetGO = App->scene_intro->CreateGO(App->GetPathName(path));
-		App->scene_intro->GOroot->AddChild(StreetGO);
+		GameObject* GO = App->scene_intro->CreateGO(App->GetPathName(path));
+		App->scene_intro->GOroot->AddChild(GO);
 
 		if (node->mNumChildren > 0)
 			for (int i = 0; i < node->mNumChildren; ++i)
-				LoadNode(scene, node->mChildren[i], path, file, StreetGO);
+				LoadNode(scene, node->mChildren[i], path, file, GO, texture_path);
 
 		aiReleaseImport(scene);
 
@@ -82,7 +82,7 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
 }
 
-void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root)
+void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root, std::string text_path)
 {
 	aiVector3D translation, scaling;
 	aiQuaternion rotation;
@@ -124,14 +124,26 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 
 	transf->UpdateLocalTransform();
 
-	go->GetComponentTransform()->default_position = transf->position;
-	go->GetComponentTransform()->default_rotation_e = transf->rotation_euler;
-	go->GetComponentTransform()->default_rotation_q= transf->rotation_quaternion;
-	go->GetComponentTransform()->default_scale = transf->scale;
+	if (GO_root->data.name == "Street environment_V04" || GO_root->data.name == "Dummy001")
+	{
+		go->GetComponentTransform()->default_position = transf->position;
+		go->GetComponentTransform()->default_rotation_e = transf->rotation_euler;
+		go->GetComponentTransform()->default_rotation_q = transf->rotation_quaternion;
+		go->GetComponentTransform()->default_scale = transf->scale;
+	}
+	else
+	{
+		go->GetComponentTransform()->default_position = float3::zero;
+		go->GetComponentTransform()->default_rotation_e = float3::zero;
+		go->GetComponentTransform()->default_rotation_q = Quat::identity;
+		go->GetComponentTransform()->default_scale = float3::one;
+	}
 
 	GO_root->AddChild(go);
 
-	for (int i = 0; i < node->mNumMeshes; ++i)
+	go->GetComponentTransform()->Reset();
+
+	for (int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* new_mesh = scene->mMeshes[node->mMeshes[i]];
 
@@ -251,6 +263,12 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 		aiString path;
 		material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 
+		if (mesh != nullptr)
+		{
+			mesh->aabb.SetNegativeInfinity();
+			mesh->aabb = mesh->aabb.MinimalEnclosingAABB(mesh->rMesh->data.vertex, mesh->rMesh->data.num_vertex);
+		}
+
 		if (path.C_Str() != nullptr && path.length > 0)
 		{
 			child->CreateComponent(COMPONENT_TYPE::TEXTURE);
@@ -262,17 +280,20 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 			if (child->GetComponentTexture()->rTexture != nullptr)
 				child->GetComponentTexture()->rTexture->LoadInMemory();
 		}
-		else child->GetComponentTexture()->texture = App->tex_imp->checker_texture;
+		else
+		{
+			child->CreateComponent(COMPONENT_TYPE::TEXTURE);
 
-		// Bounding Box (Not working now && crashen when importing a new model) 
-		// Must create and call a function of ComponentMesh()
-		mesh->aabb.SetNegativeInfinity();
-		mesh->aabb = mesh->aabb.MinimalEnclosingAABB(mesh->rMesh->data.vertex, mesh->rMesh->data.num_vertex);
+			child->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(text_path.c_str()));
+
+			if (child->GetComponentTexture()->rTexture != nullptr)
+				child->GetComponentTexture()->rTexture->LoadInMemory();
+		}
 	}
 
 	if (node->mNumChildren > 0)
 		for (int i = 0; i < node->mNumChildren; ++i)
-			LoadNode(scene, node->mChildren[i], node_path, output_file, go);
+			LoadNode(scene, node->mChildren[i], node_path, output_file, go, text_path);
 }
 
 bool MeshImporter::Export(const char* name, std::string& output_file, ResourceMesh* mesh)

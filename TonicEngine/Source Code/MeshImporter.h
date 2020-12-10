@@ -22,7 +22,7 @@ public:
 	bool CleanUp();
 
 	void LoadFile(const char* path, const char* texture_path = "Assets/Others/Lenna.png");
-	void LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root);
+	void LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root, std::string text_path);
 
 	bool Export(const char* name, std::string& output_file, ResourceMesh* mesh);
 	bool Load(ResourceMesh* mesh);
@@ -30,7 +30,6 @@ public:
 
 public:
 	bool active = false;
-	GameObject* StreetGO = nullptr;
 
 };
 
