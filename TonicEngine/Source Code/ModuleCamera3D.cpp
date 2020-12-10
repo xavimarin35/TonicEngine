@@ -42,7 +42,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if (ImGuizmo::IsUsing() == true)
 		return UPDATE_CONTINUE;
 
-	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2)
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2 || isOnQuit || isOnSelectTexture)
 	{
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)

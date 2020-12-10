@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
+#include "ModuleCamera3D.h"
 
 ComponentTexture::ComponentTexture(GameObject* gameObject) : Component(COMPONENT_TYPE::TEXTURE, gameObject)
 {
@@ -45,11 +46,11 @@ void ComponentTexture::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		if (active)
+		if (active && rTexture != nullptr)
 		{
 			if (ImGui::Button("Select Texture"))
 				openMenuTex = true;
-				
+
 			ImGui::SameLine();
 
 			if (ImGui::Button("Disable Texture"))
@@ -83,9 +84,10 @@ void ComponentTexture::DrawInspector()
 			else if (EnableCheckersTexture)
 				tex = App->tex_imp->checker_texture.id;
 
+
 			ImGui::Image((ImTextureID*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
-		else
+		else if(!active)
 		{
 			if (ImGui::Button("Enable Texture"))
 				active = true;
@@ -93,6 +95,12 @@ void ComponentTexture::DrawInspector()
 			ImGui::SameLine();
 
 			App->gui->HelpMarker("Click 'Enable' button to select a texture");
+		}
+		else if (rTexture == nullptr)
+		{
+			ImGui::Spacing();
+
+			App->gui->HelpMarker("This texture has not loaded propertly,\ntry dropping one from the Assets folder");
 		}
 	}
 }
@@ -102,6 +110,10 @@ void ComponentTexture::OpenTexturesMenu()
 {
 	if (ImGui::Begin("Select Texture Menu", &openMenuTex, ImGuiWindowFlags_AlwaysAutoResize))
 	{
+		if (ImGui::IsWindowHovered())
+			App->camera->isOnSelectTexture = true;		
+		else
+			App->camera->isOnSelectTexture = false;
 
 		if (ImGui::ImageButton((void*)App->scene_intro->GOselected->GetComponentTexture()->rTexture->tex.id, ImVec2(140, 140), ImVec2(0, 1), ImVec2(1, 0)))
 		{

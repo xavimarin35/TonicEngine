@@ -56,6 +56,8 @@ public:
 	bool isOnResourcesChild2 = false;
 	bool isOnScene = false;
 	bool isOnGame = false;
+	bool isOnQuit = false;
+	bool isOnSelectTexture = false;
 
 	GameObject* cameraGO = nullptr;
 	ComponentCamera* mainCam = nullptr;

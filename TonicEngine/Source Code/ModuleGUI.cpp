@@ -449,6 +449,8 @@ bool ModuleGUI::Draw()
 
 	if (exitMenu)
 	{
+		App->camera->isOnQuit = true;
+
 		ImGui::OpenPopup("Quit");
 		if (ImGui::BeginPopupModal("Quit", &exitMenu, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
 		{
@@ -470,6 +472,10 @@ bool ModuleGUI::Draw()
 			ImGui::Spacing();
 			ImGui::EndPopup();
 		}
+	}
+	else
+	{
+		App->camera->isOnQuit = false;
 	}
 
 	if (deleteScene)
