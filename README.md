@@ -6,24 +6,31 @@
 
 ### Basic Features
 
+* **Resource Manager** which manages all the assets of the engine
+* **Mouse Picking** functionality
 * **Drag & Drop** functionality (models and textures)
 * Creation of **different Game Objects**
+* **Play and Pause** buttons to play the game
+* Buttons to activate or deactivate **bounding boxes**
 * **Configuration window** to change renderer and camera options
-* **Inspector window** to change and enable/disable textures and to show/hide normals
+* **Inspector window** to modify the transform and texture of a Game Object
+* **Resources folder** to see which resources are being used
 * Other editor tools found in the **main menu** 
 
 ### Camera Controls
 
+* **Right Click**: First-Person Camera
 * **Right Click + WASD, QE**: Move camera in different directions.
 * **Shift + Movement**: Duplicates camera velocity.
 * **ALT + Left Click**: Orbit around reference point.
-* **Mouse Wheel Scroll**: Zoom in / Zoom out.
+* **Mouse Wheel Scroll** or **ALT + Right Click**: Zoom in / Zoom out.
 * **Mouse Wheel Drag**: Move camera through the actual axis.
+* **F**: Focus camera to selected Game Object.
 
 ### Extra Features
 
 * **Docking** functionality
-* **Create** and **Remove** Game Objects
+* **Gizmos** to move, rotate and scale Game Objects
 * **Debug** Menu
 * Camera **sensitivity** options
 * Console **auto scroll**
