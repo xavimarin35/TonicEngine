@@ -8,6 +8,8 @@
 class Resource;
 class ResourceMesh;
 class ResourceTexture;
+class ResourceScene;
+class ResourceModel;
 
 class ModuleResources : public Module
 {
@@ -21,6 +23,7 @@ public:
 	bool CleanUp();
 
 	void DrawResources(RESOURCE_TYPE type);
+	void AlignResources(int &i);
 
 	Resource* CreateResource(RESOURCE_TYPE type);
 	Resource* BuildResource(Resource* res, const char* file, std::string written);
@@ -33,15 +36,18 @@ public:
 
 	bool CompareExtensionForTextures(std::string var);
 	bool CompareExtensionForModels(std::string var);
+	bool CompareExtensionForScenes(std::string var);
+
+public: 
 
 	std::map<uint, Resource*> resources;
 	std::map<uint, ResourceTexture*> tex_resources;
 	std::map<uint, ResourceMesh*> mesh_resources;
+	std::map<uint, ResourceScene*> scene_resources;
+	std::map<uint, ResourceModel*> model_resources;
 
 private:
 
-	int tex_iterator = 0;
-	int mesh_iterator = 0;
 	
 };
 

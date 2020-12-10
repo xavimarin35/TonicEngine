@@ -21,7 +21,6 @@ bool PanelAbout::Start()
 	
 	icon = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/iconEngine.ico"));
 	icon->LoadInMemory();
-	//texIcon = App->tex_imp->LoadTexture("Assets/Others/iconEngine.ico");
 
 	return true;
 }

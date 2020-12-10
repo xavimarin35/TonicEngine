@@ -42,7 +42,6 @@ bool PanelResources::Draw()
 
 			ImGui::BeginChild("Resources Tree", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.20f, 260), false, window_flags);
 
-			// Dont zoom in/out when this child window is hovered
 			if (ImGui::IsWindowHovered()) 
 				App->camera->isOnResourcesChild1 = true;
 			else App->camera->isOnResourcesChild1 = false;
@@ -58,24 +57,18 @@ bool PanelResources::Draw()
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
 					ImGui::Selectable("Textures", &showing_textures);
+
+					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
+					ImGui::SameLine();
+					ImGui::Selectable("Scenes", &showing_scenes);
+					
+					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
+					ImGui::SameLine();
+					ImGui::Selectable("Models", &showing_models);
 					ImGui::TreePop();
 				}
 				ImGui::TreePop();
 			}
-
-
-			/*if (showing_meshes)
-			{
-				showing_textures = false;
-				showing_meshes = true;
-			}
-
-			if (showing_textures)
-			{
-				showing_meshes = false;
-				showing_textures = true;
-			}*/
-			
 
 			ImGui::EndChild();
 
@@ -87,7 +80,6 @@ bool PanelResources::Draw()
 			ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 5.0f);
 			ImGui::BeginChild("Resources Icons", ImVec2(0, 260), true, window_flags2);
 
-			// Dont zoom in/out when this child window is hovered
 			if (ImGui::IsWindowHovered()) App->camera->isOnResourcesChild2 = true;
 			else App->camera->isOnResourcesChild2 = false;
 
@@ -97,23 +89,15 @@ bool PanelResources::Draw()
 			if (showing_textures)
 				App->resources->DrawResources(RESOURCE_TYPE::TEXTURE);
 
+			if (showing_scenes)
+				App->resources->DrawResources(RESOURCE_TYPE::SCENE);
+
+			if (showing_models)
+				App->resources->DrawResources(RESOURCE_TYPE::MODEL);
+
 			ImGui::EndChild();
 			ImGui::PopStyleVar();
 
-
-			//if (ImGui::Button("Meshes"))
-			//{
-			//	showing_textures = false;
-			//	showing_meshes = true;
-			//}
-
-			//if (ImGui::Button("Textures"))
-			//{
-			//	showing_meshes = false;
-			//	showing_textures = true;
-			//}
-
-			
 		}
 
 		ImGui::End();
@@ -121,3 +105,4 @@ bool PanelResources::Draw()
 
 	return true;
 }
+

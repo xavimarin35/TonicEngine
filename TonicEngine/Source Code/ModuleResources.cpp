@@ -11,6 +11,7 @@
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
 #include "ResourceModel.h"
+#include "ResourceScene.h"
 
 #include <string>
 
@@ -99,6 +100,15 @@ uint ModuleResources::GetNewFile(const char* new_file)
 			ret = ImportFile(path.c_str(), RESOURCE_TYPE::MODEL);
 		}
 	}
+	else if (CompareExtensionForScenes(extension))
+	{
+		path = ASSETS_SCENES_FOLDER + path;
+
+		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
+		{
+			ret = ImportFile(path.c_str(), RESOURCE_TYPE::SCENE);
+		}
+	}
 
 	return ret;
 }
@@ -117,6 +127,12 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 		{
 		case RESOURCE_TYPE::TEXTURE: 
 			create_resource = App->tex_imp->LoadTextureFromPath(new_file_in_assets, written_file);
+			break;
+		case RESOURCE_TYPE::MESH:
+			break;
+		case RESOURCE_TYPE::SCENE:
+			break;
+		case RESOURCE_TYPE::MODEL:
 			break;
 		}
 
@@ -179,6 +195,14 @@ bool ModuleResources::CompareExtensionForModels(std::string var)
 		return false;
 }
 
+bool ModuleResources::CompareExtensionForScenes(std::string var)
+{
+	if (var == "json" || var == "JSON")
+		return true;
+	else
+		return false;
+}
+
 bool ModuleResources::CompareExtensionForTextures(std::string var)
 {
 	if (var == "png" || var == "PNG" || var == "dds" || var == "DDS" || var == "jpg" || var == "tga" || var == "ico" || var == "ttex")
@@ -215,20 +239,8 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 						ImGui::TextColored(YELLOW_COLOR, "%i", it->second->references);
 						ImGui::EndTooltip();
 					}
-						//ImGui::SetTooltip("Name: %s\nUUID: %u\nReferences: %i", App->GetPathName(it->second->file).c_str(), it->second->res_UUID, it->second->references);
 
-					if (i < 6)
-					{
-						ImGui::SameLine();
-						ImGui::Dummy(ImVec2(5.0f, 5.0f));
-						ImGui::SameLine();
-
-					}
-					else
-					{
-						i = 0;
-						ImGui::Dummy(ImVec2(875.0f, 10.0f));
-					}
+					AlignResources(i);
 				}
 			}
 		}
@@ -263,20 +275,82 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 						ImGui::EndTooltip();
 					}
 
-					if (i < 6)
-					{
-						ImGui::SameLine();
-						ImGui::Dummy(ImVec2(5.0f, 5.0f));
-						ImGui::SameLine();
-
-					}
-					else
-					{
-						i = 0;
-						ImGui::Dummy(ImVec2(10.0f, 10.0f));
-					}
+					AlignResources(i);
 				}
 			}
 		}
+	}
+
+	else if (type == RESOURCE_TYPE::MODEL)
+	{
+		int i = 0;
+
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		{
+			if (it->second != nullptr)
+			{
+				if (it->second->type == RESOURCE_TYPE::MODEL)
+				{
+					i++;
+
+					//std::map<uint, ResourceModel*>::const_iterator mesh = model_resources.find(it->first);
+					//ImGui::ImageButton((ImTextureID*)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+
+					if (ImGui::IsItemHovered())
+					{
+						ImGui::BeginTooltip();
+						ImGui::Text("Name:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->exported_file).c_str());
+						ImGui::EndTooltip();
+					}
+
+					AlignResources(i);
+				}
+			}
+		}
+	}
+
+	else if (type == RESOURCE_TYPE::SCENE)
+	{
+		int i = 0;
+
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		{
+			if (it->second != nullptr)
+			{
+				if (it->second->type == RESOURCE_TYPE::SCENE)
+				{
+					i++;
+
+					//std::map<uint, ResourceScene*>::const_iterator mesh = scene_resources.find(it->first);
+					//ImGui::ImageButton((ImTextureID*)App->gui->Presources->scene->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+
+					if (ImGui::IsItemHovered())
+					{
+						ImGui::BeginTooltip();
+						ImGui::Text("Name:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->exported_file).c_str());
+						ImGui::EndTooltip();
+					}
+
+					AlignResources(i);
+				}
+			}
+		}
+	}
+}
+
+void ModuleResources::AlignResources(int &i)
+{
+	if (i < 6)
+	{
+		ImGui::SameLine();
+		ImGui::Dummy(ImVec2(5.0f, 5.0f));
+		ImGui::SameLine();
+	}
+	else
+	{
+		i = 0;
+		ImGui::Dummy(ImVec2(10.0f, 10.0f));
 	}
 }

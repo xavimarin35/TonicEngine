@@ -430,6 +430,9 @@
     <ClInclude Include="Source Code\PanelCameraPreview.h">
       <Filter>Sources\Modules\GUI\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ResourceScene.h">
+      <Filter>Sources\Modules\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -677,6 +680,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\PanelCameraPreview.cpp">
       <Filter>Sources\Modules\GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ResourceScene.cpp">
+      <Filter>Sources\Modules\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
