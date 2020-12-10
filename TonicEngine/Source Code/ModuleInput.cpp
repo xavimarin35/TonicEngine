@@ -140,11 +140,18 @@ update_status ModuleInput::PreUpdate(float dt)
 				{
 					if (App->scene_intro->GOselected != nullptr)
 					{
-						App->scene_intro->GOselected->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(dropDirection));
-						App->scene_intro->GOselected->GetComponentTexture()->rTexture->LoadInMemory();
-						//App->tex_imp->LoadTexture(dropDirection);
-						TextureFileDropped = true;
-						LOG_C("New texture dropped on window with path: %s", dropDirection);
+						if (App->scene_intro->GOselected->GetComponentTexture() == nullptr)
+						{
+							LOG_C("WARNING: This Game Object doesn't have a Component Texture, maybe try with another child");
+						}
+						else
+						{
+							App->scene_intro->GOselected->GetComponentTexture()->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile(dropDirection));
+							App->scene_intro->GOselected->GetComponentTexture()->rTexture->LoadInMemory();
+							//App->tex_imp->LoadTexture(dropDirection);
+							TextureFileDropped = true;
+							LOG_C("New texture dropped on window with path: %s", dropDirection);
+						}
 					}
 					else
 					{
