@@ -111,7 +111,7 @@ uint ModuleResources::GetNewFile(const char* new_file)
 
 		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
 		{
-			ret = ImportFile(path.c_str(), RESOURCE_TYPE::SCENE);
+		ret = ImportFile(path.c_str(), RESOURCE_TYPE::SCENE);
 		}
 	}
 
@@ -137,7 +137,6 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 		case RESOURCE_TYPE::MESH:
 			break;
 		case RESOURCE_TYPE::SCENE:
-			create_resource = App->scene_intro->LoadResourceScene(scene_name, new_file_in_assets, written_file);
 			break;
 		case RESOURCE_TYPE::MODEL:
 			break;
@@ -300,8 +299,8 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 				{
 					i++;
 
-					//std::map<uint, ResourceModel*>::const_iterator model = model_resources.find(it->first);
-					//ImGui::ImageButton((ImTextureID*)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+					std::map<uint, ResourceModel*>::const_iterator model = model_resources.find(it->first);
+					ImGui::ImageButton((ImTextureID*)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
 					{
@@ -329,14 +328,25 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 				{
 					i++;
 
-					std::map<uint, ResourceScene*>::const_iterator scene = scene_resources.find(it->first);
-					ImGui::ImageButton((ImTextureID*)App->gui->Presources->mesh->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+					vector<string> file_list, dir_list;
+					std::string name, path;
+					App->file_system->DiscoverFiles("Assets/Scenes/", file_list, dir_list);
+
+					for (vector<string>::iterator iterator = file_list.begin(); iterator != file_list.end(); iterator++)
+					{
+						std::map<uint, ResourceScene*>::const_iterator scene = scene_resources.find(it->first);
+						ImGui::ImageButton((ImTextureID*)App->gui->Presources->scene->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+						name = (*iterator).c_str();
+						path = ASSETS_SCENES_FOLDER + name;
+					}
 
 					if (ImGui::IsItemHovered())
 					{
 						ImGui::BeginTooltip();
 						ImGui::Text("Name:"); ImGui::SameLine();
-						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->exported_file).c_str());
+						ImGui::TextColored(YELLOW_COLOR, "%s", name.c_str());
+						ImGui::Text("Path:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", path.c_str());
 						ImGui::EndTooltip();
 					}
 

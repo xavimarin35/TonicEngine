@@ -20,8 +20,14 @@ bool PanelResources::Start()
 	folder = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Library/Textures/folder-icon.dds"));
 	folder->LoadInMemory();
 
-	mesh = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_fbx.png"));
+	mesh = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_mesh.png"));
 	mesh->LoadInMemory();
+
+	scene = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_scene.png"));
+	scene->LoadInMemory();
+
+	model = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_model.png"));
+	model->LoadInMemory();
 
 	return true;
 }

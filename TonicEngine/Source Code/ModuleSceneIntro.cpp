@@ -9,6 +9,8 @@
 #include "Math.h"
 #include "Component.h"
 #include "ComponentTexture.h"
+#include "ModuleResources.h"
+#include "ModuleFileSystem.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -119,14 +121,14 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 	}
 }
 
-
 void ModuleSceneIntro::SaveScene(std::string scene_name)
 {
+	ResourceScene* res_scene = (ResourceScene*)App->resources->CreateResource(RESOURCE_TYPE::SCENE);
+
 	std::string full_path = ASSETS_SCENES_FOLDER + scene_name + ".json";
 
 	SaveGameObjects(App->jsonImp, GOroot);
 
-	// Create the stream and open the file
 	std::ofstream stream;
 	stream.open(full_path);
 	stream << std::setw(4) << App->jsonImp << std::endl;
@@ -162,10 +164,7 @@ void ModuleSceneIntro::LoadScene(std::string scene_name)
 	// Loading scene code
 }
 
-bool ModuleSceneIntro::LoadResourceScene(std::string scene_name, const char* path, std::string& output_file)
-{
-	return true;
-}
+
 
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
