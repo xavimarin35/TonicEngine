@@ -162,6 +162,11 @@ void ModuleSceneIntro::LoadScene(std::string scene_name)
 	// Loading scene code
 }
 
+bool ModuleSceneIntro::LoadResourceScene(std::string scene_name, const char* path, std::string& output_file)
+{
+	return true;
+}
+
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
 	string n = AssignNameToGO(objName);
@@ -180,8 +185,6 @@ GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 
 string ModuleSceneIntro::AssignNameToGO(string name_go)
 {
-	//string name = name_go.append(std::to_string(numGO));
-
 	return name_go;
 }
 

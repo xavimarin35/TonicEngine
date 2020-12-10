@@ -67,6 +67,7 @@ public:
 	void LoadScene(std::string scene_name);
 	int numScene = 0;
 	int maxScenes = 25;
+	bool LoadResourceScene(std::string scene_name, const char* path, std::string& output_file);
 
 	uint texture = -1;
 

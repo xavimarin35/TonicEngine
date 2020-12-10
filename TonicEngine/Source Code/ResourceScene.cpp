@@ -2,7 +2,7 @@
 
 bool ResourceScene::LoadInMemory()
 {
-	return true;;
+	return true;
 }
 
 void ResourceScene::ReleaseMemory()

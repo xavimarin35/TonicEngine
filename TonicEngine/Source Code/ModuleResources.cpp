@@ -4,6 +4,7 @@
 #include "ModuleGUI.h"
 #include "TextureImporter.h"
 #include "MeshImporter.h"
+#include "ModuleSceneIntro.h"
 
 // resources includes
 #include "ModuleResources.h"
@@ -58,6 +59,10 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 
 	case RESOURCE_TYPE::MODEL:
 		ret = (Resource*) new ResourceModel(uid);
+		break;
+
+	case RESOURCE_TYPE::SCENE:
+		ret = (Resource*) new ResourceScene(uid);
 		break;
 	}
 
@@ -118,6 +123,7 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 	uint ret = 0; 
 	bool create_resource = false; 
 	std::string written_file;
+	std::string scene_name;
 
 	ret = GetResourceInAssets(new_file_in_assets);
 
@@ -131,6 +137,7 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 		case RESOURCE_TYPE::MESH:
 			break;
 		case RESOURCE_TYPE::SCENE:
+			create_resource = App->scene_intro->LoadResourceScene(scene_name, new_file_in_assets, written_file);
 			break;
 		case RESOURCE_TYPE::MODEL:
 			break;
@@ -293,7 +300,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 				{
 					i++;
 
-					//std::map<uint, ResourceModel*>::const_iterator mesh = model_resources.find(it->first);
+					//std::map<uint, ResourceModel*>::const_iterator model = model_resources.find(it->first);
 					//ImGui::ImageButton((ImTextureID*)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
@@ -322,8 +329,8 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 				{
 					i++;
 
-					//std::map<uint, ResourceScene*>::const_iterator mesh = scene_resources.find(it->first);
-					//ImGui::ImageButton((ImTextureID*)App->gui->Presources->scene->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+					std::map<uint, ResourceScene*>::const_iterator scene = scene_resources.find(it->first);
+					ImGui::ImageButton((ImTextureID*)App->gui->Presources->mesh->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
 
 					if (ImGui::IsItemHovered())
 					{

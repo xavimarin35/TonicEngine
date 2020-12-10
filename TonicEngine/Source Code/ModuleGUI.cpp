@@ -7,6 +7,7 @@
 #include "ModuleFileSystem.h"
 #include "ModuleCamera3D.h"
 #include "imgui-1.78/ImGuizmo.h"
+#include "ModuleResources.h"
 
 
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -380,6 +381,7 @@ bool ModuleGUI::Draw()
 			ImGui::SameLine();
 			if (ImGui::Button("Save"))
 			{
+				ResourceScene* res_scene = (ResourceScene*)App->resources->CreateResource(RESOURCE_TYPE::SCENE);
 				App->scene_intro->SaveScene(finalName);
 				App->scene_intro->numScene++;
 				saveSceneMenu = false;
