@@ -31,6 +31,9 @@ bool ModuleCamera3D::Start()
 	cameraGO2 = App->scene_intro->CreateGO("Testing Camera 2", App->scene_intro->GOroot);
 	cameraGO2->CreateComponent(COMPONENT_TYPE::CAMERA);
 
+	// default in Play Mode
+	playCam = cameraGO->GetComponentCamera();
+
 	return true;
 }
 
@@ -256,16 +259,6 @@ void ModuleCamera3D::DrawRay()
 
 	glEnd();
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-}
-
-ComponentCamera* ModuleCamera3D::SetCamera(GameObject* current_cam)
-{
-	return /*activeCam = */current_cam->GetComponentCamera();
-}
-
-ComponentCamera* ModuleCamera3D::SelectCamera(ComponentCamera* cam)
-{
-	return cam;
 }
 
 float3 ModuleCamera3D::GetPosition() const

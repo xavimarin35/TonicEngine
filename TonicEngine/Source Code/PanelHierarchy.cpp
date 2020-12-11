@@ -198,6 +198,23 @@ void PanelHierarchy::DrawMenuNotHovering()
 			openMenuHovering = false;
 		}
 
+		if (ImGui::BeginMenu("Create GameObject"))
+		{
+			if (ImGui::MenuItem("Camera"))
+			{
+				/*App->scene_intro->CreateGO("New Camera", App->scene_intro->GOroot);
+				cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);*/
+				openMenuHovering = false;
+			}
+
+			ImGui::MenuItem("Light", NULL, false, false);
+			//{
+			//	LOG_C("WARNING: This feature is not implemented yet.")
+			//}
+
+			ImGui::EndMenu();
+		}
+
 		ImGui::Separator();
 		
 		if (ImGui::BeginMenu("Create Shape"))

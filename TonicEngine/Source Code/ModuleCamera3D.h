@@ -63,8 +63,7 @@ public:
 	GameObject* cameraGO2 = nullptr;
 	ComponentCamera* mainCam = nullptr;
 	ComponentCamera* activeCam = nullptr;
-	ComponentCamera* SetCamera(GameObject* current_cam);
-	ComponentCamera* SelectCamera(ComponentCamera* cam);
+	ComponentCamera* playCam = nullptr;
 
 	float3 looking_at;
 	bool looking = false;
