@@ -210,7 +210,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 			if (new_mesh->HasNormals() && res_mesh->data.indices3)
 			{
 				res_mesh->data.face_center = new float3[res_mesh->data.num_index];
-				res_mesh->data.face_normal = new float3[res_mesh->data.num_index];
+				res_mesh->data.face_normals = new float3[res_mesh->data.num_index];
 				res_mesh->data.num_normals = res_mesh->data.num_index / 3;
 				for (uint j = 0; j < res_mesh->data.num_index / 3; ++j)
 				{
@@ -228,9 +228,9 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 					float3 edge1 = face_B - face_A;
 					float3 edge2 = face_C - face_A;
 
-					res_mesh->data.face_normal[j] = Cross(edge1, edge2);
-					res_mesh->data.face_normal[j].Normalize();
-					res_mesh->data.face_normal[j] *= 0.15f;
+					res_mesh->data.face_normals[j] = Cross(edge1, edge2);
+					res_mesh->data.face_normals[j].Normalize();
+					res_mesh->data.face_normals[j] *= 0.15f;
 
 				}
 			}
@@ -328,7 +328,7 @@ bool MeshImporter::Export(const char* name, std::string& output_file, ResourceMe
 
 	cursor += bytes; 
 	bytes = sizeof(float) * mesh->data.num_normals * 3;
-	memcpy(cursor, mesh->data.face_normal, bytes);
+	memcpy(cursor, mesh->data.face_normals, bytes);
 
 	cursor += bytes;
 	bytes = sizeof(float) * mesh->data.num_tex_coords * 2;
@@ -387,8 +387,8 @@ bool MeshImporter::Load(ResourceMesh* mesh)
 
 		cursor += bytes; 
 		bytes = sizeof(float) * mesh->data.num_normals * 3;
-		mesh->data.face_normal = new float3[mesh->data.num_normals];
-		memcpy(mesh->data.face_normal, cursor, bytes);
+		mesh->data.face_normals = new float3[mesh->data.num_normals];
+		memcpy(mesh->data.face_normals, cursor, bytes);
 
 		cursor += bytes; 
 		bytes = sizeof(float) * mesh->data.num_tex_coords * 2;

@@ -59,7 +59,7 @@ bool Importer::Export(const char* path, std::string& file, ComponentMesh* mesh)
 
 	iterator += bytes;
 	bytes = sizeof(float) * mesh->rMesh->data.num_normals * 3;
-	memcpy(iterator, mesh->rMesh->data.normals, bytes);
+	memcpy(iterator, mesh->rMesh->data.face_normals, bytes);
 
 	// Storing Texture
 	iterator += bytes;

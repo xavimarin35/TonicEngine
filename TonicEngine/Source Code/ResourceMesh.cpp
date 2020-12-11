@@ -19,36 +19,7 @@ void ResourceMesh::ReleaseMemory()
 	glDeleteBuffers(1, (GLuint*)&data.id_vertex);
 	glDeleteBuffers(1, (GLuint*)&data.id_tex_coords);
 
-	if (data.index != nullptr)
-	{
-		delete[] data.index;
-		data.index = nullptr;
-	}
-
-	if (data.vertex != nullptr)
-	{
-		delete[] data.vertex;
-		data.vertex = nullptr;
-	}
-
-	if (data.tex_coords != nullptr)
-	{
-		delete[] data.tex_coords;
-		data.tex_coords = nullptr;
-	}
-
-	if (data.face_center != nullptr)
-	{
-		delete[] data.face_center;
-		data.face_center = nullptr;
-	}
-
-	if (data.face_normal != nullptr)
-	{
-		delete[] data.face_normal;
-		data.face_normal = nullptr;
-	}
-
-
 	delete this;
 }
+
+

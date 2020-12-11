@@ -22,7 +22,7 @@ ComponentMesh::~ComponentMesh()
 	RELEASE_ARRAY(rMesh->data.vertex);
 	RELEASE_ARRAY(rMesh->data.index);
 	RELEASE_ARRAY(rMesh->data.tex_coords);
-	RELEASE_ARRAY(rMesh->data.normals);
+	RELEASE_ARRAY(rMesh->data.face_normals);
 }
 
 bool ComponentMesh::Update()
@@ -176,12 +176,12 @@ bool ComponentMesh::DrawVertexNormals(GameObject* m, bool active)
 {
 	if (active)
 	{
-		if (m->GetComponentMesh()->rMesh->data.normals != nullptr)
+		if (m->GetComponentMesh()->rMesh->data.face_normals != nullptr)
 		{
 			for (int j = 0; j < m->GetComponentMesh()->rMesh->data.num_vertex; ++j)
 			{
 				float3 vert = m->GetComponentMesh()->rMesh->data.vertex[j];
-				float3 norm = m->GetComponentMesh()->rMesh->data.normals[j];
+				float3 norm = m->GetComponentMesh()->rMesh->data.face_normals[j];
 
 				glLineWidth(1.5f);
 				glBegin(GL_LINES);

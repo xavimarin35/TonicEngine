@@ -36,10 +36,3 @@ uint Resource::GetCurrentReference()
 	return references;
 }
 
-void Resource::Load(const nlohmann::json& config)
-{
-}
-
-void Resource::Save(nlohmann::json& config) const
-{
-}

@@ -33,10 +33,6 @@ public:
 	const char* GetImportedFile() const;
 	uint GetCurrentReference();
 
-
-	virtual void Load(const nlohmann::json& config);
-	virtual void Save(nlohmann::json& config) const;
-
 public:
 	uint res_UUID = 0;
 	std::string file = "";

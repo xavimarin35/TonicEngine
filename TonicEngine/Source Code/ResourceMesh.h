@@ -22,9 +22,9 @@ struct mesh_data
 
 	uint num_normals = 0;
 	float3* face_center = nullptr;
-	float3* face_normal = nullptr;
-	float3* normals = nullptr;
+	float3* face_normals = nullptr;
 
+	// face with 3 indices
 	bool indices3 = true;
 };
 
@@ -34,9 +34,6 @@ public:
 
 	ResourceMesh(uint uuid) : Resource(uuid, RESOURCE_TYPE::MESH) {}
 	virtual ~ResourceMesh() {}
-
-	//void Save(const char* resourceNum, nlohmann::json &config) const;
-	//void Load(const char* resourceNum, const nlohmann::json &config);
 
 	bool LoadInMemory();
 	void ReleaseMemory();

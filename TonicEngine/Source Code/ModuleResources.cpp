@@ -225,7 +225,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			if (it->second != nullptr)
+			if (it->second != nullptr && it->second->references > 0)
 			{
 				if (it->second->type == RESOURCE_TYPE::TEXTURE)
 				{
@@ -258,7 +258,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			if (it->second != nullptr)
+			if (it->second != nullptr && it->second->references > 0)
 			{
 				if (it->second->type == RESOURCE_TYPE::MESH)
 				{
@@ -293,7 +293,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			if (it->second != nullptr)
+			if (it->second != nullptr && it->second->references > 0)
 			{
 				if (it->second->type == RESOURCE_TYPE::MODEL)
 				{
@@ -322,7 +322,7 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			if (it->second != nullptr)
+			if (it->second != nullptr && it->second->references > 0)
 			{
 				if (it->second->type == RESOURCE_TYPE::SCENE)
 				{
