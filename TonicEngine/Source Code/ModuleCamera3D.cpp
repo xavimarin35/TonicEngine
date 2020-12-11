@@ -47,7 +47,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if (ImGuizmo::IsUsing() == true)
 		return UPDATE_CONTINUE;
 
-	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2 || isOnQuit || isOnSelectTexture || isOnMainBar)
+	if (CheckMousePosition())
 	{
 		mouse_picking = false;
 
@@ -297,4 +297,18 @@ GameObject* ModuleCamera3D::MousePicking() const
 	GO = App->scene_intro->MousePicking(ray, distance);
 
 	return GO;
+}
+
+bool ModuleCamera3D::CheckMousePosition()
+{
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector
+		|| isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2
+		|| isOnQuit || isOnSelectTexture || isOnMainBar)
+		return true;
+
+	else if (ImGui::IsAnyItemHovered())
+		return true;
+
+	else return false;
+
 }

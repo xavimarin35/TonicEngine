@@ -45,6 +45,8 @@ private:
 	void Rotate(float x, float y);
 	void DrawRay();
 
+	bool CheckMousePosition();
+
 public:
 	bool isOnConsole = false;
 	bool isOnHierarchy = false;
