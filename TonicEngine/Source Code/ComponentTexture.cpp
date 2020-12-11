@@ -86,7 +86,7 @@ void ComponentTexture::DrawInspector()
 				tex = App->tex_imp->checker_texture.id;
 
 
-			ImGui::Image((ImTextureID*)tex, ImVec2(250, 250), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+			ImGui::Image((ImTextureID*)tex, ImVec2(310, 310), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
 		else if(!active)
 		{

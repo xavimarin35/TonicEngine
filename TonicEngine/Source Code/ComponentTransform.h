@@ -31,6 +31,7 @@ public:
 
 	void UpdateTransform();
 	void UpdateLocalTransform();
+	void UpdateGizmo(float4x4 newMatrix);
 	
 	void Reset(bool new_default = false);
 	void SetNewDefault(float3 pos, float3 rot, float3 sc);

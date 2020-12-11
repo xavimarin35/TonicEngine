@@ -614,7 +614,17 @@ void ModuleGUI::DrawGuizmo()
 
 	if (ImGuizmo::IsUsing() == true)
 	{
-		transf->globalMatrix = matrix.Transposed();
+		float4x4 newMatrix;
+		newMatrix.Set(matrix);
+
+		newMatrix.Transpose();
+
+		if (GO->GOparent->data.name == "Dummy001")
+		{
+			transf->globalMatrix = newMatrix;
+		}
+		else
+			transf->UpdateGizmo(newMatrix);
 	}
 }
 

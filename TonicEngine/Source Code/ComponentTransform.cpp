@@ -228,3 +228,16 @@ void ComponentTransform::SetNewDefault(float3 pos, float3 rot, float3 sc)
 
 	Reset();
 }
+
+void ComponentTransform::UpdateGizmo(float4x4 newMatrix)
+{
+	newMatrix.Decompose(position, rotation_quaternion, scale);
+
+	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
+
+	SetPosition(position);
+	SetEulerRotation(rotation_euler);
+	SetScale(scale);
+
+	globalMatrix = newMatrix;
+}

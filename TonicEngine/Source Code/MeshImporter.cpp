@@ -121,6 +121,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 	transf->position = pos2;
 	transf->scale = s2;
 	transf->rotation_quaternion = rot2;
+	transf->rotation_euler = rot2.ToEulerXYZ() * RADTODEG;
 
 	transf->UpdateLocalTransform();
 
@@ -140,7 +141,6 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 	}
 
 	GO_root->AddChild(go);
-
 	go->GetComponentTransform()->Reset();
 
 	for (int i = 0; i < node->mNumMeshes; i++)
