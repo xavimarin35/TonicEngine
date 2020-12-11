@@ -145,27 +145,6 @@ void ComponentCamera::DrawInspector()
 		if (farPlane != GetFarPlane()) SetFarPlane(farPlane);
 		if (fov != GetFOV()) SetFOV(fov);
 		if (ratio != GetRatio()) SetRatio(ratio);
-
-		//ImGui::Spacing();
-		//ImGui::Separator();
-		//ImGui::Spacing();
-
-		//ImGui::Combo("##", &camera_select, "Select Camera\0Camera 1\0Camera 2");
-
-		//ImGui::SameLine();
-
-		//if ((ImGui::Button("Save Changes")))
-		//{
-		//	switch (camera_select)
-		//	{
-		//	case 1:
-		//		App->camera->SetCamera(App->camera->cameraGO);
-		//		break;
-
-		//	case 2:
-		//		App->camera->SetCamera(App->camera->cameraGO2);
-		//	}
-		//}
 	}
 }
 
@@ -370,6 +349,4 @@ void ComponentCamera::Save(uint GO_id, nlohmann::json& scene_file)
 	scene_file[object->data.name]["Components"]["Camera"]["DoCulling"] = showFrustum;
 	scene_file[object->data.name]["Components"]["Camera"]["FrustumFarPlane"] = frustum.farPlaneDistance;
 	scene_file[object->data.name]["Components"]["Camera"]["FrustumNearPlane"] = frustum.nearPlaneDistance;
-	scene_file[object->data.name]["Components"]["Camera"]["VerticalFOV"] = frustum.verticalFov;
-	scene_file[object->data.name]["Components"]["Camera"]["HorizontalFOV"] = frustum.horizontalFov;
 }
