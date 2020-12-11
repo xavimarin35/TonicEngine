@@ -28,11 +28,8 @@ bool ModuleCamera3D::Start()
 	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
 
-	cameraGO2 = App->scene_intro->CreateGO("Testing Camera 2", App->scene_intro->GOroot);
-	cameraGO2->CreateComponent(COMPONENT_TYPE::CAMERA);
-
 	// default in Play Mode
-	playCam = cameraGO->GetComponentCamera();
+	playCam = cameraGO;
 
 	return true;
 }

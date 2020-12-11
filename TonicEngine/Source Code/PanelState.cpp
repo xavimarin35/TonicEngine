@@ -73,24 +73,31 @@ bool PanelState::Draw()
 			// Engine State Button 1
 			if (ImGui::ImageButton((ImTextureID*)current_tex1->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)))
 			{
-				if (currentBut1 == 2) // button texture change play/stop
-					currentBut1 = 1;
-				else
-					currentBut1 = 2;
-
-				if (state == ENGINE_STATE::NONE)
+				if (!App->camera->playCam->IsGameObjectActive())
 				{
-					if (App->PlayScene())
-					{
-						current_tex1 = stop;
-						editing = false;
-					}
+					LOG_C("WARNING: The current Game Camera is not active");
 				}
 				else
 				{
-					App->StopScene();
-					current_tex1 = play;
-					editing = true;
+					if (currentBut1 == 2) // button texture change play/stop
+						currentBut1 = 1;
+					else
+						currentBut1 = 2;
+
+					if (state == ENGINE_STATE::NONE)
+					{
+						if (App->PlayScene())
+						{
+							current_tex1 = stop;
+							editing = false;
+						}
+					}
+					else
+					{
+						App->StopScene();
+						current_tex1 = play;
+						editing = true;
+					}
 				}
 			}
 

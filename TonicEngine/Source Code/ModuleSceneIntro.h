@@ -46,6 +46,7 @@ public:
 	GameObject* MousePicking(const LineSegment& segment, float& distance, bool closest = true) const;
 
 	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
+	GameObject* CreateCamera(string objName, GameObject* parent = nullptr);
 	string AssignNameToGO(string name_go);
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();

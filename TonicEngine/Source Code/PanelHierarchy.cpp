@@ -57,9 +57,13 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	if (GO == App->scene_intro->GOselected)
 		node_flag |= ImGuiTreeNodeFlags_Selected;
 
+	if (App->camera->playCam == GO)
+		c = { 0.f, 1.f, 1.f, 1.f };
+
 	// if GOs are not active, print them grey
 	if (!GO->data.active)
 		c = { 0.5f, 0.5f, 0.5f, 1.0f };
+
 
 	ImGui::PushStyleColor(ImGuiCol_Text, c);
 
@@ -202,8 +206,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 		{
 			if (ImGui::MenuItem("Camera"))
 			{
-				/*App->scene_intro->CreateGO("New Camera", App->scene_intro->GOroot);
-				cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);*/
+				App->scene_intro->CreateCamera("New Camera", App->scene_intro->GOroot);
 				openMenuHovering = false;
 			}
 

@@ -164,8 +164,6 @@ void ModuleSceneIntro::LoadScene(std::string scene_name)
 	// Loading scene code
 }
 
-
-
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
 	string n = AssignNameToGO(objName);
@@ -179,6 +177,24 @@ GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 	if (parent != nullptr)
 		parent->AddChild(GO);
 	
+	return GO;
+}
+
+GameObject* ModuleSceneIntro::CreateCamera(string objName, GameObject* parent)
+{
+	string n = AssignNameToGO(objName);
+
+	GameObject* GO = new GameObject(n);
+
+	GO->CreateComponent(COMPONENT_TYPE::CAMERA);
+
+	GO->data.id = numGO;
+	numGO++;
+	gameobjectsList.push_back(GO);
+
+	if (parent != nullptr)
+		parent->AddChild(GO);
+
 	return GO;
 }
 

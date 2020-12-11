@@ -73,7 +73,7 @@ void ComponentCamera::DrawInspector()
 
 		if (ImGui::Button("Set as Game Camera"))
 		{
-			App->camera->playCam = go->GetComponentCamera();
+			App->camera->playCam = go;
 		}
 
 		ImGui::SameLine();
