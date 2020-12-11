@@ -47,7 +47,8 @@ public:
 
 	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
 	GameObject* CreateCamera(string objName, GameObject* parent = nullptr);
-	string AssignNameToGO(string name_go);
+	GameObject* CreateEmpty(string objName, GameObject* parent = nullptr);
+	string AssignNameToGO(string name_go, bool isCamera, bool isEmpty);
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
 	void NumberOfGO();
@@ -55,6 +56,11 @@ public:
 	void GetGameObjectSelectedIndex(GameObject* GO);
 	void GetSizeOfList();
 	std::vector<GameObject*> gameobjectsList;
+
+	int cam_i = 0;
+	int cam_aux = 0;
+	int empty_i = 0;
+	int empty_aux = 0;
 
 	void DrawGameObjectNodes(GameObject* GO);
 	GameObject* GOselected = nullptr;

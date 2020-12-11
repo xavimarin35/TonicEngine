@@ -196,9 +196,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 
 		if (ImGui::MenuItem("Create Empty GameObject"))
 		{
-			GameObject* go = App->scene_intro->CreateGO("Empty");
-			App->scene_intro->GOroot->AddChild(go);
-
+			App->scene_intro->CreateEmpty("Empty_", App->scene_intro->GOroot);
 			openMenuHovering = false;
 		}
 
@@ -206,14 +204,11 @@ void PanelHierarchy::DrawMenuNotHovering()
 		{
 			if (ImGui::MenuItem("Camera"))
 			{
-				App->scene_intro->CreateCamera("New Camera", App->scene_intro->GOroot);
+				App->scene_intro->CreateCamera("New_Camera_", App->scene_intro->GOroot);
 				openMenuHovering = false;
 			}
 
 			ImGui::MenuItem("Light", NULL, false, false);
-			//{
-			//	LOG_C("WARNING: This feature is not implemented yet.")
-			//}
 
 			ImGui::EndMenu();
 		}
@@ -320,7 +315,7 @@ void PanelHierarchy::DrawMenuHovering()
 
 		if (ImGui::MenuItem("Create Empty Child"))
 		{
-			App->scene_intro->CreateGO("Empty Child", App->scene_intro->GOselected);
+			App->scene_intro->CreateGO("Empty_Child", App->scene_intro->GOselected);
 		}
 
 		if (ImGui::MenuItem("Remove GameObject"))

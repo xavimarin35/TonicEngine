@@ -166,7 +166,7 @@ void ModuleSceneIntro::LoadScene(std::string scene_name)
 
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName);
+	string n = AssignNameToGO(objName, false, false);
 
 	GameObject* GO = new GameObject(n);
 
@@ -182,7 +182,7 @@ GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 
 GameObject* ModuleSceneIntro::CreateCamera(string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName);
+	string n = AssignNameToGO(objName, true, false);
 
 	GameObject* GO = new GameObject(n);
 
@@ -198,9 +198,40 @@ GameObject* ModuleSceneIntro::CreateCamera(string objName, GameObject* parent)
 	return GO;
 }
 
-string ModuleSceneIntro::AssignNameToGO(string name_go)
+GameObject* ModuleSceneIntro::CreateEmpty(string objName, GameObject* parent)
 {
-	return name_go;
+	string n = AssignNameToGO(objName, false, true);
+
+	GameObject* GO = new GameObject(n);
+
+	GO->data.id = numGO;
+	numGO++;
+	gameobjectsList.push_back(GO);
+
+	if (parent != nullptr)
+		parent->AddChild(GO);
+
+	return GO;
+}
+
+string ModuleSceneIntro::AssignNameToGO(string name_go, bool isCamera, bool isEmpty)
+{
+	if (isCamera)
+	{
+		cam_aux = cam_i;
+		string cam_name = name_go.append(std::to_string(cam_aux));
+		cam_i = cam_aux + 1;
+		return cam_name;
+	}
+	else if (isEmpty)
+	{
+		empty_aux = empty_i;
+		string empty_name = name_go.append(std::to_string(empty_aux));
+		empty_i = empty_aux + 1;
+		return empty_name;
+	}
+	else
+		return name_go;
 }
 
 void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)

@@ -146,17 +146,18 @@ bool ModuleGUI::Draw()
 
 	if (ImGui::BeginMainMenuBar())
 	{
+		if (ImGui::IsWindowHovered()) App->camera->isOnMainBar = true;
+		else App->camera->isOnMainBar = false;
+
 		if (ImGui::BeginMenu("File"))
 		{
 			ImGui::MenuItem("Save Scene", "CTRL+S", &saveSceneMenu);
 
 			ImGui::MenuItem("Load Scene", "CTRL+A", &loadSceneMenu);
 
-			ImGui::MenuItem("Delete Scene", NULL, &deleteScene);
-
 			ImGui::Separator();
 
-			if (ImGui::MenuItem("Quit", "Alt + F4"))
+			if (ImGui::MenuItem("Quit", "Alt+F4"))
 				exitMenu = true;
 
 			ImGui::EndMenu();
@@ -165,10 +166,19 @@ bool ModuleGUI::Draw()
 		if (ImGui::BeginMenu("GameObjects"))
 		{
 			if (ImGui::MenuItem("Create Empty GameObject"))
+				App->scene_intro->CreateEmpty("Empty_", App->scene_intro->GOroot);
+
+			if (ImGui::BeginMenu("Create GameObject"))
 			{
-				GameObject* go = App->scene_intro->CreateGO("Empty");
-				App->scene_intro->GOroot->AddChild(go);
+				if (ImGui::MenuItem("Camera"))
+					App->scene_intro->CreateCamera("New_Camera_", App->scene_intro->GOroot);
+
+				ImGui::MenuItem("Light", NULL, false, false);
+
+				ImGui::EndMenu();
 			}
+
+			ImGui::Separator();
 
 			if (ImGui::MenuItem("Remove GameObjects"))
 				App->scene_intro->RemoveAllGO();
@@ -195,8 +205,11 @@ bool ModuleGUI::Draw()
 					App->scene_intro->Create3DObject(OBJECTS3D::BAKER_HOUSE);
 
 				if (ImGui::MenuItem("Street"))
+				{
 					App->scene_intro->Create3DObject(OBJECTS3D::STREET);
-
+					LOG_C("WARNING: This model is has many polys. Loading it can take a while.")
+				}
+					
 				ImGui::EndMenu();
 			}
 
@@ -241,6 +254,12 @@ bool ModuleGUI::Draw()
 					GameObject* go = App->scene_intro->CreateGO("Empty");
 					App->scene_intro->GOroot->AddChild(go);
 				}
+			}
+
+			if (GO == nullptr)
+			{
+				HelpMarker("You must select a GO to use this tool");
+				ImGui::SameLine();
 			}
 
 			if (ImGui::MenuItem("Delete Selected GO"))
@@ -306,20 +325,16 @@ bool ModuleGUI::Draw()
 				ImGui::EndMenu();
 			}
 
-			
+			ImGui::Separator();
+
+			if (ImGui::MenuItem("Number of GameObjects"))
+				App->scene_intro->NumberOfGO();
+
 			if (GO == nullptr)
 			{
 				HelpMarker("You must select a GO to use this tool");
 				ImGui::SameLine();
 			}
-
-			if (ImGui::MenuItem("Number of Components"))
-				App->scene_intro->NumberOfComponents();
-
-			ImGui::Separator();
-
-			if (ImGui::MenuItem("Number of GameObjects"))
-				App->scene_intro->NumberOfGO();
 
 			if (ImGui::MenuItem("Get active GO index"))
 			{

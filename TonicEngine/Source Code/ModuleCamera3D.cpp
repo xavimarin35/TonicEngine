@@ -25,7 +25,7 @@ bool ModuleCamera3D::Start()
 
 	mainCam->frustum.pos = float3(26.f, 86.f, -90.f);
 
-	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
+	cameraGO = App->scene_intro->CreateGO("Main_Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
 
 	// default in Play Mode
@@ -47,7 +47,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if (ImGuizmo::IsUsing() == true)
 		return UPDATE_CONTINUE;
 
-	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2 || isOnQuit || isOnSelectTexture)
+	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2 || isOnQuit || isOnSelectTexture || isOnMainBar)
 	{
 		mouse_picking = false;
 

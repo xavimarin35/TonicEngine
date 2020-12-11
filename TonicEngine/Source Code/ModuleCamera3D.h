@@ -58,6 +58,7 @@ public:
 	bool isOnGame = false;
 	bool isOnQuit = false;
 	bool isOnSelectTexture = false;
+	bool isOnMainBar = false;
 
 	GameObject* cameraGO = nullptr;
 	ComponentCamera* mainCam = nullptr;
