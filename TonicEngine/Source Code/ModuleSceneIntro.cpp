@@ -360,7 +360,7 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		break;
 
 	case OBJECTS3D::BAKER_HOUSE:
-		App->mesh_imp->LoadFile("Assets/BakerHouse/BakerHouse.fbx", "Assets/BakerHouse/Baker_house.png");
+		App->mesh_imp->LoadFile("Assets/BakerHouse/BakerHouse.obj", "Assets/BakerHouse/Baker_house.png");
 		break;
 
 	case OBJECTS3D::STREET:

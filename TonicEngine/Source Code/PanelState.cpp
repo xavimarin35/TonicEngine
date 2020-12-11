@@ -170,7 +170,7 @@ void PanelState::DrawGuizmoButtons()
 	ImGui::SameLine();
 
 	// Scale Button
-	if (ImGui::ImageButton((ImTextureID*)scale->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN))
+	if (ImGui::ImageButton((ImTextureID*)scale->tex.id, ImVec2(35, 35), ImVec2(0, 1), ImVec2(1, 0)) || (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN && !App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT))
 		App->gui->currentOp = 3;
 
 	if (ImGui::IsItemHovered())

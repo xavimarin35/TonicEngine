@@ -86,6 +86,12 @@ void ComponentTransform::DrawInspector()
 
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentTransform() != nullptr)
 	{
+		if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+			go->GetComponentTransform()->Reset();
+
+		if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+			new_default = true;
+
 		ImGui::Spacing();
 
 		if (go->GetComponentCamera() == nullptr)
