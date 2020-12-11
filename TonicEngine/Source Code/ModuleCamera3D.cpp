@@ -260,7 +260,12 @@ void ModuleCamera3D::DrawRay()
 
 ComponentCamera* ModuleCamera3D::SetCamera(GameObject* current_cam)
 {
-	return activeCam = current_cam->GetComponentCamera();
+	return /*activeCam = */current_cam->GetComponentCamera();
+}
+
+ComponentCamera* ModuleCamera3D::SelectCamera(ComponentCamera* cam)
+{
+	return cam;
 }
 
 float3 ModuleCamera3D::GetPosition() const

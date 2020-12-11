@@ -22,7 +22,7 @@ public:
 	bool CleanUp();
 
 	void DrawInspector();
-	void Draw2();
+	void DrawCamera();
 	void LookAt(const float3& position);
 	
 	float4x4 GetViewMatrix() const;
@@ -60,6 +60,7 @@ public:
 	bool seeFrustum = false;
 	bool update_frustum = true;
 	int camera_select = 0;
+	bool active_camera = false;
 
 };
 

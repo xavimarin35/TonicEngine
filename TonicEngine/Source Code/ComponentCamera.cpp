@@ -46,7 +46,7 @@ bool ComponentCamera::Update()
 	return true;
 }
 
-void ComponentCamera::Draw2()
+void ComponentCamera::DrawCamera()
 {
 	if (showFrustum || App->scene_intro->GOselected == object)
 		DrawFrustum();
@@ -69,6 +69,19 @@ void ComponentCamera::DrawInspector()
 
 	if (ImGui::CollapsingHeader("Camera"), flags && go->GetComponentCamera() != nullptr)
 	{
+		ImGui::Spacing();
+
+		if (ImGui::Button("Set as Game Camera"))
+		{
+			App->camera->SetCamera(App->scene_intro->GOselected);
+		}
+
+		ImGui::SameLine();
+
+		App->gui->HelpMarker("Select this camera to be the active one when entering into Play Mode");
+
+		ImGui::Spacing();
+		ImGui::Separator();
 		ImGui::Spacing();
 
 		ImGui::Checkbox("Draw Frustum", &this->seeFrustum);
@@ -133,26 +146,26 @@ void ComponentCamera::DrawInspector()
 		if (fov != GetFOV()) SetFOV(fov);
 		if (ratio != GetRatio()) SetRatio(ratio);
 
-		ImGui::Spacing();
-		ImGui::Separator();
-		ImGui::Spacing();
+		//ImGui::Spacing();
+		//ImGui::Separator();
+		//ImGui::Spacing();
 
-		ImGui::Combo("##", &camera_select, "Select Camera\0Camera 1\0Camera 2");
+		//ImGui::Combo("##", &camera_select, "Select Camera\0Camera 1\0Camera 2");
 
-		ImGui::SameLine();
+		//ImGui::SameLine();
 
-		if ((ImGui::Button("Save Changes")))
-		{
-			switch (camera_select)
-			{
-			case 1:
-				App->camera->SetCamera(App->camera->cameraGO);
-				break;
+		//if ((ImGui::Button("Save Changes")))
+		//{
+		//	switch (camera_select)
+		//	{
+		//	case 1:
+		//		App->camera->SetCamera(App->camera->cameraGO);
+		//		break;
 
-			case 2:
-				App->camera->SetCamera(App->camera->cameraGO2);
-			}
-		}
+		//	case 2:
+		//		App->camera->SetCamera(App->camera->cameraGO2);
+		//	}
+		//}
 	}
 }
 

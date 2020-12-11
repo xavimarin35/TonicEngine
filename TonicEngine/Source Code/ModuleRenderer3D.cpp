@@ -147,7 +147,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	if (culling == nullptr)
 		cam = App->camera->GetActiveCamera();
-	else cam->Draw2();
+	else cam->DrawCamera();
 
 	std::vector<const GameObject*> objs;
 
