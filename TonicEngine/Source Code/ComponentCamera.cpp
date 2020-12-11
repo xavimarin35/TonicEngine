@@ -3,6 +3,7 @@
 #include "ModuleGUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
 
 #include "MathGeoLib/include/Math/MathFunc.h"
 
@@ -131,6 +132,27 @@ void ComponentCamera::DrawInspector()
 		if (farPlane != GetFarPlane()) SetFarPlane(farPlane);
 		if (fov != GetFOV()) SetFOV(fov);
 		if (ratio != GetRatio()) SetRatio(ratio);
+
+		ImGui::Spacing();
+		ImGui::Separator();
+		ImGui::Spacing();
+
+		ImGui::Combo("##", &camera_select, "Select Camera\0Camera 1\0Camera 2");
+
+		ImGui::SameLine();
+
+		if ((ImGui::Button("Save Changes")))
+		{
+			switch (camera_select)
+			{
+			case 1:
+				App->camera->SetCamera(App->camera->cameraGO);
+				break;
+
+			case 2:
+				App->camera->SetCamera(App->camera->cameraGO2);
+			}
+		}
 	}
 }
 

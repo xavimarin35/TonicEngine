@@ -69,7 +69,6 @@ bool TextureImporter::DuplicateTexture(const char* path, std::string& output_fil
 	bool ret = false;
 	
 	std::string name = App->GetPathName(path);
-	//std::string output_file;
 
 	ILuint size;
 	ILubyte* data;
@@ -84,23 +83,12 @@ bool TextureImporter::DuplicateTexture(const char* path, std::string& output_fil
 		if (ilSaveL(IL_DDS, data, size) > 0)
 			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "dds");
 
-		LOG_C("SUCCESS: Correctly exported %s.Ttex into Textures folder", name.data());
+		LOG_C("SUCCESS: Exported %s.dds into Assets/Textures", name.data());
 
 		RELEASE_ARRAY(data);
 	}
 
 	return ret;
-}
-
-Texture TextureImporter::CreateEmptyTexture() const
-{
-	Texture tex;
-	tex.id = 0;
-	tex.width = 0;
-	tex.height = 0;
-	tex.path = "none";
-
-	return tex;
 }
 
 uint TextureImporter::CreateTexture(const void* text, uint width, uint height, int format, uint format2, const char* path) const
@@ -119,8 +107,6 @@ uint TextureImporter::CreateTexture(const void* text, uint width, uint height, i
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//LOG_C("Loaded Texture(%i x %i) with path: %s", width, height, path);
 
 	return tex;
 }
@@ -156,7 +142,6 @@ Texture TextureImporter::GenerateCheckersTexture()
 
 	tex.height = CHECKERS_HEIGHT;
 	tex.width = CHECKERS_WIDTH;
-	tex.path = "None";
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

@@ -40,7 +40,6 @@ bool ModuleRenderer3D::Init()
 
 	if(ret == true)
 	{
-		// Without this function glew doesn't initialize so the code crashes, IT MUST BE HERE
 		glewInit();
 
 		//Use Vsync
@@ -110,33 +109,26 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_TEXTURE_2D);
 	}
 
-	// Projection matrix for
-	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
-
 	return ret;
 }
 
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
-	bool* updateCam = App->camera->GetProjectionBool();
+	// In playmode projection
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 
-	if (*updateCam)
-	{
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
+	glLoadMatrixf((GLfloat*)App->camera->GetProjection());
 
-		glLoadMatrixf((GLfloat*)App->camera->GetProjection());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		*updateCam = false;
-	}
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
+	// In editor projection
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetView());
 
@@ -149,11 +141,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-// PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	App->scene_intro->Draw(); // not using this
-
 	ComponentCamera* cam = culling;
 
 	if (culling == nullptr)
@@ -172,14 +161,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		}
 	}
 
-
 	// Drawing Panels
 	App->gui->Draw();
 
 	SDL_GL_SwapWindow(App->window->window);
-
-	
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	return UPDATE_CONTINUE;
 }
@@ -272,9 +257,9 @@ void ModuleRenderer3D::GenerateObject(GameObject* GO)
 		glDisableClientState(GL_VERTEX_ARRAY);
 
 	}
-
 }
 
+// ImGuizmo purposes
 float* ModuleRenderer3D::GetProjectionMatrix()
 {
 	return &ProjectionMatrix;

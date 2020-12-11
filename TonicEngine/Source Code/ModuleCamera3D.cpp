@@ -9,7 +9,9 @@
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	activeCam = mainCam = new ComponentCamera();
+	mainCam = new ComponentCamera();
+	activeCam = new ComponentCamera();
+	mainCam = activeCam;
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -25,6 +27,9 @@ bool ModuleCamera3D::Start()
 
 	cameraGO = App->scene_intro->CreateGO("Main Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
+
+	cameraGO2 = App->scene_intro->CreateGO("Testing Camera 2", App->scene_intro->GOroot);
+	cameraGO2->CreateComponent(COMPONENT_TYPE::CAMERA);
 
 	return true;
 }
@@ -251,6 +256,11 @@ void ModuleCamera3D::DrawRay()
 
 	glEnd();
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+ComponentCamera* ModuleCamera3D::SetCamera(GameObject* current_cam)
+{
+	return activeCam = current_cam->GetComponentCamera();
 }
 
 float3 ModuleCamera3D::GetPosition() const

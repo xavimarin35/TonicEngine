@@ -188,7 +188,7 @@ bool Application::PlayScene()
 	case ENGINE_STATE::NONE:
 		if (camera->GetActiveCamera() != nullptr)
 		{
-			camera->activeCam = camera->cameraGO->GetComponentCamera();
+			camera->activeCam = camera->SetCamera(camera->cameraGO2);
 			camera->activeCam->update_frustum = true;
 			ChangeEngineState(ENGINE_STATE::PLAY);
 			time->started_timer = time->GetCurrentTimer();

@@ -60,8 +60,10 @@ public:
 	bool isOnSelectTexture = false;
 
 	GameObject* cameraGO = nullptr;
+	GameObject* cameraGO2 = nullptr;
 	ComponentCamera* mainCam = nullptr;
 	ComponentCamera* activeCam = nullptr;
+	ComponentCamera* SetCamera(GameObject* current_cam);
 
 	float3 looking_at;
 	bool looking = false;
