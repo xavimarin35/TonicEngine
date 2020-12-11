@@ -58,21 +58,35 @@ bool PanelResources::Draw()
 				{
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
-					ImGui::Selectable("Meshes", &showing_meshes);
+					if (ImGui::Selectable("Meshes", &showing_meshes))
+					{
+						showing_models = showing_scenes = showing_textures = false;
+					}
 
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
-					ImGui::Selectable("Textures", &showing_textures);
+					if (ImGui::Selectable("Textures", &showing_textures))
+					{
+						showing_models = showing_scenes = showing_meshes = false;
+					}
 
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
-					ImGui::Selectable("Scenes", &showing_scenes);
+					if (ImGui::Selectable("Scenes", &showing_scenes))
+					{
+						showing_models = showing_meshes = showing_textures = false;
+					}
 					
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
-					ImGui::Selectable("Models", &showing_models);
+					if (ImGui::Selectable("Models", &showing_models))
+					{
+						showing_meshes = showing_scenes = showing_textures = false;
+					}
+
 					ImGui::TreePop();
 				}
+
 				ImGui::TreePop();
 			}
 
@@ -92,18 +106,17 @@ bool PanelResources::Draw()
 			if (showing_meshes)
 				App->resources->DrawResources(RESOURCE_TYPE::MESH);
 
-			if (showing_textures)
+			else if (showing_textures)
 				App->resources->DrawResources(RESOURCE_TYPE::TEXTURE);
 
-			if (showing_scenes)
+			else if (showing_scenes)
 				App->resources->DrawResources(RESOURCE_TYPE::SCENE);
 
-			if (showing_models)
+			else if (showing_models)
 				App->resources->DrawResources(RESOURCE_TYPE::MODEL);
 
 			ImGui::EndChild();
 			ImGui::PopStyleVar();
-
 		}
 
 		ImGui::End();
@@ -111,4 +124,3 @@ bool PanelResources::Draw()
 
 	return true;
 }
-
