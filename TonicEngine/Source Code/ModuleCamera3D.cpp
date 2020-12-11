@@ -49,6 +49,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector || isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2 || isOnQuit || isOnSelectTexture)
 	{
+		mouse_picking = false;
+
 		// Trying to focus while hovering a menu
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !focusError)
 		{
@@ -59,6 +61,7 @@ update_status ModuleCamera3D::Update(float dt)
 		return UPDATE_CONTINUE;
 	}
 
+	mouse_picking = true;
 	focusError = false;
 
 	float3 speed = 
@@ -87,18 +90,6 @@ update_status ModuleCamera3D::Update(float dt)
 		float moveSpeed = currentSpeed * dt;
 
 		MoveCamera(moveSpeed);
-	}
-	
-	else if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		GameObject* pick;
-
-		pick = MousePicking();
-
-		if (pick != nullptr)
-			App->scene_intro->GOselected = pick;
-		else
-			App->scene_intro->GOselected = nullptr;
 	}
 
 	else if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)

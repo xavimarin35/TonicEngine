@@ -82,6 +82,8 @@ public:
 	bool exitMenu = false;
 	bool deleteScene = false;
 
+	bool usingGizmo = false;
+
 	void DrawGuizmo();
 	void ChangeOperationGuizmo(ImGuizmo::OPERATION& op);
 	ImGuizmo::OPERATION g_operator = ImGuizmo::OPERATION::TRANSLATE;

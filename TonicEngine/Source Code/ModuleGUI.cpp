@@ -112,6 +112,23 @@ update_status ModuleGUI::PostUpdate(float dt)
 	if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
 		DrawGuizmo();
 
+	if (ImGuizmo::IsUsing() == true)
+		usingGizmo = true;
+	else if (ImGuizmo::IsUsing() == false)
+		usingGizmo = false;
+
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && !usingGizmo && App->camera->mouse_picking)
+	{
+		GameObject* pick;
+
+		pick = App->camera->MousePicking();
+
+		if (pick != nullptr)
+			App->scene_intro->GOselected = pick;
+		else
+			App->scene_intro->GOselected = nullptr;
+	}
+
 	return ret;
 }
 
