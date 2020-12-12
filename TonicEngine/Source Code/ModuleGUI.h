@@ -97,6 +97,8 @@ public:
 	Color frustum_color = { 1.0f, 1.0f, 1.0f };
 	Color plane_color = { 1.0f, 0.0f, 0.0f };
 
+	bool CheckParent(GameObject* GO, bool first = false);
+
 private:
 
 	ImGuiIO* io = nullptr;
@@ -108,7 +110,6 @@ private:
 	bool show_style_editor = false;
 	
 	list<PanelManager*> panels;
-
 };
 
 #endif // !__MODULEGUI_H__

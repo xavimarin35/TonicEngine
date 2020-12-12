@@ -619,7 +619,7 @@ void ModuleGUI::DrawGuizmo()
 
 		newMatrix.Transpose();
 
-		if (GO->GOparent->data.name == "Dummy001")
+		if (CheckParent(GO->GOparent))
 		{
 			transf->globalMatrix = newMatrix;
 		}
@@ -676,4 +676,20 @@ void ModuleGUI::ApplyDocking(bool* window)
 	}
 
 	ImGui::End();
+}
+
+bool ModuleGUI::CheckParent(GameObject* GO, bool first)
+{
+	if (first)
+	{
+		if (GO->data.name == "Dummy001" || GO->data.name == "City_building_010" || GO->data.name == "City_building_016" || GO->data.name == "City_building_017" || GO->data.name == "Street_V04")
+			return true;
+
+		else return false;
+	}
+
+	if (GO->data.name == "Dummy001" || GO->data.name == "City_building_010" || GO->data.name == "City_building_016" || GO->data.name == "City_building_017")
+		return true;
+
+	else return false;
 }

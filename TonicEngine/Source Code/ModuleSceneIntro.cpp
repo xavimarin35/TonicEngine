@@ -123,8 +123,6 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 
 void ModuleSceneIntro::SaveScene(std::string scene_name)
 {
-	ResourceScene* res_scene = (ResourceScene*)App->resources->CreateResource(RESOURCE_TYPE::SCENE);
-
 	std::string full_path = ASSETS_SCENES_FOLDER + scene_name + ".json";
 
 	SaveGameObjects(App->jsonImp, GOroot);

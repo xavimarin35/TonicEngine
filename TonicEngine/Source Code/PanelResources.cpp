@@ -17,7 +17,7 @@ bool PanelResources::Start()
 {
 	this->active = true;
 
-	folder = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Library/Textures/folder-icon.dds"));
+	folder = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/folder-icon.png"));
 	folder->LoadInMemory();
 
 	mesh = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_mesh.png"));

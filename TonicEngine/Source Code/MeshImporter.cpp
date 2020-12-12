@@ -125,7 +125,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 
 	transf->UpdateLocalTransform();
 
-	if (GO_root->data.name == "Street_V04" || GO_root->data.name == "Dummy001")
+	if (App->gui->CheckParent(GO_root, true))
 	{
 		go->GetComponentTransform()->default_position = transf->position;
 		go->GetComponentTransform()->default_rotation_e = transf->rotation_euler;

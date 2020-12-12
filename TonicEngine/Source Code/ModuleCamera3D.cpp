@@ -76,6 +76,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
 	{
+		mouse_picking = false;
+
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			Orbit(speed.x / slow, speed.y / slow);
 
@@ -240,7 +242,6 @@ void ModuleCamera3D::DrawRay()
 	glBegin(GL_LINES);
 	glLineWidth(2.0f);
 	glColor4f(Red.r, Red.g, Red.b, Red.a);
-
 
 	glVertex3f(rayHit.a.x, rayHit.a.y, rayHit.a.z);
 	glVertex3f(rayHit.b.x, rayHit.b.y, rayHit.b.z);

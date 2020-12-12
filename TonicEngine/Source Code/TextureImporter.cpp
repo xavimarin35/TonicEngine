@@ -83,7 +83,7 @@ bool TextureImporter::DuplicateTexture(const char* path, std::string& output_fil
 		if (ilSaveL(IL_DDS, data, size) > 0)
 			ret = App->file_system->SaveUnique(output_file, data, size, LIBRARY_TEXTURES_FOLDER, name.data(), "dds");
 
-		LOG_C("SUCCESS: Exported %s.dds into Assets/Textures", name.data());
+		LOG_C("SUCCESS: Exported %s.dds into Library/Textures", name.data());
 
 		RELEASE_ARRAY(data);
 	}
