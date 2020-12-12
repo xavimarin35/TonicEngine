@@ -163,7 +163,7 @@ bool ModuleGUI::Draw()
 			ImGui::EndMenu();
 		}
 
-		if (ImGui::BeginMenu("GameObjects"))
+		if (ImGui::BeginMenu("GameObject"))
 		{
 			if (ImGui::MenuItem("Create Empty GameObject"))
 				App->scene_intro->CreateEmpty("Empty_", App->scene_intro->GOroot);
@@ -359,7 +359,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 			ImGui::MenuItem("Scene Window", NULL, &Pscene->active, false);
 			ImGui::MenuItem("Game Window", NULL, &Pgame->active, false);
-			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active);
+			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active, false);
 
 			ImGui::EndMenu();
 		}
@@ -678,17 +678,9 @@ void ModuleGUI::ApplyDocking(bool* window)
 	ImGui::End();
 }
 
-bool ModuleGUI::CheckParent(GameObject* GO, bool first)
+bool ModuleGUI::CheckParent(GameObject* GO)
 {
-	if (first)
-	{
-		if (GO->data.name == "Dummy001" || GO->data.name == "City_building_010" || GO->data.name == "City_building_016" || GO->data.name == "City_building_017" || GO->data.name == "Street_V04")
-			return true;
-
-		else return false;
-	}
-
-	if (GO->data.name == "Dummy001" || GO->data.name == "City_building_010" || GO->data.name == "City_building_016" || GO->data.name == "City_building_017")
+	if (GO->data.name == "Dummy001" || GO->data.name == "City_building_010" || GO->data.name == "City_building_016" || GO->data.name == "City_building_017" || GO->data.name == "Street_V04")
 		return true;
 
 	else return false;

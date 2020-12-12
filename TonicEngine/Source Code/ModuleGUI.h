@@ -97,7 +97,7 @@ public:
 	Color frustum_color = { 1.0f, 1.0f, 1.0f };
 	Color plane_color = { 1.0f, 0.0f, 0.0f };
 
-	bool CheckParent(GameObject* GO, bool first = false);
+	bool CheckParent(GameObject* GO);
 
 private:
 

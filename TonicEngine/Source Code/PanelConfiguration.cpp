@@ -207,6 +207,7 @@ bool PanelConfiguration::Draw()
 					ImGui::Spacing();
 					ImGui::Text("Draw:  "); ImGui::SameLine(); ImGui::PushItemWidth(110); ImGui::PushID("drawG"); ImGui::Checkbox(" ", &App->scene_intro->drawGrid); ImGui::PopID();
 					ImGui::Text("Size:  ");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("lenghtG"); ImGui::InputFloat(" ", &App->scene_intro->gridSize, 0.1f, 10.0f); ImGui::PopID();
+					ImGui::Text("Width:  ");	ImGui::SameLine(); ImGui::PushItemWidth(130); ImGui::PushID("widthG"); ImGui::InputFloat(" ", &App->scene_intro->gridWidth, 1.0f, 10.0f); ImGui::PopID();
 					ImGui::Text("Color: "); ImGui::SameLine(); ImGui::PushItemWidth(180); ImGui::ColorEdit3(" ", (float*)&App->scene_intro->gridColor, flags);
 					ImGui::TreePop();
 				}

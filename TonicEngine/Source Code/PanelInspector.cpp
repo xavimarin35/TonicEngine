@@ -67,6 +67,10 @@ bool PanelInspector::Draw()
 				else
 					go->DisableGameObject();
 			}
+			else
+			{
+				ImGui::TextColored(GREY_COLOR, "No GameObject Selected");
+			}
 
 		}
 

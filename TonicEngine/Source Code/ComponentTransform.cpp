@@ -94,6 +94,18 @@ void ComponentTransform::DrawInspector()
 
 		ImGui::Spacing();
 
+		if (App->gui->CheckParent(go->GOparent))
+		{
+			ImGui::TextColored(RED_COLOR, "ImGuizmo not functional in this object");
+
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::SetTooltip("ImGuizmo is not updating this transform,\nit has only a visual purpose, but you can\ntry with another object outside the Dummy001");
+			}
+
+			ImGui::Spacing();
+		}
+
 		if (go->GetComponentCamera() == nullptr)
 		{
 			if (ImGui::Button(" Reset Transform "))
