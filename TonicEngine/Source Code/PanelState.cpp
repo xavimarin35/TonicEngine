@@ -75,7 +75,8 @@ bool PanelState::Draw()
 			{
 				if (!App->camera->playCam->IsGameObjectActive())
 				{
-					LOG_C("WARNING: The current Game Camera is not active");
+					LOG_C("ERROR: Couldn't find any camera.");
+					LOG_C("ERROR: Enable it, or create a new one and set it as Game Camera.");
 				}
 				else
 				{

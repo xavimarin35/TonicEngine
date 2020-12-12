@@ -21,16 +21,6 @@ uint Resource::GetUUID() const
 	return res_UUID;
 }
 
-const char* Resource::GetFile() const
-{
-	return nullptr;
-}
-
-const char* Resource::GetImportedFile() const
-{
-	return nullptr;
-}
-
 uint Resource::GetCurrentReference()
 {
 	return references;

@@ -36,6 +36,18 @@ update_status ModuleResources::Update()
 
 bool ModuleResources::CleanUp()
 {
+	bool ret = true;
+
+	std::map <uint, Resource*>::iterator it;
+	it = resources.begin();
+	while (it != resources.end())
+	{
+		RELEASE((*it).second);
+		it++;
+	}
+
+	resources.clear();
+
 	return true;
 }
 
@@ -105,15 +117,6 @@ uint ModuleResources::GetNewFile(const char* new_file)
 			ret = ImportFile(path.c_str(), RESOURCE_TYPE::MODEL);
 		}
 	}
-	else if (CompareExtensionForScenes(extension))
-	{
-		path = ASSETS_SCENES_FOLDER + path;
-
-		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
-		{
-		ret = ImportFile(path.c_str(), RESOURCE_TYPE::SCENE);
-		}
-	}
 
 	return ret;
 }
@@ -123,9 +126,8 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 	uint ret = 0; 
 	bool create_resource = false; 
 	std::string written_file;
-	std::string scene_name;
 
-	ret = GetResourceInAssets(new_file_in_assets);
+	ret = GetResourceFromFolder(FOLDERS::ASSETS, new_file_in_assets);
 
 	if (ret == 0)
 	{
@@ -164,30 +166,35 @@ Resource* ModuleResources::Get(uint uid)
 	return nullptr;
 }
 
-uint ModuleResources::GetResourceInAssets(const char* path) const
+uint ModuleResources::GetResourceFromFolder(FOLDERS folder, const char* path)
 {
-	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	if (folder == FOLDERS::ASSETS)
 	{
-		std::string s = it->second->file;
-		if (s.compare(path) == 0)
-			return it->first;
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		{
+			std::string s = it->second->file;
+			if (s.compare(path) == 0)
+				return it->first;
+		}
+
+		return 0;
 	}
 
-	return 0;
-}
-
-uint ModuleResources::IsResourceInLibrary(const char* name) const
-{
-	for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+	if (folder == FOLDERS::LIBRARY)
 	{
-		char n[250];
-		sprintf_s(n, 250, "%s", name);
-		App->file_system->NormalizePath(n);
+		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		{
+			char n[250];
+			sprintf_s(n, 250, "%s", path);
+			App->file_system->NormalizePath(n);
 
-		std::string s = App->GetPathName(it->second->exported_file);
+			std::string s = App->GetPathName(it->second->exported_file);
 
-		if (s.compare(n) == 0)
-			return it->first;
+			if (s.compare(n) == 0)
+				return it->first;
+		}
+
+		return 0;
 	}
 
 	return 0;
@@ -307,46 +314,6 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 						ImGui::BeginTooltip();
 						ImGui::Text("Name:"); ImGui::SameLine();
 						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->exported_file).c_str());
-						ImGui::EndTooltip();
-					}
-
-					AlignResources(i);
-				}
-			}
-		}
-	}
-
-	else if (type == RESOURCE_TYPE::SCENE)
-	{
-		int i = 0;
-
-		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
-		{
-			if (it->second != nullptr)
-			{
-				if (it->second->type == RESOURCE_TYPE::SCENE)
-				{
-					i++;
-
-					vector<string> file_list, dir_list;
-					std::string name, path;
-					App->file_system->DiscoverFiles("Assets/Scenes/", file_list, dir_list);
-
-					for (vector<string>::iterator iterator = file_list.begin(); iterator != file_list.end(); iterator++)
-					{
-						std::map<uint, ResourceScene*>::const_iterator scene = scene_resources.find(it->first);
-						ImGui::ImageButton((ImTextureID*)App->gui->Presources->scene->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
-						name = (*iterator).c_str();
-						path = ASSETS_SCENES_FOLDER + name;
-					}
-
-					if (ImGui::IsItemHovered())
-					{
-						ImGui::BeginTooltip();
-						ImGui::Text("Name:"); ImGui::SameLine();
-						ImGui::TextColored(YELLOW_COLOR, "%s", name.c_str());
-						ImGui::Text("Path:"); ImGui::SameLine();
-						ImGui::TextColored(YELLOW_COLOR, "%s", path.c_str());
 						ImGui::EndTooltip();
 					}
 

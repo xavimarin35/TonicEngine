@@ -379,9 +379,6 @@
     <ClInclude Include="Source Code\Libraries\mmgr\nommgr.h">
       <Filter>Sources\Libraries\mmgr</Filter>
     </ClInclude>
-    <ClInclude Include="Source Code\Importer.h">
-      <Filter>Sources\Importers</Filter>
-    </ClInclude>
     <ClInclude Include="Source Code\ComponentCamera.h">
       <Filter>Sources\GameObject\Components</Filter>
     </ClInclude>
@@ -635,9 +632,6 @@
     </ClCompile>
     <ClCompile Include="Source Code\Libraries\mmgr\mmgr.cpp">
       <Filter>Sources\Libraries\mmgr</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Code\Importer.cpp">
-      <Filter>Sources\Importers</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\ComponentCamera.cpp">
       <Filter>Sources\GameObject\Components</Filter>

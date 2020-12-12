@@ -195,10 +195,6 @@ bool Application::PlayScene()
 			LOG_C("PLAYMODE: Running");
 			return true;
 		}
-		else
-		{
-			LOG_C("ERROR: Couldn't found any camera. Enable it or create a new one");
-		}
 		break;
 	}
 

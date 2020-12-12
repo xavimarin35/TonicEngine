@@ -5,7 +5,6 @@
 #include "GameObject.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFileSystem.h"
-#include "Importer.h"
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
 #include "ModuleResources.h"
@@ -168,9 +167,9 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 		child->CreateComponent(COMPONENT_TYPE::MESH);
 		ComponentMesh* mesh = child->GetComponentMesh();
 
-		if (App->resources->IsResourceInLibrary(child->data.name.c_str()) != NULL)
+		if (App->resources->GetResourceFromFolder(FOLDERS::LIBRARY, child->data.name.c_str()) != NULL)
 		{
-			mesh->rMesh = (ResourceMesh*)App->resources->Get(App->resources->IsResourceInLibrary(child->data.name.c_str()));
+			mesh->rMesh = (ResourceMesh*)App->resources->Get(App->resources->GetResourceFromFolder(FOLDERS::LIBRARY, child->data.name.c_str()));
 
 			if (mesh->rMesh != nullptr)
 				mesh->rMesh->LoadInMemory();

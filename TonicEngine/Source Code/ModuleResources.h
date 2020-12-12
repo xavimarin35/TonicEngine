@@ -5,6 +5,13 @@
 #include "Module.h"
 #include "Resource.h"
 
+enum class FOLDERS
+{
+	NONE = -1,
+	ASSETS,
+	LIBRARY
+};
+
 class Resource;
 class ResourceMesh;
 class ResourceTexture;
@@ -31,8 +38,8 @@ public:
 	uint ImportFile(const char* new_file_in_assets, RESOURCE_TYPE type);
 
 	Resource* Get(uint uid);
-	uint GetResourceInAssets(const char* path) const;
-	uint IsResourceInLibrary(const char* name) const;
+
+	uint GetResourceFromFolder(FOLDERS folder, const char* path);
 
 	bool CompareExtensionForTextures(std::string var);
 	bool CompareExtensionForModels(std::string var);
@@ -43,7 +50,6 @@ public:
 	std::map<uint, Resource*> resources;
 	std::map<uint, ResourceTexture*> tex_resources;
 	std::map<uint, ResourceMesh*> mesh_resources;
-	std::map<uint, ResourceScene*> scene_resources;
 	std::map<uint, ResourceModel*> model_resources;
 
 private:

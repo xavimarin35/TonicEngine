@@ -46,7 +46,7 @@ bool PanelResources::Draw()
 
 			ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize;
 
-			ImGui::BeginChild("Resources Tree", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.20f, 260), false, window_flags);
+			ImGui::BeginChild("Resources Tree", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.20f, 250), false, window_flags);
 
 			if (ImGui::IsWindowHovered()) 
 				App->camera->isOnResourcesChild1 = true;
@@ -98,7 +98,7 @@ bool PanelResources::Draw()
 			ImGuiWindowFlags window_flags2 = ImGuiWindowFlags_AlwaysAutoResize;
  
 			ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 5.0f);
-			ImGui::BeginChild("Resources Icons", ImVec2(0, 260), true, window_flags2);
+			ImGui::BeginChild("Resources Icons", ImVec2(0, 250), true, window_flags2);
 
 			if (ImGui::IsWindowHovered()) App->camera->isOnResourcesChild2 = true;
 			else App->camera->isOnResourcesChild2 = false;
