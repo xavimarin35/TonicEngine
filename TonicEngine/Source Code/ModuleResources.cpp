@@ -12,7 +12,6 @@
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
 #include "ResourceModel.h"
-#include "ResourceScene.h"
 
 #include <string>
 
@@ -71,10 +70,6 @@ Resource* ModuleResources::CreateResource(RESOURCE_TYPE type)
 
 	case RESOURCE_TYPE::MODEL:
 		ret = (Resource*) new ResourceModel(uid);
-		break;
-
-	case RESOURCE_TYPE::SCENE:
-		ret = (Resource*) new ResourceScene(uid);
 		break;
 	}
 
@@ -137,8 +132,6 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 			create_resource = App->tex_imp->LoadTextureFromPath(new_file_in_assets, written_file);
 			break;
 		case RESOURCE_TYPE::MESH:
-			break;
-		case RESOURCE_TYPE::SCENE:
 			break;
 		case RESOURCE_TYPE::MODEL:
 			break;

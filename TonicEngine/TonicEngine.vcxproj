@@ -197,7 +197,6 @@
     <ClInclude Include="Source Code\Resource.h" />
     <ClInclude Include="Source Code\ResourceMesh.h" />
     <ClInclude Include="Source Code\ResourceModel.h" />
-    <ClInclude Include="Source Code\ResourceScene.h" />
     <ClInclude Include="Source Code\ResourceTexture.h" />
     <ClInclude Include="Source Code\Viewport.h" />
     <ClInclude Include="Source Code\PathNode.h" />
@@ -285,7 +284,6 @@
     <ClCompile Include="Source Code\Resource.cpp" />
     <ClCompile Include="Source Code\ResourceMesh.cpp" />
     <ClCompile Include="Source Code\ResourceModel.cpp" />
-    <ClCompile Include="Source Code\ResourceScene.cpp" />
     <ClCompile Include="Source Code\ResourceTexture.cpp" />
     <ClCompile Include="Source Code\Viewport.cpp" />
     <ClCompile Include="Source Code\Primitive.cpp" />

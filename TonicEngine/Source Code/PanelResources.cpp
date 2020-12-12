@@ -23,9 +23,6 @@ bool PanelResources::Start()
 	mesh = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_mesh.png"));
 	mesh->LoadInMemory();
 
-	scene = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_scene.png"));
-	scene->LoadInMemory();
-
 	model = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/resource_model.png"));
 	model->LoadInMemory();
 
@@ -60,28 +57,21 @@ bool PanelResources::Draw()
 					ImGui::SameLine();
 					if (ImGui::Selectable("Meshes", &showing_meshes))
 					{
-						showing_models = showing_scenes = showing_textures = false;
+						showing_models = showing_textures = false;
 					}
 
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
 					if (ImGui::Selectable("Textures", &showing_textures))
 					{
-						showing_models = showing_scenes = showing_meshes = false;
-					}
-
-					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
-					ImGui::SameLine();
-					if (ImGui::Selectable("Scenes", &showing_scenes))
-					{
-						showing_models = showing_meshes = showing_textures = false;
+						showing_models = showing_meshes = false;
 					}
 					
 					ImGui::Image((ImTextureID)folder->tex.id, ImVec2(15, 15), ImVec2(0, 1), ImVec2(1, 0));
 					ImGui::SameLine();
 					if (ImGui::Selectable("Models", &showing_models))
 					{
-						showing_meshes = showing_scenes = showing_textures = false;
+						showing_meshes = showing_textures = false;
 					}
 
 					ImGui::TreePop();
@@ -108,9 +98,6 @@ bool PanelResources::Draw()
 
 			else if (showing_textures)
 				App->resources->DrawResources(RESOURCE_TYPE::TEXTURE);
-
-			else if (showing_scenes)
-				App->resources->DrawResources(RESOURCE_TYPE::SCENE);
 
 			else if (showing_models)
 				App->resources->DrawResources(RESOURCE_TYPE::MODEL);

@@ -17,12 +17,10 @@ public:
 
 	bool showing_textures = false;
 	bool showing_meshes = false;
-	bool showing_scenes = false;
 	bool showing_models = false;
 
 	ResourceTexture* folder = nullptr;
 	ResourceTexture* mesh = nullptr;
-	ResourceTexture* scene = nullptr;
 	ResourceTexture* model = nullptr;
 };
 

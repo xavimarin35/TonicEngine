@@ -82,7 +82,7 @@ public:
 	Color bbColor = Blue;
 	float bbSize = 1.0f;
 	float gridSize = 3.0f;
-	float gridWidth = 2.0f;
+	float gridWidth = 0.5f;
 	float axisLength = 6.0f;
 
 };

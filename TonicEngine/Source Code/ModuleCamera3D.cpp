@@ -149,7 +149,6 @@ void ModuleCamera3D::Focus(GameObject* go)
 			pos = transf->position;
 		}
 
-
 		LookAt(pos, dist);
 	}
 }

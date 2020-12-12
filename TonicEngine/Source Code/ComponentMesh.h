@@ -20,8 +20,7 @@ public:
 	void Draw() override;
 
 	void DrawInspector();
-	bool DrawFaceNormals(GameObject* m, bool active = false);
-	bool DrawVertexNormals(GameObject* m, bool active = false);
+
 	void IsMeshComponentActive(GameObject* go);
 
 	const AABB& BoundingBox();

@@ -15,7 +15,6 @@ enum class FOLDERS
 class Resource;
 class ResourceMesh;
 class ResourceTexture;
-class ResourceScene;
 class ResourceModel;
 
 class ModuleResources : public Module
