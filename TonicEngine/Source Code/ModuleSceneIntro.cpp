@@ -384,28 +384,24 @@ void ModuleSceneIntro::Create3DObject(OBJECTS3D object)
 		App->mesh_imp->LoadFile("Assets/BasicShapes/bCone.fbx");
 		break;
 
-	case OBJECTS3D::B_TREE:
-		App->mesh_imp->LoadFile("Assets/OtherMeshes/Tree/Tree_Mesh.fbx", "Assets/OtherMeshes/Tree/Tree_Trunk.png");
-		break;
-
 	case OBJECTS3D::GERALT:
-		App->mesh_imp->LoadFile("Assets/OtherMeshes/Geralt/Geralt.obj", "Assets/OtherMeshes/Geralt/Geralt.png");
+		App->mesh_imp->LoadFile("Assets/Models/Geralt_1.obj", "Assets/Models/Geralt.png");
 		break;
 
 	case OBJECTS3D::LIGHTPOST:
-		App->mesh_imp->LoadFile("Assets/OtherMeshes/LightPost/LightPost.obj", "Assets/OtherMeshes/LightPost/LightPost.png");
+		App->mesh_imp->LoadFile("Assets/Models/LightPost_1.obj", "Assets/Models/LightPost.png");
 		break;
 
 	case OBJECTS3D::CARRIAGE:
-		App->mesh_imp->LoadFile("Assets/OtherMeshes/Carriage/Carriage.obj", "Assets/OtherMeshes/Carriage/Carriage.png");
+		App->mesh_imp->LoadFile("Assets/Models/Carriage_1.obj", "Assets/Models/Carriage.png");
 		break;
 
 	case OBJECTS3D::ROCK:
-		App->mesh_imp->LoadFile("Assets/OtherMeshes/Rock/Rock.obj", "Assets/OtherMeshes/Rock/Rock.png");
+		App->mesh_imp->LoadFile("Assets/Models/Rock_1.obj", "Assets/Models/Rock.png");
 		break;
 
 	case OBJECTS3D::BAKER_HOUSE:
-		App->mesh_imp->LoadFile("Assets/BakerHouse/BakerHouse.obj", "Assets/BakerHouse/Baker_house.png");
+		App->mesh_imp->LoadFile("Assets/Models/BakerHouse_1.obj", "Assets/Models/BakerHouse.png");
 		break;
 
 	case OBJECTS3D::STREET:
