@@ -313,42 +313,63 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 		
 		for (std::list<Assets*>::iterator it = assets.begin(); it != assets.end(); it++)
 		{
-			i++;
-
-			ImGui::ImageButton((ImTextureID)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
-
-			if (ImGui::IsItemHovered()) 
+			// If the file is a texture, don't print it, just get the path
+			if ((*it)->type == Assets::TYPE::FILE)
 			{
-				if ((*it)->type == Assets::TYPE::FILE)
+				std::string extension;
+				std::string filename;
+				App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename, &extension);
+
+				std::string complete_path = "Assets/Models/";
+				std::string mesh = "";
+				std::string tex = "";
+
+				if ((extension == "png" || extension == "PNG" || extension == "dds" || extension == "DDS"))
 				{
-
-					std::string extension;
-					std::string filename;
-					App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename, &extension);
-
-					std::string complete_path = "Assets/Models/";
-					std::string mesh = "";
-					std::string tex = "";
-
-					if ((extension == "fbx" || extension == "FBX" || extension == "OBJ" || extension == "obj"))
-					{
-						mesh = complete_path + filename;
-					}
-
-					ImGui::BeginTooltip();
-					ImGui::Text("Name:"); ImGui::SameLine();
-					ImGui::TextColored(YELLOW_COLOR, "%s", filename.c_str());
-					ImGui::Text("Source File:"); ImGui::SameLine();
-					ImGui::TextColored(YELLOW_COLOR, "%s", mesh.c_str());
-					ImGui::EndTooltip();
-
-					if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
-						App->mesh_imp->LoadFile(mesh);
-	
+					isTexture = true;
+					text_path = complete_path + filename;
 				}
+				else isTexture = false;
 			}
 
-			AlignResources(i);
+			// If the file is not a texture, draw it
+			if (!isTexture)
+			{
+				i++;
+
+				ImGui::ImageButton((ImTextureID)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+
+				if (ImGui::IsItemHovered())
+				{
+					if ((*it)->type == Assets::TYPE::FILE)
+					{
+						std::string extension;
+						std::string filename;
+						App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename, &extension);
+
+						std::string complete_path = "Assets/Models/";
+						std::string mesh = "";
+						std::string tex = "";
+
+						if ((extension == "fbx" || extension == "FBX" || extension == "OBJ" || extension == "obj"))
+						{
+							mesh = complete_path + filename;
+						}
+
+						ImGui::BeginTooltip();
+						ImGui::Text("Name:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", filename.c_str());
+						ImGui::Text("Source File:"); ImGui::SameLine();
+						ImGui::TextColored(YELLOW_COLOR, "%s", mesh.c_str());
+						ImGui::EndTooltip();
+
+						if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
+							App->mesh_imp->LoadFile(mesh, text_path);
+					}
+				}
+
+				AlignResources(i);
+			}
 		}
 	}
 }

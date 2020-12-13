@@ -69,6 +69,9 @@ public:
 
 private:
 
+	bool isTexture = false;
+
+	std::string text_path;
 	
 };
 
