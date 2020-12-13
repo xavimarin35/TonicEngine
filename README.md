@@ -2,38 +2,71 @@
 
 [Tonic Engine](https://github.com/xavimarin35/TonicEngine) is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi Marín, students of [CITM](https://www.citm.upc.edu/) in Barcelona during our [Game Design and Development Bachelor's Degree](https://www.citm.upc.edu/cat/estudis/grau-videojocs-bcn/).
 
-## Information
+## Features
 
-### Basic Features
+### Windows
 
-* **Resource Manager** which manages all the assets of the engine
-* **Mouse Picking** functionality
-* **Drag & Drop** functionality (models and textures)
-* Creation of **different Game Objects**
-* **Play and Pause** buttons to play the game
-* Buttons to activate or deactivate **bounding boxes**
-* **Configuration window** to change renderer and camera options
-* **Inspector window** to modify the transform and texture of a Game Object
-* **Resources folder** to see which resources are being used
-* Other editor tools found in the **main menu** 
+**Hierarchy:**
+Shows current GameObjects tree
+* Reparent with drag and drop
+* Creation and deletion of GameObjects
+* Current active Game Camera
 
-### Camera Controls
+**Inspector:**
+Shows the attributes of the selected GameObject
+* Transform, Mesh, Texture and Camera components
+* Rename and enable/disable of GameObjects
+* Change properties of the components
 
-* **Right Click**: First-Person Camera
-* **Right Click + WASD, QE**: Move camera in different directions.
-* **Shift + Movement**: Duplicates camera velocity.
-* **ALT + Left Click**: Orbit around reference point.
-* **Mouse Wheel Scroll** or **ALT + Right Click**: Zoom in / Zoom out.
-* **Mouse Wheel Drag**: Move camera through the actual axis.
-* **F**: Focus camera to selected Game Object.
+**Console:**
+Logs real-time information about the engine's processes
+* Autoscroll
+* Clear console and last log buttons
+* Different colors depending on log type
+
+**Configuration:**
+Shows the properties of the engine and its rendering
+* Application, Hardware and Input information
+* Window and Rendering options
+* Camera movement sensitivity
+
+**Assets:**
+Displays all the resources used by the engine and their information
+* Meshes, textures and models folder
+* Textures can be assigned from the folder to current selected GameObject
+* Models can be imported to current scene from the folder
+
+**State:**
+Contains the Play menu and other important buttons
+* Move, Rotate and Scale buttons for gizmos
+* Bounding boxes buttons
+* Playmode buttons
+
+**Main Tab:**
+Menus of all the functionalities of the engine
+* File
+* GameObject
+* Debug
+* Windows
+* Help
+
+### Functionalities
+
+* **Resource Manager:** Manages all the assets of the engine
+* **Mouse Picking:** GameObjects can be picked from the world using the mouse
+* **Drag & Drop:** Meshes and Textures can be dropped to the engine
+* **Playmode:** The engine enters into a simulation with the active game camera
+* **Bounding Boxes:** All meshes have their own AABB
+* **Own file format:** New meshes and textures are saved in the library
+* **Frustum culling:** Cameras can discard and don't draw elements outside their range of view
+* **Scene Serialization:** Scenes information can be saved into .json files
 
 ### Extra Features
 
-* **Docking** functionality
-* **Gizmos** to move, rotate and scale Game Objects
-* **Debug** Menu
-* Camera **sensitivity** options
-* Console **auto scroll**
+* Docking
+* Gizmos
+* Debug Menu
+* Environment customization
 
 ## Usage
 
@@ -42,6 +75,27 @@
 Download the zip file and unzip it. Open the folder, execute the .exe and enjoy Tonic Engine!
 
 IMPORTANT: *Do not modify, change or add any folder or file (unless specified) as you might not be able to execute the application.*
+
+### Camera Controls
+
+* **Right Click**: First-Person Camera
+* **Right Click + WASD / QE**: Move camera in different directions.
+* **Shift + Movement**: Duplicates camera velocity.
+* **ALT + Left Click**: Orbit around reference point.
+* **Mouse Wheel Scroll** or **ALT + Right Click**: Zoom in / Zoom out.
+* **Mouse Wheel Drag**: Move camera through the actual axis.
+* **F**: Focus camera to selected Game Object.
+
+### Shortcuts
+
+* **CTRL + S:** Saves the actual scene information
+* **CTRL + A:** Loads the saved scene
+* **CTRL + R:** Resets the transform of the selected GameObject
+* **CTRL + T:** Saves the actual transform of the GameObject to be the new default
+* **W / E / R:** Move / Rotate / Scale gizmo operation
+* **SUPR:** Deletes the selected GameObject
+* **ESC:** Activates/Deactivates the Exit Engine pop-up
+* **ALT + F4:** Closes the engine
 
 ## Authors
 
