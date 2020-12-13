@@ -63,7 +63,6 @@ public:
 	std::map<uint, Resource*> resources;
 	std::map<uint, ResourceTexture*> tex_resources;
 	std::map<uint, ResourceMesh*> mesh_resources;
-	std::map<uint, ResourceModel*> model_resources;
 
 	std::list<Assets*> assets;
 	std::string models_path = ASSETS_MODELS_FOLDER;
