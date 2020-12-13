@@ -77,6 +77,9 @@ update_status ModuleSceneIntro::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 		App->gui->loadSceneMenu = true;
 
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		App->gui->exitMenu = true;
+
 	return UPDATE_CONTINUE;
 }
 

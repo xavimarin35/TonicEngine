@@ -7,7 +7,6 @@
 #include "ModuleFileSystem.h"
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
-#include "ResourceModel.h"
 #include "ModuleResources.h"
 
 #include "Assimp/include/cimport.h"

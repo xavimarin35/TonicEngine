@@ -134,14 +134,7 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 		if (create_resource)
 		{ 
 			Resource* res = CreateResource(type);
-			
-			if(res->type == RESOURCE_TYPE::TEXTURE)
-				BuildResource(res, new_file_in_assets, written_file);
-			else
-			{
-				res->file = new_file_in_assets;
-				res->exported_file = written_file;
-			}
+			BuildResource(res, new_file_in_assets, written_file);
 
 			ret = res->res_UUID;
 		}

@@ -156,8 +156,7 @@ bool ModuleGUI::Draw()
 
 			ImGui::Separator();
 
-			if (ImGui::MenuItem("Quit", "Alt+F4"))
-				exitMenu = true;
+			ImGui::MenuItem("Quit", NULL, &exitMenu);
 
 			ImGui::EndMenu();
 		}

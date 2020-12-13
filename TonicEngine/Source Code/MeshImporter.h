@@ -4,7 +4,6 @@
 #include "Application.h"
 #include "Module.h"
 #include "ResourceMesh.h"
-#include "ResourceModel.h"
 
 class aiNode;
 class aiScene;

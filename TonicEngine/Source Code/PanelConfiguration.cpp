@@ -45,6 +45,7 @@ bool PanelConfiguration::Draw()
 				ImGui::SliderFloat("Brightness", &screen.brightness, 0.0f, 1.0f);
 
 				SDL_SetWindowSize(App->window->window, screen.width, screen.height);
+
 				SDL_SetWindowBrightness(App->window->window, screen.brightness);
 				
 				ImGui::Separator();

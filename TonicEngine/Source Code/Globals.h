@@ -62,8 +62,8 @@ enum update_status
 #define JSON_ASSERT(x) assert(x)
 
 // Configuration -----------
-#define SCREEN_WIDTH 1820
-#define SCREEN_HEIGHT 980
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
 #define SCREEN_SIZE 1
 #define WIN_MAXIMIZED true
 #define WIN_FULLSCREEN false
