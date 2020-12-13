@@ -291,20 +291,6 @@ void ModuleSceneIntro::GetGameObjectSelectedIndex(GameObject* GO)
 	}
 }
 
-// old
-void ModuleSceneIntro::GetSizeOfList()
-{
-	int size = 0;
-
-	for (int i = 0; i < gameobjectsList.size(); ++i)
-	{
-		size = gameobjectsList.size();
-	}
-
-	LOG_C("The size of the GOs list is %i", size);
-}
-
-
 bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 {
 	if (active)
@@ -360,8 +346,7 @@ bool ModuleSceneIntro::DrawGridAndAxis(bool active)
 	}
 	else {
 		return false;
-	}
-	
+	}	
 }
 
 void ModuleSceneIntro::Create3DObject(OBJECTS3D object)

@@ -21,5 +21,3 @@ void ResourceMesh::ReleaseMemory()
 
 	delete this;
 }
-
-

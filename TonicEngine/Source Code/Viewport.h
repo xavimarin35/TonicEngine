@@ -6,7 +6,6 @@
 #include "glew/include/GL/glew.h"
 #include "imgui-1.78/imgui.h"
 
-
 class Viewport
 {
 public:
@@ -27,6 +26,5 @@ public:
 	GLuint rbo;
 	GLuint texture;
 };
-
 
 #endif

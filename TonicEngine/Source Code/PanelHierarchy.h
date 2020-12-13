@@ -5,7 +5,6 @@
 #include "PanelManager.h"
 #include "GameObject.h"
 
-
 class PanelHierarchy : public PanelManager
 {
 public:
@@ -29,7 +28,6 @@ private:
 	GameObject* newParent = nullptr;
 
 	bool changingParent = false;
-
 };
 
 #endif

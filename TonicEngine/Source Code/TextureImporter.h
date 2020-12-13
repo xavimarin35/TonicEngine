@@ -38,7 +38,6 @@ public:
 	// Textures used for opengl purposes
 	Texture texture;
 	Texture checker_texture;
-
 };
 
 #endif

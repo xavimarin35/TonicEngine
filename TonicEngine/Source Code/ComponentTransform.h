@@ -15,6 +15,7 @@ public:
 	ComponentTransform(GameObject* gameObject);
 	virtual ~ComponentTransform();
 
+	// Getters
 	float3 GetPosition() const;
 	Quat GetQuatRotation() const;
 	float3 GetEulerRotation() const;
@@ -22,17 +23,20 @@ public:
 	float4x4 GetTransform() const;
 	float4x4 GetGlobalTransform() const;
 
+	// Setters
 	void SetPosition(float3& position);
 	void SetEulerRotation(float3 rotation);
 	void SetScale(float3& scale);
-
 	void SetGlobalTransform(float4x4 transform);
+
 	void TransformGlobalMat(const float4x4& global);
 
+	// Updates
 	void UpdateTransform();
 	void UpdateLocalTransform();
 	void UpdateGizmo(float4x4 newMatrix);
 	
+	// Reset
 	void Reset(bool new_default = false);
 	void SetNewDefault(float3 pos, float3 rot, float3 sc);
 	void ResetTransform();

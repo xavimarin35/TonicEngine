@@ -286,6 +286,3 @@ void PanelState::ToolTipShortCut(const char* word)
 	ImGui::TextColored(GREY_COLOR, word);
 	ImGui::EndTooltip();
 }
-
-
-

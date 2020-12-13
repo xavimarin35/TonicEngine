@@ -19,7 +19,6 @@ public:
 	virtual bool CleanUp() { return true; }
 
 	virtual bool Draw() { return true; }
-
 };
 
 #endif

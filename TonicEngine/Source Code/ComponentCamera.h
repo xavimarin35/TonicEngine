@@ -52,14 +52,12 @@ public:
 
 	void Save(uint GO_id, nlohmann::json& scene_file);
 
-
 public:
 
 	Frustum frustum;
 	bool showFrustum = false;
 	bool seeFrustum = false;
 	bool update_frustum = true;
-
 };
 
 #endif

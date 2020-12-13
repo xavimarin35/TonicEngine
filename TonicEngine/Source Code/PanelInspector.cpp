@@ -6,7 +6,6 @@
 #include "GameObject.h"
 #include "ModuleCamera3D.h"
 
-
 PanelInspector::PanelInspector() : PanelManager()
 {
 }

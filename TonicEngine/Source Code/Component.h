@@ -14,8 +14,6 @@ enum class COMPONENT_TYPE
 	CAMERA
 };
 
-
-
 class Component
 {
 public:
@@ -39,11 +37,6 @@ public:
 	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
 	GameObject* object = nullptr;
 	uint UUID = 0;
-
 };
-
-
-
-
 
 #endif

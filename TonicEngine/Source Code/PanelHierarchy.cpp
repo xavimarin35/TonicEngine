@@ -183,7 +183,6 @@ void PanelHierarchy::ManageNodesOnHierarchy(GameObject* GO)
 	ImGui::PopStyleColor();
 }
 
-
 void PanelHierarchy::DrawMenuNotHovering()
 {
 	if (ImGui::IsMouseClicked(1))

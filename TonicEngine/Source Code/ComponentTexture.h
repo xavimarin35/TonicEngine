@@ -7,7 +7,6 @@
 
 class GameObject;
 
-
 class ComponentTexture : public Component
 {
 public:

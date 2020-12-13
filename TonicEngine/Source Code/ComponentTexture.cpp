@@ -87,6 +87,7 @@ void ComponentTexture::DrawInspector()
 
 			ImGui::Image((ImTextureID*)tex, ImVec2(310, 310), ImVec2(0, 1), ImVec2(1, 0), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
 		}
+
 		else if(!active)
 		{
 			if (ImGui::Button("Enable Texture"))
@@ -96,6 +97,7 @@ void ComponentTexture::DrawInspector()
 
 			App->gui->HelpMarker("Click 'Enable' button to select a texture");
 		}
+
 		else if (rTexture == nullptr)
 		{
 			ImGui::Spacing();
@@ -163,5 +165,3 @@ void ComponentTexture::Save(uint GO_id, nlohmann::json& scene)
 	if (rTexture != nullptr)
 		scene[object->data.name]["Components"]["Texture"]["Name"] = rTexture->exported_file;
 }
-
-

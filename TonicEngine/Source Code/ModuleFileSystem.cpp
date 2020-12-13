@@ -9,34 +9,27 @@
 
 #pragma comment( lib, "PhysFS/libx86/physfs.lib" )
 
-//#include "mmgr/mmgr.h"
-
 using namespace std;
 
 ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Module(App, start_enabled)
 {
 	const char* game_path;
 
-	// needs to be created before Init so other modules can use it
 	char* base_path = SDL_GetBasePath();
 	PHYSFS_init(base_path);
 	SDL_free(base_path);
 
-	// workaround VS string directory mess
 	AddPath(".");
 
 	if (0 && game_path != nullptr)
 		AddPath(game_path);
 
-	// Dump list of paths
 	LOG("FileSystem Operations base is [%s] plus:", GetBasePath());
 	LOG(GetReadPaths());
 
-	// enable us to write in the game's dir area
 	if (PHYSFS_setWriteDir(".") == 0)
 		LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
 
-	// Make sure standard paths exist
 	const char* dirs[] = {
 		ASSETS_FOLDER, 
 		ASSETS_SCENES_FOLDER,
@@ -53,12 +46,9 @@ ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Modul
 			PHYSFS_mkdir(dirs[i]);
 	}
 
-	// Generate IO interfaces
 	CreateAssimpIO();
-	//CreateBassIO();
 }
 
-// Destructor
 ModuleFileSystem::~ModuleFileSystem()
 {
 	RELEASE(AssimpIO);
@@ -66,34 +56,23 @@ ModuleFileSystem::~ModuleFileSystem()
 	PHYSFS_deinit();
 }
 
-// Called before render is available
-bool ModuleFileSystem::Init(/*Config* config*/)
+bool ModuleFileSystem::Init()
 {
 	LOG("Loading File System");
 	bool ret = true;
 
-	// Ask SDL for a write dir
 	char* write_path = SDL_GetPrefPath("Xavi and Pol", "Tonic Engine");
-
-	// Trun this on while in game mode
-	//if(PHYSFS_setWriteDir(write_path) == 0)
-		//LOG("File System error while creating write dir: %s\n", PHYSFS_getLastError());
-
 
 	SDL_free(write_path);
 
 	return ret;
 }
 
-// Called before quitting
 bool ModuleFileSystem::CleanUp()
 {
-	//LOG("Freeing File System subsystem");
-
 	return true;
 }
 
-// Add a new zip file or folder
 bool ModuleFileSystem::AddPath(const char* path_or_zip)
 {
 	bool ret = false;
@@ -114,7 +93,6 @@ bool ModuleFileSystem::Exists(const char* file) const
 	return PHYSFS_exists(file) != 0;
 }
 
-// Check if a file is a directory
 bool ModuleFileSystem::IsDirectory(const char* file) const
 {
 	return PHYSFS_isDirectory(file) != 0;
@@ -145,7 +123,6 @@ void ModuleFileSystem::DiscoverFiles(const char* directory, std::vector<std::str
 
 bool ModuleFileSystem::CopyFromOutsideFS(const char* full_path, const char* destination)
 {
-	// Only place we acces non virtual filesystem
 	bool ret = false;
 
 	char buf[8192];
@@ -234,7 +211,6 @@ void ModuleFileSystem::SplitFilePath(const char* full_path, std::string* path, s
 	}
 }
 
-// Flatten filenames to always use lowercase and / as folder separator
 char normalize_char(char c)
 {
 	if (c == '\\')
@@ -295,9 +271,6 @@ void ModuleFileSystem::GetFilesOfFolder(const char* path, std::list<Assets*>& as
 		std::string extension;
 		SplitFilePath(currPath.c_str(), nullptr, &filename, &extension);
 
-		/*if (extension.length() > 0)
-			filename += '.' + extension;*/
-
 		Assets* asset = new Assets();
 		asset->name = filename;
 		if (PHYSFS_isDirectory(currPath.c_str()))
@@ -316,7 +289,6 @@ unsigned int ModuleFileSystem::Load(const char* path, const char* file, char** b
 	return Load(full_path.c_str(), buffer);
 }
 
-// Read a whole file and put it in a new buffer
 uint ModuleFileSystem::Load(const char* file, char** buffer) const
 {
 	uint ret = 0;
@@ -349,7 +321,6 @@ uint ModuleFileSystem::Load(const char* file, char** buffer) const
 	return ret;
 }
 
-// Read a whole file and put it in a new buffer
 SDL_RWops* ModuleFileSystem::Load(const char* file) const
 {
 	char* buffer;
@@ -384,7 +355,6 @@ int close_sdl_rwops(SDL_RWops* rw)
 	return 0;
 }
 
-// Save a whole buffer to disk
 uint ModuleFileSystem::Save(const char* file, const void* buffer, unsigned int size, bool append) const
 {
 	unsigned int ret = 0;
@@ -404,8 +374,6 @@ uint ModuleFileSystem::Save(const char* file, const void* buffer, unsigned int s
 			if (append == true)
 			{
 				LOG("Added %u data to [%s%s]", size, PHYSFS_getWriteDir(), file);
-				//else if(overwrite == true)
-					//LOG("File [%s%s] overwritten with %u bytes", PHYSFS_getWriteDir(), file, size);
 			}
 			else if (overwrite == false)
 				LOG("New file created [%s%s] of %u bytes", PHYSFS_getWriteDir(), file, size);
@@ -479,10 +447,6 @@ const char* ModuleFileSystem::GetReadPaths() const
 
 	return paths;
 }
-
-// -----------------------------------------------------
-// ASSIMP IO
-// -----------------------------------------------------
 
 size_t AssimpWrite(aiFile* file, const char* data, size_t size, size_t chunks)
 {
@@ -583,4 +547,3 @@ aiFileIO* ModuleFileSystem::GetAssimpIO()
 {
 	return AssimpIO;
 }
-

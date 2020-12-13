@@ -25,7 +25,8 @@ ComponentCamera::ComponentCamera(GameObject* GO) : Component(COMPONENT_TYPE::CAM
 }
 
 ComponentCamera::~ComponentCamera()
-{}
+{
+}
 
 bool ComponentCamera::Start()
 {

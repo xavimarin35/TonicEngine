@@ -53,7 +53,6 @@ public:
 	void NumberOfGO();
 	void NumberOfComponents();
 	void GetGameObjectSelectedIndex(GameObject* GO);
-	void GetSizeOfList();
 	std::vector<GameObject*> gameobjectsList;
 
 	int cam_i = 0;

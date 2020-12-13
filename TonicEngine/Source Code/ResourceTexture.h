@@ -20,7 +20,6 @@ public:
 
 	Texture tex; // We will get texture id, width and height from here
 	uint resource_texture = 0;
-
 };
 
 #endif

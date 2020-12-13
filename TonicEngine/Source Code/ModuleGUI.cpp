@@ -8,7 +8,6 @@
 #include "ModuleCamera3D.h"
 #include "imgui-1.78/ImGuizmo.h"
 
-
 ModuleGUI::ModuleGUI(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -534,8 +533,6 @@ void ModuleGUI::PushBackPanels()
 	panels.push_back(Pcam);
 }
 
-
-
 void ModuleGUI::LogConsole(char* text, ...)
 {
 	char buf[1024];
@@ -546,7 +543,6 @@ void ModuleGUI::LogConsole(char* text, ...)
 	va_end(args);
 	App->appLogs.push_back(Strdup(buf));
 }
-
 
 bool ModuleGUI::CleanUp()
 {

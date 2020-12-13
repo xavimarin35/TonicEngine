@@ -46,8 +46,7 @@ bool PanelConsole::Draw()
 				}
 
 				EraseLogs();
-			}
-				
+			}				
 
 			ImGui::Separator();
 

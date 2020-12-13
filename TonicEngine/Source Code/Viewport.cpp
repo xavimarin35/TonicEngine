@@ -73,4 +73,3 @@ GLuint Viewport::GetTexture()
 {
 	return texture;
 }
-

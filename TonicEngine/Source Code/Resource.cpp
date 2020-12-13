@@ -15,4 +15,3 @@ uint Resource::GetCurrentReference()
 {
 	return references;
 }
-

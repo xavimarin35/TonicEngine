@@ -13,10 +13,6 @@ public:
 
 	bool Start();
 	bool Draw();
-
 };
 
-
-
 #endif
-

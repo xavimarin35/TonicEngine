@@ -42,6 +42,3 @@ public:
 };
 
 #endif
-
-
-

@@ -12,6 +12,8 @@ PanelScene::~PanelScene()
 {
 }
 
+// EVERYTHING COMMENTED IS WORK IN PROGRESS
+
 bool PanelScene::Start()
 {
 	this->active = false;

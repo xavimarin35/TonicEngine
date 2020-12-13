@@ -11,6 +11,8 @@ PanelCameraPreview::~PanelCameraPreview()
 {
 }
 
+// EVERYTHING COMMENTED IS WORK IN PROGRESS
+
 bool PanelCameraPreview::Start()
 {
 	this->active = false;

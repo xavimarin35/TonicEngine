@@ -48,6 +48,7 @@ void GameObject::Update()
 					DrawAllBoundingBoxes(aabb);
 
 			}
+
 			// Game Object is a camera
 			else
 			{
@@ -59,6 +60,7 @@ void GameObject::Update()
 			}
 
 		}
+
 		// No Selected Game Object
 		else
 		{
@@ -70,7 +72,6 @@ void GameObject::Update()
 
 void GameObject::CleanUp()
 {
-
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i] != nullptr && componentsList[i]->active)

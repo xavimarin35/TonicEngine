@@ -75,13 +75,6 @@ bool PanelConfiguration::Draw()
 				if (ImGui::InputText("App Name", appName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
 					App->ApplyAppName(appName);
 
-				// Organization Name
-				/*static char orgName[60];
-				if (App->GetOrgName() != nullptr)
-					strcpy_s(orgName, 60, App->GetOrgName());
-				if (ImGui::InputText("Organization Name", orgName, 60, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
-					App->ApplyOrgName(orgName);*/
-
 				ImGui::Spacing();
 				ImGui::Separator();
 				ImGui::Spacing();

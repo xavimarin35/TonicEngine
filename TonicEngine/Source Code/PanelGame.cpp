@@ -29,11 +29,6 @@ bool PanelGame::Draw()
 			else App->camera->isOnGame = false;
 		}
 
-
-
-
-
-
 		ImGui::End();
 	}
 

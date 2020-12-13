@@ -162,6 +162,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 			child = App->scene_intro->CreateGO(node_name);
 			go->AddChild(child);
 		}
+
 		else
 		{
 			child = go;
@@ -177,6 +178,7 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 			if (mesh->rMesh != nullptr)
 				mesh->rMesh->LoadInMemory();
 		}
+
 		else
 		{
 			ResourceMesh* res_mesh = (ResourceMesh*)App->resources->CreateResource(RESOURCE_TYPE::MESH);
