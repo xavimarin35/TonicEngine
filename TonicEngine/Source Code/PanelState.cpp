@@ -147,8 +147,6 @@ bool PanelState::Draw()
 				currentBut1 = 1;
 				currentBut2 = 3;
 			}
-				
-
 		}
 
 		ImGui::End();
@@ -256,7 +254,6 @@ void PanelState::TimeInfoMenu()
 	}
 
 	ImGui::End();
-
 }
 
 void PanelState::LoadButtonsTextures()

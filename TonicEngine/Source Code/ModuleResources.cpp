@@ -305,6 +305,12 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 	{
 		int i = 0;
 		
+		ImGui::Spacing();
+		ImGui::TextColored(GREY_COLOR, "You can double-click on a model to load it");
+		ImGui::Spacing();
+		ImGui::Separator();
+		ImGui::Spacing();
+		
 		for (std::list<Assets*>::iterator it = assets.begin(); it != assets.end(); it++)
 		{
 			i++;
