@@ -5,12 +5,25 @@
 #include "Module.h"
 #include "Resource.h"
 
-enum class FOLDERS
+struct Assets
 {
-	NONE = -1,
-	ASSETS,
-	LIBRARY
+	enum FOLDERS
+	{
+		ASSETS,
+		LIBRARY
+	}folders;
+
+	enum TYPE
+	{
+		FOLDER, 
+		FILE
+	}type;
+
+	std::string name = "";
+	Assets* selected_asset = nullptr;
+	bool selected = false;
 };
+
 
 class Resource;
 class ResourceMesh;
@@ -38,7 +51,8 @@ public:
 
 	Resource* Get(uint uid);
 
-	uint GetResourceFromFolder(FOLDERS folder, const char* path);
+	uint GetResourceFromFolder(Assets::FOLDERS folder, const char* path);
+	void ClearAssets();
 
 	bool CompareExtensionForTextures(std::string var);
 	bool CompareExtensionForModels(std::string var);
@@ -50,6 +64,9 @@ public:
 	std::map<uint, ResourceTexture*> tex_resources;
 	std::map<uint, ResourceMesh*> mesh_resources;
 	std::map<uint, ResourceModel*> model_resources;
+
+	std::list<Assets*> assets;
+	std::string models_path = ASSETS_MODELS_FOLDER;
 
 private:
 

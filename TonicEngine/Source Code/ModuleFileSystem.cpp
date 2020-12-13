@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleFileSystem.h"
+#include "ModuleResources.h"
 #include "PhysFS/include/physfs.h"
 #include "Assimp/include/cfileio.h"
 #include "Assimp/include/types.h"
@@ -279,6 +280,35 @@ void ModuleFileSystem::DuplicateFile(const char* path, const char* objective)
 	source.open(full_p.data(), std::ios::binary);
 }
 
+void ModuleFileSystem::GetFilesOfFolder(const char* path, std::list<Assets*>& assets)
+{
+	char** files = PHYSFS_enumerateFiles(path);
+
+	for (char** i = files; *i != NULL; i++)
+	{
+		std::string currPath = path;
+		if (currPath.size() > 0 && currPath.back() != '/')
+			currPath += '/';
+		currPath += *i;
+
+		std::string filename;
+		std::string extension;
+		SplitFilePath(currPath.c_str(), nullptr, &filename, &extension);
+
+		/*if (extension.length() > 0)
+			filename += '.' + extension;*/
+
+		Assets* asset = new Assets();
+		asset->name = filename;
+		if (PHYSFS_isDirectory(currPath.c_str()))
+			asset->type = Assets::TYPE::FOLDER;
+		else
+			asset->type = Assets::TYPE::FILE;
+
+		assets.push_back(asset);
+	}
+}
+
 unsigned int ModuleFileSystem::Load(const char* path, const char* file, char** buffer) const
 {
 	string full_path(path);
@@ -554,68 +584,3 @@ aiFileIO* ModuleFileSystem::GetAssimpIO()
 	return AssimpIO;
 }
 
-// -----------------------------------------------------
-// BASS IO
-// -----------------------------------------------------
-/*
-typedef void (CALLBACK FILECLOSEPROC)(void *user);
-typedef QWORD (CALLBACK FILELENPROC)(void *user);
-typedef DWORD (CALLBACK FILEREADPROC)(void *buffer, DWORD length, void *user);
-typedef BOOL (CALLBACK FILESEEKPROC)(QWORD offset, void *user);
-
-typedef struct {
-	FILECLOSEPROC *close;
-	FILELENPROC *length;
-	FILEREADPROC *read;
-	FILESEEKPROC *seek;
-} BASS_FILEPROCS;
-*/
-
-//void CALLBACK BassClose(void* file)
-//{
-//	if (PHYSFS_close((PHYSFS_File*)file) == 0)
-//		LOG("File System error while CLOSE via bass: %s", PHYSFS_getLastError());
-//}
-//
-//QWORD CALLBACK BassLength(void* file)
-//{
-//	PHYSFS_sint64 ret = PHYSFS_fileLength((PHYSFS_File*)file);
-//	if (ret == -1)
-//		LOG("File System error while SIZE via bass: %s", PHYSFS_getLastError());
-//
-//	return (QWORD)ret;
-//}
-//
-//DWORD CALLBACK BassRead(void* buffer, DWORD len, void* file)
-//{
-//	PHYSFS_sint64 ret = PHYSFS_read((PHYSFS_File*)file, buffer, 1, len);
-//	if (ret == -1)
-//		LOG("File System error while READ via bass: %s", PHYSFS_getLastError());
-//
-//	return (DWORD)ret;
-//}
-//
-//BOOL CALLBACK BassSeek(QWORD offset, void* file)
-//{
-//	int res = PHYSFS_seek((PHYSFS_File*)file, offset);
-//	if (res == 0)
-//		LOG("File System error while SEEK via bass: %s", PHYSFS_getLastError());
-//
-//	return (BOOL)res;
-//}
-//
-//void ModuleFileSystem::CreateBassIO()
-//{
-//	RELEASE(BassIO);
-//
-//	BassIO = new BASS_FILEPROCS;
-//	BassIO->close = BassClose;
-//	BassIO->length = BassLength;
-//	BassIO->read = BassRead;
-//	BassIO->seek = BassSeek;
-//}
-//
-//BASS_FILEPROCS* ModuleFileSystem::GetBassIO()
-//{
-//	return BassIO;
-//}

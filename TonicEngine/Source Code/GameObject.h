@@ -10,10 +10,13 @@
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
 
+
 class ComponentTransform;
 class ComponentMesh;
 class ComponentTexture;
 class ComponentCamera;
+
+class ResourceModel;
 
 struct goData;
 struct meshData;
@@ -70,13 +73,11 @@ public:
 	goData data;
 
 	std::vector<Component*> componentsList;
-
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
 
 	AABB aabb;
 	OBB obb;
-
 };
 
 namespace GO 

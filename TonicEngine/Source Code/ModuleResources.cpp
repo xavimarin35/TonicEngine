@@ -25,6 +25,8 @@ ModuleResources::~ModuleResources()
 
 bool ModuleResources::Start()
 {
+	App->file_system->GetFilesOfFolder(ASSETS_MODELS_FOLDER, assets);
+
 	return true;
 }
 
@@ -103,15 +105,6 @@ uint ModuleResources::GetNewFile(const char* new_file)
 			ret = ImportFile(path.c_str(), RESOURCE_TYPE::TEXTURE);
 		}
 	}
-	else if (CompareExtensionForModels(extension))
-	{
-		path = ASSETS_MODELS_FOLDER + path;
-
-		if (App->file_system->CopyFromOutsideFS(new_file, path.c_str()))
-		{
-			ret = ImportFile(path.c_str(), RESOURCE_TYPE::MODEL);
-		}
-	}
 
 	return ret;
 }
@@ -122,7 +115,7 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 	bool create_resource = false; 
 	std::string written_file;
 
-	ret = GetResourceFromFolder(FOLDERS::ASSETS, new_file_in_assets);
+	ret = GetResourceFromFolder(Assets::FOLDERS::ASSETS, new_file_in_assets);
 
 	if (ret == 0)
 	{
@@ -140,7 +133,14 @@ uint ModuleResources::ImportFile(const char* new_file_in_assets, RESOURCE_TYPE t
 		if (create_resource)
 		{ 
 			Resource* res = CreateResource(type);
-			BuildResource(res, new_file_in_assets, written_file);
+			
+			if(res->type == RESOURCE_TYPE::TEXTURE)
+				BuildResource(res, new_file_in_assets, written_file);
+			else
+			{
+				res->file = new_file_in_assets;
+				res->exported_file = written_file;
+			}
 
 			ret = res->res_UUID;
 		}
@@ -159,9 +159,9 @@ Resource* ModuleResources::Get(uint uid)
 	return nullptr;
 }
 
-uint ModuleResources::GetResourceFromFolder(FOLDERS folder, const char* path)
+uint ModuleResources::GetResourceFromFolder(Assets::FOLDERS folder, const char* path)
 {
-	if (folder == FOLDERS::ASSETS)
+	if (folder == Assets::FOLDERS::ASSETS)
 	{
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
@@ -173,7 +173,7 @@ uint ModuleResources::GetResourceFromFolder(FOLDERS folder, const char* path)
 		return 0;
 	}
 
-	if (folder == FOLDERS::LIBRARY)
+	if (folder == Assets::FOLDERS::LIBRARY)
 	{
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
@@ -191,6 +191,18 @@ uint ModuleResources::GetResourceFromFolder(FOLDERS folder, const char* path)
 	}
 
 	return 0;
+}
+
+void ModuleResources::ClearAssets()
+{
+	std::list<Assets*>::iterator it;
+	it = assets.begin();
+	while (it != assets.end())
+	{
+		RELEASE(*it);
+		it++;
+	}
+	assets.clear();
 }
 
 bool ModuleResources::CompareExtensionForModels(std::string var)
@@ -219,6 +231,7 @@ bool ModuleResources::CompareExtensionForTextures(std::string var)
 
 void ModuleResources::DrawResources(RESOURCE_TYPE type)
 {
+
 	if (type == RESOURCE_TYPE::TEXTURE)
 	{
 		int i = 0;
@@ -290,8 +303,8 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 	else if (type == RESOURCE_TYPE::MODEL)
 	{
 		int i = 0;
-
-		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
+		
+		/*for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
 			if (it->second != nullptr)
 			{
@@ -313,6 +326,50 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					AlignResources(i);
 				}
 			}
+		}*/
+
+		
+
+
+		for (std::list<Assets*>::iterator it = assets.begin(); it != assets.end(); it++)
+		{
+			ImGui::ImageButton((ImTextureID)App->gui->Presources->model->tex.id, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+			{
+				i++;
+
+				if ((*it)->type == Assets::TYPE::FILE)
+				{
+
+				}
+			}
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) 
+			{
+				if ((*it)->type == Assets::TYPE::FOLDER)
+				{
+					if (models_path.size() > 0 && models_path.back() != '/')
+						models_path += '/';
+					models_path += (*it)->name;
+					App->file_system->GetFilesOfFolder(models_path.c_str(), assets);
+					ImGui::PopStyleColor();
+					break;
+				}
+				else
+				{
+					std::string extension;
+					std::string filename;
+					App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename, &extension);
+
+					// TODO: Do another SplitFilePath() with new strings and save the filename for texture
+
+					if (extension == "fbx" || extension == "FBX" || extension == "OBJ" || extension == "obj")
+					{
+						const char* complete_path = "Assets/Models/";
+						App->mesh_imp->LoadFile(complete_path + filename);
+					}
+				}
+			}
+
+			//AlignResources(i);
 		}
 	}
 }

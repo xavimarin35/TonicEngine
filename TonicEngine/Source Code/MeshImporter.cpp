@@ -7,6 +7,7 @@
 #include "ModuleFileSystem.h"
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
+#include "ResourceModel.h"
 #include "ModuleResources.h"
 
 #include "Assimp/include/cimport.h"
@@ -58,9 +59,9 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-void MeshImporter::LoadFile(const char* path, const char* texture_path)
+bool MeshImporter::LoadFile(std::string path, const char* texture_path)
 {
-	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene* scene = aiImportFile(path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr)
 	{
@@ -72,13 +73,15 @@ void MeshImporter::LoadFile(const char* path, const char* texture_path)
 
 		if (node->mNumChildren > 0)
 			for (int i = 0; i < node->mNumChildren; ++i)
-				LoadNode(scene, node->mChildren[i], path, file, GO, texture_path);
+				LoadNode(scene, node->mChildren[i], path.c_str(), file, GO, texture_path);
 
 		aiReleaseImport(scene);
 
 		LOG_C("Succesfully loaded mesh with path: %s", path);
 	}
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
+
+	return true;
 }
 
 void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root, std::string text_path)
@@ -167,9 +170,9 @@ void MeshImporter::LoadNode(const aiScene* scene, aiNode* node, const char* node
 		child->CreateComponent(COMPONENT_TYPE::MESH);
 		ComponentMesh* mesh = child->GetComponentMesh();
 
-		if (App->resources->GetResourceFromFolder(FOLDERS::LIBRARY, child->data.name.c_str()) != NULL)
+		if (App->resources->GetResourceFromFolder(Assets::FOLDERS::LIBRARY, child->data.name.c_str()) != NULL)
 		{
-			mesh->rMesh = (ResourceMesh*)App->resources->Get(App->resources->GetResourceFromFolder(FOLDERS::LIBRARY, child->data.name.c_str()));
+			mesh->rMesh = (ResourceMesh*)App->resources->Get(App->resources->GetResourceFromFolder(Assets::FOLDERS::LIBRARY, child->data.name.c_str()));
 
 			if (mesh->rMesh != nullptr)
 				mesh->rMesh->LoadInMemory();

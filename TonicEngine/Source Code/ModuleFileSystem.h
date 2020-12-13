@@ -2,6 +2,7 @@
 #define __MODULEFILESYSTEM_H__
 
 #include "Module.h"
+#include "ModuleResources.h"
 #include <vector>
 
 struct SDL_RWops;
@@ -39,6 +40,7 @@ public:
 	void NormalizePath(std::string& full_path) const;
 
 	void DuplicateFile(const char* path, const char* destination);
+	void GetFilesOfFolder(const char* path, std::list<Assets*>& assets);
 
 	// Open for Read/Write
 	unsigned int Load(const char* path, const char* file, char** buffer) const;
