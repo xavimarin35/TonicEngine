@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "Module.h"
 #include "Resource.h"
+#include "PanelConsole.h"
 
 struct Assets
 {

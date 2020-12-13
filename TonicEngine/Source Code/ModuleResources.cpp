@@ -237,6 +237,12 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 	{
 		int i = 0;
 
+		ImGui::Spacing();
+		ImGui::TextColored(GREY_COLOR, "You can double-click on a texture to assign it to the selected GameObject");
+		ImGui::Spacing();
+		ImGui::Separator();
+		ImGui::Spacing();
+
 		for (std::map<uint, Resource*>::const_iterator it = resources.begin(); it != resources.end(); ++it)
 		{
 			if (it->second != nullptr && it->second->references > 0)
@@ -250,6 +256,29 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 
 					if (ImGui::IsItemHovered())
 					{
+						if (ImGui::IsMouseDoubleClicked(0))
+						{
+							GameObject* GO = App->scene_intro->GOselected;
+
+							if (GO == nullptr)
+							{
+								LOG_C("WARNING: You must select a Game Object to assign a texture to it");
+							}
+
+							else if (GO != nullptr)
+							{
+								if (GO->GetComponentTexture() == nullptr)
+								{
+									LOG_C("WARNING: This Game Object doesn't have a Component Texture, maybe try with another child");
+								}
+
+								else if (GO->GetComponentTexture() != nullptr)
+								{
+									GO->GetComponentTexture()->rTexture = tex_resources[it->first];
+								}
+							}
+						}
+
 						ImGui::BeginTooltip();
 						ImGui::Text("Name:"); ImGui::SameLine();
 						ImGui::TextColored(YELLOW_COLOR, "%s", App->GetPathName(it->second->file).c_str());

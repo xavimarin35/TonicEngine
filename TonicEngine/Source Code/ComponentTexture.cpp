@@ -102,7 +102,7 @@ void ComponentTexture::DrawInspector()
 		{
 			ImGui::Spacing();
 
-			App->gui->HelpMarker("This texture has not loaded propertly,\ntry dropping one from the Assets folder");
+			App->gui->HelpMarker("This texture has not loaded propertly, but you\ncan select one from the Textures folder!");
 		}
 	}
 }
