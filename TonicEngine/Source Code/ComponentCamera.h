@@ -59,8 +59,6 @@ public:
 	bool showFrustum = false;
 	bool seeFrustum = false;
 	bool update_frustum = true;
-	int camera_select = 0;
-	bool active_camera = false;
 
 };
 

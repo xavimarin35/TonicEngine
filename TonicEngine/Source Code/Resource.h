@@ -23,10 +23,6 @@ public:
 	virtual void ReleaseMemory() = 0;
 
 	RESOURCE_TYPE GetType() const;
-
-	bool IsLoadedToMemory() const;
-	bool LoadToMemory();
-
 	uint GetUUID() const;
 	uint GetCurrentReference();
 
