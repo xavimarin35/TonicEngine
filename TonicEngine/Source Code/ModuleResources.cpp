@@ -5,6 +5,7 @@
 #include "TextureImporter.h"
 #include "MeshImporter.h"
 #include "ModuleSceneIntro.h"
+#include "PanelResources.h"
 
 // resources includes
 #include "ModuleResources.h"
@@ -359,13 +360,24 @@ void ModuleResources::DrawResources(RESOURCE_TYPE type)
 					std::string filename;
 					App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename, &extension);
 
-					// TODO: Do another SplitFilePath() with new strings and save the filename for texture
+					std::string extension_tex;
+					std::string filename_tex;
+					App->file_system->SplitFilePath((*it)->name.c_str(), nullptr, &filename_tex, &extension_tex);
 
-					if (extension == "fbx" || extension == "FBX" || extension == "OBJ" || extension == "obj")
+					std::string complete_path = "Assets/Models/";
+					std::string mesh = "";
+					std::string tex = "";
+
+					if ((extension == "fbx" || extension == "FBX" || extension == "OBJ" || extension == "obj"))
 					{
-						const char* complete_path = "Assets/Models/";
-						App->mesh_imp->LoadFile(complete_path + filename);
+						mesh = complete_path + filename;
 					}
+
+					if (extension_tex == "png" || extension_tex == "PNG")
+						tex = complete_path + filename_tex;
+
+					App->mesh_imp->LoadFile(mesh, tex);
+					
 				}
 			}
 

@@ -59,7 +59,7 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-bool MeshImporter::LoadFile(std::string path, const char* texture_path)
+bool MeshImporter::LoadFile(std::string path, std::string texture_path)
 {
 	const aiScene* scene = aiImportFile(path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -73,7 +73,7 @@ bool MeshImporter::LoadFile(std::string path, const char* texture_path)
 
 		if (node->mNumChildren > 0)
 			for (int i = 0; i < node->mNumChildren; ++i)
-				LoadNode(scene, node->mChildren[i], path.c_str(), file, GO, texture_path);
+				LoadNode(scene, node->mChildren[i], path.c_str(), file, GO, texture_path.c_str());
 
 		aiReleaseImport(scene);
 
