@@ -7,6 +7,7 @@
 #include "MathGeoLib/include/Geometry/LineSegment.h"
 #include "MathGeoLib/include/Geometry/Plane.h"
 #include "Color.h"
+#include "Viewport.h"
 
 class GameObject;
 class Plane;
@@ -54,6 +55,10 @@ public:
 
 public:
 
+	int viewportX = 1000;
+	int viewportY = 800;
+
+	Viewport* viewport = nullptr;
 	Frustum frustum;
 	bool showFrustum = false;
 	bool seeFrustum = false;

@@ -31,7 +31,7 @@ bool PanelScene::Draw()
 
 	if (App->gui->Pscene->active)
 	{
-		//ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
 
 		if (ImGui::Begin("Scene", &active))
 		{
@@ -51,10 +51,10 @@ bool PanelScene::Draw()
 
 		new_size = ImGui::GetContentRegionAvail();
 
-		ImGui::Image((ImTextureID)viewport_tex->texture, ImVec2(current_size.x, current_size.y), ImVec2(0, 1), ImVec2(1, 0));
-
+		ImGui::Image((ImTextureID)App->camera->GetEditorCamera()->GetComponentCamera()->viewport->GetTexture(), ImVec2(current_size.x, current_size.y), ImVec2(0, 1), ImVec2(1, 0));*/
+		
 		ImGui::End();
-		ImGui::PopStyleVar();*/
+		ImGui::PopStyleVar();
 	}
 
 	return true;
@@ -72,12 +72,15 @@ update_status PanelScene::PreUpdate(float dt)
 
 	viewport_tex->BindViewport();*/
 
+	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->BindViewport();
+
 	return UPDATE_CONTINUE;
 }
 
 update_status PanelScene::PostUpdate(float dt)
 {
 	//viewport_tex->UnbindViewport();
+	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->UnbindViewport();
 
 	return UPDATE_CONTINUE;
 }

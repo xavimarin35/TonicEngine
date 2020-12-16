@@ -12,7 +12,7 @@ public:
 	Viewport();
 	~Viewport();
 
-	bool StartBuffers(ImVec2 size);
+	bool Create(int width, int height);
 	void BindViewport();
 	void UnbindViewport();
 	bool CleanUp();
@@ -20,11 +20,21 @@ public:
 	void DeleteBuffers();
 	GLuint GetTexture();
 
+	int GetViewportWidth();
+	int GetViewportHeight();
+
+	void SetViewportWidth(int w);
+	void SetViewportHeight(int h);
+
+
 public:
 
 	GLuint fbo;
 	GLuint rbo;
 	GLuint texture;
+
+	int width = 0;
+	int height = 0;
 };
 
 #endif

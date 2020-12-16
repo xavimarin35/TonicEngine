@@ -264,6 +264,22 @@ const Frustum& ModuleCamera3D::GetActiveFrustum() const
 	return activeCam->frustum;
 }
 
+GameObject* ModuleCamera3D::GetEditorCamera()
+{
+	if (cameraGO == nullptr)
+		return nullptr;
+	else
+		return cameraGO;
+}
+
+GameObject* ModuleCamera3D::GetGameCamera()
+{
+	if (playCam == nullptr)
+		return nullptr;
+	else
+		return playCam;
+}
+
 bool ModuleCamera3D::Intersects(const AABB& box) const
 {
 	return activeCam->Intersect(box);

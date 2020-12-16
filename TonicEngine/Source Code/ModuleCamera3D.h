@@ -33,6 +33,8 @@ public:
 	bool* GetProjectionBool() const;
 	ComponentCamera* GetActiveCamera();
 	const Frustum& GetActiveFrustum() const;
+	GameObject* GetEditorCamera();
+	GameObject* GetGameCamera();
 
 private:
 
