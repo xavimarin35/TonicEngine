@@ -355,7 +355,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Inspector Window", NULL, &Pinspector->active);
 			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
-			ImGui::MenuItem("Scene Window", NULL, &Pscene->active, false);
+			ImGui::MenuItem("Scene Window", NULL, &Pscene->active);
 			ImGui::MenuItem("Game Window", NULL, &Pgame->active, false);
 			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active, false);
 
@@ -381,6 +381,17 @@ bool ModuleGUI::Draw()
 
 			ImGui::EndMenu();
 		}
+
+		ImVec4* colors = ImGui::GetStyle().Colors;
+		colors[ImGuiCol_HeaderHovered] = ImVec4(0.98f, 0.26f, 0.26f, 0.80f);
+
+		ImGui::SetCursorPosX(SCREEN_WIDTH - 20);
+		if (ImGui::MenuItem("X"))
+		{
+			exitMenu = true;
+		}
+
+		colors[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
 
 		ImGui::EndMainMenuBar();
 
