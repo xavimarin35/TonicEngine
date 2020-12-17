@@ -109,6 +109,8 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_TEXTURE_2D);
 	}
 
+	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
 	return ret;
 }
 
@@ -116,14 +118,19 @@ bool ModuleRenderer3D::Init()
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
 	// In playmode projection
-	glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	glLoadMatrixf((GLfloat*)App->camera->GetProjection());
 
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();*/
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
+	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -161,6 +168,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		}
 	}
 
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 	// Drawing Panels
 	App->gui->Draw();
 
@@ -179,6 +188,37 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::OnResize(int width, int height)
 {
+	glDeleteFramebuffers(1, &scene_fbo);
+	glDeleteTextures(1, &scene_tex);
+	glDeleteRenderbuffers(1, &scene_depth);
+
+	glGenFramebuffers(1, &scene_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
+
+	glGenTextures(1, &scene_tex);
+
+	glBindTexture(GL_TEXTURE_2D, scene_tex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	scene_depth;
+	glGenRenderbuffers(1, &scene_depth);
+	glBindRenderbuffer(GL_RENDERBUFFER, scene_depth);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, scene_depth);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, scene_tex, 0);
+
+	// Set the list of draw buffers.
+	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+	glDrawBuffers(1, DrawBuffers);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		LOG("ERROR");
+	}
+
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -188,6 +228,10 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }
 
 void ModuleRenderer3D::VertexBuffer(float3* vertex, uint& size, uint& id_vertex)

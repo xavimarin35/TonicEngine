@@ -16,7 +16,7 @@ PanelScene::~PanelScene()
 
 bool PanelScene::Start()
 {
-	this->active = false;
+	this->active = true;
 
 	//viewport_tex = new Viewport();
 	//viewport_tex->StartBuffers(current_size);
@@ -52,6 +52,18 @@ bool PanelScene::Draw()
 		new_size = ImGui::GetContentRegionAvail();
 
 		ImGui::Image((ImTextureID)App->camera->GetEditorCamera()->GetComponentCamera()->viewport->GetTexture(), ImVec2(current_size.x, current_size.y), ImVec2(0, 1), ImVec2(1, 0));*/
+
+		ImVec2 newSize = ImGui::GetWindowSize();
+		ImVec2 size = { 0, 0 };
+		if (newSize.x != size.x || newSize.y != size.y)
+		{
+			size = newSize;
+			float newAR = size.x / size.y;
+			App->camera->activeCam->SetRatio(newAR);
+			//App->renderer3D->changedSceneFOV = true;
+		}
+
+		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
 		
 		ImGui::End();
 		ImGui::PopStyleVar();

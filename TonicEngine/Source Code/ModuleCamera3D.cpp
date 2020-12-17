@@ -23,7 +23,7 @@ bool ModuleCamera3D::Start()
 {
 	mainCam->frustum.farPlaneDistance = 300;
 
-	mainCam->frustum.pos = float3(26.f, 86.f, -90.f);
+	mainCam->frustum.pos = float3(0.f, 10.f, 40.f);
 
 	cameraGO = App->scene_intro->CreateGO("Main_Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);

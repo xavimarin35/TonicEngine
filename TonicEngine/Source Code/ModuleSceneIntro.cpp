@@ -43,7 +43,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(float3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(float3(0, 0, 0));	
 
-	Create3DObject(OBJECTS3D::STREET);
+	Create3DObject(OBJECTS3D::BAKER_HOUSE);
 
 	App->tex_imp->GenerateCheckersTexture();
 

@@ -38,8 +38,15 @@ public:
 
 public:
 	
-
 	ComponentCamera* culling = nullptr;
+
+	GLuint scene_fbo = 0;
+	GLuint scene_tex = 0;
+	GLuint scene_depth = 0;
+
+	GLuint game_fbo = 0;
+	GLuint game_tex = 0;
+	GLuint game_depth = 0;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
