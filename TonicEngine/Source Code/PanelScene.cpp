@@ -31,9 +31,7 @@ bool PanelScene::Draw()
 
 	if (App->gui->Pscene->active)
 	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-
-		if (ImGui::Begin("Scene", &active))
+		if (ImGui::Begin("Scene", &active, ImGuiWindowFlags_NoScrollbar))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnScene = true;
 			else App->camera->isOnScene = false;
@@ -66,7 +64,6 @@ bool PanelScene::Draw()
 		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
 		
 		ImGui::End();
-		ImGui::PopStyleVar();
 	}
 
 	return true;

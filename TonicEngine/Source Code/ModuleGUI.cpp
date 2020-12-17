@@ -356,7 +356,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 			ImGui::MenuItem("Scene Window", NULL, &Pscene->active);
-			ImGui::MenuItem("Game Window", NULL, &Pgame->active, false);
+			ImGui::MenuItem("Game Window", NULL, &Pgame->active);
 			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active, false);
 
 			ImGui::EndMenu();

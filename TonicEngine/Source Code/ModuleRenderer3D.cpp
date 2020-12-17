@@ -126,11 +126,12 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();*/
 
+	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+	glBindFramebuffer(GL_FRAMEBUFFER, game_fbo);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -167,6 +168,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			objs[i]->Draw();
 		}
 	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -209,6 +212,27 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, scene_depth);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, scene_tex, 0);
+
+	glDeleteFramebuffers(1, &game_fbo);
+	glDeleteTextures(1, &game_tex);
+	glDeleteRenderbuffers(1, &game_depth);
+
+	glGenFramebuffers(1, &game_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, game_fbo);
+
+	glGenTextures(1, &game_tex);
+
+	glBindTexture(GL_TEXTURE_2D, game_tex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	glGenRenderbuffers(1, &game_depth);
+	glBindRenderbuffer(GL_RENDERBUFFER, game_depth);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, game_depth);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, game_tex, 0);
 
 	// Set the list of draw buffers.
 	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
