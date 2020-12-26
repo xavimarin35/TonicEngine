@@ -12,14 +12,9 @@ PanelScene::~PanelScene()
 {
 }
 
-// EVERYTHING COMMENTED IS WORK IN PROGRESS
-
 bool PanelScene::Start()
 {
 	this->active = true;
-
-	//viewport_tex = new Viewport();
-	//viewport_tex->StartBuffers(current_size);
 
 	return true;
 }
@@ -57,7 +52,7 @@ bool PanelScene::Draw()
 		{
 			size = newSize;
 			float newAR = size.x / size.y;
-			App->camera->activeCam->SetRatio(newAR);
+			App->camera->playCam->GetComponentCamera()->SetRatio(newAR);
 			//App->renderer3D->changedSceneFOV = true;
 		}
 
@@ -65,40 +60,6 @@ bool PanelScene::Draw()
 		
 		ImGui::End();
 	}
-
-	return true;
-}
-
-
-update_status PanelScene::PreUpdate(float dt)
-{
-	/*if (current_size.x != new_size.x || current_size.y != new_size.y)
-	{
-		current_size = new_size;
-		viewport_tex->StartBuffers(current_size);
-		App->renderer3D->OnResize(current_size.x, current_size.y);
-	}
-
-	viewport_tex->BindViewport();*/
-
-	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->BindViewport();
-
-	return UPDATE_CONTINUE;
-}
-
-update_status PanelScene::PostUpdate(float dt)
-{
-	//viewport_tex->UnbindViewport();
-	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->UnbindViewport();
-
-	return UPDATE_CONTINUE;
-}
-
-bool PanelScene::CleanUp()
-{
-	/*viewport_tex->DeleteBuffers();
-	delete viewport_tex;
-	viewport_tex = nullptr;*/
 
 	return true;
 }

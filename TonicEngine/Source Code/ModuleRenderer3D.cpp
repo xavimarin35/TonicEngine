@@ -117,6 +117,9 @@ bool ModuleRenderer3D::Init()
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
+	//Environment Color
+	glClearColor(bg_color.r, bg_color.g, bg_color.b, 1.f);
+
 	// In playmode projection
 	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -126,31 +129,49 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();*/
 
+	// Rendering Scene in Scene Panel ---------------
 	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(App->camera->GetView());
+
+	// Draw objects and axis
+	App->scene_intro->PostUpdate(dt);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// -------------
+
+	// Rendering Game in Game Panel --------------------
 	glBindFramebuffer(GL_FRAMEBUFFER, game_fbo);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
+	
+	if (App->camera->activeCam != nullptr)
+	{
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(App->camera->GetView());
 
-	// In editor projection
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetView());
+		// Draw objects and axis
+		App->scene_intro->PostUpdate(dt);
+	}
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// -------------
 
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
-	//Environment Color
-	glClearColor(bg_color.r, bg_color.g, bg_color.b, 1.f);
 
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+
 	ComponentCamera* cam = culling;
 
 	if (culling == nullptr)
@@ -168,10 +189,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			objs[i]->Draw();
 		}
 	}
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	// Drawing Panels
 	App->gui->Draw();
@@ -205,7 +222,6 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-	scene_depth;
 	glGenRenderbuffers(1, &scene_depth);
 	glBindRenderbuffer(GL_RENDERBUFFER, scene_depth);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);

@@ -90,7 +90,6 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGridAndAxis(false);
 
-
 	// Drawing GameObjects (IF CULLING DEACTIVATED)
 	if (GOselected != nullptr)
 	{
