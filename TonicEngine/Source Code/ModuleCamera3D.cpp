@@ -324,7 +324,7 @@ bool ModuleCamera3D::CheckMousePosition()
 {
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector
 		|| isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2
-		|| isOnQuit || isOnSelectTexture || isOnMainBar)
+		|| isOnQuit || isOnSelectTexture || isOnMainBar || isOnGame)
 		return true;
 
 	else if (ImGui::IsAnyItemHovered())

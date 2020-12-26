@@ -42,19 +42,18 @@ bool PanelScene::Draw()
 
 		ImGui::GetForegroundDrawList()->AddRect(vMin, vMax, IM_COL32(255, 255, 0, 255));
 
-		new_size = ImGui::GetContentRegionAvail();
-
-		ImGui::Image((ImTextureID)App->camera->GetEditorCamera()->GetComponentCamera()->viewport->GetTexture(), ImVec2(current_size.x, current_size.y), ImVec2(0, 1), ImVec2(1, 0));*/
+		new_size = ImGui::GetContentRegionAvail();*/
 
 		ImVec2 newSize = ImGui::GetWindowSize();
-		ImVec2 size = { 0, 0 };
 		if (newSize.x != size.x || newSize.y != size.y)
 		{
+			resizedLastFrame = true;
 			size = newSize;
 			float newAR = size.x / size.y;
-			App->camera->playCam->GetComponentCamera()->SetRatio(newAR);
-			//App->renderer3D->changedSceneFOV = true;
+			App->camera->GetEditorCamera()->GetComponentCamera()->SetRatio(newAR);
 		}
+		else
+			resizedLastFrame = false;
 
 		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
 		

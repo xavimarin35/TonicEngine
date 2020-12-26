@@ -15,8 +15,9 @@ public:
 	bool Start();
 	bool Draw();
 
-	ImVec2 current_size = { 1024, 720 };
-	ImVec2 new_size;
+public:
+	ImVec2 size = { 0,0 };
+	bool resizedLastFrame = false;
 
 };
 

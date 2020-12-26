@@ -33,39 +33,39 @@ bool PanelGame::Draw()
 
 		ImVec2 newSize = ImGui::GetWindowContentRegionMax();
 
-	if (newSize.x != size.x || newSize.y != size.y)
-	{	
-		size = newSize;
-		resizedLastFrame = true;
-	}
-
-	if (App->camera->GetActiveCamera() != nullptr)
-	{
-		float AR = App->camera->activeCam->frustum.AspectRatio();
-
-		if (AR != lastAR)
-		{
-			lastAR = AR;
+		if (newSize.x != size.x || newSize.y != size.y)
+		{	
+			size = newSize;
 			resizedLastFrame = true;
 		}
 
-		if (resizedLastFrame)
+		if (App->camera->GetActiveCamera() != nullptr)
 		{
-			resizedLastFrame = false;
+			float AR = App->camera->activeCam->frustum.AspectRatio();
 
-			viewSize.x = size.x;
-			viewSize.y = viewSize.x / AR;
-
-			if (viewSize.y > size.y)
+			if (AR != lastAR)
 			{
-				viewSize.y = size.y;
-				viewSize.x = viewSize.y*AR;
+				lastAR = AR;
+				resizedLastFrame = true;
 			}
-		}
 
-		ImGui::SetCursorPos({ (size.x - viewSize.x) / 2, (size.y - viewSize.y) / 2 });
-		ImGui::Image((ImTextureID)App->renderer3D->game_tex, { (float)viewSize.x, (float)viewSize.y }, { 0,1 }, { 1,0 });
-	}
+			if (resizedLastFrame)
+			{
+				resizedLastFrame = false;
+
+				viewSize.x = size.x;
+				viewSize.y = viewSize.x / AR;
+
+				if (viewSize.y > size.y)
+				{
+					viewSize.y = size.y;
+					viewSize.x = viewSize.y*AR;
+				}
+			}
+
+			ImGui::SetCursorPos({ (size.x - viewSize.x) / 2, (size.y - viewSize.y) / 2 });
+			ImGui::Image((ImTextureID)App->renderer3D->game_tex, { (float)viewSize.x, (float)viewSize.y }, { 0,1 }, { 1,0 });
+		}
 
 		ImGui::End();
 	}
