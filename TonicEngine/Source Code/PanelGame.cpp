@@ -1,6 +1,7 @@
 #include "PanelGame.h"
 #include "ModuleCamera3D.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleSceneIntro.h"
 
 PanelGame::PanelGame()
 {
@@ -30,17 +31,41 @@ bool PanelGame::Draw()
 			else App->camera->isOnGame = false;
 		}
 
-		ImVec2 newSize = ImGui::GetWindowSize();
-		ImVec2 size = { 0, 0 };
-		if (newSize.x != size.x || newSize.y != size.y)
+		ImVec2 newSize = ImGui::GetWindowContentRegionMax();
+
+	if (newSize.x != size.x || newSize.y != size.y)
+	{	
+		size = newSize;
+		resizedLastFrame = true;
+	}
+
+	if (App->camera->GetActiveCamera() != nullptr)
+	{
+		float AR = App->camera->activeCam->frustum.AspectRatio();
+
+		if (AR != lastAR)
 		{
-			size = newSize;
-			float newAR = size.x / size.y;
-			App->camera->playCam->GetComponentCamera()->SetRatio(newAR);
-			//App->renderer3D->changedSceneFOV = true;
+			lastAR = AR;
+			resizedLastFrame = true;
 		}
 
-		ImGui::Image((ImTextureID)App->renderer3D->game_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
+		if (resizedLastFrame)
+		{
+			resizedLastFrame = false;
+
+			viewSize.x = size.x;
+			viewSize.y = viewSize.x / AR;
+
+			if (viewSize.y > size.y)
+			{
+				viewSize.y = size.y;
+				viewSize.x = viewSize.y*AR;
+			}
+		}
+
+		ImGui::SetCursorPos({ (size.x - viewSize.x) / 2, (size.y - viewSize.y) / 2 });
+		ImGui::Image((ImTextureID)App->renderer3D->game_tex, { (float)viewSize.x, (float)viewSize.y }, { 0,1 }, { 1,0 });
+	}
 
 		ImGui::End();
 	}
