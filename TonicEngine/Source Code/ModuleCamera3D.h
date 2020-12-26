@@ -29,6 +29,7 @@ public:
 	// Getters
 	float3 GetPosition() const;
 	float* GetView() const;
+	float* GetGameView() const;
 	float* GetProjection() const;
 	bool* GetProjectionBool() const;
 	ComponentCamera* GetActiveCamera();

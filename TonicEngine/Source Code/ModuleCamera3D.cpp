@@ -290,6 +290,11 @@ float* ModuleCamera3D::GetView() const
 	return activeCam->GetView().ptr();
 }
 
+float* ModuleCamera3D::GetGameView() const
+{
+	return playCam->GetComponentCamera()->GetView().ptr();
+}
+
 float* ModuleCamera3D::GetProjection() const
 {
 	return activeCam->GetProjection().ptr();

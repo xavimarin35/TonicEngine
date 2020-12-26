@@ -140,8 +140,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetView());
 
-	// if (showFrustum)
-		//App->camera->cameraGO->GetComponentCamera()->DrawFrustum();
+	if (App->camera->activeCam->showFrustum)
+		App->camera->activeCam->DrawFrustum();
 
 	// Draw objects and axis
 	App->scene_intro->PostUpdate(dt);
@@ -154,11 +154,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	if (App->camera->activeCam != nullptr)
+	if (App->camera->playCam != nullptr)
 	{
 		glLoadIdentity();
 		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(App->camera->GetView());
+		glLoadMatrixf(App->camera->GetGameView());
 
 		// Draw objects and axis
 		App->scene_intro->PostUpdate(dt);
