@@ -13,6 +13,7 @@
 #include "JsonImporter.h"
 #include "ModuleTime.h"
 #include "ModuleResources.h"
+#include "ModuleUserInterface.h"
 
 Application::Application()
 {
@@ -27,6 +28,7 @@ Application::Application()
 	tex_imp = new TextureImporter(this);
 	time = new ModuleTime(this);
 	resources = new ModuleResources(this);
+	ui = new ModuleUserInterface(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -45,6 +47,7 @@ Application::Application()
 	AddModule(scene_intro);
 	AddModule(gui);
 	AddModule(resources);
+	AddModule(ui);
 
 	// Renderer last!
 	AddModule(renderer3D);
@@ -349,43 +352,4 @@ int Application::GenerateUUID()
 {
 	int uuid = GenerateRandomBetween(99999999999);
 	return uuid;
-}
-
-std::string Application::GetBuildingID(std::string path, std::string search)
-{
-	std::string newPath = path;
-
-	if (search == "Plane") return "10";
-
-	else
-	{
-		if (!isInCharStr(newPath.c_str(), search))
-			return path;
-		else
-		{
-			size_t i = 0;
-
-			for (; i < newPath.length(); i++)
-			{
-				if (isdigit(newPath[i]))
-					break;
-			}
-
-			newPath = newPath.substr(i, newPath.length() - i);
-
-			uint _bar = newPath.find_last_of("_");
-			newPath = newPath.substr(0, _bar);
-
-			return newPath;
-		}
-	}
-}
-
-bool Application::isInCharStr(std::string path, std::string search)
-{
-	size_t found = path.find(search);
-
-	if (found != string::npos) return true;
-
-	else return false;
 }

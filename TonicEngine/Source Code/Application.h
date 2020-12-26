@@ -23,6 +23,7 @@ class TextureImporter;
 class JsonImporter;
 class ModuleTime;
 class ModuleResources;
+class ModuleUserInterface;
 
 #define YELLOW_COLOR ImVec4(1.0f, 1.0f, 0.0f, 1.0f)
 #define GREY_COLOR ImVec4(0.7f, 0.7f, 0.7f, 1.0f)
@@ -49,6 +50,7 @@ public:
 	TextureImporter* tex_imp = nullptr;
 	ModuleTime* time = nullptr;
 	ModuleResources* resources = nullptr;
+	ModuleUserInterface* ui = nullptr;
 
 	list<Module*> list_modules;
 
@@ -67,6 +69,8 @@ public:
 	void ChangeEngineState(ENGINE_STATE new_state);
 	ENGINE_STATE GetEngineState();
 
+public:
+
 	ENGINE_STATE current_state = ENGINE_STATE::NONE;
 
 	bool quitApp = false;
@@ -80,14 +84,14 @@ public:
 	string appName;
 	string orgName;
 
-	bool isInCharStr(std::string path, std::string search);
-	std::string GetBuildingID(std::string path, std::string search = "Building");
 	std::string GetPathName(std::string path);
 	std::string GetPathDir(std::string path);
 
 	int GenerateUUID();
 
 	list<char*> appLogs;
+
+public:
 
 	//Frame rate
 	uint					frame_count = 0;
