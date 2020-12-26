@@ -7,6 +7,13 @@
 
 #define MAX_LIGHTS 8
 
+enum class PANEL_TEXTURE
+{
+	NONE = 0, 
+	SCENE, 
+	GAME
+};
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -19,6 +26,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+	void RenderPanelTexture(PANEL_TEXTURE panel_tex, int width, int height);
 
 	void VertexBuffer(float3* vertex, uint& size, uint& id_vertex);
 	void IndexBuffer(uint* index, uint& size, uint& id_index);

@@ -109,7 +109,9 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_TEXTURE_2D);
 	}
 
-	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	//OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	RenderPanelTexture(PANEL_TEXTURE::SCENE, SCREEN_WIDTH, SCREEN_HEIGHT);
+	RenderPanelTexture(PANEL_TEXTURE::GAME, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	return ret;
 }
@@ -137,6 +139,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetView());
+
+	// if (showFrustum)
+		//App->camera->cameraGO->GetComponentCamera()->DrawFrustum();
 
 	// Draw objects and axis
 	App->scene_intro->PostUpdate(dt);
@@ -208,63 +213,72 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::OnResize(int width, int height)
 {
-	glDeleteFramebuffers(1, &scene_fbo);
-	glDeleteTextures(1, &scene_tex);
-	glDeleteRenderbuffers(1, &scene_depth);
+	/*glViewport(0, 0, width, height);
 
-	glGenFramebuffers(1, &scene_fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	glLoadMatrixf(&ProjectionMatrix);*/
+}
 
-	glGenTextures(1, &scene_tex);
-
-	glBindTexture(GL_TEXTURE_2D, scene_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	glGenRenderbuffers(1, &scene_depth);
-	glBindRenderbuffer(GL_RENDERBUFFER, scene_depth);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, scene_depth);
-
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, scene_tex, 0);
-
-	glDeleteFramebuffers(1, &game_fbo);
-	glDeleteTextures(1, &game_tex);
-	glDeleteRenderbuffers(1, &game_depth);
-
-	glGenFramebuffers(1, &game_fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, game_fbo);
-
-	glGenTextures(1, &game_tex);
-
-	glBindTexture(GL_TEXTURE_2D, game_tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	glGenRenderbuffers(1, &game_depth);
-	glBindRenderbuffer(GL_RENDERBUFFER, game_depth);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, game_depth);
-
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, game_tex, 0);
-
-	// Set the list of draw buffers.
-	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, DrawBuffers);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+void ModuleRenderer3D::RenderPanelTexture(PANEL_TEXTURE panel_tex, int width, int height) // This function also includes the OnResize() function
+{
+	if (panel_tex == PANEL_TEXTURE::SCENE)
 	{
-		LOG("ERROR");
+		glDeleteFramebuffers(1, &scene_fbo);
+		glDeleteTextures(1, &scene_tex);
+		glDeleteRenderbuffers(1, &scene_depth);
+
+		glGenFramebuffers(1, &scene_fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, scene_fbo);
+
+		glGenTextures(1, &scene_tex);
+
+		glBindTexture(GL_TEXTURE_2D, scene_tex);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		glGenRenderbuffers(1, &scene_depth);
+		glBindRenderbuffer(GL_RENDERBUFFER, scene_depth);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, scene_depth);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, scene_tex, 0);
 	}
 
+	if (panel_tex == PANEL_TEXTURE::GAME)
+	{
+		glDeleteFramebuffers(1, &game_fbo);
+		glDeleteTextures(1, &game_tex);
+		glDeleteRenderbuffers(1, &game_depth);
+
+		glGenFramebuffers(1, &game_fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, game_fbo);
+
+		glGenTextures(1, &game_tex);
+
+		glBindTexture(GL_TEXTURE_2D, game_tex);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		glGenRenderbuffers(1, &game_depth);
+		glBindRenderbuffer(GL_RENDERBUFFER, game_depth);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, game_depth);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, game_tex, 0);
+	}
+
+	// OnResize() -----------
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
 	glLoadMatrixf(&ProjectionMatrix);
+	// ----------------------
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
