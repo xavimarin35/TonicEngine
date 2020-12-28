@@ -140,9 +140,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetView());
 
-	if (App->camera->activeCam->showFrustum)
-		App->camera->activeCam->DrawFrustum();
-
 	// Draw objects and axis
 	App->scene_intro->PostUpdate(dt);
 	
@@ -189,7 +186,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-
 	ComponentCamera* cam = culling;
 
 	if (culling == nullptr)
