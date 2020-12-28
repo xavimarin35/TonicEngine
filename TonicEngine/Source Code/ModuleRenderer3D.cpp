@@ -145,6 +145,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	// Draw objects and axis
 	App->scene_intro->PostUpdate(dt);
+	
+	for (std::vector<GameObject*>::iterator it = App->scene_intro->gameobjectsList.begin(); it != App->scene_intro->gameobjectsList.end(); ++it)
+	{
+		(*it)->Update();
+	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	// -------------

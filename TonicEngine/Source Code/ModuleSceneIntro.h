@@ -78,9 +78,9 @@ public:
 	bool drawGrid = true;
 	Color gridColor = White;
 	Color bbColor = Blue;
-	float bbSize = 1.0f;
+	float bbSize = 4.0f;
 	float gridSize = 3.0f;
-	float gridWidth = 0.5f;
+	float gridWidth = 3.5f;
 	float axisLength = 6.0f;
 
 };
