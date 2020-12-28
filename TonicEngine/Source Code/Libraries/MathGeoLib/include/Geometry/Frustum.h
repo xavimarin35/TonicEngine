@@ -30,9 +30,9 @@ MATH_BEGIN_NAMESPACE
 
 enum FrustumType
 {
-	InvalidFrustum,
+	PerspectiveFrustum,
 	OrthographicFrustum,
-	PerspectiveFrustum
+	InvalidFrustum
 };
 
 /// Represents either an orthographic or a perspective viewing frustum.

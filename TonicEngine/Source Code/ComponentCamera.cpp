@@ -74,6 +74,7 @@ void ComponentCamera::DrawInspector()
 
 	if (ImGui::CollapsingHeader("Camera"), flags && go->GetComponentCamera() != nullptr)
 	{
+
 		ImGui::Spacing();
 
 		if (ImGui::Button("Set as Game Camera"))
@@ -150,6 +151,25 @@ void ComponentCamera::DrawInspector()
 		if (farPlane != GetFarPlane()) SetFarPlane(farPlane);
 		if (fov != GetFOV()) SetFOV(fov);
 		if (ratio != GetRatio()) SetRatio(ratio);
+
+		ImGui::Spacing();
+		ImGui::Separator();
+		ImGui::Spacing();
+
+		ImGui::PushItemWidth(150);
+		if (ImGui::Combo("Projection Mode", &projection_type, "Perspective\0\Orthogonal"))
+		{
+			switch (projection_type)
+			{
+			case 0:
+				this->frustum.type = PerspectiveFrustum;
+				break;
+
+			case 1:
+				this->frustum.type = OrthographicFrustum;
+				break;
+			}
+		}
 	}
 }
 
