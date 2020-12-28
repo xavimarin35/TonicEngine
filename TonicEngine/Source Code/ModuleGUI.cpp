@@ -108,8 +108,8 @@ update_status ModuleGUI::PostUpdate(float dt)
 		ret = (*it)->PostUpdate(dt);
 	}
 
-	if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
-		DrawGuizmo();
+	/*if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
+		DrawGuizmo();*/
 
 	if (ImGuizmo::IsUsing() == true)
 		usingGizmo = true;

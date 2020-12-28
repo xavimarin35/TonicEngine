@@ -3,6 +3,7 @@
 #include "Viewport.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleSceneIntro.h"
 
 PanelScene::PanelScene()
 {
@@ -56,6 +57,11 @@ bool PanelScene::Draw()
 			resizedLastFrame = false;
 
 		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
+
+		ImGuizmo::SetDrawlist();
+
+		if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
+			App->gui->DrawGuizmo();
 		
 		ImGui::End();
 	}
