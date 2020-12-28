@@ -9,6 +9,11 @@ ModuleUserInterface::~ModuleUserInterface()
 {
 }
 
+bool ModuleUserInterface::Init()
+{
+	return true;
+}
+
 bool ModuleUserInterface::Start()
 {
 	return true;

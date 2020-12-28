@@ -67,6 +67,15 @@
     <Filter Include="Sources\Modules\Resources">
       <UniqueIdentifier>{f6c7500b-446c-406a-99b3-90fdcbd7baed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\GameObject\UI Components">
+      <UniqueIdentifier>{6bca4f44-fd3f-4146-b693-6191344d4ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\UI">
+      <UniqueIdentifier>{c831fbd8-6689-4585-af83-3088af6fd1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\UI\UI Elements">
+      <UniqueIdentifier>{1f0b5d6d-74e2-4ead-ad1b-60e82efc8285}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -430,6 +439,21 @@
     <ClInclude Include="Source Code\ModuleUserInterface.h">
       <Filter>Sources\Modules\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ButtonUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ElementUI.h">
+      <Filter>Sources\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ImageUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\LabelUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\CanvasUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -677,6 +701,21 @@
     </ClCompile>
     <ClCompile Include="Source Code\ModuleUserInterface.cpp">
       <Filter>Sources\Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ButtonUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ElementUI.cpp">
+      <Filter>Sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ImageUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\LabelUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\CanvasUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

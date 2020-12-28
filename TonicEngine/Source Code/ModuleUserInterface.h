@@ -9,6 +9,7 @@ public:
 	ModuleUserInterface(Application* app, bool start_enabled = true);
 	~ModuleUserInterface();
 
+	bool Init();
 	bool Start();
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
