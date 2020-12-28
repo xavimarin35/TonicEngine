@@ -146,11 +146,19 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	// Draw objects and axis
 	App->scene_intro->PostUpdate(dt);
 	
+	// Debug Draw of Bounding Boxes
 	for (std::vector<GameObject*>::iterator it = App->scene_intro->gameobjectsList.begin(); it != App->scene_intro->gameobjectsList.end(); ++it)
 	{
 		(*it)->Update();
 	}
 
+	// Debug Draw of Camera Frustum
+	for (std::vector<GameObject*>::iterator it = App->scene_intro->gameobjectsList.begin(); it != App->scene_intro->gameobjectsList.end(); ++it)
+	{
+		if ((*it)->GetComponentCamera() != nullptr)
+			(*it)->GetComponentCamera()->Update();
+	}
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	// -------------
 
