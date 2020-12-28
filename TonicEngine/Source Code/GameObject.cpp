@@ -163,6 +163,37 @@ Component* GameObject::CreateComponent(COMPONENT_TYPE type, bool active)
 	return component;
 }
 
+Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
+{
+	Component* componentUI = nullptr;
+
+	/*switch (type)
+	{
+	case COMPONENT_TYPE::CANVAS_UI:
+		componentUI = new ComponentCanvas(this);
+		break;
+	case COMPONENT_TYPE::BUTTON_UI:
+		componentUI = new ComponentButton(this);
+		break;
+	case COMPONENT_TYPE::IMAGE_UI:
+		componentUI = new ComponentImage(this);
+		break;
+	case COMPONENT_TYPE::LABEL_UI:
+		componentUI = new ComponentLabel(this);
+		break;
+		case COMPONENT_TYPE::TEXT_UI:
+		componentUI = new ComponentText(this);
+		break;
+	}*/
+
+	if (componentUI != nullptr)
+	{
+		componentsList.push_back(componentUI);
+	}
+
+	return componentUI;
+}
+
 Component* GameObject::GetComponent(COMPONENT_TYPE type) const
 {
 	for (int i = 0; i < componentsList.size(); ++i)
@@ -297,7 +328,7 @@ void GameObject::UpdateBoundingBox()
 {
 	ComponentMesh* mesh = this->GetComponentMesh();
 
-	if (mesh)
+	if (mesh != nullptr)
 	{
 		obb = mesh->BoundingBox();
 		obb.Transform(this->GetComponentTransform()->GetGlobalTransform());

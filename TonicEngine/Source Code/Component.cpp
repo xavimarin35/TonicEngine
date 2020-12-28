@@ -11,6 +11,11 @@ Component::~Component()
 {
 }
 
+bool Component::Start()
+{
+	return true;
+}
+
 bool Component::Update()
 {
 	return true;

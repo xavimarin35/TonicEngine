@@ -10,10 +10,11 @@
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
 
-class ComponentTransform;
-class ComponentMesh;
-class ComponentTexture;
-class ComponentCamera;
+//class ComponentTransform;
+//class ComponentMesh;
+//class ComponentTexture;
+//class ComponentCamera;
+class ComponentCanvas;
 
 class ResourceModel;
 
@@ -46,6 +47,7 @@ public:
 	int GetGameObjectUUID();
 
 	Component* CreateComponent(COMPONENT_TYPE type, bool active = true);
+	Component* CreateComponentUI(COMPONENT_TYPE type, bool active = true);
 	Component* GetComponent(COMPONENT_TYPE type) const;
 
 	ComponentTransform* GetComponentTransform();

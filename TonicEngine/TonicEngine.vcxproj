@@ -92,6 +92,7 @@
     <ClInclude Include="Source Code\Application.h" />
     <ClInclude Include="Source Code\Color.h" />
     <ClInclude Include="Source Code\Component.h" />
+    <ClInclude Include="Source Code\ComponentCanvas.h" />
     <ClInclude Include="Source Code\ComponentMesh.h" />
     <ClInclude Include="Source Code\ComponentTexture.h" />
     <ClInclude Include="Source Code\ComponentTransform.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Source Code\ButtonUI.h" />
     <ClInclude Include="Source Code\ElementUI.h" />
     <ClInclude Include="Source Code\ImageUI.h" />
+    <ClInclude Include="Source Code\TextUI.h" />
     <ClInclude Include="Source Code\Viewport.h" />
     <ClInclude Include="Source Code\PathNode.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\entropy.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="Source Code\Application.cpp" />
     <ClCompile Include="Source Code\Color.cpp" />
     <ClCompile Include="Source Code\Component.cpp" />
+    <ClCompile Include="Source Code\ComponentCanvas.cpp" />
     <ClCompile Include="Source Code\ComponentMesh.cpp" />
     <ClCompile Include="Source Code\ComponentTexture.cpp" />
     <ClCompile Include="Source Code\ComponentTransform.cpp" />
@@ -297,6 +300,7 @@
     <ClCompile Include="Source Code\ButtonUI.cpp" />
     <ClCompile Include="Source Code\ElementUI.cpp" />
     <ClCompile Include="Source Code\ImageUI.cpp" />
+    <ClCompile Include="Source Code\TextUI.cpp" />
     <ClCompile Include="Source Code\Viewport.cpp" />
     <ClCompile Include="Source Code\Primitive.cpp" />
     <ClCompile Include="Source Code\RandomNumGenerator.cpp" />

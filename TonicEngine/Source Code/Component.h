@@ -7,11 +7,16 @@ class GameObject;
 
 enum class COMPONENT_TYPE
 {
-	NONE = -1,
+	NONE_COMPONENT = 0,
 	TRANSFORM,
 	MESH,
 	TEXTURE, 
-	CAMERA
+	CAMERA, 
+	CANVAS_UI,
+	IMAGE_UI,
+	BUTTON_UI,
+	LABEL_UI, 
+	TEXT_UI
 };
 
 class Component
@@ -20,6 +25,7 @@ public:
 	Component(COMPONENT_TYPE type, GameObject* GO = nullptr, bool active = true);
 	virtual ~Component();
 
+	virtual bool Start();
 	virtual bool Update();
 	virtual bool CleanUp();
 
@@ -34,7 +40,7 @@ public:
 
 public:
 	bool active = false;
-	COMPONENT_TYPE type = COMPONENT_TYPE::NONE;
+	COMPONENT_TYPE type = COMPONENT_TYPE::NONE_COMPONENT;
 	GameObject* object = nullptr;
 	uint UUID = 0;
 };

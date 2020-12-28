@@ -454,6 +454,12 @@
     <ClInclude Include="Source Code\CanvasUI.h">
       <Filter>Sources\UI\UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ComponentCanvas.h">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\TextUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -715,6 +721,12 @@
       <Filter>Sources\UI\UI Elements</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\CanvasUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentCanvas.cpp">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\TextUI.cpp">
       <Filter>Sources\UI\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
