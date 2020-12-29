@@ -1,5 +1,5 @@
-#ifndef __UI_CANVAS_H__
-#define __UI_CANVAS_H__
+#ifndef __CANVAS_UI_H__
+#define __CANVAS_UI_H__
 
 #include "GameObject.h"
 #include <list>

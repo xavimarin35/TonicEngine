@@ -16,6 +16,7 @@ public:
 	bool CleanUp();
 
 	void SetOrthogonalCamera();
+	void SetUIRenderSettings();
 
 private:
 

@@ -46,7 +46,7 @@ bool ComponentMesh::CleanUp()
 
 void ComponentMesh::Draw()
 {
-	App->scene_intro->DrawGameObjectNodes(object);
+	//App->scene_intro->DrawGameObjectNodes(object);
 }
 
 void ComponentMesh::DrawInspector()

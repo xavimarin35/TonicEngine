@@ -54,4 +54,19 @@ void ModuleUserInterface::SetOrthogonalCamera()
 	glOrtho(left, right, bottom, top, near_plane, far_plane);
 }
 
+void ModuleUserInterface::SetUIRenderSettings()
+{
+	glColor3f(1, 1, 1);
+
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glDisable(GL_DEPTH_TEST);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 

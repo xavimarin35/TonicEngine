@@ -63,7 +63,7 @@ public:
 	bool showFrustum = false;
 	bool seeFrustum = false;
 	bool update_frustum = true;
-	int projection_type = this->frustum.type;
+	int projection_type = this->frustum.type = PerspectiveFrustum;
 };
 
 #endif

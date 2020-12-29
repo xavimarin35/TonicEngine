@@ -167,12 +167,12 @@ Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
 {
 	Component* componentUI = nullptr;
 
-	/*switch (type)
+	switch (type)
 	{
 	case COMPONENT_TYPE::CANVAS_UI:
 		componentUI = new ComponentCanvas(this);
 		break;
-	case COMPONENT_TYPE::BUTTON_UI:
+	/*case COMPONENT_TYPE::BUTTON_UI:
 		componentUI = new ComponentButton(this);
 		break;
 	case COMPONENT_TYPE::IMAGE_UI:
@@ -183,8 +183,8 @@ Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
 		break;
 		case COMPONENT_TYPE::TEXT_UI:
 		componentUI = new ComponentText(this);
-		break;
-	}*/
+		break;*/
+	}
 
 	if (componentUI != nullptr)
 	{

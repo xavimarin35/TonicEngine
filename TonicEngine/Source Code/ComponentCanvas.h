@@ -26,7 +26,7 @@ public:
 
 private:
 
-	CanvasUI* canvas;
+	CanvasUI* canvas = nullptr;
 	bool render_elements = true;
 };
 

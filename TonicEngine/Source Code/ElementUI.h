@@ -3,7 +3,7 @@
 
 class CanvasUI;
 
-enum ELEMENT_TYPE
+enum ELEMENT_UI_TYPE
 {
 	NONE_TYPE = 0,
 	CANVAS,
@@ -13,7 +13,7 @@ enum ELEMENT_TYPE
 	TEXT
 };
 
-enum ELEMENT_STATE
+enum ELEMENT_UI_STATE
 {
 	NONE_STATE = 0,
 	PRESSED, // Mouse has pressed the button
@@ -25,7 +25,7 @@ class ElementUI
 {
 public:
 	ElementUI();
-	ElementUI(ELEMENT_TYPE type);
+	ElementUI(ELEMENT_UI_TYPE type);
 	~ElementUI();
 
 	virtual bool Start();
@@ -35,11 +35,11 @@ public:
 
 	CanvasUI* GetCanvas() const;
 
-	ELEMENT_TYPE GetType() const;
-	void SetType(const ELEMENT_TYPE& new_type);
+	ELEMENT_UI_TYPE GetType() const;
+	void SetType(const ELEMENT_UI_TYPE& new_type);
 
-	ELEMENT_STATE GetState() const;
-	void SetState(const ELEMENT_STATE& new_state);
+	ELEMENT_UI_STATE GetState() const;
+	void SetState(const ELEMENT_UI_STATE& new_state);
 	
 	bool GetSelected() const;
 	void SetSelected(const bool& new_selected);
@@ -49,8 +49,8 @@ private:
 	bool selected = false;
 	bool rendered = true;	
 
-	ELEMENT_TYPE type = ELEMENT_TYPE::NONE_TYPE;
-	ELEMENT_STATE state = ELEMENT_STATE::NONE_STATE;
+	ELEMENT_UI_TYPE type = ELEMENT_UI_TYPE::NONE_TYPE;
+	ELEMENT_UI_STATE state = ELEMENT_UI_STATE::NONE_STATE;
 	
 	CanvasUI* canvas = nullptr;
 

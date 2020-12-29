@@ -460,6 +460,12 @@
     <ClInclude Include="Source Code\TextUI.h">
       <Filter>Sources\UI\UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ComponentButton.h">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ComponentImage.h">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -728,6 +734,12 @@
     </ClCompile>
     <ClCompile Include="Source Code\TextUI.cpp">
       <Filter>Sources\UI\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentButton.cpp">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentImage.cpp">
+      <Filter>Sources\GameObject\UI Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

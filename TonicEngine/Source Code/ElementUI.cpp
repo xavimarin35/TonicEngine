@@ -4,7 +4,7 @@ ElementUI::ElementUI()
 {
 }
 
-ElementUI::ElementUI(ELEMENT_TYPE element_type)
+ElementUI::ElementUI(ELEMENT_UI_TYPE element_type)
 {
 	type = element_type;
 	rendered = true;
@@ -34,12 +34,12 @@ bool ElementUI::Draw()
 	return true;
 }
 
-ELEMENT_TYPE ElementUI::GetType() const
+ELEMENT_UI_TYPE ElementUI::GetType() const
 {
 	return type;
 }
 
-void ElementUI::SetType(const ELEMENT_TYPE& new_type)
+void ElementUI::SetType(const ELEMENT_UI_TYPE& new_type)
 {
 	type = new_type;
 }
@@ -49,12 +49,12 @@ CanvasUI* ElementUI::GetCanvas() const
 	return canvas;
 }
 
-void ElementUI::SetState(const ELEMENT_STATE& new_state)
+void ElementUI::SetState(const ELEMENT_UI_STATE& new_state)
 {
 	state = new_state;
 }
 
-ELEMENT_STATE ElementUI::GetState() const
+ELEMENT_UI_STATE ElementUI::GetState() const
 {
 	return state;
 }

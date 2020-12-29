@@ -88,11 +88,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Source Code\CanvasUI.h" />
+    <ClInclude Include="Source Code\ComponentButton.h" />
     <ClInclude Include="Source Code\ComponentCamera.h" />
     <ClInclude Include="Source Code\Application.h" />
     <ClInclude Include="Source Code\Color.h" />
     <ClInclude Include="Source Code\Component.h" />
     <ClInclude Include="Source Code\ComponentCanvas.h" />
+    <ClInclude Include="Source Code\ComponentImage.h" />
     <ClInclude Include="Source Code\ComponentMesh.h" />
     <ClInclude Include="Source Code\ComponentTexture.h" />
     <ClInclude Include="Source Code\ComponentTransform.h" />
@@ -218,11 +220,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\CanvasUI.cpp" />
+    <ClCompile Include="Source Code\ComponentButton.cpp" />
     <ClCompile Include="Source Code\ComponentCamera.cpp" />
     <ClCompile Include="Source Code\Application.cpp" />
     <ClCompile Include="Source Code\Color.cpp" />
     <ClCompile Include="Source Code\Component.cpp" />
     <ClCompile Include="Source Code\ComponentCanvas.cpp" />
+    <ClCompile Include="Source Code\ComponentImage.cpp" />
     <ClCompile Include="Source Code\ComponentMesh.cpp" />
     <ClCompile Include="Source Code\ComponentTexture.cpp" />
     <ClCompile Include="Source Code\ComponentTransform.cpp" />

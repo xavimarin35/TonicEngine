@@ -7,16 +7,9 @@
 #include "ComponentMesh.h"
 #include "ComponentTexture.h"
 #include "ComponentCamera.h"
+#include "ComponentCanvas.h"
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
-
-//class ComponentTransform;
-//class ComponentMesh;
-//class ComponentTexture;
-//class ComponentCamera;
-class ComponentCanvas;
-
-class ResourceModel;
 
 struct goData;
 struct meshData;

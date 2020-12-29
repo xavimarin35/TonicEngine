@@ -4,6 +4,8 @@
 ComponentCanvas::ComponentCanvas(GameObject* parent) : Component(COMPONENT_TYPE::CANVAS_UI, parent)
 {
 	type = COMPONENT_TYPE::CANVAS_UI;
+	object = parent;
+	render_elements = true;
 }
 
 ComponentCanvas::~ComponentCanvas()
