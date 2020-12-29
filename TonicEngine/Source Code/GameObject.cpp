@@ -28,9 +28,12 @@ void GameObject::Update()
 
 	if (this->data.active)
 	{
-		if (this->GetComponentTransform()->moved)
-			TransformGlobal(this);
-
+		if (this->GetComponentTransform() != nullptr)
+		{
+			if (this->GetComponentTransform()->moved)
+				TransformGlobal(this);
+		}
+		
 		GameObject* GO = App->scene_intro->GOselected;
 
 		UpdateBoundingBox();

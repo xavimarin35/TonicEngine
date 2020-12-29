@@ -56,7 +56,13 @@ bool PanelScene::Draw()
 		else
 			resizedLastFrame = false;
 
-		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)newSize.x, (float)newSize.y), ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::SetCursorPos({ 0,0 });
+		App->gui->sceneX = ImGui::GetCursorPosX() + ImGui::GetWindowPos().x;
+		App->gui->sceneY = ImGui::GetCursorPosY() + ImGui::GetWindowPos().y;
+		App->gui->sceneW = size.x;
+		App->gui->sceneH = size.y;
+
+		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)size.x, (float)size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 		ImGuizmo::SetDrawlist();
 

@@ -605,8 +605,9 @@ void ModuleGUI::DrawGuizmo()
 	float4x4 proj_matrix = App->camera->GetActiveCamera()->frustum.ProjectionMatrix().Transposed();
 
 	// Draw guizmos axis
-	ImGuiIO& io = ImGui::GetIO();
-	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+	ImVec2 cursorPos = { App->gui->sceneX,App->gui->sceneY };
+	ImVec2 windowSize = { App->gui->sceneW,App->gui->sceneH };
+	ImGuizmo::SetRect(cursorPos.x, cursorPos.y, windowSize.x, windowSize.y);
 
 	// Change guizmos operations
 	ChangeOperationGuizmo(g_operator);
