@@ -176,6 +176,22 @@ bool ModuleGUI::Draw()
 				ImGui::EndMenu();
 			}
 
+			if (ImGui::BeginMenu("Create UI Element"))
+			{
+				if (ImGui::MenuItem("Canvas"))
+				{
+					LOG_C("WARNING: Work In Progress :)");
+					App->scene_intro->CreateGO("Canvas", App->scene_intro->GOroot);
+				}
+
+				ImGui::MenuItem("Button", NULL, false, false);
+				ImGui::MenuItem("Image", NULL, false, false);
+				ImGui::MenuItem("Text", NULL, false, false);
+				ImGui::MenuItem("Checkbox", NULL, false, false);
+
+				ImGui::EndMenu();
+			}
+
 			ImGui::Separator();
 
 			if (ImGui::MenuItem("Remove GameObjects"))
