@@ -44,10 +44,10 @@ bool ComponentMesh::CleanUp()
 	return true;
 }
 
-void ComponentMesh::Draw()
-{
-	//App->scene_intro->DrawGameObjectNodes(object);
-}
+//void ComponentMesh::Draw()
+//{
+//	//App->scene_intro->DrawGameObjectNodes(object);
+//}
 
 void ComponentMesh::DrawInspector()
 {

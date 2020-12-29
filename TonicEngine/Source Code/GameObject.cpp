@@ -172,10 +172,10 @@ Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
 	case COMPONENT_TYPE::CANVAS_UI:
 		componentUI = new ComponentCanvas(this);
 		break;
-	/*case COMPONENT_TYPE::BUTTON_UI:
+	case COMPONENT_TYPE::BUTTON_UI:
 		componentUI = new ComponentButton(this);
 		break;
-	case COMPONENT_TYPE::IMAGE_UI:
+		/*case COMPONENT_TYPE::IMAGE_UI:
 		componentUI = new ComponentImage(this);
 		break;
 	case COMPONENT_TYPE::LABEL_UI:
@@ -255,6 +255,32 @@ ComponentCamera* GameObject::GetComponentCamera()
 		}
 	}
 	return (ComponentCamera*)camera;
+}
+
+ComponentCanvas* GameObject::GetComponentCanvasUI()
+{
+	Component* canvas = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::CANVAS_UI)
+		{
+			return (ComponentCanvas*)*i;
+		}
+	}
+	return (ComponentCanvas*)canvas;
+}
+
+ComponentButton* GameObject::GetComponentButtonUI()
+{
+	Component* button = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::BUTTON_UI)
+		{
+			return (ComponentButton*)*i;
+		}
+	}
+	return (ComponentButton*)button;
 }
 
 bool GameObject::IsGameObjectActive()

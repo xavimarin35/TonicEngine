@@ -167,7 +167,7 @@ void ModuleSceneIntro::LoadScene(std::string scene_name)
 
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName, false, false);
+	string n = AssignNameToGO(objName, false, false, false);
 
 	GameObject* GO = new GameObject(n);
 
@@ -183,7 +183,7 @@ GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)
 
 GameObject* ModuleSceneIntro::CreateCamera(string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName, true, false);
+	string n = AssignNameToGO(objName, true, false, false);
 
 	GameObject* GO = new GameObject(n);
 
@@ -201,7 +201,7 @@ GameObject* ModuleSceneIntro::CreateCamera(string objName, GameObject* parent)
 
 GameObject* ModuleSceneIntro::CreateEmpty(string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName, false, true);
+	string n = AssignNameToGO(objName, false, true, false);
 
 	GameObject* GO = new GameObject(n);
 
@@ -215,7 +215,33 @@ GameObject* ModuleSceneIntro::CreateEmpty(string objName, GameObject* parent)
 	return GO;
 }
 
-string ModuleSceneIntro::AssignNameToGO(string name_go, bool isCamera, bool isEmpty)
+GameObject* ModuleSceneIntro::CreateUI(COMPONENT_TYPE type, string objName, GameObject* parent)
+{
+	string n = AssignNameToGO(objName, false, false, true);
+
+	GameObject* GO = new GameObject(n);
+
+	switch (type)
+	{
+	case COMPONENT_TYPE::CANVAS_UI:
+		GO->CreateComponentUI(COMPONENT_TYPE::CANVAS_UI, true);
+		break;
+	case COMPONENT_TYPE::BUTTON_UI:
+		GO->CreateComponentUI(COMPONENT_TYPE::BUTTON_UI, true);
+		break;
+	}
+
+	GO->data.id = numGO;
+	numGO++;
+	gameobjectsList.push_back(GO);
+
+	if (parent != nullptr)
+		parent->AddChild(GO);
+
+	return GO;
+}
+
+string ModuleSceneIntro::AssignNameToGO(string name_go, bool isCamera, bool isEmpty, bool isUI)
 {
 	if (isCamera)
 	{
@@ -230,6 +256,13 @@ string ModuleSceneIntro::AssignNameToGO(string name_go, bool isCamera, bool isEm
 		string empty_name = name_go.append(std::to_string(empty_aux));
 		empty_i = empty_aux + 1;
 		return empty_name;
+	}
+	else if (isUI)
+	{
+		ui_aux = ui_i;
+		string ui_name = name_go.append(std::to_string(ui_aux));
+		ui_i = ui_aux + 1;
+		return ui_name;
 	}
 	else
 		return name_go;

@@ -5,6 +5,7 @@
 #include "Primitive.h"
 #include "GameObject.h"
 #include "imgui-1.78/ImGuizmo.h"
+#include "ElementUI.h"
 
 enum class OBJECTS3D
 {
@@ -47,7 +48,8 @@ public:
 	GameObject* CreateGO(string objName, GameObject* parent = nullptr);
 	GameObject* CreateCamera(string objName, GameObject* parent = nullptr);
 	GameObject* CreateEmpty(string objName, GameObject* parent = nullptr);
-	string AssignNameToGO(string name_go, bool isCamera, bool isEmpty);
+	GameObject* CreateUI(COMPONENT_TYPE type, string objName, GameObject* parent = nullptr);
+	string AssignNameToGO(string name_go, bool isCamera, bool isEmpty, bool isUI);
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();
 	void NumberOfGO();
@@ -59,6 +61,8 @@ public:
 	int cam_aux = 0;
 	int empty_i = 0;
 	int empty_aux = 0;
+	int ui_i = 0;
+	int ui_aux = 0;
 
 	void DrawGameObjectNodes(GameObject* GO);
 	GameObject* GOselected = nullptr;

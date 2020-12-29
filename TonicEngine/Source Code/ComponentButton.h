@@ -23,6 +23,7 @@ public:
 	bool Update();
 	bool CleanUp();
 	void Draw();
+	void DrawInspector();
 
 private:
 

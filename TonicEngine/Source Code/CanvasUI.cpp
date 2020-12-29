@@ -1,5 +1,6 @@
 #include "CanvasUI.h"
 #include "ComponentCanvas.h"
+#include "ModuleGUI.h"
 
 CanvasUI::CanvasUI(ComponentCanvas* canvas)
 {
@@ -10,10 +11,12 @@ CanvasUI::~CanvasUI()
 {
 }
 
-void CanvasUI::Update()
+bool CanvasUI::Update()
 {
-	for (std::list<GameObject*>::iterator it = canvas_elements.begin(); it != canvas_elements.end(); it++)
+	/*for (std::list<GameObject*>::iterator it = canvas_elements.begin(); it != canvas_elements.end(); it++)
 	{
 		(*it)->Update();
-	}
+	}*/
+
+	return true;
 }

@@ -216,11 +216,16 @@ void PanelHierarchy::DrawMenuNotHovering()
 		{
 			if (ImGui::MenuItem("Canvas"))
 			{
-				LOG_C("WARNING: Work In Progress :)");
-				App->scene_intro->CreateGO("Canvas", App->scene_intro->GOroot);
+				LOG_C("WARNING: Canvas Work In Progress :)");
+				App->scene_intro->CreateUI(COMPONENT_TYPE::CANVAS_UI, "Canvas_", App->scene_intro->GOroot);
 			}
 
-			ImGui::MenuItem("Button", NULL, false, false);
+			if (ImGui::MenuItem("Button"))
+			{
+				LOG_C("WARNING: Button Work In Progress :)");
+				App->scene_intro->CreateUI(COMPONENT_TYPE::BUTTON_UI, "Button_", App->scene_intro->GOroot);
+			}
+
 			ImGui::MenuItem("Image", NULL, false, false);
 			ImGui::MenuItem("Text", NULL, false, false);
 			ImGui::MenuItem("Checkbox", NULL, false, false);

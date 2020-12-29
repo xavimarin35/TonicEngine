@@ -14,7 +14,7 @@ public:
 
 	ComponentCanvas* Ccanvas;
 
-	void Update();
+	bool Update();
 
 	std::list<GameObject*> canvas_elements;
 };

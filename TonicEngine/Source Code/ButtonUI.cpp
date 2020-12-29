@@ -1,5 +1,6 @@
 #include "ButtonUI.h"
 #include "ModuleUserInterface.h"
+#include "ModuleGUI.h"
 
 ButtonUI::ButtonUI(ComponentButton* button)
 {

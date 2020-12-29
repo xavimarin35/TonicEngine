@@ -1,10 +1,15 @@
 #include "ComponentCanvas.h"
 #include "CanvasUI.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleGUI.h"
 
 ComponentCanvas::ComponentCanvas(GameObject* parent) : Component(COMPONENT_TYPE::CANVAS_UI, parent)
 {
 	type = COMPONENT_TYPE::CANVAS_UI;
 	object = parent;
+
+	canvas = new CanvasUI(this);
+
 	render_elements = true;
 }
 
@@ -14,8 +19,6 @@ ComponentCanvas::~ComponentCanvas()
 
 bool ComponentCanvas::Start()
 {
-	canvas = new CanvasUI(this);
-
 	return true;
 }
 
@@ -48,5 +51,20 @@ void ComponentCanvas::Draw()
 	{
 		(*it)->Draw();
 	}
+}
+
+void ComponentCanvas::DrawInspector()
+{
+	GameObject* go = App->scene_intro->GOselected;
+
+	ImGui::Spacing();
+
+	if (ImGui::CollapsingHeader("Canvas", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentCanvasUI() != nullptr)
+	{
+		ImGui::Spacing();
+
+		ImGui::Text("This is the Canvas component");
+	}
+	
 }
 

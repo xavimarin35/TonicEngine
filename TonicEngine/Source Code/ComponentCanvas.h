@@ -22,7 +22,8 @@ public:
 	bool Start();
 	bool Update();
 	bool CleanUp();
-	void Draw();
+	void Draw(); // Optional (we have been using Update and works fine)
+	void DrawInspector();
 
 private:
 

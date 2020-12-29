@@ -8,6 +8,7 @@
 #include "ComponentTexture.h"
 #include "ComponentCamera.h"
 #include "ComponentCanvas.h"
+#include "ComponentButton.h"
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
 
@@ -47,6 +48,8 @@ public:
 	ComponentMesh* GetComponentMesh();
 	ComponentTexture* GetComponentTexture();
 	ComponentCamera* GetComponentCamera();
+	ComponentCanvas* GetComponentCanvasUI();
+	ComponentButton* GetComponentButtonUI();
 
 	GameObject* GetRootGameObject();
 	void AddChild(GameObject* child);

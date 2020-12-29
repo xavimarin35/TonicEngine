@@ -17,7 +17,7 @@ public:
 	bool Update();
 	bool CleanUp();
 
-	void Draw() override;
+	/*void Draw() override;*/
 
 	void DrawInspector();
 
