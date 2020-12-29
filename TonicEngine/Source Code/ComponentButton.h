@@ -2,15 +2,9 @@
 #define _COMPONENT_BUTTON_H_
 
 #include "Component.h"
-#include "Math.h"
-#include "SDL\include\SDL_rect.h"
-
-#include <list>
-#include <string>
 
 class ElementUI;
 class ButtonUI;
-class GameObject;
 
 class ComponentButton : public Component
 {
