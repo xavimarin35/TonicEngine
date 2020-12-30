@@ -2,6 +2,7 @@
 #define _BUTTON_UI_H_
 
 #include "ElementUI.h"
+#include "GameObject.h"
 
 class ComponentButton;
 
@@ -16,7 +17,7 @@ public:
 	bool CleanUp();
 	bool Draw();
 
-	ComponentButton* Cbutton;
+	ComponentButton* Cbutton = nullptr;
 
 private:
 

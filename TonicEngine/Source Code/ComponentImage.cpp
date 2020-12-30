@@ -5,6 +5,7 @@ ComponentImage::ComponentImage(GameObject* parent) : Component(COMPONENT_TYPE::I
 {
 	type = COMPONENT_TYPE::IMAGE_UI;
 	object = parent;
+
 	image = new ImageUI(this);
 }
 

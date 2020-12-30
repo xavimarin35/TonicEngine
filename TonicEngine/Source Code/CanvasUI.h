@@ -12,7 +12,7 @@ public:
 	CanvasUI(ComponentCanvas* canvas);
 	~CanvasUI();
 
-	ComponentCanvas* Ccanvas;
+	ComponentCanvas* Ccanvas = nullptr;
 
 	bool Update();
 

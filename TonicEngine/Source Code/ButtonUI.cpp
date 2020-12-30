@@ -4,7 +4,7 @@
 
 ButtonUI::ButtonUI(ComponentButton* button)
 {
-	button = Cbutton;
+	Cbutton = button;
 }
 
 ButtonUI::~ButtonUI()
