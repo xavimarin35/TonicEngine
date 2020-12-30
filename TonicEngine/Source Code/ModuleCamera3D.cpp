@@ -23,7 +23,7 @@ bool ModuleCamera3D::Start()
 {
 	mainCam->frustum.farPlaneDistance = 300;
 
-	mainCam->frustum.pos = float3(26.f, 86.f, -90.f);
+	mainCam->frustum.pos = float3(0.f, 10.f, 40.f);
 
 	cameraGO = App->scene_intro->CreateGO("Main_Camera", App->scene_intro->GOroot);
 	cameraGO->CreateComponent(COMPONENT_TYPE::CAMERA);
@@ -290,6 +290,11 @@ float* ModuleCamera3D::GetView() const
 	return activeCam->GetView().ptr();
 }
 
+float* ModuleCamera3D::GetGameView() const
+{
+	return playCam->GetComponentCamera()->GetView().ptr();
+}
+
 float* ModuleCamera3D::GetProjection() const
 {
 	return activeCam->GetProjection().ptr();
@@ -304,7 +309,7 @@ GameObject* ModuleCamera3D::MousePicking() const
 {
 	GameObject* GO = nullptr;
 
-	ImVec2 mousePos = { (float)App->input->GetMouseX() / (float)App->window->GetWidth() * 2.f - 1.f, -((float)App->input->GetMouseY() / (float)App->window->GetHeight() * 2.f - 1.f) };
+	ImVec2 mousePos = { (float)App->gui->sceneMousePos.x / (float)App->gui->sceneW * 2.f - 1.f, -((float)App->gui->sceneMousePos.y / (float)App->gui->sceneH * 2.f - 1.f) };
 
 	LineSegment ray = activeCam->NearSegment((float)mousePos.x, (float)mousePos.y);
 
@@ -319,7 +324,7 @@ bool ModuleCamera3D::CheckMousePosition()
 {
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector
 		|| isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2
-		|| isOnQuit || isOnSelectTexture || isOnMainBar)
+		|| isOnQuit || isOnSelectTexture || isOnMainBar || isOnGame)
 		return true;
 
 	else if (ImGui::IsAnyItemHovered())

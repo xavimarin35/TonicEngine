@@ -13,6 +13,12 @@ public:
 
 	bool Start();
 	bool Draw();
+
+public:
+	ImVec2 size = { 0,0 };
+	ImVec2 viewSize = { 0,0 };
+	bool resizedLastFrame = false;
+	float lastAR = 0;
 };
 
 #endif

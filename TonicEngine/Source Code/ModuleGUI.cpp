@@ -108,8 +108,8 @@ update_status ModuleGUI::PostUpdate(float dt)
 		ret = (*it)->PostUpdate(dt);
 	}
 
-	if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
-		DrawGuizmo();
+	/*if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
+		DrawGuizmo();*/
 
 	if (ImGuizmo::IsUsing() == true)
 		usingGizmo = true;
@@ -377,7 +377,7 @@ bool ModuleGUI::Draw()
 			ImGui::MenuItem("Engine State Window", NULL, &Pstate->active);
 			ImGui::MenuItem("Resources Window", NULL, &Presources->active);
 			ImGui::MenuItem("Scene Window", NULL, &Pscene->active);
-			ImGui::MenuItem("Game Window", NULL, &Pgame->active, false);
+			ImGui::MenuItem("Game Window", NULL, &Pgame->active);
 			ImGui::MenuItem("Camera Preview Window", NULL, &Pcam->active, false);
 
 			ImGui::EndMenu();
@@ -626,8 +626,9 @@ void ModuleGUI::DrawGuizmo()
 	float4x4 proj_matrix = App->camera->GetActiveCamera()->frustum.ProjectionMatrix().Transposed();
 
 	// Draw guizmos axis
-	ImGuiIO& io = ImGui::GetIO();
-	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+	ImVec2 panPos = App->gui->panelPos;
+	ImVec2 winSize = App->gui->winSize;
+	ImGuizmo::SetRect(panPos.x, panPos.y, winSize.x, winSize.y);
 
 	// Change guizmos operations
 	ChangeOperationGuizmo(g_operator);

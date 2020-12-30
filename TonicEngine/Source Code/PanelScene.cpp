@@ -3,6 +3,7 @@
 #include "Viewport.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleSceneIntro.h"
 
 PanelScene::PanelScene()
 {
@@ -12,14 +13,9 @@ PanelScene::~PanelScene()
 {
 }
 
-// EVERYTHING COMMENTED IS WORK IN PROGRESS
-
 bool PanelScene::Start()
 {
-	this->active = false;
-
-	//viewport_tex = new Viewport();
-	//viewport_tex->StartBuffers(current_size);
+	this->active = true;
 
 	return true;
 }
@@ -31,9 +27,7 @@ bool PanelScene::Draw()
 
 	if (App->gui->Pscene->active)
 	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-
-		if (ImGui::Begin("Scene", &active))
+		if (ImGui::Begin("Scene", &active, ImGuiWindowFlags_NoScrollbar))
 		{
 			if (ImGui::IsWindowHovered()) App->camera->isOnScene = true;
 			else App->camera->isOnScene = false;
@@ -49,47 +43,39 @@ bool PanelScene::Draw()
 
 		ImGui::GetForegroundDrawList()->AddRect(vMin, vMax, IM_COL32(255, 255, 0, 255));
 
-		new_size = ImGui::GetContentRegionAvail();
+		new_size = ImGui::GetContentRegionAvail();*/
 
-		ImGui::Image((ImTextureID)App->camera->GetEditorCamera()->GetComponentCamera()->viewport->GetTexture(), ImVec2(current_size.x, current_size.y), ImVec2(0, 1), ImVec2(1, 0));*/
+		ImVec2 newSize = ImGui::GetWindowSize();
+		if (newSize.x != size.x || newSize.y != size.y)
+		{
+			resizedLastFrame = true;
+			size = newSize;
+			float newAR = size.x / size.y;
+			App->camera->GetEditorCamera()->GetComponentCamera()->SetRatio(newAR);
+		}
+		else
+			resizedLastFrame = false;
+
+		ImGui::SetCursorPos({ 0,0 });
+		App->gui->sceneX = ImGui::GetCursorPosX() + ImGui::GetWindowPos().x;
+		App->gui->sceneY = ImGui::GetCursorPosY() + ImGui::GetWindowPos().y;
+		App->gui->sceneW = size.x;
+		App->gui->sceneH = size.y;
+
+		App->gui->winSize = ImGui::GetContentRegionAvail();
+		App->gui->panelPos = ImGui::GetWindowPos();
+
+		App->gui->sceneMousePos = { ImGui::GetMousePos().x - App->gui->sceneX, ImGui::GetMousePos().y - App->gui->sceneY };
+
+		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)size.x, (float)size.y), ImVec2(0, 1), ImVec2(1, 0));
+
+		ImGuizmo::SetDrawlist();
+
+		if (App->scene_intro->GOselected != nullptr && App->scene_intro->GOselected->data.active)
+			App->gui->DrawGuizmo();
 		
 		ImGui::End();
-		ImGui::PopStyleVar();
 	}
-
-	return true;
-}
-
-
-update_status PanelScene::PreUpdate(float dt)
-{
-	/*if (current_size.x != new_size.x || current_size.y != new_size.y)
-	{
-		current_size = new_size;
-		viewport_tex->StartBuffers(current_size);
-		App->renderer3D->OnResize(current_size.x, current_size.y);
-	}
-
-	viewport_tex->BindViewport();*/
-
-	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->BindViewport();
-
-	return UPDATE_CONTINUE;
-}
-
-update_status PanelScene::PostUpdate(float dt)
-{
-	//viewport_tex->UnbindViewport();
-	//App->camera->GetEditorCamera()->GetComponentCamera()->viewport->UnbindViewport();
-
-	return UPDATE_CONTINUE;
-}
-
-bool PanelScene::CleanUp()
-{
-	/*viewport_tex->DeleteBuffers();
-	delete viewport_tex;
-	viewport_tex = nullptr;*/
 
 	return true;
 }
