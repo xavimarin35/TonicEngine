@@ -3,6 +3,12 @@
 
 #include "Module.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
+#pragma comment(lib, "FreeType/libx86/freetype.lib") 
+
+
 class ModuleUserInterface : public Module
 {
 public:
@@ -20,6 +26,7 @@ public:
 
 private:
 
+	FT_Library ft_library = FT_Library();
 
 };
 

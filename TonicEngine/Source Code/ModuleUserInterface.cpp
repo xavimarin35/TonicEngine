@@ -12,6 +12,13 @@ ModuleUserInterface::~ModuleUserInterface()
 
 bool ModuleUserInterface::Init()
 {
+	FT_Error error = FT_Init_FreeType(&ft_library);
+
+	if (error)
+	{
+		LOG_C("ERROR: Could not init FreeType Library ");
+	}
+
 	return true;
 }
 
