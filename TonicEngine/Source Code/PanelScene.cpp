@@ -62,6 +62,11 @@ bool PanelScene::Draw()
 		App->gui->sceneW = size.x;
 		App->gui->sceneH = size.y;
 
+		App->gui->winSize = ImGui::GetContentRegionAvail();
+		App->gui->panelPos = ImGui::GetWindowPos();
+
+		App->gui->sceneMousePos = { ImGui::GetMousePos().x - App->gui->sceneX, ImGui::GetMousePos().y - App->gui->sceneY };
+
 		ImGui::Image((ImTextureID)App->renderer3D->scene_tex, ImVec2((float)size.x, (float)size.y), ImVec2(0, 1), ImVec2(1, 0));
 
 		ImGuizmo::SetDrawlist();

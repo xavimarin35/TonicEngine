@@ -97,6 +97,11 @@ public:
 	float sceneW = 0.0f;
 	float sceneH = 0.0f;
 
+	ImVec2 winSize;
+	ImVec2 panelPos;
+
+	ImVec2 sceneMousePos;
+
 	bool updateMat = false;
 
 	static void HelpMarker(const char* desc);

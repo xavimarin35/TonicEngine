@@ -309,7 +309,7 @@ GameObject* ModuleCamera3D::MousePicking() const
 {
 	GameObject* GO = nullptr;
 
-	ImVec2 mousePos = { (float)App->input->GetMouseX() / (float)App->window->GetWidth() * 2.f - 1.f, -((float)App->input->GetMouseY() / (float)App->window->GetHeight() * 2.f - 1.f) };
+	ImVec2 mousePos = { (float)App->gui->sceneMousePos.x / (float)App->gui->sceneW * 2.f - 1.f, -((float)App->gui->sceneMousePos.y / (float)App->gui->sceneH * 2.f - 1.f) };
 
 	LineSegment ray = activeCam->NearSegment((float)mousePos.x, (float)mousePos.y);
 
