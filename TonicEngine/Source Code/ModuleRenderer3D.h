@@ -5,6 +5,8 @@
 #include "Light.h"
 #include "GameObject.h"
 
+#include <glew/include/GL/glew.h>
+
 #define MAX_LIGHTS 8
 
 enum class PANEL_TEXTURE

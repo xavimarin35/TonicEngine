@@ -1,7 +1,6 @@
 #include "PanelCameraPreview.h"
 #include "Application.h"
 #include "ModuleGUI.h"
-#include "Viewport.h"
 
 PanelCameraPreview::PanelCameraPreview()
 {
@@ -11,14 +10,9 @@ PanelCameraPreview::~PanelCameraPreview()
 {
 }
 
-// EVERYTHING COMMENTED IS WORK IN PROGRESS
-
 bool PanelCameraPreview::Start()
 {
 	this->active = false;
-
-	/*viewport_tex = new Viewport();
-	viewport_tex->StartBuffers(current_size);*/
 
 	return true;
 }
@@ -44,23 +38,15 @@ bool PanelCameraPreview::Draw()
 
 update_status PanelCameraPreview::PreUpdate(float dt)
 {
-	//viewport_tex->BindViewport();
-
 	return UPDATE_CONTINUE;
 }
 
 update_status PanelCameraPreview::PostUpdate(float dt)
 {
-	//viewport_tex->UnbindViewport();
-
 	return UPDATE_CONTINUE;
 }
 
 bool PanelCameraPreview::CleanUp()
 {
-	/*viewport_tex->DeleteBuffers();
-	delete viewport_tex;
-	viewport_tex = nullptr;*/
-
 	return true;
 }

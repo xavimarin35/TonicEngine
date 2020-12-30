@@ -4,7 +4,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "Viewport.h"
+
 
 #include "MathGeoLib/include/Math/MathFunc.h"
 
@@ -31,9 +31,6 @@ ComponentCamera::~ComponentCamera()
 
 bool ComponentCamera::Start()
 {
-	viewport = new Viewport();
-	viewport->Create(viewportX, viewportY);
-
 	return true;
 }
 

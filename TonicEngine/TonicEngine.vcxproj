@@ -208,7 +208,6 @@
     <ClInclude Include="Source Code\ElementUI.h" />
     <ClInclude Include="Source Code\ImageUI.h" />
     <ClInclude Include="Source Code\TextUI.h" />
-    <ClInclude Include="Source Code\Viewport.h" />
     <ClInclude Include="Source Code\PathNode.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\entropy.h" />
     <ClInclude Include="Source Code\Libraries\pcg-c-0.94\extras\pcg_spinlock.h" />
@@ -305,7 +304,6 @@
     <ClCompile Include="Source Code\ElementUI.cpp" />
     <ClCompile Include="Source Code\ImageUI.cpp" />
     <ClCompile Include="Source Code\TextUI.cpp" />
-    <ClCompile Include="Source Code\Viewport.cpp" />
     <ClCompile Include="Source Code\Primitive.cpp" />
     <ClCompile Include="Source Code\RandomNumGenerator.cpp" />
     <ClCompile Include="Source Code\TextureImporter.cpp" />

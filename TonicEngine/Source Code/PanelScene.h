@@ -4,7 +4,6 @@
 #include "Application.h"
 #include "ModuleGUI.h"
 #include "PanelManager.h"
-#include "Viewport.h"
 
 class PanelScene : public PanelManager
 {
