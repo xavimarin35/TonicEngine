@@ -28,3 +28,7 @@ bool ImageUI::Draw()
 {
 	return true;
 }
+
+void ImageUI::DrawImageTexture()
+{
+}

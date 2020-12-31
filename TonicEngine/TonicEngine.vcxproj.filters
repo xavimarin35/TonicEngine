@@ -472,6 +472,9 @@
     <ClInclude Include="Source Code\Libraries\FreeType\include\freetype\freetype.h">
       <Filter>Sources\Libraries\FreeType</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ContainerUI.h">
+      <Filter>Sources\UI\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -743,6 +746,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\ComponentImage.cpp">
       <Filter>Sources\GameObject\UI Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ContainerUI.cpp">
+      <Filter>Sources\UI\UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

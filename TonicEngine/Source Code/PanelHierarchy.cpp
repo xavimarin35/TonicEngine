@@ -226,7 +226,12 @@ void PanelHierarchy::DrawMenuNotHovering()
 				App->scene_intro->CreateUI(COMPONENT_TYPE::BUTTON_UI, "Button_", App->scene_intro->GOroot);
 			}
 
-			ImGui::MenuItem("Image", NULL, false, false);
+			if (ImGui::MenuItem("Image"))
+			{
+				LOG_C("WARNING: Image Work In Progress :)");
+				App->scene_intro->CreateUI(COMPONENT_TYPE::IMAGE_UI, "Image_", App->scene_intro->GOroot);
+			}
+
 			ImGui::MenuItem("Text", NULL, false, false);
 			ImGui::MenuItem("Checkbox", NULL, false, false);
 

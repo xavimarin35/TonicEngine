@@ -233,6 +233,9 @@ GameObject* ModuleSceneIntro::CreateUI(COMPONENT_TYPE type, string objName, Game
 	case COMPONENT_TYPE::BUTTON_UI:
 		GO->CreateComponentUI(COMPONENT_TYPE::BUTTON_UI, true);
 		break;
+	case COMPONENT_TYPE::IMAGE_UI:
+		GO->CreateComponentUI(COMPONENT_TYPE::IMAGE_UI, true);
+		break;
 	}
 
 	GO->data.id = numGO;

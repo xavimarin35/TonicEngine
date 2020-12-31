@@ -22,16 +22,24 @@ bool ComponentImage::Start()
 
 bool ComponentImage::Update()
 {
+	if (image != nullptr)
+		image->Update();
+
 	return true;
 }
 
 bool ComponentImage::CleanUp()
 {
+	if (image != nullptr)
+		image->CleanUp();
+
 	return true;
 }
 
 void ComponentImage::Draw()
 {
+	if (image != nullptr)
+		image->Draw();
 }
 
 void ComponentImage::DrawInspector()

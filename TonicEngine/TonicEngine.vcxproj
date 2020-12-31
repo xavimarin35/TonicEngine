@@ -98,6 +98,7 @@
     <ClInclude Include="Source Code\ComponentMesh.h" />
     <ClInclude Include="Source Code\ComponentTexture.h" />
     <ClInclude Include="Source Code\ComponentTransform.h" />
+    <ClInclude Include="Source Code\ContainerUI.h" />
     <ClInclude Include="Source Code\GameObject.h" />
     <ClInclude Include="Source Code\JsonImporter.h" />
     <ClInclude Include="Source Code\LabelUI.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Source Code\ComponentMesh.cpp" />
     <ClCompile Include="Source Code\ComponentTexture.cpp" />
     <ClCompile Include="Source Code\ComponentTransform.cpp" />
+    <ClCompile Include="Source Code\ContainerUI.cpp" />
     <ClCompile Include="Source Code\GameObject.cpp" />
     <ClCompile Include="Source Code\LabelUI.cpp" />
     <ClCompile Include="Source Code\Libraries\glew\src\glew.c" />

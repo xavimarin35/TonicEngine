@@ -188,10 +188,10 @@ Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
 	case COMPONENT_TYPE::BUTTON_UI:
 		componentUI = new ComponentButton(this);
 		break;
-		/*case COMPONENT_TYPE::IMAGE_UI:
+	case COMPONENT_TYPE::IMAGE_UI:
 		componentUI = new ComponentImage(this);
 		break;
-	case COMPONENT_TYPE::LABEL_UI:
+		/*case COMPONENT_TYPE::LABEL_UI:
 		componentUI = new ComponentLabel(this);
 		break;
 		case COMPONENT_TYPE::TEXT_UI:

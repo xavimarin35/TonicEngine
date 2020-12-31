@@ -17,8 +17,10 @@ public:
 	bool CleanUp();
 	bool Draw();
 
+	void DrawImageTexture();
 	ComponentImage* Cimage = nullptr;
 	ResourceTexture* image_tex = nullptr;
+	
 
 private:
 
