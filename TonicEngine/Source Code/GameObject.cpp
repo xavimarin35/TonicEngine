@@ -19,6 +19,15 @@ GameObject::~GameObject()
 {
 }
 
+void GameObject::Start()
+{
+	for (int i = 0; i < componentsList.size(); ++i)
+	{
+		if (componentsList[i]->active)
+			componentsList[i]->Start();
+	}
+}
+
 void GameObject::Update()
 {
 	for (std::vector<GameObject*>::iterator it = childrenList.begin(); it != childrenList.end(); ++it)
@@ -109,6 +118,7 @@ void GameObject::Draw() const
 		DrawAllBoundingBoxes(aabb);
 	}
 
+	// Calling Draw() function of all components (only used for UI Components)
 	for (int i = 0; i < componentsList.size(); ++i)
 	{
 		if (componentsList[i]->active)
@@ -284,6 +294,19 @@ ComponentButton* GameObject::GetComponentButtonUI()
 		}
 	}
 	return (ComponentButton*)button;
+}
+
+ComponentImage* GameObject::GetComponentImageUI()
+{
+	Component* image = nullptr;
+	for (std::vector<Component*>::iterator i = componentsList.begin(); i != componentsList.end(); i++)
+	{
+		if ((*i)->type == COMPONENT_TYPE::IMAGE_UI)
+		{
+			return (ComponentImage*)*i;
+		}
+	}
+	return (ComponentImage*)image;
 }
 
 bool GameObject::IsGameObjectActive()

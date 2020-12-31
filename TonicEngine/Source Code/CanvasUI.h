@@ -16,7 +16,7 @@ public:
 
 	bool Update();
 
-	std::list<GameObject*> canvas_elements;
+	std::vector<GameObject*> canvas_elements;
 };
 
 #endif

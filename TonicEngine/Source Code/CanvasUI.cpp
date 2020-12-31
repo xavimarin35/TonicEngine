@@ -13,10 +13,10 @@ CanvasUI::~CanvasUI()
 
 bool CanvasUI::Update()
 {
-	/*for (std::list<GameObject*>::iterator it = canvas_elements.begin(); it != canvas_elements.end(); it++)
+	for (std::vector<GameObject*>::iterator it = canvas_elements.begin(); it != canvas_elements.end(); it++)
 	{
 		(*it)->Update();
-	}*/
+	}
 
 	return true;
 }

@@ -11,6 +11,7 @@
 #include "ComponentTexture.h"
 #include "ModuleResources.h"
 #include "ModuleFileSystem.h"
+#include "ModuleUserInterface.h"
 
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
@@ -43,7 +44,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(float3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(float3(0, 0, 0));	
 
-	Create3DObject(OBJECTS3D::BAKER_HOUSE);
+	//Create3DObject(OBJECTS3D::STREET);
 
 	App->tex_imp->GenerateCheckersTexture();
 
@@ -99,6 +100,8 @@ update_status ModuleSceneIntro::PostUpdate(float dt)
 	else
 		DrawGameObjectNodes(GOroot);
 	
+	// Rendering UI Elements
+	App->ui->DrawUI();
 
 	return UPDATE_CONTINUE;
 }
@@ -119,8 +122,10 @@ void ModuleSceneIntro::DrawGameObjectNodes(GameObject* GO)
 		for (std::vector<GameObject*>::iterator it = GO->childrenList.begin(); it != GO->childrenList.end(); ++it)
 		{
 			DrawGameObjectNodes(*it);
+			(*it)->Draw();
 		}
 	}
+
 }
 
 void ModuleSceneIntro::SaveScene(std::string scene_name)

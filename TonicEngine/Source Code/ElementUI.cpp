@@ -1,4 +1,7 @@
 #include "ElementUI.h"
+#include <list>
+#include "GameObject.h"
+#include "CanvasUI.h"
 
 ElementUI::ElementUI()
 {

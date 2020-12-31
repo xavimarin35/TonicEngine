@@ -47,7 +47,7 @@ void ComponentCanvas::Draw()
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	for (std::list<GameObject*>::iterator it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
+	for (std::vector<GameObject*>::iterator it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
 	{
 		(*it)->Draw();
 	}
@@ -59,7 +59,7 @@ void ComponentCanvas::DrawInspector()
 
 	ImGui::Spacing();
 
-	if (ImGui::CollapsingHeader("Canvas", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentCanvasUI() != nullptr)
+	if (ImGui::CollapsingHeader("UI - Canvas", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentCanvasUI() != nullptr)
 	{
 		ImGui::Spacing();
 

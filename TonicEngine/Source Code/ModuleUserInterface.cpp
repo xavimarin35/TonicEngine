@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleUserInterface.h"
 #include "ModuleGUI.h"
+#include "ModuleRenderer3D.h"
 
 ModuleUserInterface::ModuleUserInterface(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -74,6 +75,19 @@ void ModuleUserInterface::SetUIRenderSettings()
 	glDisable(GL_DEPTH_TEST);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void ModuleUserInterface::DrawUI()
+{
+	// GetComponentCamera to set what camera we will be using while rendering elements of the list
+
+	for (auto it = GOcanvas.begin(); it != GOcanvas.end(); it++)
+	{
+		// we must set the orthogonal cam here (?) and then...
+
+		SetUIRenderSettings();
+		(*it)->Draw();
+	}
 }
 
 

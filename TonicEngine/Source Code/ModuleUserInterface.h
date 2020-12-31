@@ -2,11 +2,14 @@
 #define _MODULE_USERINTERFACE_H_
 
 #include "Module.h"
+#include "GameObject.h"
+#include <list>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 #pragma comment(lib, "FreeType/libx86/freetype.lib") 
+
 
 
 class ModuleUserInterface : public Module
@@ -23,11 +26,12 @@ public:
 
 	void SetOrthogonalCamera();
 	void SetUIRenderSettings();
+	void DrawUI();
 
 private:
 
 	FT_Library ft_library = FT_Library();
-
+	std::vector<GameObject*> GOcanvas;
 };
 
 #endif

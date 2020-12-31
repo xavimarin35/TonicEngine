@@ -36,7 +36,8 @@ bool ComponentButton::CleanUp()
 }
 
 void ComponentButton::Draw()
-{
+{ 
+
 }
 
 void ComponentButton::DrawInspector()
@@ -45,7 +46,7 @@ void ComponentButton::DrawInspector()
 
 	ImGui::Spacing();
 
-	if (ImGui::CollapsingHeader("Button", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentButtonUI() != nullptr)
+	if (ImGui::CollapsingHeader("UI - Button", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentButtonUI() != nullptr)
 	{
 		ImGui::Spacing();
 

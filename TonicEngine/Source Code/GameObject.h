@@ -9,6 +9,7 @@
 #include "ComponentCamera.h"
 #include "ComponentCanvas.h"
 #include "ComponentButton.h"
+#include "ComponentImage.h"
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
 
@@ -28,6 +29,7 @@ public:
 	GameObject(std::string name);
 	virtual ~GameObject();
 
+	void Start();
 	void Update();
 	void CleanUp();
 	void Draw() const;
@@ -50,6 +52,7 @@ public:
 	ComponentCamera* GetComponentCamera();
 	ComponentCanvas* GetComponentCanvasUI();
 	ComponentButton* GetComponentButtonUI();
+	ComponentImage* GetComponentImageUI();
 
 	GameObject* GetRootGameObject();
 	void AddChild(GameObject* child);
@@ -72,6 +75,7 @@ public:
 
 	AABB aabb;
 	OBB obb;
+
 };
 
 namespace GO 
