@@ -81,13 +81,18 @@ void ModuleUserInterface::DrawUI()
 {
 	// GetComponentCamera to set what camera we will be using while rendering elements of the list
 
-	for (auto it = GOcanvas.begin(); it != GOcanvas.end(); it++)
+	for (std::vector<GameObject*>::iterator it = GOcanvas.begin(); it != GOcanvas.end(); it++)
 	{
 		// we must set the orthogonal cam here (?) and then...
 
 		SetUIRenderSettings();
 		(*it)->Draw();
 	}
+}
+
+void ModuleUserInterface::AddCanvasGO(GameObject* GO)
+{
+	GOcanvas.push_back(GO);
 }
 
 

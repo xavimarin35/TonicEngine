@@ -48,6 +48,7 @@ bool ModuleSceneIntro::Start()
 
 	App->tex_imp->GenerateCheckersTexture();
 
+
 	return ret;
 }
 

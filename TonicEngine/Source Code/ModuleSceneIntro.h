@@ -49,6 +49,7 @@ public:
 	GameObject* CreateCamera(string objName, GameObject* parent = nullptr);
 	GameObject* CreateEmpty(string objName, GameObject* parent = nullptr);
 	GameObject* CreateUI(COMPONENT_TYPE type, string objName, GameObject* parent = nullptr);
+
 	string AssignNameToGO(string name_go, bool isCamera, bool isEmpty, bool isUI);
 	void RemoveSelectedGO(GameObject* GO);
 	void RemoveAllGO();

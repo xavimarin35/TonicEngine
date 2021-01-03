@@ -2,15 +2,17 @@
 #include "CanvasUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleGUI.h"
+#include "ModuleUserInterface.h"
 
 ComponentCanvas::ComponentCanvas(GameObject* parent) : Component(COMPONENT_TYPE::CANVAS_UI, parent)
 {
 	type = COMPONENT_TYPE::CANVAS_UI;
 	object = parent;
+	render_elements = true;
 
 	canvas = new CanvasUI(this);
+	App->ui->AddCanvasGO(object);
 
-	render_elements = true;
 }
 
 ComponentCanvas::~ComponentCanvas()
@@ -19,6 +21,8 @@ ComponentCanvas::~ComponentCanvas()
 
 bool ComponentCanvas::Start()
 {
+	canvas->Start();
+	
 	return true;
 }
 
@@ -66,5 +70,15 @@ void ComponentCanvas::DrawInspector()
 		ImGui::Text("This is the Canvas component");
 	}
 	
+}
+
+void ComponentCanvas::CreateElementInCanvas(GameObject* element)
+{
+	if (element != nullptr)
+		canvas->canvas_elements.push_back(element);
+	else
+	{
+		LOG_C("ERROR: Couldn't create the UI element to the canvas");
+	}
 }
 

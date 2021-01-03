@@ -27,6 +27,7 @@ public:
 	void SetOrthogonalCamera();
 	void SetUIRenderSettings();
 	void DrawUI();
+	void AddCanvasGO(GameObject* GO);
 
 private:
 

@@ -13,8 +13,10 @@ public:
 	~CanvasUI();
 
 	ComponentCanvas* Ccanvas = nullptr;
-
+	
+	bool Start();
 	bool Update();
+	void DrawCanvasRect(ResourceMesh* mesh, float3* vert, Color color);
 
 	std::vector<GameObject*> canvas_elements;
 };

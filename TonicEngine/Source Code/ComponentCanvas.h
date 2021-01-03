@@ -19,6 +19,8 @@ public:
 	void Draw(); // Optional (we have been using Update and works fine)
 	void DrawInspector();
 
+	void CreateElementInCanvas(GameObject* element);
+
 private:
 
 	CanvasUI* canvas = nullptr;
