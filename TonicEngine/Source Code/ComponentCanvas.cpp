@@ -42,14 +42,11 @@ void ComponentCanvas::Draw()
 	if (!render_elements)
 		return;
 
-	glColor3f(1, 1, 1);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);
+	canvas->CreateCanvasRect();
+	canvas->SetUpCanvasRect(canvas->canvas_mesh, {10, 10});
+	canvas->DrawCanvasRect(canvas->canvas_mesh, White);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	App->ui->SetUIRenderSettings();
 
 	for (std::vector<GameObject*>::iterator it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
 	{
@@ -78,7 +75,8 @@ void ComponentCanvas::CreateElementInCanvas(GameObject* element)
 		canvas->canvas_elements.push_back(element);
 	else
 	{
-		LOG_C("ERROR: Couldn't create the UI element to the canvas");
+		LOG_C("ERROR: Couldn't create the UI element in the canvas");
 	}
 }
+
 

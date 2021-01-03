@@ -5,6 +5,7 @@
 #include <list>
 
 class ComponentCanvas;
+class ResourceMesh;
 
 class CanvasUI
 {
@@ -16,9 +17,12 @@ public:
 	
 	bool Start();
 	bool Update();
-	void DrawCanvasRect(ResourceMesh* mesh, float3* vert, Color color);
-
+	void CreateCanvasRect();
+	void SetUpCanvasRect(ResourceMesh* mesh, float2 size = { 1,1 });
+	void DrawCanvasRect(ResourceMesh* mesh, Color color);
+	
 	std::vector<GameObject*> canvas_elements;
+	ResourceMesh* canvas_mesh = nullptr;
 };
 
 #endif
