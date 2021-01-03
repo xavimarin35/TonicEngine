@@ -10,7 +10,7 @@
 
 #pragma comment(lib, "FreeType/libx86/freetype.lib") 
 
-
+class FontUI;
 
 class ModuleUserInterface : public Module
 {
@@ -32,6 +32,7 @@ public:
 private:
 
 	FT_Library ft_library = FT_Library();
+	std::list<FontUI*> fontsList;
 	std::vector<GameObject*> GOcanvas;
 };
 

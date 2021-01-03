@@ -43,7 +43,7 @@ void ComponentCanvas::Draw()
 		return;
 
 	canvas->CreateCanvasRect();
-	canvas->SetUpCanvasRect(canvas->canvas_mesh, {10, 10});
+	canvas->SetUpCanvasRect(canvas->canvas_mesh, {20, 10});
 	canvas->DrawCanvasRect(canvas->canvas_mesh, White);
 
 	App->ui->SetUIRenderSettings();
