@@ -24,6 +24,7 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	FontUI* LoadFont(std::string name, int size);
 	void SetOrthogonalCamera();
 	void SetUIRenderSettings();
 	void DrawUI();

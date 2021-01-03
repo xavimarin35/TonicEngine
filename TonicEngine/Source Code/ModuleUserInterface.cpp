@@ -2,6 +2,7 @@
 #include "ModuleUserInterface.h"
 #include "ModuleGUI.h"
 #include "ModuleRenderer3D.h"
+#include "FontUI.h"
 
 ModuleUserInterface::ModuleUserInterface(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -25,6 +26,8 @@ bool ModuleUserInterface::Init()
 
 bool ModuleUserInterface::Start()
 {
+	LoadFont("arial", 20);
+
 	return true;
 }
 
@@ -41,6 +44,32 @@ update_status ModuleUserInterface::PostUpdate(float dt)
 bool ModuleUserInterface::CleanUp()
 {
 	return true;
+}
+
+FontUI* ModuleUserInterface::LoadFont(std::string name, int size)
+{
+	FontUI* new_font = new FontUI();
+
+	new_font->name = name;
+	string path = ASSETS_FONTS_FOLDER + name + ".ttf";
+	FT_Error error = FT_New_Face(ft_library, path.c_str(), 0, &new_font->text_font);
+
+	if (error)
+	{
+		LOG_C("ERROR: Couldn't load the font '%s'", name.c_str());
+		return nullptr;
+	}
+	else
+	{
+		LOG_C("The font '%s' has been loaded correctly", name.c_str());
+		FT_Set_Pixel_Sizes(new_font->text_font, 0, size);
+		new_font->CreateCharacterText();
+		fontsList.push_back(new_font);
+		return new_font;
+	}
+
+	FT_Done_Face(new_font->text_font);
+	FT_Done_FreeType(ft_library);
 }
 
 void ModuleUserInterface::SetOrthogonalCamera()

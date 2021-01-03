@@ -14,9 +14,12 @@ public:
 
 	void CreateCharacterText();
 
+	GLuint GetCharacterTexture(GLchar character);
+	FontCharacterUI* GetCharacterFont(GLchar character);
+
 	std::string name;
 	FT_Face text_font;
-	std::map<GLchar, FontCharacterUI*> chars_list;
+	std::map<GLchar, FontCharacterUI*> charactersList;
 	bool loaded = false;
 
 };
