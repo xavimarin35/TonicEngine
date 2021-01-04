@@ -97,6 +97,7 @@
     <ClInclude Include="Source Code\ComponentContainer.h" />
     <ClInclude Include="Source Code\ComponentImage.h" />
     <ClInclude Include="Source Code\ComponentMesh.h" />
+    <ClInclude Include="Source Code\ComponentText.h" />
     <ClInclude Include="Source Code\ComponentTexture.h" />
     <ClInclude Include="Source Code\ComponentTransform.h" />
     <ClInclude Include="Source Code\ContainerUI.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="Source Code\ComponentContainer.cpp" />
     <ClCompile Include="Source Code\ComponentImage.cpp" />
     <ClCompile Include="Source Code\ComponentMesh.cpp" />
+    <ClCompile Include="Source Code\ComponentText.cpp" />
     <ClCompile Include="Source Code\ComponentTexture.cpp" />
     <ClCompile Include="Source Code\ComponentTransform.cpp" />
     <ClCompile Include="Source Code\ContainerUI.cpp" />

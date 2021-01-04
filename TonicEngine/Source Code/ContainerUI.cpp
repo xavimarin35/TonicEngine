@@ -37,3 +37,7 @@ bool ContainerUI::CreateElementContainer(ImVec2 size)
 
 	return true;
 }
+
+void ContainerUI::ResizeContainer(float x, float y)
+{
+}

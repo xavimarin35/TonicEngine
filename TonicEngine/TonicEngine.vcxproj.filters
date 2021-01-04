@@ -487,6 +487,9 @@
     <ClInclude Include="Source Code\ComponentContainer.h">
       <Filter>Sources\GameObject\UI Components</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\ComponentText.h">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\ComponentMesh.cpp">
@@ -769,6 +772,9 @@
       <Filter>Sources\UI\UI Elements\Fonts</Filter>
     </ClCompile>
     <ClCompile Include="Source Code\ComponentContainer.cpp">
+      <Filter>Sources\GameObject\UI Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentText.cpp">
       <Filter>Sources\GameObject\UI Components</Filter>
     </ClCompile>
   </ItemGroup>

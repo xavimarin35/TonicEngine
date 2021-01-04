@@ -4,7 +4,6 @@
 #include "ElementUI.h"
 #include "imgui-1.78/imgui.h"
 
-class ResourceTexture;
 class ResourceMesh;
 
 class ContainerUI : public ElementUI
@@ -19,9 +18,8 @@ public:
 	bool Draw();
 
 	bool CreateElementContainer(ImVec2 size = { 1,1 }); // Default size --> { 1,1 } 
-	void DrawImageUI();
+	void ResizeContainer(float x, float y);
 
-	ResourceTexture* container_tex = nullptr;
 	ResourceMesh* container_mesh = nullptr;
 
 private:
