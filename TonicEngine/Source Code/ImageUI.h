@@ -31,7 +31,6 @@ public:
 	ResourceTexture* GetMaterial();
 
 	ComponentImage* Cimage = nullptr;
-	ResourceTexture* image_tex = nullptr;
 	
 private:
 

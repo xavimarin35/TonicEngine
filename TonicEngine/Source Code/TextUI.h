@@ -28,6 +28,8 @@ public:
 
 	ComponentText* Ctext = nullptr;
 
+	char inspector_text[100];
+
 private:
 
 	std::string current_text;

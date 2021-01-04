@@ -52,6 +52,19 @@ void ComponentImage::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		ImGui::Text("This is the Image component");
+		if (go->GetComponentImageUI()->image->GetMaterial())
+		{
+			ImGui::Text("Name:"); ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", go->GetComponentImageUI()->image->GetMaterial()->file.c_str());
+			//ImGui::Text("Path:"); ImGui::SameLine();
+			//ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", go->GetComponentImageUI()->image->GetMaterial()->file.c_str());
+		}
+		else
+		{
+			ImGui::Text("Material:"); ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "NONE");
+			ImGui::Text("Path:"); ImGui::SameLine();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "NONE");
+		}
 	}
 }
