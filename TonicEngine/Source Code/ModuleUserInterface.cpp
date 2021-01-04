@@ -73,6 +73,19 @@ FontUI* ModuleUserInterface::LoadFont(std::string name, int size)
 	FT_Done_FreeType(ft_library);
 }
 
+FontUI* ModuleUserInterface::GetFont(std::string name)
+{
+	for (auto it = fontsList.begin(); it != fontsList.end(); it++)
+	{
+		if ((*it)->name == name)
+		{
+			return (*it);
+		}
+	}
+
+	return nullptr;
+}
+
 void ModuleUserInterface::SetOrthogonalCamera()
 {
 	glMatrixMode(GL_MODELVIEW);

@@ -30,11 +30,9 @@ public:
 	void SetTextureToImageUI(ResourceTexture* new_img_tex);
 	ResourceTexture* GetMaterial();
 
-
 	ComponentImage* Cimage = nullptr;
 	ResourceTexture* image_tex = nullptr;
 	
-
 private:
 
 	ContainerUI* container_image = nullptr;

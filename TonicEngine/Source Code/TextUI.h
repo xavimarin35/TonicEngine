@@ -19,18 +19,21 @@ public:
 	bool CleanUp();
 	bool Draw();
 
-	void CreateTextContainer(const char* character, float3 position);
+	void CreateTextContainer(GLchar character, float3 position); // Dont know if it has to be GLchar or const char* and if the position parameter can be removed in a future
 	void FillTextArray();
+
+	std::string GetText();
+	void SetText(std::string new_text);
+	void SetFont(string name);
 
 	ComponentText* Ctext = nullptr;
 
 private:
 
 	std::string current_text;
-	FontUI current_font;
-	int text_size;
+	FontUI* current_font = nullptr;
 
-	std::list<ImageUI*> text_images;
+	std::list<ImageUI*> textList;
 
 };
 

@@ -66,6 +66,8 @@ GLuint FontUI::GetCharacterTexture(GLchar character)
 			return id;
 		}
 	}
+
+	return GLuint();
 }
 
 FontCharacterUI* FontUI::GetCharacterFont(GLchar character)
@@ -77,4 +79,6 @@ FontCharacterUI* FontUI::GetCharacterFont(GLchar character)
 			return (*it).second;
 		}
 	}
+
+	return nullptr;
 }
