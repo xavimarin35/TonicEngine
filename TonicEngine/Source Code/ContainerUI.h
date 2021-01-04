@@ -17,8 +17,9 @@ public:
 	bool Update();
 	bool CleanUp();
 	bool Draw();
-	
+
 	bool CreateElementContainer(ImVec2 size = { 1,1 }); // Default size --> { 1,1 } 
+	void DrawImageUI();
 
 	ResourceTexture* container_tex = nullptr;
 	ResourceMesh* container_mesh = nullptr;

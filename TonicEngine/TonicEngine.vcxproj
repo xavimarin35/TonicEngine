@@ -94,6 +94,7 @@
     <ClInclude Include="Source Code\Color.h" />
     <ClInclude Include="Source Code\Component.h" />
     <ClInclude Include="Source Code\ComponentCanvas.h" />
+    <ClInclude Include="Source Code\ComponentContainer.h" />
     <ClInclude Include="Source Code\ComponentImage.h" />
     <ClInclude Include="Source Code\ComponentMesh.h" />
     <ClInclude Include="Source Code\ComponentTexture.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="Source Code\Color.cpp" />
     <ClCompile Include="Source Code\Component.cpp" />
     <ClCompile Include="Source Code\ComponentCanvas.cpp" />
+    <ClCompile Include="Source Code\ComponentContainer.cpp" />
     <ClCompile Include="Source Code\ComponentImage.cpp" />
     <ClCompile Include="Source Code\ComponentMesh.cpp" />
     <ClCompile Include="Source Code\ComponentTexture.cpp" />

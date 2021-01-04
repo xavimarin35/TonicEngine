@@ -16,7 +16,8 @@ enum class COMPONENT_TYPE
 	IMAGE_UI,
 	BUTTON_UI,
 	LABEL_UI, 
-	TEXT_UI
+	TEXT_UI, 
+	CONTAINER_UI
 };
 
 class Component

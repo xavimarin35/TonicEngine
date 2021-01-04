@@ -35,5 +35,5 @@ bool ContainerUI::CreateElementContainer(ImVec2 size)
 {
 	container_mesh = (ResourceMesh*)App->resources->CreateResource(RESOURCE_TYPE::MESH); 
 
-	return false;
+	return true;
 }
