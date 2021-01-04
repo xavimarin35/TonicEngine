@@ -34,6 +34,10 @@ void Component::DrawInspector()
 {
 }
 
+void Component::FitToRect()
+{
+}
+
 COMPONENT_TYPE Component::GetComponentType() const
 {
 	return type;

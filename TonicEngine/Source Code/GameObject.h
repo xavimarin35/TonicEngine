@@ -10,11 +10,14 @@
 #include "ComponentCanvas.h"
 #include "ComponentButton.h"
 #include "ComponentImage.h"
+#include "ComponentContainer.h"
 #include "ModuleInput.h"
 #include "imgui-1.78/ImGuizmo.h"
 
 struct goData;
 struct meshData;
+
+class ComponentContainer;
 
 struct goData {
 	uint id = -1;
@@ -72,6 +75,8 @@ public:
 	std::vector<Component*> componentsList;
 	std::vector<GameObject*> childrenList;
 	GameObject* GOparent = nullptr;
+
+	ComponentContainer* container;
 
 	AABB aabb;
 	OBB obb;

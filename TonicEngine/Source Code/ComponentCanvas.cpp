@@ -8,27 +8,26 @@ ComponentCanvas::ComponentCanvas(GameObject* parent) : Component(COMPONENT_TYPE:
 {
 	type = COMPONENT_TYPE::CANVAS_UI;
 	object = parent;
-	render_elements = true;
-
-	canvas = new CanvasUI(this);
-	App->ui->AddCanvasGO(object);
 
 }
 
 ComponentCanvas::~ComponentCanvas()
 {
+	delete canvas;
 }
 
 bool ComponentCanvas::Start()
 {
-	canvas->Start();
+	canvas = new CanvasUI();
+	App->ui->AddCanvasGO(object);
 	
-	return true;
+	return false;
 }
 
 bool ComponentCanvas::Update()
 {
 	canvas->Update();
+
 	return true;
 }
 
@@ -39,34 +38,10 @@ bool ComponentCanvas::CleanUp()
 
 void ComponentCanvas::Draw()
 {
-	if (!render_elements)
-		return;
-
-	canvas->CreateCanvasRect();
-	canvas->SetUpCanvasRect(canvas->canvas_mesh, {20, 10});
-	canvas->DrawCanvasRect(canvas->canvas_mesh, White);
-
-	App->ui->SetUIRenderSettings();
-
-	for (std::vector<GameObject*>::iterator it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
+	for (auto it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
 	{
 		(*it)->Draw();
 	}
-}
-
-void ComponentCanvas::DrawInspector()
-{
-	GameObject* go = App->scene_intro->GOselected;
-
-	ImGui::Spacing();
-
-	if (ImGui::CollapsingHeader("UI - Canvas", ImGuiTreeNodeFlags_DefaultOpen) && go->GetComponentCanvasUI() != nullptr)
-	{
-		ImGui::Spacing();
-
-		ImGui::Text("This is the Canvas component");
-	}
-	
 }
 
 void ComponentCanvas::CreateElementInCanvas(GameObject* element)
@@ -78,5 +53,3 @@ void ComponentCanvas::CreateElementInCanvas(GameObject* element)
 		LOG_C("ERROR: Couldn't create the UI element in the canvas");
 	}
 }
-
-

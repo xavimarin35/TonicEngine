@@ -36,6 +36,8 @@ public:
 	virtual void EnableComponent();
 	virtual void DisableComponent();
 
+	virtual void FitToRect();
+
 	virtual void Load(uint GO_id, const nlohmann::json& scene_file) {}
 	virtual void Save(uint GO_id, nlohmann::json& scene_file) {}
 

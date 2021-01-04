@@ -222,9 +222,26 @@ GameObject* ModuleSceneIntro::CreateEmpty(string objName, GameObject* parent)
 
 GameObject* ModuleSceneIntro::CreateUI(COMPONENT_TYPE type, string objName, GameObject* parent)
 {
+	GameObject* UI_parent = nullptr; 
+
+	UI_parent = App->ui->GetLastCanvas();
+
+	if (UI_parent != nullptr)
+	{
+		GameObject* parent_canvas = new GameObject("Canvas");
+		parent_canvas->CreateComponentUI(COMPONENT_TYPE::CANVAS_UI);
+
+		App->ui->AdaptCanvas();
+
+		UI_parent = parent_canvas;
+	}
+
 	string n = AssignNameToGO(objName, false, false, true);
 
 	GameObject* GO = new GameObject(n);
+	if (UI_parent != nullptr)
+		GO->GOparent = UI_parent;
+	else GO->GOparent = GOroot;
 
 	switch (type)
 	{
@@ -238,6 +255,9 @@ GameObject* ModuleSceneIntro::CreateUI(COMPONENT_TYPE type, string objName, Game
 		GO->CreateComponentUI(COMPONENT_TYPE::IMAGE_UI, true);
 		break;
 	}
+
+	ComponentCanvas* comp_canv = (ComponentCanvas*)GO->GetComponent(COMPONENT_TYPE::CANVAS_UI);
+	comp_canv->CreateElementInCanvas(GO);
 
 	GO->data.id = numGO;
 	numGO++;
@@ -521,4 +541,13 @@ GameObject* ModuleSceneIntro::MousePicking(const LineSegment& segment, float& di
 	}
 
 	return pick;
+}
+
+void ModuleSceneIntro::AddGO(GameObject* GO)
+{
+	GO->data.id = numGO;
+	numGO++;
+
+	gameobjectsList.push_back(GO);
+	GO->Start();
 }

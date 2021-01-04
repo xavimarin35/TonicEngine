@@ -10,7 +10,13 @@ GameObject::GameObject(std::string name)
 {
 	this->data.name = name;
 	this->data.UUID = GO::GenerateUUID();
-	CreateComponent(COMPONENT_TYPE::TRANSFORM);
+
+	if (name == "Canvas")
+	{
+		CreateComponentUI(COMPONENT_TYPE::CONTAINER_UI);
+	}
+	else
+		CreateComponent(COMPONENT_TYPE::TRANSFORM);
 
 	LOG_C("A new GameObject called '%s' has been created!", name.c_str());
 }
@@ -190,6 +196,9 @@ Component* GameObject::CreateComponentUI(COMPONENT_TYPE type, bool active)
 		break;
 	case COMPONENT_TYPE::IMAGE_UI:
 		componentUI = new ComponentImage(this);
+		break;
+	case COMPONENT_TYPE::CONTAINER_UI:
+		componentUI = new ComponentContainer(this);
 		break;
 		/*case COMPONENT_TYPE::LABEL_UI:
 		componentUI = new ComponentLabel(this);

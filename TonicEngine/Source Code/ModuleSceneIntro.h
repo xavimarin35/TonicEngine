@@ -36,6 +36,7 @@ public:
 
 	bool DrawGridAndAxis(bool active);
 	void Create3DObject(OBJECTS3D object);
+	void AddGO(GameObject* GO);
 
 	// DRAW CUBE INFO
 	uint id_vertices = 0;

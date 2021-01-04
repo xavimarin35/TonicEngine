@@ -29,6 +29,9 @@ public:
 	void SetUIRenderSettings();
 	void DrawUI();
 	void AddCanvasGO(GameObject* GO);
+	void AdaptCanvas();
+
+	GameObject* GetLastCanvas() const;
 
 private:
 
