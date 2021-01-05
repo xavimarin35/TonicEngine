@@ -3,7 +3,6 @@
 #include "ModuleGUI.h"
 #include "ModuleRenderer3D.h"
 #include "FontUI.h"
-#include "ComponentContainer.h"
 
 ModuleUserInterface::ModuleUserInterface(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -138,28 +137,4 @@ void ModuleUserInterface::AddCanvasGO(GameObject* GO)
 	GOcanvas.push_back(GO);
 }
 
-void ModuleUserInterface::AdaptCanvas()
-{
-	for (auto it = GOcanvas.begin(); it != GOcanvas.end(); it++)
-	{
-		ComponentContainer* r_transform = (ComponentContainer*)(*it)->GetComponent(COMPONENT_TYPE::CANVAS_UI);
-		if (r_transform != nullptr)
-		{
-			r_transform->Rect2ScreenSize();
-		}
-	}
-}
 
-GameObject* ModuleUserInterface::GetLastCanvas() const
-{
-	int limit = GOcanvas.size();
-	int count = 0;
-
-	for (auto it = GOcanvas.begin(); it != GOcanvas.end(); it++)
-	{
-		if (++count == limit)
-			return (*it);
-	}
-
-	return nullptr;
-}

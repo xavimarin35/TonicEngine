@@ -17,12 +17,14 @@ public:
 	bool Update();
 	bool CleanUp();
 	void Draw(); // Optional (we have been using Update and works fine)
+	void DrawInspector();
 
 	void CreateElementInCanvas(GameObject* element);
 
 private:
 
-	CanvasUI* canvas;
+	CanvasUI* canvas = nullptr;
+	bool render_elements = true;
 };
 
 #endif

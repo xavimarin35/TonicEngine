@@ -5,7 +5,6 @@
 #include "ModuleInput.h"
 #include "MeshImporter.h"
 #include "ModuleCamera3D.h"
-#include "ModuleUserInterface.h"
 
 PanelHierarchy::PanelHierarchy() : PanelManager()
 {
@@ -218,12 +217,7 @@ void PanelHierarchy::DrawMenuNotHovering()
 			if (ImGui::MenuItem("Canvas"))
 			{
 				LOG_C("WARNING: Canvas Work In Progress :)");
-				GameObject* parent_canvas = new GameObject("Canvas");
-				parent_canvas->CreateComponentUI(COMPONENT_TYPE::CANVAS_UI);
-
-				App->ui->AdaptCanvas();
-				// parent_canvas->GOparent = App->scene_intro->GOroot;
-				App->scene_intro->AddGO(parent_canvas);
+				App->scene_intro->CreateUI(COMPONENT_TYPE::CANVAS_UI, "Canvas_", App->scene_intro->GOroot);
 			}
 
 			if (ImGui::MenuItem("Button"))

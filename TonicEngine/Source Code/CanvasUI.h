@@ -4,16 +4,25 @@
 #include "GameObject.h"
 #include <list>
 
+class ComponentCanvas;
+class ResourceMesh;
 
 class CanvasUI
 {
 public:
-	CanvasUI();
+	CanvasUI(ComponentCanvas* canvas);
 	~CanvasUI();
 
+	ComponentCanvas* Ccanvas = nullptr;
+	
+	bool Start();
 	bool Update();
-
-	std::list<GameObject*> canvas_elements;
+	void CreateCanvasRect();
+	void SetUpCanvasRect(ResourceMesh* mesh, float2 size = { 1,1 });
+	void DrawCanvasRect(ResourceMesh* mesh, Color color);
+	
+	std::vector<GameObject*> canvas_elements;
+	ResourceMesh* canvas_mesh = nullptr;
 };
 
 #endif

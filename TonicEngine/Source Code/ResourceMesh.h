@@ -6,8 +6,6 @@
 #include "MathGeoLib/include/MathBuildConfig.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 
-#include "imgui-1.78/imgui.h"
-
 struct mesh_data
 {
 	uint id_index = 0;
@@ -36,11 +34,6 @@ public:
 
 	ResourceMesh(uint uuid) : Resource(uuid, RESOURCE_TYPE::MESH) {}
 	virtual ~ResourceMesh() {}
-
-	bool SetVertexData(ImVec2 size);
-
-	float3 CenterVertices(float3* center, int num);
-	void CleanData();
 
 	bool LoadInMemory();
 	void ReleaseMemory();
