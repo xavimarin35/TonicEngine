@@ -28,7 +28,7 @@ public:
 	void SetImageID(int new_img_id);
 	int GetImageID();
 	void SetTextureToImageUI(ResourceTexture* new_img_tex);
-	ResourceTexture* GetMaterial();
+	ResourceTexture* GetTexture();
 
 	ComponentImage* Cimage = nullptr;
 	

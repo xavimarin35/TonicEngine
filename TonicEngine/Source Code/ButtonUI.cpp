@@ -28,7 +28,7 @@ bool ButtonUI::CleanUp()
 
 bool ButtonUI::Draw()
 {
-	App->ui->SetUIRenderSettings();
+	App->ui->UseUIRenderSettings();
 
 	return true;
 }

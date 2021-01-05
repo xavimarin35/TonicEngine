@@ -52,10 +52,10 @@ void ComponentImage::DrawInspector()
 	{
 		ImGui::Spacing();
 
-		if (go->GetComponentImageUI()->image->GetMaterial())
+		if (go->GetComponentImageUI()->image->GetTexture())
 		{
 			ImGui::Text("Name:"); ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", go->GetComponentImageUI()->image->GetMaterial()->file.c_str());
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", go->GetComponentImageUI()->image->GetTexture()->file.c_str());
 			//ImGui::Text("Path:"); ImGui::SameLine();
 			//ImGui::TextColored(ImVec4(1, 1, 0, 1), "%s", go->GetComponentImageUI()->image->GetMaterial()->file.c_str());
 		}

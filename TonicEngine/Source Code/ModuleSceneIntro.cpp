@@ -48,6 +48,9 @@ bool ModuleSceneIntro::Start()
 
 	App->tex_imp->GenerateCheckersTexture();
 
+	// Default Canvas GO
+	GameObject* parent_canvas = CreateGO("Parent Canvas", GOroot);
+	parent_canvas->CreateComponentUI(COMPONENT_TYPE::CANVAS_UI, true);
 
 	return ret;
 }

@@ -1,4 +1,6 @@
 #include "ComponentContainer.h"
+#include "ContainerUI.h"
+#include "Color.h"
 
 ComponentContainer::ComponentContainer(GameObject* parent) : Component(COMPONENT_TYPE::CONTAINER_UI, parent)
 {
@@ -11,21 +13,24 @@ ComponentContainer::~ComponentContainer()
 
 bool ComponentContainer::Start()
 {
-	return false;
+	return true;
 }
 
 bool ComponentContainer::Update()
 {
-	return false;
+	return true;
 }
 
 bool ComponentContainer::CleanUp()
 {
-	return false;
+	return true;
 }
 
 void ComponentContainer::Draw()
 {
+	container->CreateContainerRect();
+	container->SetUpContainerRect(container->container_mesh, { 20, 10 });
+	container->DrawContainerRect(container->container_mesh, White);
 }
 
 void ComponentContainer::DrawInspector()

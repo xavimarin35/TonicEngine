@@ -27,7 +27,7 @@ public:
 	FontUI* LoadFont(std::string name, int size);
 	FontUI* GetFont(std::string name);
 	void SetOrthogonalCamera();
-	void SetUIRenderSettings();
+	void UseUIRenderSettings();
 	void DrawUI();
 	void AddCanvasGO(GameObject* GO);
 

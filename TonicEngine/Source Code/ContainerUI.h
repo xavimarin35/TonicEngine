@@ -3,6 +3,8 @@
 
 #include "ElementUI.h"
 #include "imgui-1.78/imgui.h"
+#include "Color.h"
+#include "Math.h"
 
 class ResourceMesh;
 
@@ -17,8 +19,13 @@ public:
 	bool CleanUp();
 	bool Draw();
 
-	bool CreateElementContainer(ImVec2 size = { 1,1 }); // Default size --> { 1,1 } 
 	void ResizeContainer(float x, float y);
+	ResourceMesh* GetContainerMesh();
+
+	void CreateContainerRect(float2 size = { 1, 1 });
+	void SetUpContainerRect(ResourceMesh* mesh, float2 size = { 1, 1 });
+	void DrawContainerRect(ResourceMesh* mesh, Color color);
+	void ResetContainerRect(ResourceMesh* mesh);
 
 	ResourceMesh* container_mesh = nullptr;
 

@@ -42,11 +42,11 @@ void ComponentCanvas::Draw()
 	if (!render_elements)
 		return;
 
-	canvas->CreateCanvasRect();
+	/*canvas->CreateCanvasRect();
 	canvas->SetUpCanvasRect(canvas->canvas_mesh, {20, 10});
-	canvas->DrawCanvasRect(canvas->canvas_mesh, White);
+	canvas->DrawCanvasRect(canvas->canvas_mesh, White);*/
 
-	App->ui->SetUIRenderSettings();
+	App->ui->UseUIRenderSettings();
 
 	for (std::vector<GameObject*>::iterator it = canvas->canvas_elements.begin(); it != canvas->canvas_elements.end(); it++)
 	{
