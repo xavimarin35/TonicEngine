@@ -149,6 +149,7 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 
  Don't hesitate to visit:
  - Our repository: [Tonic Engine](https://github.com/xavimarin35/TonicEngine) 
+ - Latest Release: [Releases](https://github.com/xavimarin35/TonicEngine/releases)
  
  Or contact us:
  - Pol Casaú: pccpolcasau@gmail.com
