@@ -103,7 +103,8 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 
 ## Pol Casaú
 
-![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/pol_.jpg)
+![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/pol_.jpg?raw=true)
+
 - Github: [Bullseye14](https://github.com/Bullseye14)
 - LinkedIn: [Pol Casaú](https://www.linkedin.com/in/polcasau8/)
 
@@ -124,7 +125,8 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 	
 ## Xavi Marín
 
-![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/xavi.jpg)
+![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/xavi.jpg?raw=true)
+
 - Github: [XaviMarin35](https://github.com/xavimarin35)
 - LinkedIn: [Xavi Marín](https://www.linkedin.com/in/xavi-marin-sola/)
 
