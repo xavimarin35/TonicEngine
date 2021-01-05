@@ -1,14 +1,10 @@
 # Tonic Engine
 
-[Tonic Engine](https://github.com/xavimarin35/TonicEngine) is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi Marín, students of [CITM](https://www.citm.upc.edu/) in Barcelona during our [Game Design and Development Bachelor's Degree](https://www.citm.upc.edu/cat/estudis/grau-videojocs-bcn/). This engine specializes in the User Interfaces subsystem.
+[Tonic Engine](https://github.com/xavimarin35/TonicEngine) is a 3D Game Engine developed in C & C++ made by Pol Casaú and Xavi Marín, students of [CITM](https://www.citm.upc.edu/) in Barcelona during our [Game Design and Development Bachelor's Degree](https://www.citm.upc.edu/cat/estudis/grau-videojocs-bcn/).
 
 ## Features
 
 ### Windows
-
-**Scene and Game:**
-* Scene window is used to edit the environment
-* Game window displays the game camera
 
 **Hierarchy:**
 Shows current GameObjects tree
@@ -101,47 +97,17 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 * **ESC:** Activates/Deactivates the Exit Engine pop-up
 * **ALT + F4:** Closes the engine
 
-## Pol Casaú
+## Authors
 
-![](https://github.com/xavimarin35/TonicEngine/blob/master/docs/images/pol_.jpg)
+### Pol Casaú
+
 - Github: [Bullseye14](https://github.com/Bullseye14)
 - LinkedIn: [Pol Casaú](https://www.linkedin.com/in/polcasau8/)
-
-### Individual Work
-
-- FBX import and Drag & Drop
-- DevIL and Textures import
-- GameObjects' Components
-- Module Camera Improvement (v2)
-- Work on all of the panels
-- Own File Format
-- Gizmos implementation
-- Bounding Boxes
-- Frustum and Camera Culling
-- Mouse Picking
-- Camera to Component (v3)
-- Reparenting
 	
-## Xavi Marín
+### Xavi Marín
 
-![](https://github.com/xavimarin35/TonicEngine/blob/master/docs/images/xavi.jpg)
 - Github: [XaviMarin35](https://github.com/xavimarin35)
 - LinkedIn: [Xavi Marín](https://www.linkedin.com/in/xavi-marin-sola/)
-
-### Individual Work
-
-- Panels system and docking
-- Engine Icon
-- Work on all of the panels
-- Module Camera (v1)
-- GameObjects system
-- Vertex and Face normals
-- GameObjects' parenting
-- Json implementation
-- Gizmos implementation
-- Playmode logic
-- Scene and Game Viewports
-- Resource Manager
 
 ## Contact
 
