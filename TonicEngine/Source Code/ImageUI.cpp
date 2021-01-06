@@ -9,7 +9,7 @@ ImageUI::ImageUI(ComponentImage* image)
 	CreateContainerImage();
 	Cimage = image;
 
-	image_texture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/move2.png"));
+	image_texture = (ResourceTexture*)App->resources->Get(App->resources->GetNewFile("Assets/Others/test.png"));
 	image_texture->LoadInMemory();
 }
 
@@ -43,31 +43,31 @@ void ImageUI::DrawImageTexture() // THERE'S AN ERROR IN glDrawElements() THAT I 
 {
 	App->ui->UseUIRenderSettings();
 
-	//glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_vertex);
-	//glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glBindBuffer(GL_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_vertex);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	//if (image_texture != nullptr)
-	//{
-	//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	//	glBindBuffer(GL_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_tex_coords);
+	if (image_texture != nullptr)
+	{
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_tex_coords);
 
-	//	glBindTexture(GL_TEXTURE_2D, image_texture->tex.id);
+		glBindTexture(GL_TEXTURE_2D, image_texture->tex.id);
 
-	//	glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-	//}
+		glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+	}
 
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_index);
-	//glDrawElements(GL_TRIANGLES, container_image->GetContainerMesh()->data.num_index, GL_UNSIGNED_INT, NULL); 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, container_image->GetContainerMesh()->data.id_index);
+	glDrawElements(GL_TRIANGLES, container_image->GetContainerMesh()->data.num_index, GL_UNSIGNED_INT, NULL); 
 
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//if (image_texture)
-	//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (image_texture)
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	//glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 ContainerUI* ImageUI::GetContainer()
