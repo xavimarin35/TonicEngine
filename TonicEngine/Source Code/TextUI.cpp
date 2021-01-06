@@ -6,7 +6,7 @@ TextUI::TextUI(ComponentText* text)
 {
 	Ctext = text;
 	SetFont("arial");
-	SetText("ansu papi");
+	SetText("jo volia particle system :(");
 }
 
 TextUI::~TextUI()
@@ -41,7 +41,6 @@ void TextUI::CreateTextContainer(GLchar character, float3 position) // Dont know
 
 	// Create the corresponding container 
 	ImageUI* char_img = new ImageUI(nullptr);
-	//char_img->GetContainer()->InvertImage(size);
 
 	// Get the corresponding texture 
 	uint texture_id = current_font->GetCharacterTexture(character);

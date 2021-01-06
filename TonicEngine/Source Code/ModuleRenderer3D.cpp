@@ -169,6 +169,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 		glMatrixMode(GL_MODELVIEW);
 		glLoadMatrixf(App->camera->GetGameView());
 
+		App->scene_intro->drawGrid = false;
+
 		// Draw objects and axis
 		App->scene_intro->PostUpdate(dt);
 	}

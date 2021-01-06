@@ -4,10 +4,14 @@
 #include "ModuleGUI.h"
 #include "ModuleUserInterface.h"
 
-ComponentCanvas::ComponentCanvas(GameObject* parent) : Component(COMPONENT_TYPE::CANVAS_UI, parent)
+ComponentCanvas::ComponentCanvas(GameObject* parent/*, int w, int h*/) : Component(COMPONENT_TYPE::CANVAS_UI, parent)
 {
 	type = COMPONENT_TYPE::CANVAS_UI;
 	object = parent;
+
+	//width = w;
+	//height = h;
+
 	render_elements = true;
 
 	canvas = new CanvasUI(this);
@@ -42,9 +46,9 @@ void ComponentCanvas::Draw()
 	if (!render_elements)
 		return;
 
-	/*canvas->CreateCanvasRect();
+	canvas->CreateCanvasRect();
 	canvas->SetUpCanvasRect(canvas->canvas_mesh, {20, 10});
-	canvas->DrawCanvasRect(canvas->canvas_mesh, White);*/
+	canvas->DrawCanvasRect(canvas->canvas_mesh, White);
 
 	App->ui->UseUIRenderSettings();
 

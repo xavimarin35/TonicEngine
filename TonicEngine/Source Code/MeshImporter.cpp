@@ -75,7 +75,16 @@ bool MeshImporter::LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string te
 			GO = App->scene_intro->CreateGO("Image", App->scene_intro->parent_canvas);
 			GO->CreateComponentUI(COMPONENT_TYPE::IMAGE_UI);
 		}
-
+		else if (type == ELEMENT_UI_TYPE::BUTTON)
+		{
+			GO = App->scene_intro->CreateGO("Button", App->scene_intro->parent_canvas);
+			GO->CreateComponentUI(COMPONENT_TYPE::BUTTON_UI);
+		}
+		else if (type == ELEMENT_UI_TYPE::TEXT)
+		{
+			GO = App->scene_intro->CreateGO("Text", App->scene_intro->parent_canvas);
+			GO->CreateComponentUI(COMPONENT_TYPE::TEXT_UI);
+		}
 		/*GameObject* GO = App->scene_intro->CreateGO(App->GetPathName(path));
 		App->scene_intro->GOroot->AddChild(GO);*/
 

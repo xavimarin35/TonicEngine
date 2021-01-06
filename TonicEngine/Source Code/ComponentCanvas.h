@@ -10,7 +10,7 @@ class ComponentCanvas : public Component
 {
 public:
 
-	ComponentCanvas(GameObject* parent);
+	ComponentCanvas(GameObject* parent/*, int w, int h*/);
 	~ComponentCanvas();
 
 	bool Start();
@@ -25,6 +25,8 @@ private:
 
 	CanvasUI* canvas = nullptr;
 	bool render_elements = true;
+	int width = 0;
+	int height = 0;
 };
 
 #endif
