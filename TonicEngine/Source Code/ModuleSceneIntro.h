@@ -68,6 +68,7 @@ public:
 	void DrawGameObjectNodes(GameObject* GO);
 	GameObject* GOselected = nullptr;
 	GameObject* GOroot = nullptr;
+	GameObject* parent_canvas = nullptr;
 	uint numGO = 0;
 
 	// Serialization

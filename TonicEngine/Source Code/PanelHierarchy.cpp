@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "MeshImporter.h"
 #include "ModuleCamera3D.h"
+#include "ElementUI.h"
 
 PanelHierarchy::PanelHierarchy() : PanelManager()
 {
@@ -229,7 +230,8 @@ void PanelHierarchy::DrawMenuNotHovering()
 			if (ImGui::MenuItem("Image"))
 			{
 				LOG_C("WARNING: Image Work In Progress :)");
-				App->scene_intro->CreateUI(COMPONENT_TYPE::IMAGE_UI, "Image_", App->scene_intro->GOroot);
+				//App->scene_intro->CreateUI(COMPONENT_TYPE::IMAGE_UI, "Image_", App->scene_intro->GOroot);
+				App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::IMAGE, "Assets/BasicShapes/bUI.fbx");
 			}
 
 			ImGui::MenuItem("Text", NULL, false, false);

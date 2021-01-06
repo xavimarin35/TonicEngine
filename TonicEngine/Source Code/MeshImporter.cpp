@@ -8,6 +8,7 @@
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
 #include "ModuleResources.h"
+#include "ElementUI.h"
 
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
@@ -54,6 +55,39 @@ update_status MeshImporter::Update(float dt)
 bool MeshImporter::CleanUp()
 {
 	aiDetachAllLogStreams();
+
+	return true;
+}
+
+bool MeshImporter::LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string texture_path)
+{
+	const aiScene* scene = aiImportFile(path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+
+	if (scene != nullptr)
+	{
+		aiNode* node = scene->mRootNode;
+		std::string file;
+
+		GameObject* GO = nullptr;
+
+		if (type == ELEMENT_UI_TYPE::IMAGE)
+		{
+			GO = App->scene_intro->CreateGO("Image", App->scene_intro->parent_canvas);
+			GO->CreateComponentUI(COMPONENT_TYPE::IMAGE_UI);
+		}
+
+		/*GameObject* GO = App->scene_intro->CreateGO(App->GetPathName(path));
+		App->scene_intro->GOroot->AddChild(GO);*/
+
+		if (node->mNumChildren > 0)
+			for (int i = 0; i < node->mNumChildren; ++i)
+				LoadNode(scene, node->mChildren[i], path.c_str(), file, GO, texture_path.c_str());
+
+		aiReleaseImport(scene);
+
+		LOG_C("Succesfully loaded mesh with path: %s", path);
+	}
+	else LOG_C("ERROR: Could not load scene with path: %s", path);
 
 	return true;
 }
