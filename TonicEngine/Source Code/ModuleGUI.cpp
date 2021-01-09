@@ -181,19 +181,21 @@ bool ModuleGUI::Draw()
 				if (ImGui::MenuItem("Canvas"))
 				{
 					LOG_C("WARNING: Canvas Work In Progress :)");
-					App->scene_intro->CreateUI(COMPONENT_TYPE::CANVAS_UI, "Canvas_", App->scene_intro->GOroot);
+					App->scene_intro->CreateUI(COMPONENT_TYPE::CANVAS_UI, "Parent Canvas", App->scene_intro->GOroot);
 				}
 
 				if (ImGui::MenuItem("Button"))
 				{
 					LOG_C("WARNING: Button Work In Progress :)");
-					App->scene_intro->CreateUI(COMPONENT_TYPE::BUTTON_UI, "Button_", App->scene_intro->GOroot);
+					/*App->scene_intro->CreateUI(COMPONENT_TYPE::BUTTON_UI, "Button_", App->scene_intro->GOroot);*/
+					App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::BUTTON, "Assets/BasicShapes/bUI.fbx");
 				}
 
 				if (ImGui::MenuItem("Image"))
 				{
 					LOG_C("WARNING: Image Work In Progress :)");
-					App->scene_intro->CreateUI(COMPONENT_TYPE::IMAGE_UI, "Image_", App->scene_intro->GOroot);
+					/*App->scene_intro->CreateUI(COMPONENT_TYPE::IMAGE_UI, "Image_", App->scene_intro->GOroot);*/
+					App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::IMAGE, "Assets/BasicShapes/bUI.fbx");
 				}
 
 				ImGui::MenuItem("Text", NULL, false, false);

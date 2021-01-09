@@ -59,7 +59,7 @@ void ComponentImage::DrawInspector()
 		ImGui::Separator();
 		ImGui::Spacing();
 
-		if (ImGui::Button("Scale"))
+		if (ImGui::Button("Adapt To Screen Size"))
 		{
 			float3 newScale(20, 10, 1);
 			go->GetComponentTransform()->SetScale(newScale);

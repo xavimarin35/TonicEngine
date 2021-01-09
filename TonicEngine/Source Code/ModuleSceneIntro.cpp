@@ -334,7 +334,7 @@ GameObject* ModuleSceneIntro::CreateEmpty(string objName, GameObject* parent)
 
 GameObject* ModuleSceneIntro::CreateUI(COMPONENT_TYPE type, string objName, GameObject* parent)
 {
-	string n = AssignNameToGO(objName, false, false, true);
+	string n = AssignNameToGO(objName, false, false, false);
 
 	GameObject* GO = new GameObject(n);
 
