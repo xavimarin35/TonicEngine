@@ -2,6 +2,7 @@
 #include "ImageUI.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleGUI.h"
+#include "ModuleCamera3D.h"
 
 ComponentImage::ComponentImage(GameObject* parent) : Component(COMPONENT_TYPE::IMAGE_UI, parent)
 {
@@ -45,6 +46,7 @@ void ComponentImage::Draw()
 void ComponentImage::DrawInspector()
 {
 	GameObject* go = App->scene_intro->GOselected;
+	GameObject* camera = App->camera->GetGameCamera();
 
 	ImGui::Spacing();
 
@@ -53,6 +55,15 @@ void ComponentImage::DrawInspector()
 		ImGui::Spacing();
 
 		ImGui::Text("This is the Image component");
+
+		ImGui::Separator();
+		ImGui::Spacing();
+
+		if (ImGui::Button("Scale"))
+		{
+			float3 newScale(20, 10, 1);
+			go->GetComponentTransform()->SetScale(newScale);
+		}
 
 	}
 }
