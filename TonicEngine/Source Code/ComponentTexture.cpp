@@ -163,5 +163,5 @@ void ComponentTexture::Save(uint GO_id, nlohmann::json& scene)
 	scene[object->data.name]["Components"]["Texture"]["Checkers Texture"] = EnableCheckersTexture;
 
 	if (rTexture != nullptr)
-		scene[object->data.name]["Components"]["Texture"]["Name"] = rTexture->exported_file;
+		scene[object->data.name]["Components"]["Texture"]["ResourceName"] = rTexture->exported_file;
 }

@@ -17,6 +17,9 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include <fstream>
+#include <iomanip>
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -166,11 +169,117 @@ void ModuleSceneIntro::DeleteScene()
 
 void ModuleSceneIntro::LoadScene(std::string scene_name)
 {
-	//DeleteScene();
-	LOG_C("WARNING: Scene has saved correcty, but cannot be loaded yet.");
-	LOG_C("WARNING: It will be implemented in upcoming releases.");
+	DeleteScene();
 
-	// Loading scene code
+	json file;
+	std::string path = ASSETS_SCENES_FOLDER + scene_name;
+
+	std::ifstream stream;
+	stream.open(path);
+	file = json::parse(stream);
+	stream.close();
+
+	std::vector<GameObject*> objects;
+	for (json::iterator it = file.begin(); it != file.end(); ++it)
+	{
+		std::string name = it.key().data();
+		GameObject* obj = CreateGO(name);
+		if (name.compare("Root") != 0)
+		{
+
+			obj->data.name = name;
+			std::string uid = file[it.key()]["UUID"];
+			obj->data.UUID = std::stoi(uid);
+
+			if (name == "Main_Camera")
+			{
+				App->camera->cameraGO = obj;
+			}
+
+			json components = file[it.key()]["Components"];
+			ComponentTransform* transform = obj->GetComponentTransform();
+
+			std::string posx = components["Transform"]["PositionX"];
+			std::string posy = components["Transform"]["PositionY"];
+			std::string posz = components["Transform"]["PositionZ"];
+
+			std::string rotx = components["Transform"]["RotationX"];
+			std::string roty = components["Transform"]["RotationY"];
+			std::string rotz = components["Transform"]["RotationZ"];
+
+			std::string sx = components["Transform"]["ScaleX"];
+			std::string sy = components["Transform"]["ScaleY"];
+			std::string sz = components["Transform"]["ScaleZ"];
+
+
+			transform->SetPosition(float3(std::stof(posx), std::stof(posy), std::stof(posz)));
+			transform->SetEulerRotation(float3(std::stof(rotx), std::stof(roty), std::stof(rotz)));
+			transform->SetScale(float3(std::stof(sx), std::stof(sy), std::stof(sz)));
+
+			for (json::iterator comp = components.begin(); comp != components.end(); ++comp)
+			{
+				std::string type = comp.key();
+
+				if (type.compare("Mesh") == 0)
+				{
+					obj->CreateComponent(COMPONENT_TYPE::MESH);
+					ComponentMesh* mesh = obj->GetComponentMesh();
+
+					std::string comp_id = components[comp.key()]["UUID"];
+					uint mesh_id = std::stoi(comp_id);
+					mesh->UUID = mesh_id;
+
+					std::string name = components[comp.key()]["ResourceName"];
+
+					mesh->rMesh = (ResourceMesh*)App->resources->Get(App->resources->GetResourceFromFolder(Assets::FOLDERS::LIBRARY, name.c_str()));
+					mesh->rMesh->references++;
+
+					if (mesh != nullptr)
+					{
+						mesh->aabb.SetNegativeInfinity();
+						mesh->aabb = mesh->aabb.MinimalEnclosingAABB(mesh->rMesh->data.vertex, mesh->rMesh->data.num_vertex);
+					}
+
+				}
+
+				if (type.compare("Texture") == 0)
+				{
+					obj->CreateComponent(COMPONENT_TYPE::TEXTURE);
+					ComponentTexture* tex = obj->GetComponentTexture();
+
+					std::string comp_id = components[comp.key()]["UUID"];
+					uint mesh_id = std::stoi(comp_id);
+					tex->UUID = mesh_id;
+
+					std::string tex_name = components[comp.key()]["ResourceName"];
+					tex_name = App->GetPathName(tex_name);
+					tex->rTexture = (ResourceTexture*)App->resources->Get(App->resources->GetResourceFromFolder(Assets::FOLDERS::LIBRARY, tex_name.c_str()));
+					tex->rTexture->references++;
+				}
+			}
+
+
+			objects.push_back(obj);
+		}
+
+
+	}
+
+	for (uint i = 0; i < objects.size(); ++i)
+	{
+		std::string parent_uid = file[objects[i]->data.name]["ParentUUID"];
+		uint p_uid = std::stoi(parent_uid);
+
+		for (uint j = 0; j < objects.size(); ++j)
+		{
+			if (p_uid == objects[j]->data.UUID)
+			{
+				objects[j]->AddChild(objects[i]);
+				continue;
+			}
+		}
+	}
+
 }
 
 GameObject* ModuleSceneIntro::CreateGO(string objName, GameObject* parent)

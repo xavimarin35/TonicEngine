@@ -367,13 +367,33 @@ void GameObject::TransformGlobal(GameObject* GO)
 
 void GameObject::Save(uint GO_id, nlohmann::json& scene)
 {
-	scene["Game Objects"][GO_id]["Name"] = data.name;
-	scene["Game Objects"][GO_id]["Id"] = data.id;
-	scene["Game Objects"][GO_id]["UUID"] = data.UUID;
-	scene["Game Objects"][GO_id]["Active"] = data.active;
-	
+	scene[data.name.c_str()]["UUID"] = std::to_string(data.UUID);
+
+	if (GOparent)
+		scene[data.name.c_str()]["ParentUUID"] = std::to_string(GOparent->data.UUID);
+	else
+		scene[data.name.c_str()]["ParentUUID"] = "NONE";
+
+	scene[data.name.c_str()]["Active"] = std::to_string(data.active);
+
 	for (int i = 0; i < componentsList.size(); i++)
 		componentsList[i]->Save(GO_id, scene);
+}
+
+void GameObject::Load(uint GO_id, nlohmann::json& scene_file)
+{
+	scene_file["Game Objects"][GO_id]["UUID"] = data.UUID;
+	scene_file["Game Objects"][GO_id]["Name"] = data.name;
+
+	if (GOparent)
+		scene_file["Game Objects"][GO_id]["ParentUUID"] = GOparent->data.UUID;
+	else
+		scene_file["Game Objects"][GO_id]["ParentUUID"] = "NONE";
+
+	scene_file["Game Objects"][GO_id]["Active"] = data.active;
+
+	for (int i = 0; i < componentsList.size(); i++)
+		componentsList[i]->Load(GO_id, scene_file);
 }
 
 void GameObject::UpdateBoundingBox()

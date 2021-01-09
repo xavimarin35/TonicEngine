@@ -116,7 +116,7 @@ void ComponentMesh::Save(uint GO_id, nlohmann::json& scene)
 {
 	scene[object->data.name]["Components"]["Mesh"]["UUID"] = UUID;
 	if (rMesh != nullptr)
-		scene[object->data.name]["Components"]["Mesh"]["Name"] = App->GetPathName(rMesh->exported_file);
+		scene[object->data.name]["Components"]["Mesh"]["ResourceName"] = App->GetPathName(rMesh->exported_file);
 }
 
 const AABB& ComponentMesh::BoundingBox() 

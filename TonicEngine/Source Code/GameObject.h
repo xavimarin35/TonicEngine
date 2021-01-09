@@ -65,6 +65,7 @@ public:
 	bool DrawOwnBoundingBox(GameObject* GO);
 
 	void Save(uint GO_id, nlohmann::json& scene_file);
+	void Load(uint GO_id, nlohmann::json& scene_file);
 
 public:
 	goData data;

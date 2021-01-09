@@ -1,0 +1,113 @@
+{
+    "Container": {
+        "Active": "1",
+        "Components": {
+            "Mesh": {
+                "ResourceName": "container",
+                "UUID": 0
+            },
+            "Texture": {
+                "Active": true,
+                "Checkers Texture": false,
+                "ResourceName": "/library/textures/test.dds",
+                "UUID": 0
+            },
+            "Transform": {
+                "PositionX": 6.5,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": -0.0,
+                "RotationY": 0.0,
+                "RotationZ": -0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        },
+        "ParentUUID": "896708466",
+        "UUID": "298104714"
+    },
+    "Image": {
+        "Active": "1",
+        "Components": {
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        },
+        "ParentUUID": "378224731",
+        "UUID": "896708466"
+    },
+    "Main_Camera": {
+        "Active": "1",
+        "Components": {
+            "Camera": {
+                "DoCulling": false,
+                "FrustumFarPlane": 200.0,
+                "FrustumNearPlane": 1.0,
+                "ShowFrustum": false
+            },
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        },
+        "ParentUUID": "350801733",
+        "UUID": "337935504"
+    },
+    "Parent Canvas": {
+        "Active": "1",
+        "Components": {
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        },
+        "ParentUUID": "350801733",
+        "UUID": "378224731"
+    },
+    "Root": {
+        "Active": "1",
+        "Components": {
+            "Transform": {
+                "PositionX": 0.0,
+                "PositionY": 0.0,
+                "PositionZ": 0.0,
+                "RotationX": 0.0,
+                "RotationY": 0.0,
+                "RotationZ": 0.0,
+                "ScaleX": 1.0,
+                "ScaleY": 1.0,
+                "ScaleZ": 1.0,
+                "UUID": 0
+            }
+        },
+        "ParentUUID": "NONE",
+        "UUID": "350801733"
+    }
+}
