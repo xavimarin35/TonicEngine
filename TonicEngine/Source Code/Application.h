@@ -116,6 +116,8 @@ public:
 	void LoadJSON();
 	void SaveJSON();
 
+	bool vsyncB = true;
+
 private:
 
 	void AddModule(Module* mod);

@@ -41,9 +41,16 @@ bool ModuleRenderer3D::Init()
 	{
 		glewInit();
 
-		//Use Vsync
-		if(VSYNC && SDL_GL_SetSwapInterval(1) < 0)
-			LOG_C("ERROR: Unable to set VSync");
+		// Use VSYNC
+		if (App->vsyncB)
+		{
+			int swapInterval = SDL_GL_SetSwapInterval(1);
+
+			if (swapInterval < 0)
+			{
+				LOG_C("ERROR: Unable to set VSync");
+			}
+		}
 
 		//Initialize Projection Matrix
 		glMatrixMode(GL_PROJECTION);

@@ -90,6 +90,22 @@ bool PanelConfiguration::Draw()
 
 				ImGui::Spacing();
 
+				if(ImGui::Checkbox("VSYNC", &App->vsyncB)) 
+				{
+					if (App->vsyncB) {
+						SDL_GL_SetSwapInterval(1);
+						LOG_C("VSYNC activated");
+					}
+
+					else {
+						SDL_GL_SetSwapInterval(0);
+						LOG_C("VSYNC deactivated");
+					}
+				}
+
+
+				ImGui::Spacing();
+
 				char title[25];
 				sprintf_s(title, 25, "Framerate %.1f", App->fpsVec[App->fpsVec.size() - 1]);
 				ImGui::PlotHistogram("##framerate", &App->fpsVec[0], App->fpsVec.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
