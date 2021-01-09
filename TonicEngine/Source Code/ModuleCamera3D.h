@@ -87,7 +87,7 @@ private:
 
 	LineSegment rayHit;
 
-	float3 defaultPos = { 0,0,8.5 };
+	float3 defaultPos = { 0,0,9 };
 	float3 defaultRot = { 180,0,180 };
 };
 
