@@ -69,6 +69,7 @@ public:
 	GameObject* GOselected = nullptr;
 	GameObject* GOroot = nullptr;
 	GameObject* parent_canvas = nullptr;
+	GameObject* background_image = nullptr;
 	uint numGO = 0;
 
 	// Serialization
@@ -88,6 +89,8 @@ public:
 	float gridSize = 3.0f;
 	float gridWidth = 3.5f;
 	float axisLength = 6.0f;
+
+	float3 defaultSize = { 20,10,0 };
 
 };
 

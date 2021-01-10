@@ -44,7 +44,7 @@ void ComponentTransform::SetEulerRotation(float3 rotation)
 
 void ComponentTransform::SetScale(float3& scale)
 {
-	if (scale.x > 0.0f && scale.y > 0.0f && scale.z > 0.0f) this->scale = scale;
+	if (scale.x > 0.0f || scale.y > 0.0f || scale.z > 0.0f) this->scale = scale;
 
 	UpdateLocalTransform();
 }

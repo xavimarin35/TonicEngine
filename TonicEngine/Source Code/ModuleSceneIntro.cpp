@@ -55,6 +55,9 @@ bool ModuleSceneIntro::Start()
 	parent_canvas = CreateGO("Parent Canvas", GOroot);
 	parent_canvas->CreateComponentUI(COMPONENT_TYPE::CANVAS_UI, true);
 
+	background_image = App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::IMAGE, "Assets/BasicShapes/bUI.fbx", "Assets/Others/mainmenu.png");
+	background_image->GetComponentTransform()->SetScale(defaultSize);
+
 	return ret;
 }
 

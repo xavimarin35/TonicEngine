@@ -59,16 +59,16 @@ bool MeshImporter::CleanUp()
 	return true;
 }
 
-bool MeshImporter::LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string texture_path)
+GameObject* MeshImporter::LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string texture_path)
 {
 	const aiScene* scene = aiImportFile(path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+
+	GameObject* GO = nullptr;
 
 	if (scene != nullptr)
 	{
 		aiNode* node = scene->mRootNode;
 		std::string file;
-
-		GameObject* GO = nullptr;
 
 		if (type == ELEMENT_UI_TYPE::IMAGE)
 		{
@@ -98,7 +98,7 @@ bool MeshImporter::LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string te
 	}
 	else LOG_C("ERROR: Could not load scene with path: %s", path);
 
-	return true;
+	return GO;
 }
 
 bool MeshImporter::LoadFile(std::string path, std::string texture_path)

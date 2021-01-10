@@ -21,7 +21,7 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	bool LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string texture_path = "Assets/Others/test.png");
+	GameObject* LoadUI(ELEMENT_UI_TYPE type, std::string path, std::string texture_path = "Assets/Others/test.png");
 	bool LoadFile(std::string path, std::string texture_path = "Assets/Others/Lenna.png");
 	void LoadNode(const aiScene* scene, aiNode* node, const char* node_path, std::string output_file, GameObject* GO_root, std::string text_path);
 
