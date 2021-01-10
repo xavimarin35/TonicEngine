@@ -167,7 +167,7 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 - GameObjects system
 - Vertex and Face normals
 - GameObjects' parenting
-- Json implementation
+- Scene serialization
 - Gizmos implementation
 - Playmode logic
 - Scene and Game Viewports
