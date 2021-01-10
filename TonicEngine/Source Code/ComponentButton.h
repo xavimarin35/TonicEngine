@@ -19,6 +19,8 @@ public:
 	void Draw();
 	void DrawInspector();
 
+	int button_function = -1;
+
 private:
 
 	ButtonUI* button = nullptr;
