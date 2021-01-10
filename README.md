@@ -6,9 +6,21 @@
 
 ### Windows
 
-**Scene and Game:**
-* Scene window is used to edit the environment
-* Game window displays the game camera
+**Main Tab:**
+Menus of all the functionalities of the engine
+* File
+* GameObject
+* Debug
+* Windows
+* Help
+
+**Scene Viewport:**
+Displays the scene from the view of the editor camera
+* Shows the ImGizmos
+
+**Game Viewport:**
+Displays the scene from the view of the play camera
+* Maintain the proper aspect ratio when is resized
 
 **Hierarchy:**
 Shows current GameObjects tree
@@ -46,14 +58,6 @@ Contains the Play menu and other important buttons
 * Bounding boxes buttons
 * Playmode buttons
 
-**Main Tab:**
-Menus of all the functionalities of the engine
-* File
-* GameObject
-* Debug
-* Windows
-* Help
-
 ### User Interface System
 
 This engine is specialized in the User Interface system:
@@ -84,7 +88,7 @@ In this gif we see how, when the game starts, by pressing RETURN, the main menu 
 ### Extra Features
 
 * Docking
-* Gizmos
+* ImGizmos
 * Debug Menu
 * Environment customization
 
