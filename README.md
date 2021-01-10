@@ -8,6 +8,22 @@ Don't hesitate to check our website [here](https://xavimarin35.github.io/TonicEn
 
 ### Windows
 
+**Main Tab:**
+Menus of all the functionalities of the engine
+* File
+* GameObject
+* Debug
+* Windows
+* Help
+
+**Scene Viewport:**
+Displays the scene from the view of the editor camera
+* Shows the ImGizmos
+
+**Game Viewport:**
+Displays the scene from the view of the play camera
+* Maintain the proper aspect ratio when is resized
+
 **Hierarchy:**
 Shows current GameObjects tree
 * Reparent with drag and drop
@@ -44,14 +60,6 @@ Contains the Play menu and other important buttons
 * Bounding boxes buttons
 * Playmode buttons
 
-**Main Tab:**
-Menus of all the functionalities of the engine
-* File
-* GameObject
-* Debug
-* Windows
-* Help
-
 ### Functionalities
 
 * **Resource Manager:** Manages all the assets of the engine
@@ -66,7 +74,7 @@ Menus of all the functionalities of the engine
 ### Extra Features
 
 * Docking
-* Gizmos
+* ImGizmos
 * Debug Menu
 * Environment customization
 
