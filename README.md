@@ -92,6 +92,12 @@ In this gif we see how, when the game starts, by pressing RETURN, the main menu 
 * Debug Menu
 * Environment customization
 
+## Showcase
+
+### Quick Showcase
+
+### Full Showcase
+
 ## Usage
 
 ### Installation
@@ -121,15 +127,16 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 * **ESC:** Activates/Deactivates the Exit Engine pop-up
 * **ALT + F4:** Closes the engine
 
-## Pol Casaú
+## Contributors
+
+### Pol Casaú
 
 ![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/pol_.jpg?raw=true)
 
 - Github: [Bullseye14](https://github.com/Bullseye14)
 - LinkedIn: [Pol Casaú](https://www.linkedin.com/in/polcasau8/)
 
-### Individual Work
-
+**Individual Work**
 - FBX import and Drag & Drop
 - DevIL and Textures import
 - GameObjects' Components
@@ -145,15 +152,14 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 - Main Menu
 - Website
 	
-## Xavi Marín
+### Xavi Marín
 
 ![](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/images/xavi.jpg?raw=true)
 
 - Github: [XaviMarin35](https://github.com/xavimarin35)
 - LinkedIn: [Xavi Marín](https://www.linkedin.com/in/xavi-marin-sola/)
 
-### Individual Work
-
+**Individual Work**
 - Panels system and docking
 - Engine Icon
 - Work on all of the panels
