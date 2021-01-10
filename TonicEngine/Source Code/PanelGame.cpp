@@ -74,11 +74,14 @@ bool PanelGame::Draw()
 
 			App->gui->gameMousePos = { ImGui::GetMousePos().x - App->gui->gameX, ImGui::GetMousePos().y - App->gui->gameY };
 
-			if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_REPEAT && !continued && App->gui->isButton)
+			if (App->gui->isButton && !continued)
 			{
-				continued = true;
-				DoButtonFunction(0);
-			}
+				if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_REPEAT)
+				{
+					continued = true;
+					DoButtonFunction(0);
+				}
+			}			
 
 			if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && continued)
 			{

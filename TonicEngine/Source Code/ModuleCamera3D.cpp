@@ -319,8 +319,6 @@ GameObject* ModuleCamera3D::MousePicking() const
 	else if (App->camera->isOnGame)
 		mousePos = { (float)App->gui->gameMousePos.x / (float)App->gui->gameW * 2.f - 1.f, -((float)App->gui->gameMousePos.y / (float)App->gui->gameH * 2.f - 1.f) };
 
-	LOG_C("Mouse Pos: %f, %f", mousePos.x, mousePos.y);
-
 	LineSegment ray = activeCam->NearSegment((float)mousePos.x, (float)mousePos.y);
 
 	float distance = 99999999999.f;
