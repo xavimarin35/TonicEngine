@@ -23,9 +23,9 @@ float3 ComponentTransform::GetScale() const { return scale; }
 
 float4x4 ComponentTransform::GetGlobalTransform() const { return globalMatrix; }
 
-void ComponentTransform::SetPosition(float3& position)
+void ComponentTransform::SetPosition(float3& position_)
 {
-	this->position = position;
+	position = position_;
 
 	UpdateLocalTransform();
 }
@@ -243,13 +243,16 @@ void ComponentTransform::SetNewDefault(float3 pos, float3 rot, float3 sc)
 
 void ComponentTransform::UpdateGizmo(float4x4 newMatrix)
 {
-	newMatrix.Decompose(position, rotation_quaternion, scale);
+	if (App->scene_intro->GOselected != nullptr)
+	{
+		newMatrix.Decompose(position, rotation_quaternion, scale);
 
-	rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
+		rotation_euler = rotation_quaternion.ToEulerXYZ() * RADTODEG;
 
-	SetPosition(position);
-	SetEulerRotation(rotation_euler);
-	SetScale(scale);
+		SetPosition(position);
+		SetEulerRotation(rotation_euler);
+		SetScale(scale);
 
-	globalMatrix = newMatrix;
+		globalMatrix = newMatrix;
+	}
 }

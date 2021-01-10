@@ -90,7 +90,9 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	float3 camPos = App->camera->GetGameCamera()->GetComponentTransform()->position;
 	camPos.z -= 9;
-	parent_canvas->GetComponentTransform()->SetPosition(camPos);
+
+	if (parent_canvas->GetComponentTransform() != nullptr)
+		parent_canvas->GetComponentTransform()->SetPosition(camPos);
 
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->gui->saveSceneMenu = true;
@@ -403,7 +405,12 @@ string ModuleSceneIntro::AssignNameToGO(string name_go, bool isCamera, bool isEm
 
 void ModuleSceneIntro::RemoveSelectedGO(GameObject* GO)
 {
-	if (GO != GOroot && !gameobjectsList.empty() && GO != nullptr)
+	if (GO == App->camera->GetGameCamera())
+	{
+		LOG_C("ERROR: You can not delete the game camera");
+	}
+
+	else if (GO != GOroot && !gameobjectsList.empty() && GO != nullptr)
 	{
 		GOselected = nullptr;
 		App->gui->Pstate->drawBB = 0;
