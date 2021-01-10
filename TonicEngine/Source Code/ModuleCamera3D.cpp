@@ -311,8 +311,15 @@ bool* ModuleCamera3D::GetProjectionBool() const
 GameObject* ModuleCamera3D::MousePicking() const
 {
 	GameObject* GO = nullptr;
+	ImVec2 mousePos;
 
-	ImVec2 mousePos = { (float)App->gui->sceneMousePos.x / (float)App->gui->sceneW * 2.f - 1.f, -((float)App->gui->sceneMousePos.y / (float)App->gui->sceneH * 2.f - 1.f) };
+	if (App->camera->isOnScene)
+		mousePos = { (float)App->gui->sceneMousePos.x / (float)App->gui->sceneW * 2.f - 1.f, -((float)App->gui->sceneMousePos.y / (float)App->gui->sceneH * 2.f - 1.f) };
+
+	else if (App->camera->isOnGame)
+		mousePos = { (float)App->gui->gameMousePos.x / (float)App->gui->gameW * 2.f - 1.f, -((float)App->gui->gameMousePos.y / (float)App->gui->gameH * 2.f - 1.f) };
+
+	LOG_C("Mouse Pos: %f, %f", mousePos.x, mousePos.y);
 
 	LineSegment ray = activeCam->NearSegment((float)mousePos.x, (float)mousePos.y);
 
@@ -327,7 +334,7 @@ bool ModuleCamera3D::CheckMousePosition()
 {
 	if (isOnConfiguration || isOnConsole || isOnHierarchy || isOnInspector
 		|| isOnState || isOnResources || isOnResourcesChild1 || isOnResourcesChild2
-		|| isOnQuit || isOnSelectTexture || isOnMainBar || isOnGame)
+		|| isOnQuit || isOnSelectTexture || isOnMainBar)
 		return true;
 
 	else if (ImGui::IsAnyItemHovered())

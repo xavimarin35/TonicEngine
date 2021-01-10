@@ -123,7 +123,24 @@ update_status ModuleGUI::PostUpdate(float dt)
 		pick = App->camera->MousePicking();
 
 		if (pick != nullptr)
-			App->scene_intro->GOselected = pick;
+		{
+			if (!App->camera->isOnGame)
+			{
+				App->scene_intro->GOselected = pick;
+			}
+			else
+			{
+				if(isButton)
+				{
+					if (pick->GetComponentButtonUI() != nullptr)
+						if (App->gui->Pgame->continued)
+							App->gui->Pgame->DoButtonFunction(1);
+						else
+							App->gui->Pgame->DoButtonFunction(0);
+				}
+			}
+
+		}
 		else
 			App->scene_intro->GOselected = nullptr;
 	}

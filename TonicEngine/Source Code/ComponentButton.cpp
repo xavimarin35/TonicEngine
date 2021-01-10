@@ -59,26 +59,7 @@ void ComponentButton::DrawInspector()
 		ImGui::PushItemWidth(150);
 		if (ImGui::Combo("Event Call", &button_function, "Load Street\0\Change vsync"))
 		{
-			switch (button_function)
-			{
-			case 0:
-				App->scene_intro->Create3DObject(OBJECTS3D::STREET);
-				break;
-
-			case 1:
-				App->vsyncB = !App->vsyncB;
-
-				if (App->vsyncB) {
-					SDL_GL_SetSwapInterval(1);
-					LOG_C("VSYNC activated");
-				}
-
-				else if (!App->vsyncB){
-					SDL_GL_SetSwapInterval(0);
-					LOG_C("VSYNC deactivated");
-				}
-				break;
-			}
+			App->gui->Pgame->DoButtonFunction(button_function);
 		}
 	}
 }

@@ -58,6 +58,12 @@ bool ModuleSceneIntro::Start()
 	background_image = App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::IMAGE, "Assets/BasicShapes/bUI.fbx", "Assets/Others/mainmenu.png");
 	background_image->GetComponentTransform()->SetScale(defaultSize);
 
+	start_button = App->mesh_imp->LoadUI(ELEMENT_UI_TYPE::BUTTON, "Assets/BasicShapes/bUI.fbx", "Assets/Others/street_but.png");
+	start_button->GetComponentTransform()->SetScale(button1Size);
+	start_button->GetComponentTransform()->SetPosition(button1Pos);
+	start_button->GetComponentButtonUI()->button_function = 0;
+
+
 	return ret;
 }
 
@@ -81,6 +87,10 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	GOroot->Update();
+
+	float3 camPos = App->camera->GetGameCamera()->GetComponentTransform()->position;
+	camPos.z -= 9;
+	parent_canvas->GetComponentTransform()->SetPosition(camPos);
 
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->gui->saveSceneMenu = true;

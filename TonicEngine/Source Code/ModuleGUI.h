@@ -97,10 +97,13 @@ public:
 	float sceneW = 0.0f;
 	float sceneH = 0.0f;
 
+	float gameX, gameY, gameW, gameH;
+
 	ImVec2 winSize;
 	ImVec2 panelPos;
 
 	ImVec2 sceneMousePos;
+	ImVec2 gameMousePos;
 
 	bool updateMat = false;
 
@@ -109,6 +112,7 @@ public:
 	Color frustum_color = { 1.0f, 1.0f, 1.0f };
 	Color plane_color = { 1.0f, 0.0f, 0.0f };
 
+	bool isButton = false;
 	bool CheckParent(GameObject* GO);
 
 private:

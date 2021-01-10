@@ -70,6 +70,7 @@ public:
 	GameObject* GOroot = nullptr;
 	GameObject* parent_canvas = nullptr;
 	GameObject* background_image = nullptr;
+	GameObject* start_button = nullptr;
 	uint numGO = 0;
 
 	// Serialization
@@ -90,7 +91,10 @@ public:
 	float gridWidth = 3.5f;
 	float axisLength = 6.0f;
 
-	float3 defaultSize = { 20,10,0 };
+	float3 defaultSize = { 20,10,1 };
+
+	float3 button1Size = { 5,1,1 };
+	float3 button1Pos = { 0.5,-3.5,0.001 };
 
 };
 
