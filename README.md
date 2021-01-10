@@ -54,6 +54,22 @@ Menus of all the functionalities of the engine
 * Windows
 * Help
 
+### User Interface System
+
+This engine is specialized in the User Interface system:
+
+* You can create a parent canvas to contain all the UI elements
+* You can create an image and assign it any picture
+* You can create a button and assign a function to it
+
+![CREATION OF UI ELEMENTS](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/gifs/Create.gif?raw=true)
+
+In this gif we see how we create different UI elements that automatically place inside the canvas
+
+![FUNCTION OF BUTTON](https://github.com/xavimarin35/TonicEngine/blob/gh-pages/docs/gifs/PlayMode.gif?raw=true)
+
+In this gif we see how, when the game starts, by pressing RETURN, the main menu disappears and the scene is loaded
+
 ### Functionalities
 
 * **Resource Manager:** Manages all the assets of the engine
