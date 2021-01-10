@@ -142,6 +142,8 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 - Mouse Picking
 - Camera to Component (v3)
 - Reparenting
+- Main Menu
+- Website
 	
 ## Xavi Marín
 
@@ -164,6 +166,8 @@ IMPORTANT: *Do not modify, change or add any folder or file (unless specified) a
 - Playmode logic
 - Scene and Game Viewports
 - Resource Manager
+- UI Base System
+- Canvas, buttons and images
 
 ## Contact
 
